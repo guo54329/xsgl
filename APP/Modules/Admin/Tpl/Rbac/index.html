@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
+<link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
+<style>
+input{
+	width:100px;
+}
+
+</style>
+
+</head>
+<body>
+<div class="panel panel-default">
+	  <div class="panel-heading">用户列表</div>
+	  <div class="panel-body">
+		<table class='table table-bordered table-hover'>
+			<tr><td>序号</td><td>用户名</td><td>上次登录时间</td><td>上次登录IP</td><td>当前状态</td><td>角色</td><td>操作</td></tr>
+			<foreach name='user' item='v'>
+			<tr>
+				<td>{$v.id}</td>
+				<td>{$v.username}</td>
+				<td>{$v.logintime|date='Y-m-d H:i:s',###}</td>
+				<td>{$v.loginip}</td>
+				<td><if condition='$v["lock"]'>锁定<else/>正常</if></td>
+				<td>
+					<if condition='$v["username"] eq C("RBAC_SUPERADMIN")'>超级管理员
+					<else/>
+						<foreach name='v.role' item='value'>
+							<div>{$value.name}({$value.remark})</div>
+						</foreach>
+				</if>
+				</td>
+				<td> 
+					<if condition="$v['id'] neq 1">
+					[ <a href="{:U(GROUP_NAME.'/Rbac/editUser',array('id'=>$v['id']))}">配置角色</a> | 
+					 <if condition='$v["lock"]'><a href="{:U(GROUP_NAME.'/Rbac/lock',array('id'=>$v['id'],'lock'=>1))}">解锁</a>
+					<else/><a href="{:U(GROUP_NAME.'/Rbac/lock',array('id'=>$v['id'],'lock'=>0))}">锁定</a>
+					</if>
+					 | <a href="{:U(GROUP_NAME.'/Rbac/delUser',array('id'=>$v['id']))}">删除</a> ]</if> 
+				</td>
+			</tr>
+			</foreach>
+		</table>	
+	  </div>
+	   <div class="panel-footer">
+	  	<a href="{:U(GROUP_NAME.'/Rbac/addUser')}"  class="btn btn4 btn-info">添加用户</a>
+	   </div>
+</div>
+</body>
+</html>

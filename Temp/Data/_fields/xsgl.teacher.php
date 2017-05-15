@@ -1,0 +1,1 @@
+<?php	return array ( 0 => 'id', 1 => 'jsno', 2 => 'jsxm', 3 => 'jsxb', 4 => 'jsdh', 5 => 'jsmm', 6 => 'offname', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'int(5) unsigned', 'jsno' => 'varchar(9)', 'jsxm' => 'varchar(10)', 'jsxb' => 'varchar(2)', 'jsdh' => 'varchar(11)', 'jsmm' => 'varchar(32)', 'offname' => 'varchar(50)', ), );?>

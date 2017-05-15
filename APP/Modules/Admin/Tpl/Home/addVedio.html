@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<!--<link rel="stylesheet" href="__PUBLIC__/Css/content.css" />-->
+<link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
+
+<head>
+<style>
+	body{
+		font-family:Microsoft YaHei,Verdana,Arial,SimSun; line-height:30px;padding-bottom:40px;
+	}
+	.panel-footer,.panel-heading{
+		text-align: center;
+	}
+	input{
+		width:600px;
+	}
+	.btn{
+		width:200px;
+	}
+</style>
+<js file="__PUBLIC__/Js/jquery-1.8.3.min.js" />
+<js file="__ROOT__/Data/Ueditor/ueditor.config.js" />
+<js file="__ROOT__/Data/Ueditor/ueditor.all.min.js" />
+
+<script type="text/javascript">	
+	window.UEDITOR_HOME_URL='__ROOT__/Data/Ueditor/';
+	window.onload =function(){
+		window.UEDITOR_CONFIG.initialFrameWidth=600;
+		window.UEDITOR_CONFIG.initialFrameHeight=100;
+		//window.UEDITOR_CONFIG.scaleEnabled=true;
+		window.UEDITOR_CONFIG.toolbars=[[
+            
+             'fullscreen', 'source','paragraph', 'fontfamily', 'fontsize', '|',
+            'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify','|', 
+            'print', 'preview', 'help'
+        ]];
+
+		
+		//TP里面的上传类，相关配置，此处没用到
+		  //window.UEDITOR_CONFIG.imageUrl="{:U(GROUP_NAME.'/Blog/upload')}"; 
+		  //window.UEDITOR_CONFIG.imagePath='__ROOT__/uploads/';
+
+		//图片保存路径直接在Ueditor/php/config.json中配置imagePathFormat的值
+		UE.getEditor('content'); //实例化编辑器
+
+	
+	}
+
+
+</script>
+													
+
+
+</head>
+<body>
+<form action='{:U(GROUP_NAME.'/Home/addVedio')}' method='post' enctype="multipart/form-data">
+<div class="panel panel-default">
+	  <div class="panel-heading">发布课程资源</div>
+	  <div class="panel-body">
+		<table class='table table-bordered table-hover'>	
+			<tr>
+				<td align='right' width='20%'>标题</td>
+				<td><input type="text" placeholder="请输入标题" name="title" id="title" style="width:600px;" />
+			</tr>
+			<tr>
+				<td align='right' width='20%'>描述</td>
+				<td width='70%'><textarea name='desc' id='content'></textarea></td>
+			</tr>
+			<tr><td align='right'>所属课程</td>
+				<td><input type="text" placeholder="请输入课程名称(专业名称)" name="type" id="type" style="width:600px;" />
+				</td>
+			</tr>
+			<tr>
+				<td align='right'>视频截图</td>
+				<td><input type="file"  name="imgurl"  style="width:600px;" /> 支持格式：jpg，jpeg，gif，png，PNG；支持大小：<=10M
+				</td>
+			</tr>
+			<tr>
+				<td align='right'>视频(微视频)</td>
+				<td><input type="file"  name="videourl"  style="width:600px;" />
+				支持格式：目前仅支持mp4(如果格式不对，可使用格式工程转化格式)；支持大小：<=100M
+				</td>
+			</tr>
+		</table>	
+	  </div>
+	  
+	  <div class="panel-footer"><input id="sub" type='submit'  value='发布' class="btn btn-info"/></div>
+</div>
+</form>
+</body>
+</html>

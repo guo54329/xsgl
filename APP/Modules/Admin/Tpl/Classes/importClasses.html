@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<!--<link rel="stylesheet" href="__PUBLIC__/Css/style.css" />-->
+<link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
+<script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/region.js"></script>
+<style>
+body{
+	font-family:Microsoft YaHei,Verdana,Arial,SimSun; line-height:30px;padding-bottom:40px;
+}
+.panel-footer,.panel-heading{
+	text-align: center;
+}
+.select {
+	height:36px;
+	/*width:200px;*/
+}
+input{
+	width:600px;
+}
+.btn{
+	width:150px;
+}
+</style>
+<head>
+</head>
+<body>
+<form action='{:U(GROUP_NAME.'/Classes/importClassesHandle')}' method='post' enctype="multipart/form-data">
+<div class="panel panel-default">
+	  <div class="panel-heading">导入班级</div>
+	  <div class="panel-body">
+		<input  type="file" name="file"/>
+　　　　　提示：支持Excel2003和Excel2007及其以上版本。单击<a href="__ROOT__/Public/template/class.xlsx">模板下载</a>，上级ID参考下载：<a href={:U(GROUP_NAME.'/School/exportSchool')}>基础数据表</a>
+	  </div>
+	  <div class="panel-footer">
+	    <!--导入所有学校(工作站)的班级-->
+	  	<input type='submit' name='sub1' value='导入所有学校的班级' class="btn btn-info"/>&nbsp;&nbsp;&nbsp;&nbsp;
+	  	<!--导入指定学校(工作站)的班级-->
+	  	<select name="province" id="province" onchange="loadRegion('province',2,'city','{:U('Admin/Ajax/getRegion')}');" class="select">
+			<option value="0" selected>省/直辖市电大</option><volist name="province" id="vo"> 
+			<option value="{$vo.id}" >{$vo.sname}</option></volist>
+		</select>          
+		<select name="city" id="city"  onchange="loadRegion('city',3,'schid','{:U('Admin/Ajax/getRegion')}');" class="select">
+			<option value="0">市分校</option>
+		</select>
+		<select name="schid" id="schid" class="select">
+			<option value="0">工作站</option>
+		</select>
+	  	<input type='submit' name='sub2' value='导入选定学校的班级' class="btn btn-info"/>
+	  </div>
+</div>
+</form>
+</body>
+</html>

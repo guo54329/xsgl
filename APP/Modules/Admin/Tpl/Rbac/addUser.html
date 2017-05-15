@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
+<link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
+<script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
+<style>
+.add-role{
+	display: inline-block;
+	width: 120px;
+	height: 34px;
+	line-height: 34px;
+	text-align: center;
+	border:1px solid #ccc;
+	border-radius: 4px;
+	margin-left: 20px;
+	cursor: pointer;
+}
+</style>
+<script type="text/javascript">
+	$(function(){
+		$('.add-role').click(function(){
+			var obj=$(this).parents('tr').clone();
+			obj.find('.add-role').remove();
+			$('#last').before(obj);
+		});
+	});
+
+</script>
+<head>
+</head>
+<body>
+<form action='{:U(GROUP_NAME.'/Rbac/addUser')}' method='post'>
+<div class="panel panel-default">
+	  <div class="panel-heading">添加用户</div>
+	  <div class="panel-body">
+		<table class='table table-bordered table-hover'>
+			<tr>
+				<td>用户帐号</td>
+				<td><input type='text' name='username' class='form-control' /></td>
+			</tr>
+			<tr>
+				<td>初始密码</td>
+				<td><input type='password' name='password'  class='form-control'/></td>
+			</tr>
+			<tr>
+				<td>所属角色</td>
+				<td>
+					 <div class="form-inline">
+						<select name="role_id[]" class="form-control">
+							<foreach name='role' item='v'>
+								<option value="{$v['id']}">{$v.name}({$v.remark})</option>
+							</foreach>
+						</select>
+						<span class='add-role'>添加一个角色</span>
+					</div>
+				</td>
+			</tr>
+			<tr id='last'></tr>
+		</table>	
+	  </div>
+	  <div class="panel-footer">
+	  	<input type='submit'  value='添加' class="btn btn-info"/>
+	  </div>
+</div>
+</form>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
+<link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
+<style type="text/css">
+	.btn-info{
+		width:100px;
+	}
+	.badge{
+		background-color: white;
+	}
+	.form-inline{
+		text-align: left;
+	}
+</style>
+</head>
+<body>
+<form action='{:U(GROUP_NAME.'/System/verify')}' method='post'>
+<div class="panel panel-default">
+	  <div class="panel-heading">验证码设置</div>
+	  <div class="panel-body">
+		<table class='table table-bordered table-hover'>	
+			<tr>
+			    <td>验证码字体大小</td>
+			    <td><input type='text' name='VERIFY_SIZE' value='{$Think.config.VERIFY_SIZE}' class="form-control" /></td>
+			</tr>
+			<tr>
+			    <td>验证码字体颜色<br/>(16进制色值)</td>
+				<td>
+				<div class="form-inline">
+					<input type='text' name='VERIFY_COLOR' value='{$Think.config.VERIFY_COLOR}' class="form-control" />
+				 	<span class="glyphicon glyphicon-info-sign"></span> 非专业人员不得改动,颜色如：
+					<span class="badge">
+						<span style="display:block; border:1px solid black;width:50px;height:30px;background-color:{$Think.config.VERIFY_COLOR};"></span>
+					</span>
+				
+				</div></td>
+			</tr>
+			<tr><td>验证码长度</td>
+			    <td width='70%'><input type='text' name='VERIFY_LENGTH' value='{$Think.config.VERIFY_LENGTH}' class="form-control" /></td>
+			</tr>
+			<tr><td>验证码背影颜色<br/>(16进制色值)</td>
+				<td>
+				<div class="form-inline">
+				<input type='text' name='VERIFY_BGCOLOR' value='{$Think.config.VERIFY_BGCOLOR}' class="form-control" />
+				<span class="glyphicon glyphicon-info-sign"></span> 非专业人员不得改动,颜色如：
+				<span class="badge">
+						<span style="display:block; border:1px solid black;width:50px;height:30px;background-color:{$Think.config.VERIFY_BGCOLOR};"></span>
+				</span>
+				</div>
+				</td>
+			</tr>
+			<tr>
+			    <td align='right'>验证码种子</td><td>
+			    <div class="form-inline">
+			    <input type='text' name='VERIFY_SEED' value='{$Think.config.VERIFY_SEED}' class="form-control" />
+				<span class="glyphicon glyphicon-info-sign"></span> 非专业人员不得改动
+
+			    </td>
+			</tr>
+
+			<input type='hidden' name='VERIFY_WIDTH' value='{$Think.config.VERIFY_WIDTH}'  />
+			<input type='hidden' name='VERIFY_HEIGHT' value='{$Think.config.VERIFY_HEIGHT}'  />
+			<input type='hidden' name='VERIFY_FONTFILE' value='{$Think.config.VERIFY_FONTFILE}'/>
+			<input type='hidden' name='VERIFY_NAME' value='{$Think.config.VERIFY_NAME}'/>
+			<input type='hidden' name='VERIFY_FUNC' value='{$Think.config.VERIFY_FUNC}'/>
+
+        <!--
+			<tr><td>验证码图片宽度(像素)</td><td><input type='hidden' name='VERIFY_WIDTH' value='{$Think.config.VERIFY_WIDTH}'  /> 修改无效</td></tr>
+			<tr><td>验证码图片高度(像素)</td><td><input type='hidden' name='VERIFY_HEIGHT' value='{$Think.config.VERIFY_HEIGHT}'  /> 修改无效</td></tr>
+			<tr><td>验证码字体文件 相对项目文件夹下</td><td><input type='hidden' name='VERIFY_FONTFILE' value='{$Think.config.VERIFY_FONTFILE}'/></td></tr>
+			<tr><td>SESSION识别名称</td><td><input type='hidden' name='VERIFY_NAME' value='{$Think.config.VERIFY_NAME}'/></td></tr>
+			<tr><td>存储验证码到SESSION时使用函数</td><td><input type='hidden' name='VERIFY_FUNC' value='{$Think.config.VERIFY_FUNC}'/></td></tr>
+        -->
+		</table>	
+	  </div>
+	  <div class="panel-footer">
+	     <button type='submit' class="btn btn-info"><span class="glyphicon glyphicon-check"></span> 提交设置</button>
+	  </div>
+</div>
+</form>
+</body>
+</html>

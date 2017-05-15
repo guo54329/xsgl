@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<!--<link rel="stylesheet" href="__PUBLIC__/Css/style.css" />-->
+<link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
+<script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/region.js"></script>
+<style>
+body{
+	font-family:Microsoft YaHei,Verdana,Arial,SimSun; line-height:30px;padding-bottom:40px;
+}
+.panel-footer,.panel-heading{
+	text-align: center;
+}
+.select {
+	height:30px;
+	width:400px;
+}
+input{
+	width:400px;
+}
+.btn{
+	width:150px;
+}
+</style>
+<head>
+</head>
+<body>
+<form action='{:U(GROUP_NAME.'/Classes/addClasses')}' method='post'>
+<div class="panel panel-default">
+	  <div class="panel-heading">添加班级</div>
+	  <div class="panel-body">
+		<table class='table table-bordered table-hover'>
+			<tr>
+				<td width='30%' align='right'>班级代码</td>
+				<td width='70%'><input type='text' name='ccode'/>提示：长度为6位，如201601</td>
+			</tr>
+			<tr>
+				<td align='right'>班级名称</td>
+				<td><input type='text' name='cname' /></td>
+			</tr>
+			<tr>
+				<td align='right'>班主任</td>
+				<td>
+				  <select name="master" class="select"> 
+ 	                 <option value="0">请选择...</option>
+ 	                 <foreach name="teacher" item="v">
+ 	                     <option value="{$v.id}">{$v.jsxm}</option>
+ 	                 </foreach>
+				  </select>
+	           </td>
+			</tr>
+			<tr>
+				<td align='right'>班主任电话</td>
+				<td>
+				  <input type='text' name='telphone' />
+	           </td>
+			</tr>
+		</table>	
+	  </div>
+	  <div class="panel-footer">
+	  	<input type='submit'  value='添加' class="btn btn-info"/>
+	  </div>
+</div>
+</form>
+</body>
+</html>

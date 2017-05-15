@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<!--<link rel="stylesheet" href="__PUBLIC__/Css/style.css" />-->
+<link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
+<style>
+body{
+	font-family:Microsoft YaHei,Verdana,Arial,SimSun; line-height:30px;padding-bottom:40px;
+}
+.panel-footer,.panel-heading{
+	text-align: center;
+}
+input{
+	width:600px;
+}
+.btn{
+	width:200px;
+}
+</style>
+<head>
+</head>
+<body>
+<form action='{:U(GROUP_NAME.'/Home/addLink')}' method='post' enctype="multipart/form-data">
+<div class="panel panel-default">
+	  <div class="panel-heading">添加友情链接(最多支持6个)</div>
+	  <div class="panel-body">
+		<table class='table table-bordered table-hover'>
+			<tr>
+				<td width='30%'>名称</td>
+				<td width='70%'><input type='text' name='title'/></td>
+			</tr>
+			<tr>
+				<td>链接地址</td>
+				<td><input type='text' name='link' /></td>
+			</tr>
+			<tr>
+				<td>连接图片</td>
+				<td><input type='file' name='imgsrc' /> (要求：长*宽为为150*36，单位为像素)</td>
+			</tr>
+			<tr>
+				<td>排序</td>
+				<td><input type='text' name='sort' value='0'/></td>
+			</tr>
+			
+		</table>	
+	  </div>
+	  <div class="panel-footer">
+	  	<input type='submit'  value='添加' class="btn btn-info"/>
+	  </div>
+</div>
+</form>
+</body>
+</html>

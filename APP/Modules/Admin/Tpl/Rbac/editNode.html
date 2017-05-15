@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
+<link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
+</head>
+<body>
+<form action='{:U(GROUP_NAME.'/Rbac/editNode')}' method='post'>
+<div class="panel panel-default">
+	  <div class="panel-heading">修改节点</div>
+	  <div class="panel-body">
+		<table class='table table-bordered table-hover'>
+			<tr>
+				<td>{$type}名称(英文)</td>
+				<td><input type='text' name='name' value="{$node.name}" class='form-control' /></td>
+			</tr>
+			<tr>
+				<td>{$type}描述(中文)</td>
+				<td><input type='text' name='title' value="{$node.title}" class='form-control' /></td>
+			</tr>
+			<tr>
+				<td>是否开启：</td>
+				<td><label class="checkbox-inline"><input type='radio' name='status' value='1' checked='checked'/>&nbsp;开启&nbsp;</label>
+					<label class="checkbox-inline"><input type='radio' name='status' value='0'/>&nbsp;关闭</label>
+				</td>
+			</tr>
+			<tr>
+				<td>排序</td>
+				<td><input type='text' name='sort' value="{$node.sort}"  class='form-control'  value='1'/></td>
+			</tr>
+		</table>	
+	  </div>
+	  <div class="panel-footer">
+	  	<input type='hidden' name='id' value='{$node.id}'/>
+	  	<input type='submit'  value='提交修改' class="btn btn-info"/>
+	  </div>
+</div>
+</form>
+</body>
+</html>

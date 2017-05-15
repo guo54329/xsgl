@@ -1,0 +1,1 @@
+<?php	return array ( 0 => 'id', 1 => 'xsno', 2 => 'xsxm', 3 => 'xsxb', 4 => 'xsmm', 5 => 'rxsj', 6 => 'ccode', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'int(10) unsigned', 'xsno' => 'varchar(13)', 'xsxm' => 'varchar(20)', 'xsxb' => 'varchar(2)', 'xsmm' => 'varchar(32)', 'rxsj' => 'varchar(11)', 'ccode' => 'int(5) unsigned', ), );?>

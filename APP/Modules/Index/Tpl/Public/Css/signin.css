@@ -1,0 +1,73 @@
+body {
+	background:url(../images/login_bg_0.jpg) #f8f6e9;
+}
+
+.signin {
+	width:477px;
+	height:440px;
+	background:url(../images/login_bg.png) no-repeat;
+	margin:0 auto;
+	
+	position:absolute;
+	top:48%;
+	left:50%;
+	margin-top:-239px;
+	margin-left:-238px;
+}
+.signin-head {
+	margin:0 auto;
+	padding-top:20px;
+	width:120px;
+}
+.form-signin {
+  max-width: 330px;
+  padding: 43px 15px 15px 15px;
+  margin: 0 auto;
+}
+.form-signin .form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.input-group {
+   margin-bottom: 16px;
+}
+.sys{
+  height:50px;
+  line-height:50px;
+  font-size:14px;
+}
+.sys .l{display:inline-block;float:left;padding-left:80px;}
+.sys .r{display:inline-block;float:right;padding-right:80px;}
+.c{text-align: center;}
+/*footer*/
+.footer{
+    width: 100%;
+    overflow: hidden;
+    border-top: 1px solid #CCC;
+    padding-top:15px;  
+    padding-bottom:20px;
+    text-align: center;
+    position:fixed;
+    bottom:0;
+	  
+}
+.footer p{
+  line-height: 20px;
+  color:black;
+    font-family:微软雅黑;
+    font-size:12px;
+    font-weight:none;
+}
+a,a:hover,a:visited{
+	text-decoration;
+  out-line: none;
+  color:#333; 
+}
