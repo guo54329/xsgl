@@ -1,0 +1,10 @@
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" /><link rel="stylesheet" href="__PUBLIC__/Css/main.css" /><style type="text/css">    .btnw{
+        width: 90px;
+    }
+	.footeralign{
+		text-align: left;
+	}
+</style></head><body><div class="panel panel-default"><div class="panel-heading">教师课程表 </div><div class="panel-footer footeralign"><a href="<?php echo U(GROUP_NAME.'/Excise/coursetableSave');?>" class="btn btn-info btnw"><span class="glyphicon glyphicon-plus"></span> 添加课程</a></div><div class="panel-body"><table class='table table-bordered table-hover'><tr><td>ID</td><td>学期</td><td>任课教师</td><td>班级</td><td>课程</td><td>任务数量</td><td>操作(如需删除，请先进入任务列表删除任务)</td></tr><?php if(is_array($coursetable)): foreach($coursetable as $key=>$v): ?><tr><td><?php echo ($v["scid"]); ?></td><td><?php echo ($v["term"]); ?></td><td><?php echo ($v["jsxm"]); ?></td><td><?php echo ($v["cname"]); ?></td><td><?php echo ($v["coursename"]); ?></td><td><?php $scid = $v['scid']; $pubnum = M('sxpubexcise')->where("scid=$scid")->count(); echo $pubnum; ?></td><td align="left">　
+				   <a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$v['scid']));?>" class="btn btn-default btnw" title="查看指定教师发布的指定课程的任务列表！"><span class="glyphicon glyphicon-eye-open"></span> 任务列表</a>&nbsp;
+					
+					<?php if( $pubnum != 0): ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxcoursePackage',array('scid'=>$v['scid']));?>" class="btn btn-default btnw" title="将该课程所有任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 打包下载</a>&nbsp;<?php endif; if($pubnum == 0): ?><a href="<?php echo U(GROUP_NAME.'/Excise/delcourseTable',array('id'=>$v['scid']));?>" class="btn btn-default" title="如果没有任务可以直接删除，否则需要删尽其下的任务再进行删除！"><span class="glyphicon glyphicon-remove"></span> 删除</a><?php endif; ?></td></tr><?php endforeach; endif; ?></table></div></div></body></html>
