@@ -36,7 +36,7 @@
 			$(this).prevAll().css("background-position", "0px -555px");
 			$(this).nextAll().css("background-position", "0px -575px");
 		
-			$("#pointP").html($(this).prevAll().length+1+"分");
+			$("#pointP").html(($(this).prevAll().length+1)*10);
 			$("#desc").val($("#pointP").html());
 
 		});
@@ -84,7 +84,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" align="left" style="height: 50px;line-height: 30px;background-color: #F5F5F5;"><strong>请上传已完成的实训作业，对本次自我表现进行评价(满分10分)！</strong></td>
+				<td colspan="2" align="left" style="height: 50px;line-height: 30px;background-color: #F5F5F5;"><strong>请上传已完成的实训作业，并进行自评！</strong></td>
 				
 			</tr>
 			
@@ -97,7 +97,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>自我评价:</td>
+				<td>自评成绩:</td>
 				<td>
 				<div class="item" style="margin-top: -14px;margin-left: -5px;">
 		          <div class="formItemDiff formItemDiffFirst"></div>

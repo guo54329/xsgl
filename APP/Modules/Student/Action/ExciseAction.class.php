@@ -15,7 +15,7 @@ public function sxsubexciseList(){
 public function sxsubexciseDo(){
     
   	if(!empty($_POST)){
-        if($_POST['desc']==0){
+        if($_POST['desc']==''){
           $this->error("请进行自我评价！");
         }
     		//作业提交处理
@@ -29,8 +29,8 @@ public function sxsubexciseDo(){
         if(in_array($fileext, $filedenyext)){
           $this->error("上传附件格式不支持！");
         }
-        if($file['size']>51200000){
-          $this->error("附件不能超过50MB！");
+        if($file['size']>512000000){
+          $this->error("附件不能超过500MB！");
         }
 
         $seid=$_POST['seid'];

@@ -497,9 +497,9 @@ public function sxsubexciseRedo(){
 	   $data = array(
 			'seid'=>$seid,
 			'desc' =>'',
-      'filename'=>'',
+			'filename'=>'',
 			'status'=>0,
-			'isrec'=>0
+			'isrec'=>''
 		);
 	   $res = M('sxsubexcise')->save($data);
 	   if($res){
