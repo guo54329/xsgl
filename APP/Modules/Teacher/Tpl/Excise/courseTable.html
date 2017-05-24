@@ -13,13 +13,28 @@
 	.footeralign{
 		text-align: left;
 	}
+	.query{
+		width: 50px;
+	}
 </style>
 </head>
 
 <body>
 <div class="panel panel-default">
 	  <div class="panel-heading">我的课程表</div>
-	  <div class="panel-footer footeralign"><a href="{:U(GROUP_NAME.'/Excise/coursetableSave')}" class="btn btn-info btnw"><span class="glyphicon glyphicon-plus"></span> 添加课程</a>
+	  <div class="panel-footer footeralign">
+	   <div class="form-inline"> 
+            <form action="{:U(GROUP_NAME.'/Excise/courseTable')}" method="post">
+            <a href="{:U(GROUP_NAME.'/Excise/coursetableSave')}" class="btn btn-info btnw"><span class="glyphicon glyphicon-plus"></span> 添加课程</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  			<select name='term' class="form-control">
+				<option value="0">选择学期查看...</option>
+				<foreach name='term' item='v'>
+					<option value="{$v.term}">{$v.term}</option>
+				</foreach>
+			</select>
+			<input type="submit" value="查询" class="btn btn-default query" />
+			</form>
+        </div>
 	  </div>
 	  <div class="panel-body">
 		 <table class='table table-bordered table-hover'>

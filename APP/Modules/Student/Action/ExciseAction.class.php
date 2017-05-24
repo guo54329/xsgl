@@ -2,11 +2,21 @@
 Class ExciseAction extends CommonAction {
 //作业列表
 public function sxsubexciseList(){
+
     $stu = session('stu');
     $xsno = $stu['xsno'];
     $Model = M('sxsubexcise as a');
-    $list = $Model->join("xh_sxpubexcise as b on a.peid=b.peid")->join("xh_sxsetcourse as c on b.scid=c.scid")->join("xh_teacher as d on c.jsno=d.jsno")->where("xsno='$xsno'")->field("a.seid,a.status,a.desc,a.isrec,b.peid,b.title,b.filename,b.url,b.pubtime,c.coursename,c.term,d.jsxm,b.pubtime")->order("c.term DESC,b.scid ASC,d.jsxm ASC,a.peid ASC")->select();
+    if($_POST['term']!='' && $_POST['coursename']!=''){//根据条件查询
+        $term=$_POST['term'];
+        $coursename=$_POST['coursename'];
+        $list = $Model->join("xh_sxpubexcise as b on a.peid=b.peid")->join("xh_sxsetcourse as c on b.scid=c.scid")->join("xh_teacher as d on c.jsno=d.jsno")->where("xsno='$xsno' and c.term='$term' and c.coursename='$coursename'")->field("a.seid,a.status,a.desc,a.isrec,b.peid,b.title,b.filename,b.url,b.pubtime,c.coursename,c.term,d.jsxm,b.pubtime")->order("d.jsxm ASC,a.peid ASC")->select();
+    }else{//查询所有
+        
+        $list = $Model->join("xh_sxpubexcise as b on a.peid=b.peid")->join("xh_sxsetcourse as c on b.scid=c.scid")->join("xh_teacher as d on c.jsno=d.jsno")->where("xsno='$xsno'")->field("a.seid,a.status,a.desc,a.isrec,b.peid,b.title,b.filename,b.url,b.pubtime,c.coursename,c.term,d.jsxm,b.pubtime")->order("c.term DESC,b.scid ASC,d.jsxm ASC,a.peid ASC")->select();
+    }
+    
 
+    getCourseinfor();//创建由学期联动课程查询的select
     $this->assign('list',$list);
     $this->display();
 }

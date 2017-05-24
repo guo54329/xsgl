@@ -107,4 +107,54 @@ function unlimitedForLevel($cate,$html='',$pid=0,$level=0){
         }
     }
 }
+    //查询学期->课程
+function getCourseinfor(){
+    $Model = M('sxsetcourse as a');
+    $res=$Model->field('term')->distinct(true)->select();
+    $s="var xq=[{data:[['','请选择学期...']";
+    foreach($res as $v){
+     
+      $s=$s.",'" . $v['term']. "'";
+    }   
+    $s=$s."]}];";
+    
+    
+    $s1 = $s;
+    
+    $res=$Model->join('xh_sxsetcourse as b  on a.term = b.term', 'left')->field('a.term,a.coursename')->distinct(true)->select();
+    $s="var kc=[{value:'',disabled:true,data:[['','请选择课程...']";
+    $p = "";
+    $c = "";
+    foreach($res as $v2){
+      if($p == ($v2['term']))
+        {
+          $s=$s . ",'" . $v2['coursename'] . "'";
+        }
+        else
+        { 
+          $s=$s . "]},{value:'" . $v2['term']."',data:[['','请选择课程...'],'" .$v2['coursename'] . "'";
+        }
+        $p = $v2['term'];
+        $c = $v2['coursename'];
+    }
+    
+    
+    
+    $s=$s."]}];";
+    $s2 = $s;
+
+    $file=C('TMPL_PARSE_STRING');
+    $file=$file['__JS__'].'/termCourse.js';
+    $content = $s1.$s2;
+
+    //p($content);die;
+   
+    unlink($file);
+    if(file_put_contents($file,$content)==FALSE)  
+    {
+      echo "由学期联动课程的js文件不可写!";
+      exit;
+    }
+}
+
 ?>

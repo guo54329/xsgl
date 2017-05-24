@@ -303,4 +303,103 @@ function getNodeChildsId($cate,$pid){
     }
     return $arr;
 }
+
+//查询学期->课程
+function getCourseinfor2(){
+    $Model = M('sxsetcourse as a');
+    $res=$Model->field('term')->distinct(true)->select();
+    $s="var xq=[{data:[['','请选择学期...']";
+    foreach($res as $v){
+     
+      $s=$s.",'" . $v['term']. "'";
+    }   
+    $s=$s."]}];";
+    
+    
+    $s1 = $s;
+    
+    $res=$Model->join('xh_sxsetcourse as b  on a.term = b.term', 'left')->field('a.term,a.coursename')->distinct(true)->select();
+    $s="var kc=[{value:'',disabled:true,data:[['','请选择课程...']";
+    $p = "";
+    $c = "";
+    foreach($res as $v2){
+      if($p == ($v2['term']))
+        {
+          $s=$s . ",'" . $v2['coursename'] . "'";
+        }
+        else
+        { 
+          $s=$s . "]},{value:'" . $v2['term']."',data:[['','请选择课程...'],'" .$v2['coursename'] . "'";
+        }
+        $p = $v2['term'];
+        $c = $v2['coursename'];
+    }
+    
+    
+    
+    $s=$s."]}];";
+    $s2 = $s;
+
+    $file=C('TMPL_PARSE_STRING');
+    $file=$file['__JS__'].'/termCourse.js';
+    $content = $s1.$s2;
+
+    //p($content);die;
+   
+    unlink($file);
+    if(file_put_contents($file,$content)==FALSE)  
+    {
+      echo "由学期联动课程的js文件不可写!";
+      exit;
+    }
+}
+
+//查询学期->教师
+function getCourseinfor3(){
+    $Model = M('sxsetcourse as a');
+    $res=$Model->field('term')->distinct(true)->select();
+    $s="var xq=[{data:[['','请选择学期...']";
+    foreach($res as $v){
+     
+      $s=$s.",'" . $v['term']. "'";
+    }   
+    $s=$s."]}];";
+    
+    
+    $s1 = $s;
+    
+    $res=$Model->join('xh_sxsetcourse as b  on a.term = b.term', 'left')->join('xh_teacher as c on a.jsno = c.jsno')->field('a.term,a.jsno,c.jsxm')->distinct(true)->select();
+    $s="var js=[{value:'',disabled:true,data:[['','请选择教师...']";
+    $p = "";
+    $c = "";
+    foreach($res as $v2){
+      if($p == ($v2['term']))
+        {
+           $s=$s . ",'" . $v2['jsno']."-". $v2['jsxm'] . "'";
+        }
+        else
+        { 
+          $s=$s . "]},{value:'" . $v2['term']."',data:[['','请选择教师...'],'" . $v2['jsno']."-". $v2['jsxm'] . "'";
+        }
+        $p = $v2['term'];
+        $c = $v2['jsno']."-". $v2['jsxm'];
+    }
+    
+    $s=$s."]}];";
+    $s2 = $s;
+
+    $file=C('TMPL_PARSE_STRING');
+    $file=$file['__JS__'].'/termTeacher.js';
+    $content = $s1.$s2;
+
+    //p($content);die;
+   
+    unlink($file);
+    if(file_put_contents($file,$content)==FALSE)  
+    {
+      echo "由学期联动教师的js文件不可写!";
+      exit;
+    }
+}
+
 ?>

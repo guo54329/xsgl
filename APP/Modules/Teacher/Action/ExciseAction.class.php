@@ -10,7 +10,20 @@ public function courseTable(){
     $tea = session('tea');
     $jsno = $tea['jsno'];
     $Model = M('sxsetcourse as a');
-    $list = $Model->join('xh_classes as b on a.ccode = b.ccode')->join('xh_teacher as c on c.jsno = b.master')->where("a.jsno='$jsno'")->field("a.scid,a.term,a.coursename,b.cname,c.jsxm,c.jsdh")->order("a.term DESC,a.scid ASC")->select();
+    //查询学期数据
+    $term = $Model->field('a.term')->distinct(true)->order('a.term DESC')->select();
+    //p($term);
+    $this->assign('term',$term);
+
+    //查询课程表
+    if(!empty($_POST['term'])){
+       $term = $_POST['term'];
+        //按学期查询
+        $list = $Model->join('xh_classes as b on a.ccode = b.ccode')->join('xh_teacher as c on c.jsno = b.master')->where("a.jsno='$jsno' and a.term='$term'")->field("a.scid,a.term,a.coursename,b.cname,c.jsxm,c.jsdh")->order("a.scid ASC")->select();
+    }else{//查询所有
+        $list = $Model->join('xh_classes as b on a.ccode = b.ccode')->join('xh_teacher as c on c.jsno = b.master')->where("a.jsno='$jsno'")->field("a.scid,a.term,a.coursename,b.cname,c.jsxm,c.jsdh")->order("a.term DESC,a.scid ASC")->select();
+    }
+
     $this->assign('list',$list);
     $this->display();
 

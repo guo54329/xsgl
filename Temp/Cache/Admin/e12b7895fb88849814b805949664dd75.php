@@ -1,4 +1,17 @@
-<?php if (!defined('THINK_PATH')) exit();?>﻿<html xmlns="http://www.w3.org/1999/xhtml"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" /><link rel="stylesheet" href="__PUBLIC__/Css/main.css" /><link rel="stylesheet" href="__PUBLIC__/Css/login.css" /><script src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script><script src="__PUBLIC__/Js/dialog/layer.js"></script><script src="__PUBLIC__/Js/dialog.js"></script><SCRIPT type="text/javascript">var URL = '<?php echo U(GROUP_NAME."/Login/verify");?>';
+<?php if (!defined('THINK_PATH')) exit();?>﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
+<link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
+<link rel="stylesheet" href="__PUBLIC__/Css/login.css" />
+<script src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
+<script src="__PUBLIC__/Js/dialog/layer.js"></script>
+<script src="__PUBLIC__/Js/dialog.js"></script>
+   
+<SCRIPT type="text/javascript">
+var URL = '<?php echo U(GROUP_NAME."/Login/verify");?>';
 
 //更换验证码
 function change_code(obj){
@@ -38,4 +51,38 @@ $(function(){
 			
       });
 });
-</SCRIPT></HEAD><BODY><DIV class="top_div"></DIV><DIV style="background:white; margin: -120px auto auto; border: 1px solid #E7E7E7; border-image: none; width: 400px; height: 340px; text-align: center;"><DIV style="width: 165px; height: 95px; position: absolute;"><DIV class="tou"></DIV><DIV class="initial_left_hand" id="left_hand"></DIV><DIV class="initial_right_hand" id="right_hand"></DIV></DIV><div class="col-md-10" style="margin-left:30px;margin-top:40px;"><div class="form-group has-feedback"><input type="text" class="form-control" id="username" name='username' placeholder="用户名..."></div><div class="form-group has-feedback"><input type="password" class="form-control" id="password" name='password' placeholder="密码..."></div><div class="form-inline"><input type="text" class="form-control" id="codeid" name='code' placeholder="验证码..."><a href="javascript:void(change_code(this));"><img src="<?php echo U(GROUP_NAME.'/Login/verify');?>" id="code"/></a></div><div style="position: relative;margin-left:-56px;margin-top:22px;"><button id="login" name="login" value="" class="btn btn-info">登录</button><input type="reset" name="reset" value="重置" class="btn btn-info"/></div><DIV style="height: 5px; line-height: 5px; margin-top: 5px; border-top-color:#E7E7E7; border-top-width: 1px; border-top-style: solid;"></DIV></div></DIV></BODY></HTML>
+</SCRIPT>
+ 
+</HEAD> 
+<BODY>
+<DIV class="top_div"></DIV>
+<DIV style="background:white; margin: -120px auto auto; border: 1px solid #E7E7E7; border-image: none; width: 400px; height: 340px; text-align: center;">
+		<DIV style="width: 165px; height: 95px; position: absolute;">
+			<DIV class="tou"></DIV>
+			<DIV class="initial_left_hand" id="left_hand"></DIV>
+			<DIV class="initial_right_hand" id="right_hand"></DIV>
+		</DIV>
+		<div class="col-md-10" style="margin-left:30px;margin-top:40px;">
+			<div class="form-group has-feedback">
+			  <input type="text" class="form-control" id="username" name='username' placeholder="用户名..."> 
+			</div>
+			<div class="form-group has-feedback">
+			  <input type="password" class="form-control" id="password" name='password' placeholder="密码...">
+			</div>
+			<div class="form-inline">
+				  <input type="text" class="form-control" id="codeid" name='code' placeholder="验证码...">
+			      <a href="javascript:void(change_code(this));"><img src="<?php echo U(GROUP_NAME.'/Login/verify');?>" id="code"/>
+			        </a>
+			</div>
+
+	       <div style="position: relative;margin-left:-56px;margin-top:22px;">
+             <button id="login" name="login" value="" class="btn btn-info">登录</button>
+             <input type="reset" name="reset" value="重置" class="btn btn-info"/>
+	       </div>
+	
+		  <DIV style="height: 5px; line-height: 5px; margin-top: 5px; border-top-color:#E7E7E7; border-top-width: 1px; border-top-style: solid;"></DIV>
+	</div>
+</DIV>
+
+</BODY>
+</HTML>

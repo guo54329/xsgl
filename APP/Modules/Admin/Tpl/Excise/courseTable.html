@@ -5,9 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
 <link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
+<script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/selects.js"></script>
 <style type="text/css">
     .btnw{
         width: 90px;
+        margin-bottom: 5px;
     }
 	.footeralign{
 		text-align: left;
@@ -19,7 +22,50 @@
 <div class="panel panel-default">
 	  <div class="panel-heading">教师课程表 </div>
 	  <div class="panel-footer footeralign">
-	  <a href="{:U(GROUP_NAME.'/Excise/coursetableSave')}" class="btn btn-info btnw"><span class="glyphicon glyphicon-plus"></span> 添加课程</a>
+		<div class="form-inline">
+			<form action='{:U(GROUP_NAME.'/Excise/courseTable')}' method="post">
+			<a href="{:U(GROUP_NAME.'/Excise/coursetableSave')}" class="btn btn-info btnw"><span class="glyphicon glyphicon-plus"></span> 添加课程</a>&nbsp;&nbsp;<span>提示：请选择其中一种方式，然后单击查询！</span><br/>
+	  		方式一：
+  			<select name="term1" class="form-control"></select>
+			<select name="coursename" class="form-control"></select>
+			<!-- js的使用 start-->
+			 <script type="text/javascript" src="__PUBLIC__/Js/termCourse.js"></script>
+			 <script type="text/javascript">
+
+				var s = selects;
+				//获取对象
+				var a = document.getElementsByName('term1')[0];
+				var b = document.getElementsByName('coursename')[0];
+				//绑定数据
+				s.bind(a,xq);//xq和kc来自js文件的变量
+				s.bind(b,kc);//a和b来自本页面的属性
+				
+				//确定从属关系
+				s.parent(a,b);
+			 </script>
+			<input type="submit" value="查询" class="btn btn-default query" />
+			&nbsp;&nbsp;<br/>
+	  		方式二：
+  			<select name="term2" class="form-control"></select>
+			<select name="js" class="form-control"></select>
+			<!-- js的使用 start-->
+			 <script type="text/javascript" src="__PUBLIC__/Js/termTeacher.js"></script>
+			 <script type="text/javascript">
+
+				var s = selects;
+				//获取对象
+				var a = document.getElementsByName('term2')[0];
+				var b = document.getElementsByName('js')[0];
+				//绑定数据
+				s.bind(a,xq);//xq和kc来自js文件的变量
+				s.bind(b,js);//a和b来自本页面的属性
+				
+				//确定从属关系
+				s.parent(a,b);
+			 </script>
+			<input type="submit" value="查询" class="btn btn-default query" />
+			</form>
+			</div>
 	  </div>
 	  <div class="panel-body">
 		 <table class='table table-bordered table-hover'>

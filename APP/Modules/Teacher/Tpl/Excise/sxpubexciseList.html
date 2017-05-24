@@ -9,6 +9,9 @@
 <script src="__PUBLIC__/Js/dialog/layer.js"></script>
 <script src="__PUBLIC__/Js/dialog.js"></script>
 <script type="text/javascript">
+function myrefresh(){
+	window.location.reload();
+}
 function publish(obj){
 	var peid = obj.id;
 	var status = $("#status"+peid);
@@ -72,6 +75,7 @@ function del(obj){
 	  <div class="panel-heading">实训任务列表 </div>
 	  <div class="panel-footer footeralign">
  		<a href="{:U(GROUP_NAME.'/Excise/courseTable')}" class="btn btn-info btnw"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>&nbsp;
+ 		<button class="btn btn-info btnw" onclick="myrefresh()"><span class="glyphicon glyphicon-repeat"></span> 刷新</button>&nbsp;
 	  	<a href="{:U(GROUP_NAME.'/Excise/sxpubexciseSave',array('scid'=>$courseinfo['scid']))}" class="btn btn-info browse"><span class="glyphicon glyphicon-plus"></span> 添加任务</a>
 	  </div>
 	  <div class="panel-body">

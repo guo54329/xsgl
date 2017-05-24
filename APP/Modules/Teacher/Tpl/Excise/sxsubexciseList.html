@@ -38,6 +38,11 @@ function isrec(obj){
 	.no{
 		color: red;
 	}
+	.fresh{
+		right:20;
+		bottom: 20;
+		position: fixed;
+	}
 </style>
 </head>
 
@@ -89,6 +94,7 @@ function isrec(obj){
 			</foreach>
 		</table>
 	  </div>
+	  <div class="fresh"><button class="btn btn-info btnw" onclick="myrefresh()"><span class="glyphicon glyphicon-repeat"></span> 刷新</button></div>
 </div>
 </body>
 </html>

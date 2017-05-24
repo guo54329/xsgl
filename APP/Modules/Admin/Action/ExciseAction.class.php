@@ -7,7 +7,26 @@ Class ExciseAction extends CommonAction {
  */
 public function courseTable(){
   //课程表
-    $coursetable = M('sxsetcourse as a ')->join("xh_teacher as b on a.jsno=b.jsno")->join("xh_classes as c on a.ccode = c.ccode")->field("a.scid,a.term,b.jsxm,c.cname,a.coursename")->order("a.term DESC,a.jsno ASC")->select();
+
+   if($_POST['term1']!='' && $_POST['coursename']!=''){//根据条件学期和课程查询
+      $term=$_POST['term1'];
+      $coursename=$_POST['coursename'];
+
+       $coursetable = M('sxsetcourse as a ')->join("xh_teacher as b on a.jsno=b.jsno")->join("xh_classes as c on a.ccode = c.ccode")->field("a.scid,a.term,b.jsxm,c.cname,a.coursename")->where("a.term='$term' and a.coursename='$coursename'")->order("a.jsno ASC")->select();
+   }elseif($_POST['term2']!='' && $_POST['js']!=''){//根据条件学期和教师查询
+       
+       $term=$_POST['term2'];
+       $js = explode('-',$_POST['js']);
+       $jsno=$js[0];
+       
+       $coursetable = M('sxsetcourse as a ')->join("xh_teacher as b on a.jsno=b.jsno")->join("xh_classes as c on a.ccode = c.ccode")->field("a.scid,a.term,b.jsxm,c.cname,a.coursename")->where("a.term='$term' and a.jsno='$jsno'")->order("a.coursename ASC")->select();
+   }else{//查询所有
+
+       $coursetable = M('sxsetcourse as a ')->join("xh_teacher as b on a.jsno=b.jsno")->join("xh_classes as c on a.ccode = c.ccode")->field("a.scid,a.term,b.jsxm,c.cname,a.coursename")->order("a.term DESC,a.jsno ASC")->select();
+   }
+    
+    getCourseinfor2();//创建由学期联动课程的js
+    getCourseinfor3();//创建由学期联动教师的js
     $this->assign('coursetable',$coursetable);
     $this->display();
 
