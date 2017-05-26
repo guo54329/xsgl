@@ -890,3 +890,9 @@ ERR: 无法加载模块:APP
 [ 2017-05-24T23:50:27+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
 ERR: 无法加载模块:APP
 
+[ 2017-05-24T23:51:58+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/bootstrap.min.js
+ERR: 非法操作:public
+
+[ 2017-05-24T23:51:58+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/jquery.min.js
+ERR: 非法操作:public
+
