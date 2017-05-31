@@ -10,3 +10,49 @@ ERR: Access denied for user 'root'@'localhost' (using password: NO)
 [ 2017-05-31T13:20:41+08:00 ] 127.0.0.1 /xsgl/
 ERR: Access denied for user 'root'@'localhost' (using password: NO)
 
+[ 2017-05-31T14:44:32+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Login/login
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001056s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001177s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `xh_user` [ RunTime:0.001906s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `xh_user` WHERE ( `username` = 'admin' ) LIMIT 1   [ RunTime:0.000813s ]
+SQL: UPDATE `xh_user` SET `logintime`=1496213072,`loginip`='0.0.0.0' WHERE ( `id` = 1 ) [ RunTime:0.001461s ]
+
+[ 2017-05-31T14:44:33+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/bootstrap.min.js
+ERR: 非法操作:public
+
+[ 2017-05-31T14:44:33+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/jquery.min.js
+ERR: 非法操作:public
+
+[ 2017-05-31T14:49:21+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/jquery.min.js
+ERR: 非法操作:public
+
+[ 2017-05-31T14:49:21+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/bootstrap.min.js
+ERR: 非法操作:public
+
+[ 2017-05-31T14:49:21+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/jquery.min.js
+ERR: 非法操作:public
+
+[ 2017-05-31T14:49:22+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/bootstrap.min.js
+ERR: 非法操作:public
+
+[ 2017-05-31T14:49:37+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/jquery.min.js
+ERR: 非法操作:public
+
+[ 2017-05-31T14:49:37+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/bootstrap.min.js
+ERR: 非法操作:public
+
+[ 2017-05-31T14:49:37+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/jquery.min.js
+ERR: 非法操作:public
+
+[ 2017-05-31T14:49:37+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/bootstrap.min.js
+ERR: 非法操作:public
+
+[ 2017-05-31T14:50:48+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/jquery.min.js
+ERR: 非法操作:public
+
+[ 2017-05-31T14:50:48+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/bootstrap.min.js
+ERR: 非法操作:public
+
