@@ -16,7 +16,9 @@ public function sxsubexciseList(){
     }
     
 
-    getCourseinfor();//创建由学期联动课程查询的select
+    $ccode = $stu['ccode'];
+	//p($stu);
+    getCourseinfor($ccode);//创建由学期联动课程查询的select
     $this->assign('list',$list);
     $this->display();
 }

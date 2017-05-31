@@ -108,8 +108,8 @@ function unlimitedForLevel($cate,$html='',$pid=0,$level=0){
     }
 }
     //查询学期->课程
-function getCourseinfor(){
-    $Model = M('sxsetcourse as a');
+function getCourseinfor($ccode){
+    $Model = M('sxsetcourse as a')->where("ccode='$ccode'");
     $res=$Model->field('term')->distinct(true)->select();
     $s="var xq=[{data:[['','请选择学期...']";
     foreach($res as $v){
@@ -121,7 +121,7 @@ function getCourseinfor(){
     
     $s1 = $s;
     
-    $res=$Model->join('xh_sxsetcourse as b  on a.term = b.term', 'left')->field('a.term,a.coursename')->distinct(true)->select();
+    $res=$Model->join('xh_sxsetcourse as b  on a.term = b.term', 'left')->field('a.term,a.coursename')->where("a.ccode='$ccode'")->distinct(true)->select();
     $s="var kc=[{value:'',disabled:true,data:[['','请选择课程...']";
     $p = "";
     $c = "";

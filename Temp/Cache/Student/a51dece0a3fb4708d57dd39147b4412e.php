@@ -18,7 +18,7 @@
 			<tr><td>帐号</td><td><?php echo ($stu["xsno"]); ?></td></tr>
 			<tr><td>姓名</td><td><?php echo ($stu["xsxm"]); ?></td></tr>
 			<tr><td>班级</td><td><?php echo ($stu["cname"]); ?></td></tr>
-			<tr><td>班级</td><td><?php echo ($stu["rxsj"]); ?></td></tr>
+			<tr><td>入学时间</td><td><?php echo ($stu["rxsj"]); ?></td></tr>
 			<tr><td>登录时间</td><td><?php echo (date('Y-m-d H:i:s',$stu["logintime"])); ?></td></tr>
 			<tr><td>登录IP</td><td><?php echo ($stu["loginip"]); ?></td></tr>
 	        </table>

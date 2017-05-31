@@ -1,0 +1,12 @@
+[ 2017-05-31T13:13:49+08:00 ] 0.0.0.0 /xsgl/
+ERR: Access denied for user 'root'@'localhost' (using password: NO)
+
+[ 2017-05-31T13:14:41+08:00 ] 0.0.0.0 /xsgl/
+ERR: Access denied for user 'root'@'localhost' (using password: NO)
+
+[ 2017-05-31T13:18:31+08:00 ] 127.0.0.1 /xsgl/
+ERR: Access denied for user 'root'@'localhost' (using password: NO)
+
+[ 2017-05-31T13:20:41+08:00 ] 127.0.0.1 /xsgl/
+ERR: Access denied for user 'root'@'localhost' (using password: NO)
+
