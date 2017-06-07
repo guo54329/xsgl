@@ -1,0 +1,326 @@
+[ 2017-06-07T15:19:31+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Login/login
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001260s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001399s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `xh_user` [ RunTime:0.001320s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `xh_user` WHERE ( `username` = 'admin' ) LIMIT 1   [ RunTime:0.000497s ]
+SQL: UPDATE `xh_user` SET `logintime`=1496819971,`loginip`='0.0.0.0' WHERE ( `id` = 1 ) [ RunTime:0.002445s ]
+
+[ 2017-06-07T15:19:34+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/jquery.min.js
+ERR: 非法操作:public
+
+[ 2017-06-07T15:19:34+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/bootstrap.min.js
+ERR: 非法操作:public
+
+[ 2017-06-07T15:29:15+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:29:17+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:29:21+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:29:25+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:29:28+08:00 ] 0.0.0.0 /xsgl/index.php/Teacher/Excise/sxpubexciseStatus
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000960s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001069s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `xh_sxsetcourse` [ RunTime:0.001427s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT `ccode` FROM `xh_sxsetcourse` WHERE ( `scid` = 1 ) LIMIT 1   [ RunTime:0.000404s ]
+SQL: SHOW COLUMNS FROM `xh_student` [ RunTime:0.001387s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT `xsno` FROM `xh_student` WHERE ( ccode = 201601 ) ORDER BY xsno ASC  [ RunTime:0.000956s ]
+SQL: SHOW COLUMNS FROM `xh_sxsubexcise` [ RunTime:0.001278s ]
+SQL: INSERT INTO `xh_sxsubexcise` (`peid`,`xsno`) VALUES (5,'160903001'),(5,'160903002'),(5,'160903003'),(5,'160903004'),(5,'160903005'),(5,'160903006'),(5,'160903008'),(5,'160903009'),(5,'160903010'),(5,'160903012'),(5,'160903013'),(5,'160903014'),(5,'160903015'),(5,'160903016'),(5,'160903017'),(5,'160903018'),(5,'160903019'),(5,'160903020'),(5,'160903021'),(5,'160903022'),(5,'160903023'),(5,'160903024'),(5,'160903025'),(5,'160903026'),(5,'160903028'),(5,'160903029'),(5,'160903030'),(5,'160903031'),(5,'160903033'),(5,'160903034'),(5,'160903036'),(5,'160903037'),(5,'160903038'),(5,'160903039'),(5,'160903040'),(5,'160903041'),(5,'160903042'),(5,'160903043'),(5,'160903044'),(5,'160903045'),(5,'160903046'),(5,'160903048'),(5,'160903050'),(5,'160903051') [ RunTime:0.000539s ]
+SQL: SHOW COLUMNS FROM `xh_sxpubexcise` [ RunTime:0.001199s ]
+SQL: UPDATE `xh_sxpubexcise` SET `status`=1 WHERE ( `peid` = 5 ) [ RunTime:0.000453s ]
+
+[ 2017-06-07T15:29:28+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:29:29+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:29:40+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:29:46+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:32:24+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:32:28+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:32:29+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:32:34+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:32:49+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:38:21+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:38:22+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:39:44+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:39:46+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:40:43+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:40:45+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:41:00+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:41:02+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:41:41+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:41:42+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:41:46+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:41:49+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:41:51+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:43:33+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:44:01+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:44:41+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:45:20+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:45:20+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:45:26+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:45:28+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:45:32+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:47:55+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:48:00+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:49:03+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:49:36+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:49:41+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:49:43+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:52:22+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:54:15+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:54:57+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:54:59+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:55:10+08:00 ] 0.0.0.0 /xsgl/index.php/Teacher/Excise/sxpubexciseStatus
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001539s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001783s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `xh_sxsubexcise` [ RunTime:0.000591s ]
+SQL: DELETE FROM `xh_sxsubexcise` WHERE ( peid = 5 ) [ RunTime:0.001405s ]
+SQL: SHOW COLUMNS FROM `xh_sxpubexcise` [ RunTime:0.000647s ]
+SQL: UPDATE `xh_sxpubexcise` SET `status`=0 WHERE ( `peid` = 5 ) [ RunTime:0.000369s ]
+
+[ 2017-06-07T15:55:10+08:00 ] 0.0.0.0 /xsgl/index.php/Teacher/Excise/sxpubexciseStatus
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001170s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001312s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `xh_sxsubexcise` [ RunTime:0.000700s ]
+SQL: DELETE FROM `xh_sxsubexcise` WHERE ( peid = 5 ) [ RunTime:0.000343s ]
+SQL: SHOW COLUMNS FROM `xh_sxpubexcise` [ RunTime:0.000812s ]
+SQL: UPDATE `xh_sxpubexcise` SET `status`=0 WHERE ( `peid` = 5 ) [ RunTime:0.000374s ]
+
+[ 2017-06-07T15:55:10+08:00 ] 0.0.0.0 /xsgl/index.php/Teacher/Excise/sxpubexciseStatus
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001028s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001163s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `xh_sxsubexcise` [ RunTime:0.001245s ]
+SQL: DELETE FROM `xh_sxsubexcise` WHERE ( peid = 5 ) [ RunTime:0.000885s ]
+SQL: SHOW COLUMNS FROM `xh_sxpubexcise` [ RunTime:0.001231s ]
+SQL: UPDATE `xh_sxpubexcise` SET `status`=0 WHERE ( `peid` = 5 ) [ RunTime:0.000495s ]
+
+[ 2017-06-07T15:55:10+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:55:12+08:00 ] 0.0.0.0 /xsgl/index.php/Teacher/Excise/sxpubexciseDel
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001031s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001146s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `xh_sxsubexcise` [ RunTime:0.000709s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `xh_sxsubexcise` WHERE ( peid=5 ) LIMIT 1   [ RunTime:0.000386s ]
+SQL: SHOW COLUMNS FROM `xh_sxpubexcise` [ RunTime:0.000634s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT `url`,`filename` FROM `xh_sxpubexcise` WHERE ( `peid` = 5 ) LIMIT 1   [ RunTime:0.000398s ]
+NOTIC: [2] unlink(00): No such file or directory C:\wamp64\www\xsgl\APP\Modules\Teacher\Action\ExciseAction.class.php 第 265 行.
+SQL: DELETE FROM `xh_sxpubexcise` WHERE ( `peid` = 5 ) [ RunTime:0.000369s ]
+SQL: SHOW COLUMNS FROM `xh_xh_sxdisexicise` [ RunTime:0.000626s ]
+ERR: 1146:Table 'xsgl.xh_xh_sxdisexicise' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `xh_xh_sxdisexicise`
+SQL: DELETE FROM `xh_xh_sxdisexicise` WHERE ( peid=5 ) [ RunTime:0.000340s ]
+ERR: 1146:Table 'xsgl.xh_xh_sxdisexicise' doesn't exist
+ [ SQL语句 ] : DELETE FROM `xh_xh_sxdisexicise` WHERE ( peid=5 )
+
+[ 2017-06-07T15:55:13+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:55:20+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:55:23+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:55:54+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:55:59+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T15:59:00+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:00:34+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:00:42+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:01:10+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:05:39+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:08:17+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:08:18+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:08:19+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:08:43+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:08:44+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:08:44+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:10:02+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:10:03+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:10:06+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:11:47+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:11:47+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:11:49+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:26:39+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:26:40+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:26:42+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:27:06+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Login/login
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001010s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001132s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `xh_user` [ RunTime:0.001340s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `xh_user` WHERE ( `username` = 'admin' ) LIMIT 1   [ RunTime:0.000446s ]
+SQL: UPDATE `xh_user` SET `logintime`=1496824026,`loginip`='0.0.0.0' WHERE ( `id` = 1 ) [ RunTime:0.000433s ]
+
+[ 2017-06-07T16:27:21+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/jquery.min.js
+ERR: 非法操作:public
+
+[ 2017-06-07T16:27:21+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/bootstrap.min.js
+ERR: 非法操作:public
+
+[ 2017-06-07T16:27:24+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:27:28+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:27:31+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:27:59+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:28:01+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-07T16:28:02+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+

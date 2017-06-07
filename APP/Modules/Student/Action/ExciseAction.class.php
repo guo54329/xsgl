@@ -27,7 +27,8 @@ public function sxsubexciseList(){
 public function sxsubexciseDo(){
     
   	if(!empty($_POST)){
-        if($_POST['desc']==''){
+        $desc =$_POST['desc'];
+        if($_POST['desc']=='0'){
           $this->error("请进行自我评价！");
         }
     		//作业提交处理
@@ -45,6 +46,10 @@ public function sxsubexciseDo(){
           $this->error("附件不能超过500MB！");
         }
 
+//注意：学生提交作业时使用的是任务附件的保存路径
+//如果发布的任务没有附件，则相应没有文件保存路径，学生的作业也就没路径可以提交了，所以每次会提交失败。
+//处理办法：教师发布任务时，必须发布附件(至少附件中的内容可以是任务表述或要求)
+//
         $seid=$_POST['seid'];
         $peid=M('sxsubexcise')->field('peid')->find($seid);
         $peid = $peid['peid'];
@@ -52,17 +57,18 @@ public function sxsubexciseDo(){
         $filepath=$url['url'];  
         $uploadfile = new UploadFile();
         $uploadfile->saveRule ='definefilename'; 
-        if($info = $uploadfile->uploadOne($file,$filepath)){ //上传成功
+        $info = $uploadfile->uploadOne($file,$filepath);
+        if($info){ //上传成功
+        
               $filename=$info[0]['savename']; 
               //准备保存数据
               $data=array(
-              'seid'=>$_POST['seid'],
-              'desc'=>$_POST['desc'],
+              'seid'=>$seid,
+              'desc'=>$desc,
               'filename'=>$filename,
               'status'=>1,
               'subtime'=>time(),
               );
-
               $id = M('sxsubexcise')->save($data);
               if($id>0){
                 $this->success("作业提交成功！",U(GROUP_NAME."/Excise/sxsubexciseList"));

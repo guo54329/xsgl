@@ -64,7 +64,7 @@
 				<td>任务附件:</td>
 				<td>
 				   <div class="form-inline">
-				     <input type="file"  name="attach"  class="form-control" /> <span class="glyphicon glyphicon-info-sign"></span> 必须上传附件(附件的内容可以是任务描述或要求),如果附件文件类型为php、text、html,请先转换为zip文件后再上传.<br/>
+				     <input type="file"  name="attach"  class="form-control" /><br/> <span class="glyphicon glyphicon-info-sign"></span> 必须上传附件(附件的内容可以是任务描述或要求),如果附件文件类型为php、text、html,请先转换为zip文件后再上传.<br/>
 				      <span class="glyphicon glyphicon-flash"></span> 注意：学生提交作业时使用的是任务附件的保存路径，如果发布的任务没有附件，则相应没有文件保存路径，学生的作业就无路径无法提交！
 				    </div>
 				</td>

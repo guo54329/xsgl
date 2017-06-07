@@ -22,11 +22,12 @@
 
 	  <div class="panel-body">
 		 <table class='table table-bordered table-hover'>
-			<tr><td>序号</td><td>课程</td><td>所属专业</td><td>操作</td></tr>
+			<tr><td>序号</td><td>课程</td><td>课程类型</td><td>所属专业</td><td>操作</td></tr>
 			<foreach name='course' item='v'>
 			<tr>
 				<td>{$v.id}</td>
 				<td>{$v.name}</td>
+				<td><if condition="$v['coursetype'] eq 2">专业课<else/>公共课</if></td>
 				<td>{$v.proname}</td>
 				<td>
 					<a href="{:U(GROUP_NAME.'/Basicdata/saveCourse',array('id'=>$v['id']))}"  class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> 修改</a>&nbsp;

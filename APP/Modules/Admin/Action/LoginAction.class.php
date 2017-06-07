@@ -13,10 +13,10 @@ Class LoginAction extends Action {
 		//p($_POST);
 
 		if(!IS_POST)halt('页面不存在！');//判断是不是post过来的数据
-		if(I('code','','strtolower')!=session('verify')){
-			//$this->error('验证码错误！');
-			show(0,"验证码错误！");
-		}
+		 if(I('code','','strtolower')!=session('verify')){
+		 	//$this->error('验证码错误！');
+		 	show(0,"验证码错误！");
+		 }
 
 		$db=M('user');
 		$user=$db->where(array('username'=>I('username')))->find();

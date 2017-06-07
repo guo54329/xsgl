@@ -279,7 +279,8 @@ public function saveCourseH(){
 	 	$id=(int)$_POST['id'];
 	 	$data=array(
 	 		'name'=>trim($_POST['name']),
-	 		'proname'=>trim($_POST['proname'])
+	 		'proname'=>trim($_POST['proname']),
+	 		'coursetype'=>trim($_POST['coursetype'])
 	 	);
 
 	 	if($id==0){
@@ -290,8 +291,9 @@ public function saveCourseH(){
 		 	$data['id']=$id;
 	 		$res=M('course')->save($data);
 		}
+		//p($data);die;
 		if($res){
-				$this->success("提交成功！",U(GROUP_NAME.'/Basicdata/course'));
+			$this->success("提交成功！",U(GROUP_NAME.'/Basicdata/course'));
 		}else{
 			$this->error("提交失败！");
 		}	
@@ -313,7 +315,8 @@ public function importCourse(){
 	    for($i=0;$i<count($course);$i++){
 			$data[$i] = array(
 				'name'=>trim($course[$i][1]),
-				'proname'=>trim($course[$i][2]),
+				'coursetype'=>trim($course[$i][2]),
+				'proname'=>trim($course[$i][3]),
 			);
     	}
         //p($data);die;
