@@ -44,21 +44,21 @@
 </style>												
 </head>
 <body>
-<form action='<?php echo U(GROUP_NAME.'/Excise/sxpubexciseSave');?>' method='post' enctype="multipart/form-data">
+<form action='<?php echo U(GROUP_NAME.'/Excise/sxpubexciseEdit');?>' method='post' enctype="multipart/form-data">
 <div class="panel panel-default">
-	  <div class="panel-heading">添加任务(您正在为<strong><?php echo ($coursename); ?></strong>添加任务)</div>
+	  <div class="panel-heading">修改任务(您正在修改<strong><?php echo ($coursename); ?></strong>的指定任务)</div>
 	  <div class="panel-body">
 		<table class='table table-bordered table-hover'>	
 			<tr>
 				<td>任务标题:</td>
 				<td>
 				<div class="form-inline">
-				<input type="text" placeholder="请输入标题" name="title" id="title" class="form-control" />
+				<input type="text" placeholder="请输入标题" name="title" id="title" class="form-control" value="<?php echo ($excise['title']); ?>" />
 				</div>
 			</tr>
 			<tr>
 				<td>任务描述:</td>
-				<td><textarea name='desc' id='content' ></textarea></td>
+				<td><textarea name='desc' id='content' ><?php echo ($excise['desc']); ?></textarea></td>
 			</tr>
 			<tr>
 				<td>任务附件:</td>
@@ -73,9 +73,10 @@
 	  </div>
 	  
 	  <div class="panel-footer">
-	      <input name="scid" type='hidden'  value="<?php echo ($scid); ?>"/>
-	      <a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$scid));?>" class="btn btn-info btnw"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>&nbsp;
+	      <input name="peid" type='hidden'  value="<?php echo ($excise['peid']); ?>"/>
 	      <button class="btn btn-info" type="submit" ><span class="glyphicon glyphicon-check"></span> 提交</button>
+	      &nbsp;&nbsp;
+	      <a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$excise['scid']));?>" class="btn btn-info btnw"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>
 
 	  </div>
 </div>

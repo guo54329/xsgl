@@ -23,10 +23,12 @@
 			<tr>
 				<td>学期</td>
 				<td>
+				  <div class="form-inline">
 					<select name='term' class="form-control">
 						<option value="0">请选择学期...</option>
 						<?php if(is_array($term)): foreach($term as $key=>$v): ?><option value="<?php echo ($v["name"]); ?>"><?php echo ($v["name"]); ?></option><?php endforeach; endif; ?>
 					</select>
+				  </div>
 				</td>
 			</tr>
 
@@ -85,6 +87,8 @@
 	  </div>
 	  <div class="panel-footer">
 	  	<button type='submit' class="btn btn-info"><span class="glyphicon glyphicon-check"></span> 提交</button>
+	  	&nbsp;&nbsp;
+	  	<a href="<?php echo U(GROUP_NAME.'/Excise/courseTable');?>" class="btn btn-info btnw"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>
 	  </div>
 </div>
 </form>

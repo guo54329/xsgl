@@ -33,7 +33,7 @@ function isrec(obj){
 		text-align:center;
 	}
 	.browse{
-		width: 100px;
+		width: 90px;
 	}
 	.no{
 		color: red;
@@ -50,9 +50,9 @@ function isrec(obj){
 <div class="panel panel-default">
 	  <div class="panel-heading">学生完成情况 </div>
 	  <div class="panel-footer footeralign"> 
-	  		<a href="{:U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$courseinfo['scid']))}" class="btn btn-info btnw"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>&nbsp;
-	  		<button class="btn btn-info btnw" onclick="myrefresh()"><span class="glyphicon glyphicon-repeat"></span> 刷新</button>&nbsp;
-	  		<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseTable',array('peid'=>$excisedesc['peid']))}" class="btn btn-info btnw"><span class="glyphicon glyphicon-floppy-save"></span> 导出</a>
+	  		<a href="{:U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$courseinfo['scid']))}" class="btn btn-info"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>&nbsp;
+	  		<button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-repeat"></span> 刷新</button>&nbsp;
+	  		<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseTable',array('peid'=>$excisedesc['peid']))}" class="btn btn-info browse"><span class="glyphicon glyphicon-floppy-save"></span> 完成情况</a>
 	  </div>
 	  <div class="panel-body">
 		 <table class='table table-bordered table-hover'>

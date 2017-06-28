@@ -91,7 +91,7 @@ function del(obj){
 			<foreach name='list' item='v'>
 			<tr>
 				<td>{$i}{~$v.peid}</td>
-				<td>{$v.title}</td>
+				<td align="left">{$v.title}</td>
 				<!--<td>{$v.desc}</td>
 				<td>{$v.title}</td>-->
 				<td><span id="s{$v.peid}"><if condition="$v['status'] eq 0 "><span class="no">未发布</span> <else/><span class="yes">已发布</span></if></span></td>
@@ -107,6 +107,7 @@ function del(obj){
 				
 
 				<td align="left">
+				<a href="{:U(GROUP_NAME.'/Excise/sxpubexciseEdit',array('peid'=>$v['peid']))}" class="btn btn-default" ><span class="glyphicon glyphicon-pencil"></span> 修改</a>&nbsp;
 
 				<button class="btn btn-default" id="{$v.peid}" onclick="publish(this);" title="发布后再次单击执行撤销发布操作"><span class="glyphicon glyphicon-share-alt"></span> 发布</button>&nbsp;
 				<button class="btn btn-default" id="{$v.peid}" onclick="del(this);" title="若有学生作业，请先设置重做！"><span class="glyphicon glyphicon-remove"></span> 删除</button>&nbsp;
@@ -116,7 +117,7 @@ function del(obj){
 				</if>&nbsp;
 				<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseList',array('peid'=>$v['peid']))}" class="btn btn-default browse" ><span class="glyphicon glyphicon-eye-open"></span> 学生完成</a>&nbsp;
 				<a href="{:U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']))}" class="btn btn-default" ><span class="glyphicon glyphicon-eye-open"></span> 讨论</a>&nbsp;
-				<a href="{:U(GROUP_NAME.'/Excise/sxexcisePackage',array('peid'=>$v['peid']))}" class="btn btn-default browse" title="将该任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 打包下载</a>&nbsp;
+				<a href="{:U(GROUP_NAME.'/Excise/sxexcisePackage',array('peid'=>$v['peid']))}" class="btn btn-default browse" title="将该任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 学生作业</a>&nbsp;
 				<input type="hidden" id="status{$v.peid}" value="{$v.status}" />
 				<input type="hidden" id="scid{$v.peid}" value="{$courseinfo.scid}" />
 

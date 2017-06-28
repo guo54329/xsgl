@@ -90,7 +90,7 @@ function del(obj){
 			<?php $i=1;?>
 			<?php if(is_array($list)): foreach($list as $key=>$v): ?><tr>
 				<td><?php echo ($i); $v.peid;?></td>
-				<td><?php echo ($v["title"]); ?></td>
+				<td align="left"><?php echo ($v["title"]); ?></td>
 				<!--<td><?php echo ($v["desc"]); ?></td>
 				<td><?php echo ($v["title"]); ?></td>-->
 				<td><span id="s<?php echo ($v["peid"]); ?>"><?php if($v['status'] == 0 ): ?><span class="no">未发布</span> <?php else: ?><span class="yes">已发布</span><?php endif; ?></span></td>
@@ -101,6 +101,7 @@ function del(obj){
 				
 
 				<td align="left">
+				<a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseEdit',array('peid'=>$v['peid']));?>" class="btn btn-default" ><span class="glyphicon glyphicon-pencil"></span> 修改</a>&nbsp;
 
 				<button class="btn btn-default" id="<?php echo ($v["peid"]); ?>" onclick="publish(this);" title="发布后再次单击执行撤销发布操作"><span class="glyphicon glyphicon-share-alt"></span> 发布</button>&nbsp;
 				<button class="btn btn-default" id="<?php echo ($v["peid"]); ?>" onclick="del(this);" title="若有学生作业，请先设置重做！"><span class="glyphicon glyphicon-remove"></span> 删除</button>&nbsp;
@@ -108,7 +109,7 @@ function del(obj){
 				<?php if($v['url'] != '0' ): ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$v['peid']));?>" class="btn btn-default" ><span class="glyphicon glyphicon-save"></span> 附件</a><?php endif; ?>&nbsp;
 				<a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseList',array('peid'=>$v['peid']));?>" class="btn btn-default browse" ><span class="glyphicon glyphicon-eye-open"></span> 学生完成</a>&nbsp;
 				<a href="<?php echo U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']));?>" class="btn btn-default" ><span class="glyphicon glyphicon-eye-open"></span> 讨论</a>&nbsp;
-				<a href="<?php echo U(GROUP_NAME.'/Excise/sxexcisePackage',array('peid'=>$v['peid']));?>" class="btn btn-default browse" title="将该任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 打包下载</a>&nbsp;
+				<a href="<?php echo U(GROUP_NAME.'/Excise/sxexcisePackage',array('peid'=>$v['peid']));?>" class="btn btn-default browse" title="将该任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 学生作业</a>&nbsp;
 				<input type="hidden" id="status<?php echo ($v["peid"]); ?>" value="<?php echo ($v["status"]); ?>" />
 				<input type="hidden" id="scid<?php echo ($v["peid"]); ?>" value="<?php echo ($courseinfo["scid"]); ?>" />
 

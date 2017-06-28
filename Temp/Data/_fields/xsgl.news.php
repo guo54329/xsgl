@@ -1,1 +1,0 @@
-<?php	return array ( 0 => 'id', 1 => 'title', 2 => 'content', 3 => 'pubtype', 4 => 'userxm', 5 => 'pubtime', 6 => 'updatetime', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'int(11)', 'title' => 'varchar(255)', 'content' => 'text', 'pubtype' => 'int(1)', 'userxm' => 'varchar(30)', 'pubtime' => 'int(10)', 'updatetime' => 'int(10)', ), );?>

@@ -1,1 +1,0 @@
-<?php	return array ( 0 => 'scid', 1 => 'jsno', 2 => 'ccode', 3 => 'coursename', 4 => 'term', '_autoinc' => true, '_pk' => 'scid', '_type' => array ( 'scid' => 'int(10)', 'jsno' => 'varchar(9)', 'ccode' => 'varchar(6)', 'coursename' => 'varchar(50)', 'term' => 'varchar(11)', ), );?>
