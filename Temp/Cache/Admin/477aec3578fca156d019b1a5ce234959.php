@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<form action='{:U(GROUP_NAME.'/Excise/coursetableSave')}' method='post'>
+<form action='<?php echo U(GROUP_NAME.'/Excise/coursetableSave');?>' method='post'>
 <div class="panel panel-default">
 	  <div class="panel-heading">添加教师课程表</div>
 	  <div class="panel-body">
@@ -25,9 +25,7 @@
 				 <div class="form-inline">
 					<select name='term' class="form-control">
 						<option value="0">请选择学期...</option>
-						<foreach name='term' item='v'>
-							<option value="{$v.name}">{$v.name}</option>
-						</foreach>
+						<?php if(is_array($term)): foreach($term as $key=>$v): ?><option value="<?php echo ($v["name"]); ?>"><?php echo ($v["name"]); ?></option><?php endforeach; endif; ?>
 					</select>
 				</div>
 				</td>
@@ -110,9 +108,9 @@
 		</table>	
 	  </div>
 	  <div class="panel-footer">
-        <input type='hidden'  name="id" value="{$teacher.id}"/>
+        <input type='hidden'  name="id" value="<?php echo ($teacher["id"]); ?>"/>
 	  	<button type='submit' class="btn btn-info"><span class="glyphicon glyphicon-check"></span> 提交</button>&nbsp;&nbsp;
-	  	<a href="{:U(GROUP_NAME.'/Excise/courseTable')}" class="btn btn-info btnw"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>
+	  	<a href="<?php echo U(GROUP_NAME.'/Excise/courseTable');?>" class="btn btn-info btnw"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>
 	  </div>
 </div>
 </form>

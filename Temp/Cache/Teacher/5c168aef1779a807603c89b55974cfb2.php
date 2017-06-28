@@ -53,7 +53,8 @@
 				<td>任务标题:</td>
 				<td>
 				<div class="form-inline">
-				<input type="text" placeholder="请输入标题" name="title" id="title" class="form-control" />
+				<input type="text" placeholder="请输入标题" name="title" id="title" class="form-control" style="width:400px;" />
+				
 				</div>
 			</tr>
 			<tr>
@@ -74,8 +75,10 @@
 	  
 	  <div class="panel-footer">
 	      <input name="scid" type='hidden'  value="<?php echo ($scid); ?>"/>
-	      <a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$scid));?>" class="btn btn-info btnw"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>&nbsp;
+	      
 	      <button class="btn btn-info" type="submit" ><span class="glyphicon glyphicon-check"></span> 提交</button>
+	      &nbsp;&nbsp;
+	      <a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$scid));?>" class="btn btn-info btnw"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>
 
 	  </div>
 </div>

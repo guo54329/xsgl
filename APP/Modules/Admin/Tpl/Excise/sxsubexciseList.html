@@ -22,10 +22,15 @@
 		text-align:center;
 	}
 	.browse{
-		width: 100px;
+		width: 90px;
 	}
 	.no{
 		color: red;
+	}
+	.fresh{
+		right:20;
+		top: 210;
+		position: fixed;
 	}
 </style>
 </head>
@@ -35,7 +40,8 @@
 	  <div class="panel-heading">学生完成情况 </div>
 	  <div class="panel-footer footeralign"> 
 	  		<a href="{:U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$courseinfo['scid']))}" class="btn btn-info btnw"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>&nbsp;
-	  		<button class="btn btn-info btnw" onclick="myrefresh()"><span class="glyphicon glyphicon-repeat"></span> 刷新</button>
+	  		<button class="btn btn-info btnw" onclick="myrefresh()"><span class="glyphicon glyphicon-repeat"></span> 刷新</button>&nbsp;&nbsp;
+	  		<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseRedoAll',array('peid'=>$excisedesc['peid']))}" class="btn btn-info browse"><span class="glyphicon glyphicon-repeat"></span> 一键重做</a>
 	  </div>
 	  <div class="panel-body">
 		 <table class='table table-bordered table-hover'>
@@ -56,7 +62,7 @@
 		    
 		    </td>
 		    </tr>
-			<tr><th>序号</th><th>学号</th><th>姓名</th><th>提交状态</th><th>提交时间</th><th>自评成绩</th><th>实训成绩</th><th>操作</th></tr>
+			<tr><th>序号</th><th>学号</th><th>姓名</th><th>提交状态</th><th>提交时间</th><th>实训成绩</th><th>操作</th></tr>
 			{~$i=1}
 			<foreach name='exciselist' item='v'>
 			<tr>
@@ -66,9 +72,8 @@
 				
 				<td><if condition="$v['status'] eq 0 "><span class="no">未提交</span><else/>已提交 </if>
 				</td>
-				<td>{$v.subtime|date='Y-m-d H:i:s',###}</td>
-				<td>{$v.desc}</td>
-				<td>{$v.isrec}</td>
+				<td><if condition="$v['subtime'] neq 0"> {$v.subtime|date='Y-m-d H:i:s',###}</if></td>
+				<td><php> echo $v['desc']*0.3+$v['isrec']*0.7;</php></td>
 				<td>
 				   <if condition="$v['status'] eq 1 ">　
 					<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDownAttach',array('seid'=>$v['seid']))}" class="btn btn-default browse"><span class="glyphicon glyphicon-save"></span> 下载附件</a>
@@ -81,6 +86,8 @@
 			</foreach>
 		</table>
 	  </div>
+
+	  <div class="fresh"><button class="btn btn-info btnw" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button></div>
 </div>
 </body>
 </html>

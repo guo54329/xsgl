@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,7 +37,7 @@ function myrefresh(){
 
 	  <div class="panel-footer footeralign">
 	    <div class="form-inline">
-	    	<form action='{:U(GROUP_NAME.'/Excise/sxsubexciseList')}' method="post">
+	    	<form action='<?php echo U(GROUP_NAME.'/Excise/sxsubexciseList');?>' method="post">
 	  		<button class="btn btn-info btnw" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;
@@ -66,27 +66,25 @@ function myrefresh(){
 	  <div class="panel-body">
 		 <table class='table table-bordered table-hover'>
 			<tr><th>学期</th><th>课程</th><th>序号</th><th>任务标题</th><th>发布教师</th><th>发布时间</th><th>完成状态</th><th>是否重做</th><th>实训成绩</th><th>操作</th></tr>
-			{~$i=1}
-			<foreach name='list' item='v'>
-			<tr>
-				<td>{$v.term}</td>
-				<td>{$v.coursename}</td>
-				<td>{$i}{~$v.peid}</td>
-				<td align="left">{$v.title}</td>
-				<td>{$v.jsxm}</td>
-				<td>{$v.pubtime|date='m-d H:i',###}</td>
+			<?php $i=1;?>
+			<?php if(is_array($list)): foreach($list as $key=>$v): ?><tr>
+				<td><?php echo ($v["term"]); ?></td>
+				<td><?php echo ($v["coursename"]); ?></td>
+				<td><?php echo ($i); $v.peid;?></td>
+				<td align="left"><?php echo ($v["title"]); ?></td>
+				<td><?php echo ($v["jsxm"]); ?></td>
+				<td><?php echo (date('m-d H:i',$v["pubtime"])); ?></td>
 
-				<td><if condition="$v['status'] eq 0 "><a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDo',array('seid'=>$v['seid']))}" class="btn"><span class="glyphicon glyphicon-hand-right"></span> 去完成</a> <else/>已完成</if></td>
+				<td><?php if($v['status'] == 0 ): ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseDo',array('seid'=>$v['seid']));?>" class="btn"><span class="glyphicon glyphicon-hand-right"></span> 去完成</a> <?php else: ?>已完成<?php endif; ?></td>
 
-				<td><if condition="$v['status'] eq 0 ">请完成<else/><a href="{:U(GROUP_NAME.'/Excise/sxsubexciseRedo',array('seid'=>$v['seid']))}" class="btn"><span class="glyphicon glyphicon-hand-right"></span> 重做 </a></if></td>
+				<td><?php if($v['status'] == 0 ): ?>请完成<?php else: ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseRedo',array('seid'=>$v['seid']));?>" class="btn"><span class="glyphicon glyphicon-hand-right"></span> 重做 </a><?php endif; ?></td>
 
-				<td><php> echo $v['desc']*0.3+$v['isrec']*0.7;</php></td>
+				<td><?php echo $v['desc']*0.3+$v['isrec']*0.7; ?></td>
 			
-				<td><if condition="$v['status'] eq 0 ">无<else/><a href="{:U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']))}" class="btn btn-default browse" ><span class="glyphicon glyphicon-eye-open"></span> 交流讨论</a></if></td>
+				<td><?php if($v['status'] == 0 ): ?>无<?php else: ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']));?>" class="btn btn-default browse" ><span class="glyphicon glyphicon-eye-open"></span> 交流讨论</a><?php endif; ?></td>
 				
 			</tr>
-			{~$i++}
-			</foreach>
+			<?php $i++; endforeach; endif; ?>
 		</table>
 	  </div>
 	  

@@ -75,7 +75,7 @@ function del(obj){
 	  <div class="panel-heading">实训任务列表 </div>
 	  <div class="panel-footer footeralign">
  		<a href="{:U(GROUP_NAME.'/Excise/courseTable')}" class="btn btn-info btnw"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>&nbsp;
- 		<button class="btn btn-info btnw" onclick="myrefresh()"><span class="glyphicon glyphicon-repeat"></span> 刷新</button>&nbsp;
+ 		<button class="btn btn-info btnw" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp;
 	  	<a href="{:U(GROUP_NAME.'/Excise/sxpubexciseSave',array('scid'=>$courseinfo['scid']))}" class="btn btn-info browse"><span class="glyphicon glyphicon-plus"></span> 添加任务</a>
 	  </div>
 	  <div class="panel-body">
@@ -110,14 +110,17 @@ function del(obj){
 				<a href="{:U(GROUP_NAME.'/Excise/sxpubexciseEdit',array('peid'=>$v['peid']))}" class="btn btn-default" ><span class="glyphicon glyphicon-pencil"></span> 修改</a>&nbsp;
 
 				<button class="btn btn-default" id="{$v.peid}" onclick="publish(this);" title="发布后再次单击执行撤销发布操作"><span class="glyphicon glyphicon-share-alt"></span> 发布</button>&nbsp;
-				<button class="btn btn-default" id="{$v.peid}" onclick="del(this);" title="若有学生作业，请先设置重做！"><span class="glyphicon glyphicon-remove"></span> 删除</button>&nbsp;
-				<!--如果有附件，在提供下载按钮-->
+				<button class="btn btn-default" id="{$v.peid}" onclick="del(this);" title="若有学生作业，请先设置重做！"><span class="glyphicon glyphicon-remove"></span> 删除</button>&nbsp;&nbsp;&nbsp;&nbsp;
+				<!--如果有附件，在提供下载按钮  || 此处取消附件下载功能
 				<if condition="$v['url'] neq '0' ">
 				<a href="{:U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$v['peid']))}" class="btn btn-default" ><span class="glyphicon glyphicon-save"></span> 附件</a>
-				</if>&nbsp;
+				</if>&nbsp;-->
 				<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseList',array('peid'=>$v['peid']))}" class="btn btn-default browse" ><span class="glyphicon glyphicon-eye-open"></span> 学生完成</a>&nbsp;
-				<a href="{:U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']))}" class="btn btn-default" ><span class="glyphicon glyphicon-eye-open"></span> 讨论</a>&nbsp;
+				
 				<a href="{:U(GROUP_NAME.'/Excise/sxexcisePackage',array('peid'=>$v['peid']))}" class="btn btn-default browse" title="将该任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 学生作业</a>&nbsp;
+
+				<a href="{:U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']))}" class="btn btn-default browse" ><span class="glyphicon glyphicon-comment"></span> 交流讨论</a>&nbsp;
+
 				<input type="hidden" id="status{$v.peid}" value="{$v.status}" />
 				<input type="hidden" id="scid{$v.peid}" value="{$courseinfo.scid}" />
 

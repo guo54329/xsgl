@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,11 +32,11 @@
 	  <div class="panel-heading">教师课程表 </div>
 	  <div class="panel-footer footeralign">
 		<div class="form-inline">
-			<form action='{:U(GROUP_NAME.'/Excise/courseTable')}' method="post">
+			<form action='<?php echo U(GROUP_NAME.'/Excise/courseTable');?>' method="post">
              <span class="bpx">
 			 <button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp;&nbsp;&nbsp;&nbsp;
 
-			<a href="{:U(GROUP_NAME.'/Excise/coursetableSave')}" class="btn btn-info btnw"><span class="glyphicon glyphicon-plus"></span> 添加课程</a>&nbsp;&nbsp;<span>提示：请选择其中一种方式，然后单击查询！</span>
+			<a href="<?php echo U(GROUP_NAME.'/Excise/coursetableSave');?>" class="btn btn-info btnw"><span class="glyphicon glyphicon-plus"></span> 添加课程</a>&nbsp;&nbsp;<span>提示：请选择其中一种方式，然后单击查询！</span>
 			</span>
 			<br/>
 	  		方式一：
@@ -84,32 +84,22 @@
 	  <div class="panel-body">
 		 <table class='table table-bordered table-hover'>
 			<tr><td>ID</td><td>学期</td><td>任课教师</td><td>班级</td><td>课程</td><td>任务数量</td><td>操作(如需删除，请先进入任务列表删除任务)</td></tr>
-			<foreach name='coursetable' item='v'>
-			<tr>
-				<td>{$v.scid}</td>
-				<td>{$v.term}</td>
-				<td>{$v.jsxm}</td>
-				<td>{$v.cname}</td>
-				<td>{$v.coursename}</td>
-				<td><php>    
-						$scid = $v['scid'];
-    					$pubnum = M('sxpubexcise')->where("scid=$scid")->count();
-    					echo $pubnum;
-    				</php>
+			<?php if(is_array($coursetable)): foreach($coursetable as $key=>$v): ?><tr>
+				<td><?php echo ($v["scid"]); ?></td>
+				<td><?php echo ($v["term"]); ?></td>
+				<td><?php echo ($v["jsxm"]); ?></td>
+				<td><?php echo ($v["cname"]); ?></td>
+				<td><?php echo ($v["coursename"]); ?></td>
+				<td><?php $scid = $v['scid']; $pubnum = M('sxpubexcise')->where("scid=$scid")->count(); echo $pubnum; ?>
     			</td>
 				<td align="left">　
-				   <a href="{:U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$v['scid']))}" class="btn btn-default btnw" title="查看指定教师发布的指定课程的任务列表！"><span class="glyphicon glyphicon-eye-open"></span> 任务列表</a>&nbsp;
+				   <a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$v['scid']));?>" class="btn btn-default btnw" title="查看指定教师发布的指定课程的任务列表！"><span class="glyphicon glyphicon-eye-open"></span> 任务列表</a>&nbsp;
 					
-					<if condition=" $pubnum neq 0">
-						<a href="{:U(GROUP_NAME.'/Excise/sxcoursePackage',array('scid'=>$v['scid']))}" class="btn btn-default btnw" title="将该课程所有任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 资料存档</a>&nbsp;
-					</if>
+					<?php if( $pubnum != 0): ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxcoursePackage',array('scid'=>$v['scid']));?>" class="btn btn-default btnw" title="将该课程所有任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 资料存档</a>&nbsp;<?php endif; ?>
 					
-					<if condition="$pubnum eq 0">
-					<a href="{:U(GROUP_NAME.'/Excise/delcourseTable',array('id'=>$v['scid']))}" class="btn btn-default" title="如果没有任务可以直接删除，否则需要删尽其下的任务再进行删除！"><span class="glyphicon glyphicon-remove"></span> 删除</a>
-					</if>
+					<?php if($pubnum == 0): ?><a href="<?php echo U(GROUP_NAME.'/Excise/delcourseTable',array('id'=>$v['scid']));?>" class="btn btn-default" title="如果没有任务可以直接删除，否则需要删尽其下的任务再进行删除！"><span class="glyphicon glyphicon-remove"></span> 删除</a><?php endif; ?>
 				</td>
-			</tr>
-			</foreach>
+			</tr><?php endforeach; endif; ?>
 		</table>
 	  </div>
 	  

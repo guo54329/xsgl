@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,9 +8,9 @@
 <script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
 <script src="__PUBLIC__/Js/dialog/layer.js"></script>
 <script src="__PUBLIC__/Js/dialog.js"></script>
-<js file="__PUBLIC__/Js/jquery-1.8.3.min.js" />
-<js file="__ROOT__/Data/Ueditor/ueditor.config.js" />
-<js file="__ROOT__/Data/Ueditor/ueditor.all.min.js" />
+<script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Data/Ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__ROOT__/Data/Ueditor/ueditor.all.min.js"></script>
 
 <script type="text/javascript">	
 	window.UEDITOR_HOME_URL='__ROOT__/Data/Ueditor/';
@@ -72,15 +72,15 @@
 </style>
 </head>
 <body>
-<form action='{:U(GROUP_NAME.'/Excise/sxsubexciseDo')}' method='post' enctype="multipart/form-data">
+<form action='<?php echo U(GROUP_NAME.'/Excise/sxsubexciseDo');?>' method='post' enctype="multipart/form-data">
 <div class="panel panel-default">
-	  <div class="panel-heading">本次任务详情(<strong>课程：{$dolist.coursename}</strong>) </div>
+	  <div class="panel-heading">本次任务详情(<strong>课程：<?php echo ($dolist["coursename"]); ?></strong>) </div>
 	  <div class="panel-body">
 		 <table class='table table-bordered table-hover'>
 			<tr><td colspan="2">
-			<strong>任务标题：</strong>{$dolist.title}&nbsp;&nbsp;&nbsp;&nbsp;
-			<strong>附件下载：</strong><a href="{:U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$dolist['peid']))}" class="btn btn-default attach"><span class="glyphicon glyphicon-save"> {$dolist.filename}</span> </a>&nbsp;&nbsp;&nbsp;&nbsp;<strong>发布时间：</strong>{$dolist.pubtime|date='Y-m-d H:i:s',###}<br/>
-		    <strong>任务描述：</strong>{$dolist.desc}
+			<strong>任务标题：</strong><?php echo ($dolist["title"]); ?>&nbsp;&nbsp;&nbsp;&nbsp;
+			<strong>附件下载：</strong><a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$dolist['peid']));?>" class="btn btn-default attach"><span class="glyphicon glyphicon-save"> <?php echo ($dolist["filename"]); ?></span> </a>&nbsp;&nbsp;&nbsp;&nbsp;<strong>发布时间：</strong><?php echo (date('Y-m-d H:i:s',$dolist["pubtime"])); ?><br/>
+		    <strong>任务描述：</strong><?php echo ($dolist["desc"]); ?>
 				</td>
 			</tr>
 			<tr>
@@ -116,9 +116,9 @@
 		</table>
 	  </div>
 	  <div class="panel-footer">
-       <input type="hidden" name="seid" value="{$dolist.seid}">
+       <input type="hidden" name="seid" value="<?php echo ($dolist["seid"]); ?>">
 	  <button type="submit"  class="btn btn-info browse"><span class="glyphicon glyphicon-check"></span> 提交完成</button>&nbsp;&nbsp;
-	  <a href="{:U(GROUP_NAME.'/Excise/sxsubexciseList')}" class="btn btn-info browse"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回列表</a>
+	  <a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseList');?>" class="btn btn-info browse"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回列表</a>
 	  </div>
 </div>
 </form>

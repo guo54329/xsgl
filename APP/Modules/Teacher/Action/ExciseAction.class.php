@@ -201,19 +201,21 @@ public function sxpubexciseSave(){
    } 
 }
 
-//修改任务
-//修改指定课程的任务      
+//修改指定任务      
 public function sxpubexciseEdit(){   
    if(!empty($_POST)){
 
       $peid = $_POST['peid'];
+      $scid=M('sxpubexcise')->field('scid')->find($peid);
+      $scid = $scid['scid'];//课程id  查询课程信息和最终返回使用
+
       $data=array(
             'peid'=>$peid,
             'title'=>trim($_POST['title']),
             'desc'=>trim($_POST['desc']),
             'pubtime'=>time(),
       ); 
-      if(!empty($_FILES['attach'])){
+      if($_FILES['attach']['name']!=''){
           
           //将原先的附件删除
           $attach = M('sxpubexcise')->field('url,filename')->find($peid);
@@ -237,8 +239,6 @@ public function sxpubexciseEdit(){
               $this->error("附件不能超过100MB！");
           }
           //用于生成教师附件上传的路径
-          $scid=M('sxpubexcise')->field('scid')->find($peid);
-          $scid = $scid['scid'];//课程id
           $courseinfo = M('sxsetcourse')->field('term,jsno,coursename')->find($scid);//在课程表获取该课程的信息
           $coursename = $courseinfo['coursename'];//课程名称
           $term = $courseinfo['term'];//学期
@@ -405,6 +405,7 @@ public function sxsubexciseList(){
     $this->display();
 }
 
+//任务完成情况统计下载
 public function sxsubexciseTable(){
     $peid = (int)$_GET['peid'];
     $title=M('sxpubexcise')->field('title')->find($peid);
@@ -594,6 +595,7 @@ public function sxsubexciseRedo(){
 			'seid'=>$seid,
 			'desc' =>'',
 			'filename'=>'',
+      'subtime'=>0,
 			'status'=>0,
 			'isrec'=>''
 		);
@@ -604,7 +606,41 @@ public function sxsubexciseRedo(){
 			   $this->error('设置重做失败！');
 	   }
      
-	}
+}
+
+//一键设置学生作业重做
+public function sxsubexciseRedoAll(){
+    $peid=(int)$_GET['peid'];
+    $url= M('sxpubexcise')->field('url')->find($peid);
+    $excises = M('sxsubexcise')->where("peid=$peid")->select();
+    $index=0;
+    for($i=0;$i<count($excises);$i++){
+         if($excises[$i]['filename']!=''){//删除已提交的作业  也可以使用提交状态status来做判断
+             $file = $url['url'].$excises[$i]['filename'];
+             unlink($file);//删除附件
+             $seids[$index++] = $excises[$i]['seid'];  //保存需要重做的seid
+         }      
+    }
+    //设置重做的字段值都是一样的所以只需要初始化一次即可
+    $data= array(
+        'desc' =>'',
+        'filename'=>'',
+        'subtime'=>0,
+        'status'=>0,
+        'isrec'=>''
+     );
+
+    $where['seid']=array('in',$seids);  //批量删除的正确方法
+
+    $res = M('sxsubexcise')->where($where)->save($data);
+    if($res){
+        $this->success('一键重做设置成功！',U(GROUP_NAME."/Excise/sxsubexciseList",array('peid'=>$peid)));
+    }else{
+        $this->error('一键重做设置失败！');
+    }
+}
+
+
 }
 
 ?>

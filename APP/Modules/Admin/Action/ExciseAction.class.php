@@ -207,6 +207,92 @@ public function sxpubexciseSave(){
    } 
 }
 
+//修改指定课程的任务      
+public function sxpubexciseEdit(){   
+   if(!empty($_POST)){
+
+      $peid = $_POST['peid'];
+      $scid=M('sxpubexcise')->field('scid')->find($peid);
+      $scid = $scid['scid'];//课程id  查询课程信息和最终返回使用
+
+      $data=array(
+            'peid'=>$peid,
+            'title'=>trim($_POST['title']),
+            'desc'=>trim($_POST['desc']),
+            'pubtime'=>time(),
+      ); 
+       //p($_FILES['attach']);die;
+      if($_FILES['attach']['name']!=''){
+          
+          //将原先的附件删除
+          $attach = M('sxpubexcise')->field('url,filename')->find($peid);
+          $filename = $attach['filename'];
+          $filepath = $attach['url'];
+          $file = $filepath.$filename;
+          unlink($file);
+
+
+          //上传附近，如果学生需要上交作业，必须上传附件以便给学生提供上传文件的路径
+          import('ORG.Net.UploadFile'); //载入TP上传类
+          //获取上传文件
+          $file = $_FILES['attach'];
+          $fileext = explode('.',$file['name']);  
+          $fileext = strtolower($fileext[count($fileext)-1]);
+          $filedenyext = array('php','txt','html','htm');
+          if(in_array($fileext, $filedenyext)){
+              $this->error("请压缩,再上传！");
+          }
+          if($file['size']>102400000){
+              $this->error("附件不能超过100MB！");
+          }
+          
+          //用于生成教师附件上传的路径
+          $courseinfo = M('sxsetcourse')->field('term,jsno,coursename')->find($scid);//在课程表获取该课程的信息
+         
+          
+          $coursename = $courseinfo['coursename'];//课程名称
+          $term = $courseinfo['term'];//学期
+          $jsno = $courseinfo['jsno'];//教师编码
+          
+          $jsxm = M('teacher')->where("jsno='$jsno'")->field("jsxm")->find();
+          $jsxm =$jsxm['jsxm'];//教师姓名
+          
+          import('Class.Pinyin',APP_PATH);//引入中英文转换类
+          $py = new PinYin();
+          $jsxmpinyin = $py->getAllPY($jsxm);//将中文的教师姓名转换为拼音
+          $coursenamepinyin = $py->getAllPY($coursename);//将中文的课程名称转换为拼音
+          //定义上传文件的路径,该路径还用于学生作业上交
+          $js=$jsno.'-'.$jsxmpinyin;
+          $filepath="./Public/Excise/".$term."/".$js."/".$coursenamepinyin."/".date("YmdHis")."/";
+          
+          $uploadfile = new UploadFile();
+          $uploadfile->uploadReplace=true;//允许同名文件覆盖
+          $uploadfile->saveRule ='definefilename';  //文件命名自定义：在functon里面定义
+          if($info = $uploadfile->uploadOne($file,$filepath)){ //上传成功
+              $filename=$info[0]['savename']; 
+              //准备保存数据
+              $data['url']=$filepath;
+              $data['filename']=$filename; 
+          }
+      }
+      //p($data);echo $scid;die;
+      if(M('sxpubexcise')->save($data)){
+          $this->success("修改任务成功！",U(GROUP_NAME."/Excise/sxpubexciseList",array('scid'=>$scid)));
+      }else{
+          $this->error("修改任务失败！");
+      }
+   }else{
+      //修改任务视图
+      $peid = (int)$_GET['peid'];
+      $excise=M('sxpubexcise')->find($peid);
+      $coursename = M('sxsetcourse')->field('coursename')->find($excise['scid']);
+      $this->assign('coursename',$coursename['coursename']);
+      $this->assign('excise',$excise);
+     // p($excise);die;
+      $this->display();
+   } 
+}
+
 //修改发布状态(发布和撤销发布)
 public function sxpubexciseStatus(){
     $peid = (int)$_POST['peid'];
@@ -245,6 +331,8 @@ public function sxpubexciseStatus(){
       show(0,"发布状态设置失败！",$flag);
     }
 }
+
+
 
 //下载教师发布的任务的附件
 public function sxpubexciseDownAttach(){
@@ -428,7 +516,8 @@ public function sxsubexciseRedo(){
        $data = array(
             'seid'=>$seid,
             'desc' =>'',
-      'filename'=>'',
+            'filename'=>'',
+            'subtime'=>0,
             'status'=>0,
             'isrec'=>0
         );
@@ -439,7 +528,40 @@ public function sxsubexciseRedo(){
                $this->error('设置重做失败！');
        }
      
+}
+
+//一键设置学生作业重做
+public function sxsubexciseRedoAll(){
+    $peid=(int)$_GET['peid'];
+    $url= M('sxpubexcise')->field('url')->find($peid);
+    $excises = M('sxsubexcise')->where("peid=$peid")->select();
+    $index=0;
+    for($i=0;$i<count($excises);$i++){
+         if($excises[$i]['filename']!=''){//删除已提交的作业  也可以使用提交状态status来做判断
+             $file = $url['url'].$excises[$i]['filename'];
+             unlink($file);//删除附件
+             $seids[$index++] = $excises[$i]['seid'];  //保存需要重做的seid
+         }      
     }
+    //设置重做的字段值都是一样的所以只需要初始化一次即可
+    $data= array(
+        'desc' =>'',
+        'filename'=>'',
+        'subtime'=>0,
+        'status'=>0,
+        'isrec'=>''
+     );
+
+    $where['seid']=array('in',$seids);  //批量删除的正确方法
+
+    $res = M('sxsubexcise')->where($where)->save($data);
+    if($res){
+        $this->success('一键重做设置成功！',U(GROUP_NAME."/Excise/sxsubexciseList",array('peid'=>$peid)));
+    }else{
+        $this->error('一键重做设置失败！');
+    }
+}
+
 }
 
 ?>
