@@ -1071,3 +1071,107 @@ ERR: 无法加载模块:APP
 [ 2017-06-29T11:38:11+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
 ERR: 无法加载模块:APP
 
+[ 2017-06-29T11:40:19+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:40:20+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:40:48+08:00 ] 0.0.0.0 /xsgl/index.php/Teacher/Excise/sxpubexciseStatus
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001020s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001172s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `xh_sxsetcourse` [ RunTime:0.000691s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT `ccode` FROM `xh_sxsetcourse` WHERE ( `scid` = 2 ) LIMIT 1   [ RunTime:0.000358s ]
+SQL: SHOW COLUMNS FROM `xh_student` [ RunTime:0.000755s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT `xsno` FROM `xh_student` WHERE ( ccode = 201601 ) ORDER BY xsno ASC  [ RunTime:0.000586s ]
+SQL: SHOW COLUMNS FROM `xh_sxsubexcise` [ RunTime:0.000709s ]
+SQL: INSERT INTO `xh_sxsubexcise` (`peid`,`xsno`) VALUES (8,'160903001'),(8,'160903002'),(8,'160903003'),(8,'160903004'),(8,'160903005'),(8,'160903006'),(8,'160903008'),(8,'160903009'),(8,'160903010'),(8,'160903012'),(8,'160903013'),(8,'160903014'),(8,'160903015'),(8,'160903016'),(8,'160903017'),(8,'160903018'),(8,'160903019'),(8,'160903020'),(8,'160903021'),(8,'160903022'),(8,'160903023'),(8,'160903024'),(8,'160903025'),(8,'160903026'),(8,'160903028'),(8,'160903029'),(8,'160903030'),(8,'160903031'),(8,'160903033'),(8,'160903034'),(8,'160903036'),(8,'160903037'),(8,'160903038'),(8,'160903039'),(8,'160903040'),(8,'160903041'),(8,'160903042'),(8,'160903043'),(8,'160903044'),(8,'160903045'),(8,'160903046'),(8,'160903048'),(8,'160903050'),(8,'160903051') [ RunTime:0.002043s ]
+SQL: SHOW COLUMNS FROM `xh_sxpubexcise` [ RunTime:0.000757s ]
+SQL: UPDATE `xh_sxpubexcise` SET `status`=1 WHERE ( `peid` = 8 ) [ RunTime:0.000487s ]
+
+[ 2017-06-29T11:40:48+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:40:49+08:00 ] 0.0.0.0 /xsgl/index.php/Teacher/Excise/sxpubexciseStatus
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000894s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001006s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `xh_sxsetcourse` [ RunTime:0.000718s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT `ccode` FROM `xh_sxsetcourse` WHERE ( `scid` = 2 ) LIMIT 1   [ RunTime:0.000351s ]
+SQL: SHOW COLUMNS FROM `xh_student` [ RunTime:0.000639s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT `xsno` FROM `xh_student` WHERE ( ccode = 201601 ) ORDER BY xsno ASC  [ RunTime:0.000462s ]
+SQL: SHOW COLUMNS FROM `xh_sxsubexcise` [ RunTime:0.000608s ]
+SQL: INSERT INTO `xh_sxsubexcise` (`peid`,`xsno`) VALUES (6,'160903001'),(6,'160903002'),(6,'160903003'),(6,'160903004'),(6,'160903005'),(6,'160903006'),(6,'160903008'),(6,'160903009'),(6,'160903010'),(6,'160903012'),(6,'160903013'),(6,'160903014'),(6,'160903015'),(6,'160903016'),(6,'160903017'),(6,'160903018'),(6,'160903019'),(6,'160903020'),(6,'160903021'),(6,'160903022'),(6,'160903023'),(6,'160903024'),(6,'160903025'),(6,'160903026'),(6,'160903028'),(6,'160903029'),(6,'160903030'),(6,'160903031'),(6,'160903033'),(6,'160903034'),(6,'160903036'),(6,'160903037'),(6,'160903038'),(6,'160903039'),(6,'160903040'),(6,'160903041'),(6,'160903042'),(6,'160903043'),(6,'160903044'),(6,'160903045'),(6,'160903046'),(6,'160903048'),(6,'160903050'),(6,'160903051') [ RunTime:0.000778s ]
+SQL: SHOW COLUMNS FROM `xh_sxpubexcise` [ RunTime:0.000729s ]
+SQL: UPDATE `xh_sxpubexcise` SET `status`=1 WHERE ( `peid` = 6 ) [ RunTime:0.000354s ]
+
+[ 2017-06-29T11:40:49+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:40:51+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:40:52+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:42:04+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/Css/bootstrap.css.map
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:43:33+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/Css/bootstrap.css.map
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:44:23+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/Css/bootstrap.css.map
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:44:49+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/Css/bootstrap.css.map
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:45:12+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/Css/bootstrap.css.map
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:45:43+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/Css/bootstrap.css.map
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:47:02+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/Css/bootstrap.css.map
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:47:08+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/Css/bootstrap.css.map
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:47:08+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:47:11+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:47:11+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/Css/bootstrap.css.map
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:47:14+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/Css/bootstrap.css.map
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:47:17+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/Css/bootstrap.css.map
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:47:18+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/Css/bootstrap.css.map
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:47:25+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/public/js/jquery.min.js
+ERR: 无法加载模块:public
+
+[ 2017-06-29T11:47:25+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/public/js/bootstrap.min.js
+ERR: 无法加载模块:public
+
+[ 2017-06-29T11:47:25+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/Css/bootstrap.css.map
+ERR: 无法加载模块:APP
+
+[ 2017-06-29T11:47:55+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Student/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
