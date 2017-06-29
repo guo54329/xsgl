@@ -15,8 +15,21 @@
 
 <div class="panel panel-default">
 	  <div class="panel-heading">班级维护 </div>
-	  <div class="panel-footer footeralign"><a href="{:U(GROUP_NAME.'/Basicdata/saveClasses')}" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> 添加</a>&nbsp;
-	  <a href="{:U(GROUP_NAME.'/Basicdata/importClasses')}" class="btn btn-info"><span class="glyphicon glyphicoglyphicon glyphicon-plus-sign"></span> 导入</a>
+	  <div class="panel-footer footeralign">
+	      <form action="{:U(GROUP_NAME.'/Basicdata/classes')}" method="post">
+			<div class="form-inline">
+			  <a href="{:U(GROUP_NAME.'/Basicdata/saveClasses')}" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> 添加</a>&nbsp;
+			  <a href="{:U(GROUP_NAME.'/Basicdata/importClasses')}" class="btn btn-info"><span class="glyphicon glyphicoglyphicon glyphicon-plus-sign"></span> 导入</a>&nbsp;&nbsp;
+		      <select name="zjsj" class="form-control">
+		         <option value=''>请选择组建时间</option>
+		      	 <foreach name="zjsjs" item="v">
+		      	 	 <option value="{$v.zjsj}">{$v.zjsj}</option>
+		      	 </foreach>
+		      </select>
+		      <button type="submit" class="btn btn-default"><span class='glyphicon glyphicon-search'></span> 查询</button>
+
+			</div>
+		  </form>
 	  </div>
 	  <div class="panel-body">
 		 <table class='table table-bordered table-hover'>

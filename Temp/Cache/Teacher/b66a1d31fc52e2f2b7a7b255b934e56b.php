@@ -18,9 +18,7 @@
 	.footeralign{
 		text-align: left;
 	}
-	.query{
-		width: 50px;
-	}
+
 </style>
 </head>
 
@@ -39,7 +37,7 @@
 				<option value="0">选择学期查看...</option>
 				<?php if(is_array($term)): foreach($term as $key=>$v): ?><option value="<?php echo ($v["term"]); ?>"><?php echo ($v["term"]); ?></option><?php endforeach; endif; ?>
 			</select>
-			<input type="submit" value="查询" class="btn btn-default query" />
+			<button type="submit" class="btn btn-default"><span class='glyphicon glyphicon-search'></span> 查询</button>
 			</form>
         </div>
 	  </div>

@@ -18,9 +18,7 @@
 	.footeralign{
 		text-align: left;
 	}
-	.query{
-		width: 50px;
-	}
+
 </style>
 </head>
 
@@ -41,7 +39,7 @@
 					<option value="{$v.term}">{$v.term}</option>
 				</foreach>
 			</select>
-			<input type="submit" value="查询" class="btn btn-default query" />
+			<button type="submit" class="btn btn-default"><span class='glyphicon glyphicon-search'></span> 查询</button>
 			</form>
         </div>
 	  </div>

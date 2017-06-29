@@ -1,0 +1,50 @@
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
+<link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
+
+<style type="text/css">
+	.tip{
+		text-align:left
+	}
+    p{
+    	line-height: 30px;
+    }
+</style>
+</head>
+
+<body>
+<form action="<?php echo U(GROUP_NAME.'/Basicdata/importTeacher');?>" method="post">
+<div class="panel panel-default">
+	  <div class="panel-heading">导入教师</div>
+	  <div class="panel-body">
+		<table class="table table-bordered">
+			<tr>
+				<td class="tip" width="45%">
+					<span class="glyphicon glyphicon-info-sign"></span> 导入提示<br/>
+					<p></p>
+					<p><strong>说明：</strong><br/>1、请下载输入数据的Excel模板：<a href="__PUBLIC__/xlsx/tea.xlsx">下载</a> <br/>(请使用"右键另存为"方式下载,模板文件需要Excel2007及其以上版本打开.)<br/>
+					2、"所在处室名称"请参考"处室数据维护"列表</p>
+				   <P><strong>导入步骤：</strong><br/>
+				   第一步：请按照"序号、用户名、姓名、性别、联系电话、所在处室"的次序在Excel表中录入数据.<br/>
+				   第二步：将录入的数据复制到右侧的文本框中.<br/>注意：不复制标题行(第一行)和示例行(第二行)
+				   <br/>
+				   第三步：如果贴到到文本框中有空白行，请先删除空白行，单击提交按钮即可！</p>
+				</td>
+				<td width="55%">
+				   <div style="text-align: left;">请根据“导入提示”执行导入操作：</div>
+					<textarea class="form-control textarea" rows="20" name="teachers" id="teachers"></textarea><br/>
+					<button type='submit' class="btn btn-info"><span class="glyphicon glyphicon-check"></span> 提交</button>
+				</td>
+			</tr>
+	   </table>	
+	  </div>
+	  <!--<div class="panel-footer"></div>-->
+</div>
+</form>
+</body>
+
+</html>

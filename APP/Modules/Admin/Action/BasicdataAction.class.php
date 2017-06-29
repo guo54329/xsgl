@@ -248,7 +248,15 @@ public function delProfessional(){
  */
 public function course(){
 //列表
-	$course = M('course')->order('proname ASC')->select();
+    //p($_POST);
+    if($_POST['proname']!=''){
+    	$proname = $_POST['proname'];
+    	$course = M('course')->where("proname='$proname'")->select();
+    }else{//默认显示所有
+    	$course = M('course')->order('proname ASC')->select();
+    }
+	$pronames = M('course')->distinct(true)->field("proname")->select();
+	$this->assign('pronames',$pronames);
     $this->assign('course',$course);
 	$this->display();
 }
@@ -349,8 +357,16 @@ public function delCourse(){
  */
 public function classes(){
 //列表
-	$classes = M('classes as a')->join("xh_teacher as b on a.master=b.jsno")->field("a.id,a.ccode,a.cname,b.offname,b.jsxm,b.jsdh,a.zjsj,a.proname")->order('ccode ASC,proname ASC')->select();
-	//print_r($classes);die;
+   
+    if($_POST['zjsj']!=''){
+    	$zjsj=$_POST['zjsj'];
+		$classes = M('classes as a')->join("xh_teacher as b on a.master=b.jsno")->where("a.zjsj='$zjsj'")->field("a.id,a.ccode,a.cname,b.offname,b.jsxm,b.jsdh,a.zjsj,a.proname")->order('proname ASC,ccode ASC')->select();
+    }else{
+    	$classes = M('classes as a')->join("xh_teacher as b on a.master=b.jsno")->field("a.id,a.ccode,a.cname,b.offname,b.jsxm,b.jsdh,a.zjsj,a.proname")->order('ccode ASC,proname ASC')->select();
+    }
+	
+	$zjsjs = M('classes')->distinct(true)->field("zjsj")->select();
+    $this->assign('zjsjs',$zjsjs);
     $this->assign('classes',$classes);
 	$this->display();
 }
@@ -463,7 +479,24 @@ public function delClasses(){
  */
 public function teacher(){
 //列表
-	$teacher = M('teacher')->order('offname ASC,jsno ASC')->select();
+    //p($_POST);
+	$offname=$_POST['offname'];//处室名称
+	$tea = $_POST['tea'];//帐号或姓名
+    if($offname!=''&&$tea==''){
+    	$teacher = M('teacher')->where("offname='$offname'")->order('jsno ASC')->select();
+    }
+    if($offname==''&&$tea!=''){
+    	$teacher = M('teacher')->where("jsno='$tea' or jsxm='$tea'")->order('offname ASC,jsno ASC')->select();
+    }
+    if($offname!=''&&$tea!=''){
+    	$teacher = M('teacher')->where("offname='$offname' and (jsno='$tea' or jsxm='$tea')")->order('jsno ASC')->select();
+    }
+    if($offname==''&&$tea==''){
+    	$teacher = M('teacher')->order('offname ASC,jsno ASC')->select();
+    }
+	
+	$offnames=M('teacher')->distinct(true)->field('offname')->select();
+	$this->assign('offnames',$offnames);
     $this->assign('teacher',$teacher);
 	$this->display();
 }
@@ -588,17 +621,25 @@ public function delTeacher(){
  * 学生维护
  */
 public function student(){
-//列表]
+//列表
 
-/*
-    import('ORG.Util.Page');// 导入分页类
-    $count = M('student as a')->join("xh_classes as b on a.ccode=b.ccode","left")->count();// 查询满足要求的总记录数
-    $Page  = new Page($count,20);// 实例化分页类 传入总记录数和每页显示的记录数
-    $show  = $Page->show();// 分页显示输出
-*/
-	$student = M('student as a')->join("xh_classes as b on a.ccode=b.ccode","left")->field("a.id,a.xsno,a.xsxm,a.xsxb,a.rxsj,b.cname")->order('a.ccode ASC,a.id ASC')->select();
-	//p($student);die;
-	//$this->assign('page',$show);// 赋值分页输出
+	$ccode=$_POST['ccode'];//班级代码
+	$stu = $_POST['stu'];//学号或姓名
+    if($ccode!=''&&$stu==''){
+    	$student = M('student as a')->join("xh_classes as b on a.ccode=b.ccode","left")->field("a.id,a.xsno,a.xsxm,a.xsxb,a.rxsj,b.cname")->where("a.ccode='$ccode'")->order('a.id ASC')->select();
+    }
+    if($ccode==''&&$stu!=''){
+    	$student = M('student as a')->join("xh_classes as b on a.ccode=b.ccode","left")->field("a.id,a.xsno,a.xsxm,a.xsxb,a.rxsj,b.cname")->where("a.xsno='$stu' or a.xsxm='$stu'")->order('a.ccode ASC,a.id ASC')->select();
+    }
+    if($ccode!=''&&$stu!=''){
+    	$student = M('student as a')->join("xh_classes as b on a.ccode=b.ccode","left")->field("a.id,a.xsno,a.xsxm,a.xsxb,a.rxsj,b.cname")->where("a.ccode='$ccode' and (a.xsno='$stu' or a.xsxm='$stu')")->order('a.ccode ASC,a.id ASC')->select();
+    }
+    if($ccode==''&&$stu==''){
+    	$student = M('student as a')->join("xh_classes as b on a.ccode=b.ccode","left")->field("a.id,a.xsno,a.xsxm,a.xsxb,a.rxsj,b.cname")->order('a.ccode ASC,a.id ASC')->select();
+    }
+	
+	$ccodes=M('student')->distinct(true)->field('ccode')->select();
+	$this->assign('ccodes',$ccodes);
     $this->assign('student',$student);
 	$this->display();
 }

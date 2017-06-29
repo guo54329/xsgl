@@ -25,9 +25,6 @@ function myrefresh(){
 	.footeralign{
 		text-align: left;
 	}
-	.query{
-		width: 50px;
-	}
 </style>
 </head>
 
@@ -58,7 +55,7 @@ function myrefresh(){
 				//确定从属关系
 				s.parent(a,b);
 			 </script>
-			<input type="submit" value="查询" class="btn btn-default query" />
+			 <button type="submit" class="btn btn-default"><span class='glyphicon glyphicon-search'></span> 查询</button>
 			</form>
 		</div>
 	  </a>
