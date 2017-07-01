@@ -84,10 +84,13 @@ function isrec(obj){
 				<td><input type="text" id="<?php echo ($v["seid"]); ?>" name="isrec" value="<?php echo ($v["isrec"]); ?>" onblur="isrec(this)" style="width: 80px;border-radius: 4px;text-align: center;" />
 				</td>
 				<td><?php echo $v['desc']*0.3+$v['isrec']*0.7; ?></td>
-				<td>
-				   <?php if($v['status'] == 1 ): ?>　
-					<a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseDownAttach',array('seid'=>$v['seid']));?>" class="btn btn-default browse"><span class="glyphicon glyphicon-save"></span> 下载附件</a><?php endif; ?>&nbsp;
+				<td class="footeralign">
+				   
 					<a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseRedo',array('seid'=>$v['seid']));?>" class="btn btn-default"><span class="glyphicon glyphicon-repeat"></span> 重做</a>
+					&nbsp;
+					<a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseDel',array('seid'=>$v['seid']));?>" class="btn btn-default" title="如果该生已不存在，则可直接删除；如果存在，删除之前先设置重做！"><span class="glyphicon glyphicon-remove"></span> 删除</a>
+					<?php if($v['status'] == 1 ): ?>&nbsp;　
+					<a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseDownAttach',array('seid'=>$v['seid']));?>" class="btn btn-default browse"><span class="glyphicon glyphicon-save"></span> 下载附件</a><?php endif; ?>
 
 				</td>
 			</tr>

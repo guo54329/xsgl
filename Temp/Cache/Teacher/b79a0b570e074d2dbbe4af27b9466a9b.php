@@ -43,10 +43,10 @@
 	<div class="left_menu">
 	<ul id="nav_dot">
 	    <li style="margin-top:10px;display:block;">
-          <h4 class="M6"><span></span>通知消息管理</h4>
+          <h4 class="M6"><span></span>系统消息管理</h4>
           <div class="list-item none">
            <a href="<?php echo U(GROUP_NAME.'/Index/welcome');?>" target='nr'>查看系统消息</a>
-            <a href="<?php echo U(GROUP_NAME.'/News/news');?>" target='nr'>发布通知消息</a>
+            <a href="<?php echo U(GROUP_NAME.'/News/news');?>" target='nr'>管理已发消息</a>
             
         </li>
         <li style="margin-top:10px;display:block;">

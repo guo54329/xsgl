@@ -36,11 +36,11 @@
 				<td>
 					<div class="form-inline">
 				    	<label class="xb">
-				    		<input type="radio" name="xsxb" class="form-control" value="男" checked> 男  
+				    		<input type="radio" name="xsxb" class="form-control" value="男"  <if condition="$student['xsxb'] eq '男'">checked</if> > 男  
 				    	</label> 
 				    
 				    	<label class="xb">
-				    		<input type="radio" name="xsxb" class="form-control" value="女"> 女	
+				    		<input type="radio" name="xsxb" class="form-control" value="女" <if condition="$student['xsxb'] eq '女'">checked</if> > 女	
 				    	</label>
 				    </div>
 				</td>
@@ -51,7 +51,7 @@
 					<select name="rxsj" class="form-control">
 						<option value="0">请选择入学时间...</option>
 						<foreach name="term" item="v">
-							<option value="{$v.name}">{$v.name}</option>
+							<option value="{$v.name}" <if condition="$student['rxsj'] eq $v['name']">selected="selected"</if> >{$v.name}</option>
 						</foreach>
 					</select>
 				</td>
@@ -62,7 +62,7 @@
 				<div class="form-inline">
 					<select name="zjsj" class="form-control"></select>
 					<select name="ccode" class="form-control"></select>
-				</div>
+				
 				     <!-- js的使用 start-->
 				     <script type="text/javascript" src="__PUBLIC__/Js/zjsjclasses.js"></script>
 				     <script type="text/javascript">
@@ -78,7 +78,15 @@
 					//确定从属关系
 					s.parent(a,b);
 				 </script>
-					
+				 <if condition="$student['xsnostatus'] eq 0"> 
+					 <span class="glyphicon glyphicon-info-sign"></span>  提示：原班级：
+					 <php>
+					 	$ccode = $student['ccode'];
+					 	$classes = M('classes')->field('zjsj,cname')->where("ccode='$ccode'")->find();
+					 	echo $classes['zjsj']."->".$classes['cname'];
+					 </php>
+				</if>
+				</div>
 				</td>
 			</tr>
 

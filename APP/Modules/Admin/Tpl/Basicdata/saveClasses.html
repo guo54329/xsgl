@@ -35,7 +35,7 @@
 				<div class="form-inline">
 					<select name="office" class="form-control "></select>
 					<select name="master" class="form-control"></select>
-				</div>
+				
 				     <!-- js的使用 start-->
 				     <script type="text/javascript" src="__PUBLIC__/Js/offteacher.js"></script>
 				     <script type="text/javascript">
@@ -52,8 +52,9 @@
 					s.parent(a,b);
 				 	</script>
 				<if condition="$classes['ccodestatus'] eq 0"> 
-					<br/>提示：原班主任：{$classes.offname}->{$classes.jsxm}
+					 <span class="glyphicon glyphicon-info-sign"></span>  提示：原班主任：{$classes.offname}->{$classes.jsxm}
 				</if>
+				</div>
 				</td>
 			</tr>
 			<tr>
@@ -62,12 +63,9 @@
 				    <select name='zjsj' class="form-control">
 						<option value="0">请选择时间...</option>
 						<foreach name='term' item='v'>
-							<option value="{$v.name}">{$v.name}</option>
+							<option value="{$v.name}"  <if condition="$classes['zjsj'] eq $v['name']">selected="selected"</if>  >{$v.name}</option>
 						</foreach>
 					</select>
-					<if condition="$classes['ccodestatus'] eq 0"> 
-						<br/>提示：原时间：{$classes.zjsj}
-					</if>
 				</td>
 			</tr>
 			<tr>
@@ -76,12 +74,9 @@
 					<select name='proname' class="form-control">
 						<option value="0">请选择专业...</option>
 						<foreach name='pro' item='v'>
-							<option value="{$v.name}">{$v.name}</option>
+							<option value="{$v.name}"  <if condition="$classes['proname'] eq $v['name']">selected="selected"</if>  >{$v.name}</option>
 						</foreach>
 					</select>
-					<if condition="$classes['ccodestatus'] eq 0"> 
-						<br/>提示：原专业：{$classes.proname}
-					</if>
 				</td>
 			</tr>
 

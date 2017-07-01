@@ -40,8 +40,9 @@
 	  <div class="panel-heading">学生完成情况 </div>
 	  <div class="panel-footer footeralign"> 
 	  		<a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$courseinfo['scid']));?>" class="btn btn-info btnw"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>&nbsp;
-	  		<button class="btn btn-info btnw" onclick="myrefresh()"><span class="glyphicon glyphicon-repeat"></span> 刷新</button>&nbsp;&nbsp;
-	  		<a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseRedoAll',array('peid'=>$excisedesc['peid']));?>" class="btn btn-info browse"><span class="glyphicon glyphicon-repeat"></span> 一键重做</a>
+	  		<button class="btn btn-info btnw" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp;&nbsp;
+	  		<a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseRedoAll',array('peid'=>$excisedesc['peid']));?>" class="btn btn-info browse"><span class="glyphicon glyphicon-repeat"></span> 一键重做</a>&nbsp;
+	  		<a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseTable',array('peid'=>$excisedesc['peid']));?>" class="btn btn-info browse"><span class="glyphicon glyphicon-download"></span> 完成情况</a>
 	  </div>
 	  <div class="panel-body">
 		 <table class='table table-bordered table-hover'>
@@ -73,12 +74,16 @@
 				</td>
 				<td><?php if($v['subtime'] != 0): echo (date('Y-m-d H:i:s',$v["subtime"])); endif; ?></td>
 				<td><?php echo $v['desc']*0.3+$v['isrec']*0.7; ?></td>
-				<td>
-				   <?php if($v['status'] == 1 ): ?>　
-					<a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseDownAttach',array('seid'=>$v['seid']));?>" class="btn btn-default browse"><span class="glyphicon glyphicon-save"></span> 下载附件</a><?php endif; ?>&nbsp;
+				<td class="footeralign">
+				   
 					<a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseRedo',array('seid'=>$v['seid']));?>" class="btn btn-default"><span class="glyphicon glyphicon-repeat"></span> 重做</a>
+					&nbsp;
+					<a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseDel',array('seid'=>$v['seid']));?>" class="btn btn-default" title="如果该生已不存在，则可直接删除；如果存在，删除之前先设置重做！"><span class="glyphicon glyphicon-remove"></span> 删除</a>
+					<?php if($v['status'] == 1 ): ?>&nbsp;　
+					<a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseDownAttach',array('seid'=>$v['seid']));?>" class="btn btn-default browse"><span class="glyphicon glyphicon-save"></span> 下载附件</a><?php endif; ?>
 
 				</td>
+
 			</tr>
 			<?php $i++; endforeach; endif; ?>
 		</table>

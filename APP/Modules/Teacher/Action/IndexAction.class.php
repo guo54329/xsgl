@@ -30,6 +30,7 @@ Class IndexAction extends CommonAction {
 		$wel = "您的身份是教师，欢迎使用".$g_site['title']."！";
 		$this->assign("wel",$wel);
 		$this->assign('tea',$tea);
+		//pubtype=1 表示管理员->所有教师和学生，pubtype=3 表示管理员->所有学生
 		$news = M('news')->where("pubtype=1 or pubtype=2")->order('pubtime DESC')->select();
 		$this->assign('news',$news);
 		$this->display();

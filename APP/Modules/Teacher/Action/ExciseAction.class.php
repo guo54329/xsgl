@@ -19,9 +19,9 @@ public function courseTable(){
     if(!empty($_POST['term'])){
        $term = $_POST['term'];
         //按学期查询
-        $list = $Model->join('xh_classes as b on a.ccode = b.ccode')->join('xh_teacher as c on c.jsno = b.master')->where("a.jsno='$jsno' and a.term='$term'")->field("a.scid,a.term,a.coursename,b.cname,c.jsxm,c.jsdh")->order("a.scid ASC")->select();
+        $list = $Model->join('xh_classes as b on a.ccode = b.ccode')->join('xh_teacher as c on c.jsno = b.master')->where("a.jsno='$jsno' and a.term='$term'")->field("a.scid,a.term,a.coursename,b.ccode,b.cname,c.jsxm,c.jsdh")->order("a.scid ASC")->select();
     }else{//查询所有
-        $list = $Model->join('xh_classes as b on a.ccode = b.ccode')->join('xh_teacher as c on c.jsno = b.master')->where("a.jsno='$jsno'")->field("a.scid,a.term,a.coursename,b.cname,c.jsxm,c.jsdh")->order("a.term DESC,a.scid ASC")->select();
+        $list = $Model->join('xh_classes as b on a.ccode = b.ccode')->join('xh_teacher as c on c.jsno = b.master')->where("a.jsno='$jsno'")->field("a.scid,a.term,a.coursename,b.ccode,b.cname,c.jsxm,c.jsdh")->order("a.term DESC,a.scid ASC")->select();
     }
 
     $this->assign('list',$list);
@@ -115,6 +115,34 @@ public function delcourseTable(){
       }
   }
   
+}
+
+public function coursenewsSave(){
+  if(!empty($_POST)){
+      $ccode  =(string)$_POST['ccode'];
+      //添加消息
+      $tea = session('tea');
+      $data=array(
+      'title'=>$_POST['title'],
+      'pubtype'=>4,
+      'ccode' =>$ccode,
+      'content'=>$_POST['content'],
+      'userxm'=>$tea['jsxm'],
+      'pubtime'=>time()
+      );
+      $id = M('news')->add($data);
+      if($id>0){
+        $this->success("发布成功！",U(GROUP_NAME."/News/news"));
+      }else{
+        $this->error("发布失败！");
+      }
+  }else{
+     // $pubtype= (int)$_GET['pubtype'];//教师给学生发默认发布类型为4即指定班级的学生
+      $ccode  =(string)$_GET['ccode'];
+      $this->assign('ccode',$ccode);
+      $this->display();
+  }
+
 }
 /**
  * 教师发布的实训任务管理
@@ -400,7 +428,7 @@ public function sxsubexciseList(){
     $this->assign('excisedesc',$excisedesc);
     $this->assign('classes',$classes);
     //查询学生作业完成情况
-    $exciselist=M('sxsubexcise as a')->join('xh_student as b on a.xsno=b.xsno')->where("peid=$peid")->field("a.seid,a.xsno,b.xsxm,a.desc,a.status,a.subtime,a.peid,a.isrec")->order('a.status ASC,a.xsno ASC')->select();
+    $exciselist=M('sxsubexcise as a')->join('xh_student as b on a.xsno=b.xsno')->where("peid=$peid")->field("a.seid,a.xsno,b.xsxm,a.desc,a.status,a.subtime,a.peid,a.isrec")->order('a.status DESC,a.xsno ASC')->select();
     $this->assign('exciselist',$exciselist);
     $this->display();
 }
@@ -411,7 +439,7 @@ public function sxsubexciseTable(){
     $title=M('sxpubexcise')->field('title')->find($peid);
     $title=$title['title'];//实训任务标题
     //查询学生作业完成情况
-    $data=M('sxsubexcise as a')->join('xh_student as b on a.xsno=b.xsno')->where("peid=$peid")->field("a.seid,a.xsno,b.xsxm,a.desc,a.status,a.subtime,a.peid")->order('a.status ASC,a.xsno ASC')->select();
+    $data=M('sxsubexcise as a')->join('xh_student as b on a.xsno=b.xsno')->where("peid=$peid")->field("a.seid,a.xsno,b.xsxm,a.desc,a.status,a.subtime,a.peid")->order('a.status DESC,a.xsno ASC')->select();
     //引入PHPExcel
     import('Class.PHPExcel',APP_PATH); 
     require APP_PATH.'Class/PHPExcel/Writer/Excel2007.php' ; //xlsx格式  
@@ -422,20 +450,22 @@ public function sxsubexciseTable(){
     //$objPHPExcel->getActiveSheet()->getColumnDimension()->setAutoSize(true);
     $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
     $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(14);
-    $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(50);  
-    $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(14);
-    $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
+    $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(14);  
+    $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(22);
+    $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(14);
+    $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(14);
+    $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(30);
     
     //设置行高度
-    $objPHPExcel->getActiveSheet()->getRowDimension('1')->setRowHeight(30);
+    $objPHPExcel->getActiveSheet()->getRowDimension('1')->setRowHeight(34);
     $objPHPExcel->getActiveSheet()->getRowDimension('2')->setRowHeight(26);
   
     //设置字体大小
     $objPHPExcel->getActiveSheet()->getDefaultStyle()->getFont()->setSize(11);
-    $objPHPExcel->getActiveSheet()->getStyle('A1:E2')->getFont()->setBold(true);
+    $objPHPExcel->getActiveSheet()->getStyle('A1:G2')->getFont()->setBold(true);
   
-    $objPHPExcel->getActiveSheet()->getStyle('A1:E2')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
-    $objPHPExcel->getActiveSheet()->getStyle('A1:E2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+    $objPHPExcel->getActiveSheet()->getStyle('A1:G2')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+    $objPHPExcel->getActiveSheet()->getStyle('A1:G2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
     
     //设置水平居中
     $objPHPExcel->getActiveSheet()->getStyle('A')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -443,18 +473,22 @@ public function sxsubexciseTable(){
     $objPHPExcel->getActiveSheet()->getStyle('C')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
     $objPHPExcel->getActiveSheet()->getStyle('D')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
     $objPHPExcel->getActiveSheet()->getStyle('E')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-  
+    $objPHPExcel->getActiveSheet()->getStyle('F')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+    $objPHPExcel->getActiveSheet()->getStyle('G')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
     //合并
-    $objPHPExcel->getActiveSheet()->mergeCells('A1:E1');
+    $objPHPExcel->getActiveSheet()->mergeCells('A1:G1');
     //设置表格头部内容
 
     $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A1', "学生完成情况统计($title)");
 
     $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A2', '学号');
     $objPHPExcel->setActiveSheetIndex(0)->setCellValue('B2', '姓名');
-    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('C2', '自评');
-    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('D2', '是否完成');
-    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('E2', '提交时间');
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('C2', '是否完成');
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('D2', '提交时间');
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('E2', '自我评价');
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('F2', '教师评价');
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('G2', '实训成绩(自评*0.3+师评*0.7)');
 
     //将数据库中的数据转码 UTF-8
     //p($data);die;
@@ -462,14 +496,22 @@ public function sxsubexciseTable(){
         //如果是从数据库中读取的数据，需要对数据进行转码操作，convertUTF8($str)
         $objPHPExcel->getActiveSheet(0)->setCellValue('A' . ($i + 3), $data[$i]['xsno']." ");
         $objPHPExcel->getActiveSheet(0)->setCellValue('B' . ($i + 3), $data[$i]['xsxm']);
-        $objPHPExcel->getActiveSheet(0)->setCellValue('C' . ($i + 3), $data[$i]['desc']);
         if($data[$i]['status']==0){
-           $objPHPExcel->getActiveSheet(0)->setCellValue('D' . ($i + 3), '未完成');
+           $objPHPExcel->getActiveSheet(0)->setCellValue('C' . ($i + 3), '未完成');
         }else{
-           $objPHPExcel->getActiveSheet(0)->setCellValue('D' . ($i + 3), '已完成');
+           $objPHPExcel->getActiveSheet(0)->setCellValue('C' . ($i + 3), '已完成');
         }
-        $subtime = date("Y-m-d H-i-s",$data[$i]['subtime']);
-        $objPHPExcel->getActiveSheet(0)->setCellValue('E' . ($i + 3), $subtime); 
+        if($data[$i]['subtime']!=0){
+           $subtime = date("Y-m-d H-i-s",$data[$i]['subtime']);
+           $objPHPExcel->getActiveSheet(0)->setCellValue('D' . ($i + 3), $subtime);
+        }else{
+           $objPHPExcel->getActiveSheet(0)->setCellValue('D' . ($i + 3), '');
+        }
+        
+        $objPHPExcel->getActiveSheet(0)->setCellValue('E' . ($i + 3), $data[$i]['desc']);
+        $objPHPExcel->getActiveSheet(0)->setCellValue('F' . ($i + 3), $data[$i]['isrec']);
+        $objPHPExcel->getActiveSheet(0)->setCellValue('G' . ($i + 3), round($data[$i]['desc']*0.3+$data[$i]['isrec']*0.7),2);
+
         $objPHPExcel->getActiveSheet()->getRowDimension($i + 3)->setRowHeight(24);  
     }
     // 设置工作表名
@@ -581,6 +623,18 @@ public function sxsubexciseDownAttach(){
     $filepath.$filename;
   	downAttach($filepath,$filename);
 }
+//删除指定学生作业
+public function sxsubexciseDel(){
+   $seid = $_GET['seid'];
+   $peid = M('sxsubexcise')->field('peid')->find($seid);
+   $peid = $peid['peid']; 
+   if(M('sxsubexcise')->delete($seid)){
+        $this->success('删除成功！',U(GROUP_NAME."/Excise/sxsubexciseList",array('peid'=>$peid)));
+   }else{
+        $this->error('删除失败！');
+   }
+}
+
 //设置学生作业重做
 public function sxsubexciseRedo(){
 	   $seid = $_GET['seid'];

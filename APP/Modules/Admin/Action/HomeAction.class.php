@@ -105,7 +105,7 @@ Class HomeAction extends CommonAction {
  */
      //消息列表
 	public function news(){
-		$info = M('news')->field("id,title,pubtype,userxm,pubtime")->order('pubtime DESC')->select();
+		$info = M('news as a')->join('xh_classes as b on a.ccode=b.ccode','left')->field("a.id,a.title,a.pubtype,b.cname,a.userxm,a.pubtime")->order('a.pubtype ASC,a.pubtime DESC')->select();
 		$this->assign("info",$info);
 		$this->display();
 
@@ -121,6 +121,7 @@ Class HomeAction extends CommonAction {
 			'content'=>$_POST['content'],
 			'userxm'=>session('username'),
 			'pubtime'=>time()
+
 			);
 			$id = M('news')->add($data);
 			if($id>0){
@@ -137,7 +138,7 @@ Class HomeAction extends CommonAction {
 	//消息详情
 	public function detailNews(){
 		$id=intval($_GET['id']);
-		$info = D('news')->where("id=$id")->field("id,title,content,pubtype,userxm,pubtime")->find();
+		$info = M('news as a')->join('xh_classes as b on a.ccode=b.ccode','left')->where("a.id=$id")->field("a.id,a.title,a.content,a.pubtype,b.cname,a.userxm,a.pubtime")->find();
 		//var_dump($info);
 		$this->assign("info",$info);
 		$this->display();
@@ -152,13 +153,14 @@ Class HomeAction extends CommonAction {
 			$id=intval($_POST['id']);
 			$data = array(
 				'title'=>$_POST['title'],
-				'content'=>$_POST['content'],
-				'updatetime'=>time()
+				'pubtype'=>$_POST['pubtype'],
+				'content'=>$_POST['content']
+				
 			);
 			if(M('news')->where("id=$id")->save($data)){
-				$this->success("更新成功！",U(GROUP_NAME."/Home/news"));
+				$this->success("修改成功！",U(GROUP_NAME."/Home/news"));
 			}else{
-				$this->success("更新失败！");
+				$this->success("修改失败！");
 			}
 		}else{
 			$id=intval($_GET['id']);

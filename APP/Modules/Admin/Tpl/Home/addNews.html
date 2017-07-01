@@ -48,12 +48,12 @@
 				<td align='right' width='20%'>标题</td>
 				<td><input type="text" placeholder="请输入标题" name="title" id="title" class="form-control" />
 			</tr>
-			<tr><td align='right'>对象</td>
+			<tr><td align='right'>接收对象</td>
 				<td><select id="pubtype" name="pubtype" class="form-control">
-						<option value="0">请选择对象</option>
-						<option value="1">全部</option>
-						<option value="2">教师</option>
-						<option value="3">学生</option>
+						<option value="0">请选择接收对象</option>
+						<option value="1">所有教师和学生</option>
+						<option value="2">所有教师</option>
+						<option value="3">所有学生</option>
 						
 					</select>
 					
@@ -67,7 +67,11 @@
 		</table>	
 	  </div>
 	  
-	  <div class="panel-footer"><input id="sub" type='submit'  value='发布' class="btn btn-info"/></div>
+	  <div class="panel-footer">
+			<button type='submit' class="btn btn-info"><span class="glyphicon glyphicon-check"></span> 提交</button>
+	  	&nbsp;&nbsp;
+	  		<a href="{:U(GROUP_NAME.'/Home/News')}" class="btn btn-info btnw"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>
+	  </div>
 </div>
 </form>
 </body>

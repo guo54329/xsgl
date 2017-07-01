@@ -39,7 +39,7 @@
 </script>
 </head>
 <body>
-<form action='{:U(GROUP_NAME.'/News/addNews')}' method='post'>
+<form action='{:U(GROUP_NAME.'/Excise/coursenewsSave')}' method='post'>
 <div class="panel panel-default">
 	  <div class="panel-heading">发布消息</div>
 	  <div class="panel-body">
@@ -48,13 +48,7 @@
 				<td align='right' width='20%'>标题</td>
 				<td><input type="text" placeholder="请输入标题" name="title" id="title" class="form-control" />
 			</tr>
-			<tr><td align='right'>对象</td>
-				<td><select id="pubtype" name="pubtype" class="form-control">
-						<option value="3">学生</option>
-					</select>
-					
-				</td>
-			</tr>
+			
 			<tr>
 				<td align='right'>内容<br/><br/><br/>推荐字号<br/>字号<=16px </td>
 				<td width='70%'><textarea name='content' id='content' placeholder="不推荐使用富文本"></textarea></td>
@@ -63,7 +57,12 @@
 		</table>	
 	  </div>
 	  
-	  <div class="panel-footer"><input id="sub" type='submit'  value='发布' class="btn btn-info"/></div>
+	  <div class="panel-footer">
+		 <input type="hidden" name="ccode" value="{$ccode}" />
+	 	 <button type='submit' class="btn btn-info"><span class="glyphicon glyphicon-check"></span> 提交</button>
+	  	&nbsp;&nbsp;
+	  	<a href="{:U(GROUP_NAME.'/Excise/courseTable')}" class="btn btn-info btnw"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>
+	  </div>
 </div>
 </form>
 </body>

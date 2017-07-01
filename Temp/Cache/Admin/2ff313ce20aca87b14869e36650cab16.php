@@ -25,6 +25,7 @@
 		      	 <?php if(is_array($zjsjs)): foreach($zjsjs as $key=>$v): ?><option value="<?php echo ($v["zjsj"]); ?>"><?php echo ($v["zjsj"]); ?></option><?php endforeach; endif; ?>
 		      </select>
 		      <button type="submit" class="btn btn-default"><span class='glyphicon glyphicon-search'></span> 查询</button>
+		      &nbsp;&nbsp;<span>如想导出，请直接选择复制下表中的数据粘贴到Excel表中即可！</span>
 
 			</div>
 		  </form>

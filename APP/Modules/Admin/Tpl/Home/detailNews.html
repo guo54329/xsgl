@@ -11,7 +11,11 @@
 <div class="panel panel-default">
 	  <div class="panel-heading">
 		<h4>{$info.title}</h4><hr/>
-		发布时间：{$info.pubtime|date='Y-m-d H:i:s',###}&nbsp;&nbsp;发布者：{$info.username}
+		发布者：{$info.userxm}&nbsp;&nbsp;发布时间：{$info.pubtime|date='Y-m-d H:i:s',###}&nbsp;&nbsp; 接收对象：<if condition="$info['pubtype'] eq 1">所有教师和学生</if>
+					<if condition="$info['pubtype'] eq 2">所有教师</if>
+					<if condition="$info['pubtype'] eq 3">所有学生</if>
+					<if condition="$info['pubtype'] eq 4">班级:{$info.cname}</if>
+
 	  </div>
 	  <div class="panel-body">
 　　　    <div  style="padding:10px 50px;">{$info.content}</div>   

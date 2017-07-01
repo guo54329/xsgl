@@ -37,6 +37,11 @@
 	}
 
 </script>
+    <style type="text/css">
+    	.browse{
+		width: 90px;
+	}
+    </style>
 </head>
 <body>
 <form action='{:U(GROUP_NAME.'/Home/editNews')}' method='post'>
@@ -49,6 +54,19 @@
 				<td align='right' width='20%'>标题</td>
 				<td><input type="text"  name="title" id="title"  value="{$n.title}" class="form-control" />
 			</tr>
+			<tr><td align='right'>接收对象</td>
+				<td>
+				
+				<select id="pubtype" name="pubtype" class="form-control">
+						
+						<option value="1" <if condition="$n['pubtype'] eq 1">selected='selected'</if>  >所有教师和学生</option>
+						<option value="2" <if condition="$n['pubtype'] eq 2">selected='selected'</if> >所有教师</option>
+						<option value="3" <if condition="$n['pubtype'] eq 3">selected='selected'</if> >所有学生</option>
+						
+					</select>
+					
+				</td>
+			</tr>
 			<tr>
 				<td align='right'>内容</td>
 				<td width='70%'><textarea name='content' id='content'>{$n.content}</textarea></td>
@@ -57,7 +75,11 @@
 		</table>	
 	  </div>
 	  <span id="ddjjid"></span>
-	  <div class="panel-footer"><input id="sub" type='submit'  value='提交修改' class="btn btn4 btn-info"/></div>
+	  <div class="panel-footer">
+			<button type='submit' class="btn btn-info browse"><span class="glyphicon glyphicon-check"></span> 提交修改</button>
+	  	&nbsp;&nbsp;
+	  		<a href="{:U(GROUP_NAME.'/Home/News')}" class="btn btn-info btnw"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>
+	  </div>
 </div>
 </form>
 </body>

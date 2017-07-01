@@ -1,20 +1,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
-<link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
-<script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="__PUBLIC__/Js/selects.js"></script>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
+	<link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
+	<script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Js/selects.js"></script>
+	<script type="text/javascript">
+		function myrefresh(){
+			window.location.reload();
+		}
+	</script>
+	<style type="text/css">
+		.footeralign{
+			text-align: left;
+		}
+	</style>
+</head>
 <body>
 
 <div class="panel panel-default">
-	  <div class="panel-heading">现有消息列表</div>
+	  <div class="panel-heading">消息列表</div>
+	  <div class="panel-footer footeralign">
+	     <a href="{:U(GROUP_NAME.'/Home/addNews')}" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> 添加</a>
+         <button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp;&nbsp;
+	  </div>
 	  <div class="panel-body">
 		<table class='table table-bordered table-hover'>
 		   <thead>
-			 <tr><th>序号</th><th>标题</th><th>对象</th><th>发布者</th><th>发布时间</th><th>操作</th></tr>
+			 <tr><th>序号</th><th>标题</th><th>接收对象</th><th>发布者</th><th>发布时间</th><th>操作</th></tr>
 		   </thead>
 		   <tbody>
 		   	{~$i=1}
@@ -23,16 +38,21 @@
 				<td>{$i++}</td>
 				<td align='left'>{$v.title}</td>
 				<td align='left'>
-					<if condition="$v['pubtype'] eq 1">全部<elseif condition="$v['pubtype'] eq 2"/>教师<else/>学生</if>
+					<if condition="$v['pubtype'] eq 1">所有教师和学生</if>
+					<if condition="$v['pubtype'] eq 2">所有教师</if>
+					<if condition="$v['pubtype'] eq 3">所有学生</if>
+					<if condition="$v['pubtype'] eq 4">班级:{$v.cname}</if>
 				</td>
 				<td align='left'>{$v.userxm}</td>
 				
 				<td align='left'>{$v.pubtime|date='Y-m-d H:i:s',###}</td>
 				
 				<td align='left'>
-					[ <a href="{:U(GROUP_NAME.'/Home/detailNews',array('id'=>$v['id']))}">查看</a> | <a href="{:U(GROUP_NAME.'/Home/editNews',array('id'=>$v['id']))}">编辑</a> |  
-					<a href="{:U(GROUP_NAME.'/Home/delNews',array('id'=>$v['id']))}">删除</a> ]
-					
+					<a href="{:U(GROUP_NAME.'/Home/detailNews',array('id'=>$v['id']))}" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span> 查看</a> <if condition="$v['pubtype'] neq 4">
+					<a href="{:U(GROUP_NAME.'/Home/editNews',array('id'=>$v['id']))}" class="btn btn-default"><span class="glyphicon glyphicon-edit" ></span> 编辑</a></if>
+
+					<a href="{:U(GROUP_NAME.'/Home/delNews',array('id'=>$v['id']))}" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 删除</a>
+
 				</td>
 				
 			</tr>
@@ -40,7 +60,7 @@
 		   </tbody>
 		</table>
 	  </div>
-	  <div class="panel-footer"><a href="{:U(GROUP_NAME.'/Home/addNews')}" class="btn btn-info">添加</a></div>
+	  
 </div>
 
 </body>

@@ -36,11 +36,11 @@
 				<td>
 				    <div class="form-inline">
 				    	<label class="xb">
-				    		<input type="radio" name="jsxb" class="form-control" value="男" checked> 男  
+				    		<input type="radio" name="jsxb" class="form-control" value="男" <if condition="$teacher['jsxb'] eq '男'">checked</if> > 男  
 				    	</label> 
 				    	
 				    	<label class="xb">
-				    		<input type="radio" name="jsxb" class="form-control" value="女"> 女	
+				    		<input type="radio" name="jsxb" class="form-control" value="女" <if condition="$teacher['jsxb'] eq '女'">checked</if> > 女	
 				    	</label>
 				    </div>
 				    
@@ -56,7 +56,7 @@
 					<select name='offname' class="form-control">
 						<option value="0">请选择处室...</option>
 						<foreach name='office' item='v'>
-							<option value="{$v.name}">{$v.name}</option>
+							<option value="{$v.name}" <if condition="$teacher['offname'] eq $v['name']">selected="selected"</if> >{$v.name}</option>
 						</foreach>
 					</select>
 				</td>
