@@ -80,7 +80,7 @@ $(function(){
 	  <div class="panel-heading">配置权限</div>
 	  <div class="panel-body">  
 	    <div id='wrap'>
-			<a href="{:U(GROUP_NAME.'/Rbac/role')}" class='btn btn-info'>返回</a>
+			<a href="{:U(GROUP_NAME.'/Rbac/role')}" class='btn btn-info'><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>
 			
 			<foreach name='node' item='app'>
 				<div class="app">
@@ -108,7 +108,7 @@ $(function(){
 	  </div>
 	  <div class="panel-footer">
 		<input type='hidden' name='rid' value='{$rid}' />
-	  	<input type='submit'  value='保存配置' class="btn btn 4 btn-info"/>
+	  	<button type="submit" class="btn btn-info btn4"><span class="glyphicon glyphicon-check"></span> 保存配置</button>
 	  </div>
 </div>
 </form>

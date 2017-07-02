@@ -19,7 +19,7 @@
 				<td>班级编码</td>
 				<td>
 				<div class="form-inline">
-				<input type='text' name='ccode' value="{$classes.ccode}" class="form-control"
+				<input style="width: 500px;" type='text' name='ccode' value="{$classes.ccode}" class="form-control"
 					<if condition="$classes['ccodestatus'] eq 0"> disabled </if> /> 
 				<span class="glyphicon glyphicon-info-sign"></span> 某班是2016年秋季第一个组建的班级，则编码为：201601
 				</div>
@@ -27,14 +27,14 @@
 			</tr>
 			<tr>
 				<td>班级名称</td>
-				<td><input type='text' name='cname' value="{$classes.cname}" class="form-control"/></td>
+				<td><input type='text' name='cname' value="{$classes.cname}" class="form-control" style="width: 500px;"/></td>
 			</tr>
 			<tr>
 				<td>班主任</td>
 				<td>
 				<div class="form-inline">
-					<select name="office" class="form-control "></select>
-					<select name="master" class="form-control"></select>
+					<select name="office" class="form-control " style="width: 250px;"></select>
+					<select name="master" class="form-control" style="width: 250px;"></select>
 				
 				     <!-- js的使用 start-->
 				     <script type="text/javascript" src="__PUBLIC__/Js/offteacher.js"></script>
@@ -60,7 +60,7 @@
 			<tr>
 				<td>组建时间</td>
 				<td>
-				    <select name='zjsj' class="form-control">
+				    <select name='zjsj' class="form-control" style="width: 500px;">
 						<option value="0">请选择时间...</option>
 						<foreach name='term' item='v'>
 							<option value="{$v.name}"  <if condition="$classes['zjsj'] eq $v['name']">selected="selected"</if>  >{$v.name}</option>
@@ -71,7 +71,7 @@
 			<tr>
 				<td>所属专业</td>
 				<td>
-					<select name='proname' class="form-control">
+					<select name='proname' class="form-control" style="width: 500px;">
 						<option value="0">请选择专业...</option>
 						<foreach name='pro' item='v'>
 							<option value="{$v.name}"  <if condition="$classes['proname'] eq $v['name']">selected="selected"</if>  >{$v.name}</option>

@@ -14,27 +14,27 @@
 		<table class='table table-bordered table-hover'>
 			<tr>
 				<td>{$type}名称(英文)</td>
-				<td><input type='text' name='name' value="{$node.name}" class='form-control' /></td>
+				<td><input type='text' name='name' value="{$node.name}" class='form-control' style="width: 500px;"/></td>
 			</tr>
 			<tr>
 				<td>{$type}描述(中文)</td>
-				<td><input type='text' name='title' value="{$node.title}" class='form-control' /></td>
+				<td><input type='text' name='title' value="{$node.title}" class='form-control' style="width: 500px;"/></td>
 			</tr>
 			<tr>
 				<td>是否开启：</td>
-				<td><label class="checkbox-inline"><input type='radio' name='status' value='1' checked='checked'/>&nbsp;开启&nbsp;</label>
+				<td style="text-align: left;"><label class="checkbox-inline"><input type='radio' name='status' value='1' checked='checked'/>&nbsp;开启&nbsp;</label>
 					<label class="checkbox-inline"><input type='radio' name='status' value='0'/>&nbsp;关闭</label>
 				</td>
 			</tr>
 			<tr>
 				<td>排序</td>
-				<td><input type='text' name='sort' value="{$node.sort}"  class='form-control'  value='1'/></td>
+				<td><input type='text' name='sort' value="{$node.sort}"  class='form-control'  value='1' style="width: 500px;"/></td>
 			</tr>
 		</table>	
 	  </div>
 	  <div class="panel-footer">
 	  	<input type='hidden' name='id' value='{$node.id}'/>
-	  	<input type='submit'  value='提交修改' class="btn btn-info"/>
+	  	<button type="submit" class="btn btn-info btn4"><span class="glyphicon glyphicon-check"></span> 提交修改</button>
 	  </div>
 </div>
 </form>

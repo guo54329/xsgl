@@ -53,7 +53,6 @@
 				<td>{$v.term}</td>
 				<td>{$v.coursename}</td>
 				<td><php>  
-				        $ccode = $v['ccode'];//发布消息使用 
 						$scid = $v['scid'];
     					$pubnum = M('sxpubexcise')->where("scid=$scid")->count();
     					echo $pubnum;
@@ -63,7 +62,6 @@
 				<td>{$v.jsxm}</td>
 				<td>{$v.jsdh}</td>
 				<td align="left">　
-					<a href="{:U(GROUP_NAME.'/Excise/coursenewsSave',array('ccode'=>$ccode))}" class="btn btn-default btnw" ><span class="glyphicon glyphicon-bullhorn"></span> 发布消息</a>&nbsp;
 				  
 				   <a href="{:U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$v['scid']))}" class="btn btn-default btnw" ><span class="glyphicon glyphicon-eye-open"></span> 任务列表</a>&nbsp;
 

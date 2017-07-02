@@ -19,7 +19,7 @@
 				<td>班级编码</td>
 				<td>
 				<div class="form-inline">
-				<input type='text' name='ccode' value="<?php echo ($classes["ccode"]); ?>" class="form-control"
+				<input style="width: 500px;" type='text' name='ccode' value="<?php echo ($classes["ccode"]); ?>" class="form-control"
 					<?php if($classes['ccodestatus'] == 0): ?>disabled<?php endif; ?> /> 
 				<span class="glyphicon glyphicon-info-sign"></span> 某班是2016年秋季第一个组建的班级，则编码为：201601
 				</div>
@@ -27,14 +27,14 @@
 			</tr>
 			<tr>
 				<td>班级名称</td>
-				<td><input type='text' name='cname' value="<?php echo ($classes["cname"]); ?>" class="form-control"/></td>
+				<td><input type='text' name='cname' value="<?php echo ($classes["cname"]); ?>" class="form-control" style="width: 500px;"/></td>
 			</tr>
 			<tr>
 				<td>班主任</td>
 				<td>
 				<div class="form-inline">
-					<select name="office" class="form-control "></select>
-					<select name="master" class="form-control"></select>
+					<select name="office" class="form-control " style="width: 250px;"></select>
+					<select name="master" class="form-control" style="width: 250px;"></select>
 				
 				     <!-- js的使用 start-->
 				     <script type="text/javascript" src="__PUBLIC__/Js/offteacher.js"></script>
@@ -58,7 +58,7 @@
 			<tr>
 				<td>组建时间</td>
 				<td>
-				    <select name='zjsj' class="form-control">
+				    <select name='zjsj' class="form-control" style="width: 500px;">
 						<option value="0">请选择时间...</option>
 						<?php if(is_array($term)): foreach($term as $key=>$v): ?><option value="<?php echo ($v["name"]); ?>"  <?php if($classes['zjsj'] == $v['name']): ?>selected="selected"<?php endif; ?>  ><?php echo ($v["name"]); ?></option><?php endforeach; endif; ?>
 					</select>
@@ -67,7 +67,7 @@
 			<tr>
 				<td>所属专业</td>
 				<td>
-					<select name='proname' class="form-control">
+					<select name='proname' class="form-control" style="width: 500px;">
 						<option value="0">请选择专业...</option>
 						<?php if(is_array($pro)): foreach($pro as $key=>$v): ?><option value="<?php echo ($v["name"]); ?>"  <?php if($classes['proname'] == $v['name']): ?>selected="selected"<?php endif; ?>  ><?php echo ($v["name"]); ?></option><?php endforeach; endif; ?>
 					</select>

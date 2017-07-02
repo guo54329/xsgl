@@ -10,10 +10,10 @@
 <div class="panel panel-default">
 	  <div class="panel-heading">个人帐户</div>
 	  <div class="panel-body">
-		<table class='table table-bordered table-hover'>
+		<table class='table table-striped'>
 			<tr><td>现用帐户：</td><td>{$user.username}</td></tr>	
 		    <tr><td>上次登录时间：</td><td>{$user.logintime|date='Y-m-d H:i:s',###}</td></tr>	
-		    <tr><td>上次登录IP：</td><td>{$user.loginip}</td></tr>		   	
+		    <tr  style="border-bottom: 1px solid #ddd;"><td>上次登录IP：</td><td>{$user.loginip}</td></tr>		   	
 		</table>	
 	  </div>
 	 

@@ -15,7 +15,7 @@
 		<table class='table table-bordered table-hover'>
 			<tr>
 				<td>专业名称</td>
-				<td><input type='text' name='name' value="<?php echo ($professional["name"]); ?>" class="form-control"/></td>
+				<td><input type='text' name='name' value="<?php echo ($professional["name"]); ?>" class="form-control" style="width: 500px;"/></td>
 			</tr>
 		</table>	
 	  </div>

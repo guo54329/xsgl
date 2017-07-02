@@ -133,7 +133,7 @@ function show(){
 	    
 	     <table id="table" class='table table-bordered table-hover'>
 	       <caption><strong>讨论评价区</strong>&nbsp;
-			<button class="btn btn-default btnw" onclick="myrefresh()"><span class="glyphicon glyphicon-repeat"></span> 刷新</button>&nbsp; 
+			<button class="btn btn-default btnw" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp; 
 			<button class="btn btn-default" onclick="show();"><span class="glyphicon glyphicon-edit"></span> 评论</button>
 	       </caption>
 		   

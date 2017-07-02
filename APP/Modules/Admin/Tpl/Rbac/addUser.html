@@ -39,17 +39,17 @@
 		<table class='table table-bordered table-hover'>
 			<tr>
 				<td>用户帐号</td>
-				<td><input type='text' name='username' class='form-control' /></td>
+				<td><input type='text' name='username' class='form-control' style="width: 500px;"/></td>
 			</tr>
 			<tr>
 				<td>初始密码</td>
-				<td><input type='password' name='password'  class='form-control'/></td>
+				<td><input type='password' name='password'  class='form-control' style="width: 500px;"/></td>
 			</tr>
 			<tr>
 				<td>所属角色</td>
 				<td>
 					 <div class="form-inline">
-						<select name="role_id[]" class="form-control">
+						<select name="role_id[]" class="form-control" style="width: 500px;">
 							<foreach name='role' item='v'>
 								<option value="{$v['id']}">{$v.name}({$v.remark})</option>
 							</foreach>
@@ -62,7 +62,8 @@
 		</table>	
 	  </div>
 	  <div class="panel-footer">
-	  	<input type='submit'  value='添加' class="btn btn-info"/>
+	 	 <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-check"></span> 提交</button>
+	  	
 	  </div>
 </div>
 </form>

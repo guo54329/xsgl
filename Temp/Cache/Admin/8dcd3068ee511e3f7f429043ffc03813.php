@@ -16,6 +16,9 @@
 		.footeralign{
 			text-align: left;
 		}
+		.btnw{
+			width: 90px;
+		}
 	</style>
 </head>
 <body>
@@ -23,8 +26,9 @@
 <div class="panel panel-default">
 	  <div class="panel-heading">消息列表</div>
 	  <div class="panel-footer footeralign">
-	     <a href="<?php echo U(GROUP_NAME.'/Home/addNews');?>" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> 添加</a>
-         <button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp;&nbsp;
+	  	<button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp;&nbsp;
+	     <a href="<?php echo U(GROUP_NAME.'/Home/addNews');?>" class="btn btn-info btnw" ><span class="glyphicon glyphicon-bullhorn"></span> 发布消息</a>
+         
 	  </div>
 	  <div class="panel-body">
 		<table class='table table-bordered table-hover'>

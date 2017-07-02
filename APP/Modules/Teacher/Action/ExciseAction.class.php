@@ -117,33 +117,6 @@ public function delcourseTable(){
   
 }
 
-public function coursenewsSave(){
-  if(!empty($_POST)){
-      $ccode  =(string)$_POST['ccode'];
-      //添加消息
-      $tea = session('tea');
-      $data=array(
-      'title'=>$_POST['title'],
-      'pubtype'=>4,
-      'ccode' =>$ccode,
-      'content'=>$_POST['content'],
-      'userxm'=>$tea['jsxm'],
-      'pubtime'=>time()
-      );
-      $id = M('news')->add($data);
-      if($id>0){
-        $this->success("发布成功！",U(GROUP_NAME."/News/news"));
-      }else{
-        $this->error("发布失败！");
-      }
-  }else{
-     // $pubtype= (int)$_GET['pubtype'];//教师给学生发默认发布类型为4即指定班级的学生
-      $ccode  =(string)$_GET['ccode'];
-      $this->assign('ccode',$ccode);
-      $this->display();
-  }
-
-}
 /**
  * 教师发布的实训任务管理
  * @return [type] [description]

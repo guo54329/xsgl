@@ -82,6 +82,10 @@ function yh(obj){
 }
 </script>
 <style>
+   .title{
+   	  text-align: center;
+   	  font-weight: bold;
+   }
    .form-inline{
    	text-align: left;
    }
@@ -98,7 +102,7 @@ function yh(obj){
 	  		<form name='myhf' action='{:U(GROUP_NAME.'/System/backup')}' method='post' onsubmit='return checkhf();'>
 			<div class="form-horizontal">  
 			    <div class="form-inline">
-					<select class="form-control" id="selecthf" name="hffilename" >
+					<select class="form-control" id="selecthf" name="hffilename" style="width:662px;">
 						<option value="0">请选择恢复文件名...</option>
 						{~$i=0}
 						<foreach name="files" item="v">
@@ -111,7 +115,7 @@ function yh(obj){
 			    </div>
 			</div>
 			</form>
-
+	       <hr>
 			<form name='mybf' action='{:U(GROUP_NAME.'/System/backup')}' method='post' onsubmit='return checkbf();'>
                 <div class="form-inline">
 					<button type="button" id="all" class="btn btn-default" >全选</button>
@@ -120,7 +124,7 @@ function yh(obj){
 				
 					<button type="button" id="othercheck" class="btn btn-default">反选</button>
 				
-					<input type="text" name="bffilename" placeholder="请输入备份文件名！" class="form-control" />
+					<input type="text" name="bffilename" placeholder="请输入备份文件名！" class="form-control" style="width:500px;"/>
 				
 					<button class="btn btn-info" type="submit"  name="bf"><span class="glyphicon glyphicon-floppy-save"></span> 备份</button>
 				</div>						
@@ -128,7 +132,7 @@ function yh(obj){
 
 		<table class='table table-bordered table-hover'>
 		<thead>
-			<tr class="title"><th>序号</th><th>表名</th><!--<th>表引擎</th>--><th>记录数</th><th>表大小</th><th>更新时间</th><th>操作</th><!--<th>表编码</th>--></tr>
+			<tr class="title"><td>序号</td><td>表名</td><!--<th>表引擎</th>--><td>记录数</td><td>表大小</td><td>更新时间</td><td>操作</td><!--<th>表编码</th>--></tr>
 		</thead>	
 		<tbody id="data">
 			{~$i=0}<!--~不输出-->  

@@ -38,9 +38,7 @@
 	#content{
 	    text-align: left;
 	}
-	#title{
-		width: 600px；
-	}
+
 </style>												
 </head>
 <body>
@@ -53,7 +51,7 @@
 				<td>任务标题:</td>
 				<td>
 				<div class="form-inline">
-				<input type="text" placeholder="请输入标题" name="title" id="title" class="form-control" />
+				<input type="text" placeholder="请输入标题" name="title"  class="form-control" style="width: 500px;"/>
 				</div>
 			</tr>
 			<tr>

@@ -23,17 +23,17 @@
 				<td>编号</td>
 				<td>
 				<div class="form-inline">
-				<input type='text' name='xsno' value="{$student.xsno}" class="form-control" <if condition="$student['xsnostatus'] eq 0"> disabled </if> /> <span class="glyphicon glyphicon-info-sign"></span> 学号最长为13位数字
+				<input style="width: 500px;" type='text' name='xsno' value="{$student.xsno}" class="form-control" <if condition="$student['xsnostatus'] eq 0"> disabled </if> /> <span class="glyphicon glyphicon-info-sign"></span> 学号最长为13位数字
 				</div>
 				</td>
 			</tr>
 			<tr>
 				<td>姓名</td>
-				<td><input type='text' name='xsxm' value="{$student.xsxm}" class="form-control"/></td>
+				<td><input type='text' name='xsxm' value="{$student.xsxm}" class="form-control" style="width: 500px;"/></td>
 			</tr>
 			<tr>
 				<td>性别</td>
-				<td>
+				<td style="text-align: left;">
 					<div class="form-inline">
 				    	<label class="xb">
 				    		<input type="radio" name="xsxb" class="form-control" value="男"  <if condition="$student['xsxb'] eq '男'">checked</if> > 男  
@@ -48,7 +48,7 @@
 			<tr>
 				<td>入学时间</td>
 				<td>
-					<select name="rxsj" class="form-control">
+					<select name="rxsj" class="form-control" style="width: 500px;">
 						<option value="0">请选择入学时间...</option>
 						<foreach name="term" item="v">
 							<option value="{$v.name}" <if condition="$student['rxsj'] eq $v['name']">selected="selected"</if> >{$v.name}</option>
@@ -60,8 +60,8 @@
 				<td>所在班级</td>
 				<td>
 				<div class="form-inline">
-					<select name="zjsj" class="form-control"></select>
-					<select name="ccode" class="form-control"></select>
+					<select name="zjsj" class="form-control" style="width: 250px;"></select>
+					<select name="ccode" class="form-control" style="width: 250px;"></select>
 				
 				     <!-- js的使用 start-->
 				     <script type="text/javascript" src="__PUBLIC__/Js/zjsjclasses.js"></script>

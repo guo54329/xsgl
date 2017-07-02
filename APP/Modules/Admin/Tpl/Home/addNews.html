@@ -46,10 +46,10 @@
 		<table class='table table-bordered table-hover'>	
 			<tr>
 				<td align='right' width='20%'>标题</td>
-				<td><input type="text" placeholder="请输入标题" name="title" id="title" class="form-control" />
+				<td><input type="text" placeholder="请输入标题" name="title" id="title" class="form-control" style="width: 500px;"/>
 			</tr>
 			<tr><td align='right'>接收对象</td>
-				<td><select id="pubtype" name="pubtype" class="form-control">
+				<td><select id="pubtype" name="pubtype" class="form-control" style="width: 500px;">
 						<option value="0">请选择接收对象</option>
 						<option value="1">所有教师和学生</option>
 						<option value="2">所有教师</option>

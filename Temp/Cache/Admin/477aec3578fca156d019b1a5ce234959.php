@@ -23,7 +23,7 @@
 				<td>学期</td>
 				<td>
 				 <div class="form-inline">
-					<select name='term' class="form-control">
+					<select name='term' class="form-control" style="width: 500px;">
 						<option value="0">请选择学期...</option>
 						<?php if(is_array($term)): foreach($term as $key=>$v): ?><option value="<?php echo ($v["name"]); ?>"><?php echo ($v["name"]); ?></option><?php endforeach; endif; ?>
 					</select>
@@ -34,8 +34,8 @@
 				<td>教师</td>
 				<td>
 				<div class="form-inline">
-				    <select name="cs" class="form-control"></select>
-					<select name="js" class="form-control"></select>
+				    <select name="cs" class="form-control" style="width: 250px;"></select>
+					<select name="js" class="form-control" style="width: 250px;"></select>
 				</div>
 				     <!-- js的使用 start-->
 				     <script type="text/javascript" src="__PUBLIC__/Js/offteacher.js"></script>
@@ -58,8 +58,8 @@
 				<td>班级</td>
 				<td>
 				<div class="form-inline">
-					<select name="zjsj" class="form-control"></select>
-					<select name="ccode" class="form-control"></select>
+					<select name="zjsj" class="form-control" style="width: 250px;"></select>
+					<select name="ccode" class="form-control" style="width: 250px;"></select>
 				</div>
 					
 					     <!-- js的使用 start-->
@@ -84,8 +84,8 @@
 				<td>课程</td>
 				<td>
 				<div class="form-inline">
-					<select name="zy" class="form-control"></select>
-					<select name="kc" class="form-control"></select>
+					<select name="zy" class="form-control" style="width: 250px;"></select>
+					<select name="kc" class="form-control" style="width: 250px;"></select>
 				</div>	
 					     <!-- js的使用 start-->
 					     <script type="text/javascript" src="__PUBLIC__/Js/procourse.js"></script>

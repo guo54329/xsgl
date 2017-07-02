@@ -22,18 +22,18 @@
 				<td>教师编码</td>
 				<td>
 				<div class="form-inline">
-				<input type='text' name='jsno' value="<?php echo ($teacher["jsno"]); ?>" class="form-control" <?php if($teacher['jsnostatus'] == 0): ?>disabled<?php endif; ?>  /> 
+				<input style="width: 500px;" type='text' name='jsno' value="<?php echo ($teacher["jsno"]); ?>" class="form-control" <?php if($teacher['jsnostatus'] == 0): ?>disabled<?php endif; ?>  /> 
 				<span class="glyphicon glyphicon-info-sign"></span> 编号格式为处室名称汉字的首字母+两位序号，如jsj01
 				</div>
 				</td>
 			</tr>
 			<tr>
 				<td>姓名</td>
-				<td><input type='text' name='jsxm' value="<?php echo ($teacher["jsxm"]); ?>" class="form-control"/></td>
+				<td><input type='text' name='jsxm' value="<?php echo ($teacher["jsxm"]); ?>" class="form-control" style="width: 500px;"/></td>
 			</tr>
 			<tr>
 				<td>性别</td>
-				<td>
+				<td style="text-align: left;">
 				    <div class="form-inline">
 				    	<label class="xb">
 				    		<input type="radio" name="jsxb" class="form-control" value="男" <?php if($teacher['jsxb'] == '男'): ?>checked<?php endif; ?> > 男  
@@ -48,12 +48,12 @@
 			</tr>
 			<tr>
 				<td>联系电话</td>
-				<td><input type='text' name='jsdh' value="<?php echo ($teacher["jsdh"]); ?>" class="form-control"/></td>
+				<td><input type='text' name='jsdh' value="<?php echo ($teacher["jsdh"]); ?>" class="form-control" style="width: 500px;"/></td>
 			</tr>
 			<tr>
 				<td>所在处室</td>
 				<td>
-					<select name='offname' class="form-control">
+					<select name='offname' class="form-control" style="width: 500px;">
 						<option value="0">请选择处室...</option>
 						<?php if(is_array($office)): foreach($office as $key=>$v): ?><option value="<?php echo ($v["name"]); ?>" <?php if($teacher['offname'] == $v['name']): ?>selected="selected"<?php endif; ?> ><?php echo ($v["name"]); ?></option><?php endforeach; endif; ?>
 					</select>

@@ -2,8 +2,8 @@
 
 Class NewsAction extends CommonAction {
 
-     //消息列表
-		public function news(){
+    //消息列表
+	public function news(){
 		$tea = session('tea');
 		$userxm=$tea['jsxm'];
 		//只查询自己发布的
@@ -14,7 +14,14 @@ Class NewsAction extends CommonAction {
 
 	}
 	
-	
+	//管理员发布的消息列表
+	public function sysNews(){
+		//pubtype=1 表示管理员->所有教师和学生，pubtype=3 表示管理员->所有学生
+		$news = M('news')->where("pubtype=1 or pubtype=2")->order('pubtime DESC')->select();
+		$this->assign('news',$news);
+		$this->display();
+
+	}
 	//消息详情
 	public function detailNews(){
 		$id=intval($_GET['id']);
@@ -33,6 +40,40 @@ Class NewsAction extends CommonAction {
 		}else{
 			$this->success("删除失败！");
 		}
+	}
+
+	public function newsSave(){
+		$tea = session('tea');
+		$jsno = $tea['jsno'];
+		$jsxm = $tea['jsxm'];
+		  if(!empty($_POST)){
+		      $ccode  =trim($_POST['ccode']);
+		      if($ccode==0){
+		      	  $this->error('请选择接收对象！');
+		      }
+		      //添加消息
+		      $data=array(
+		      'title'=>$_POST['title'],
+		      'pubtype'=>4,
+		      'ccode' =>$ccode,
+		      'content'=>$_POST['content'],
+		      'userxm'=>$jsxm,
+		      'pubtime'=>time()
+		      );
+		      $id = M('news')->add($data);
+		      if($id>0){
+		        $this->success("发布成功！",U(GROUP_NAME."/News/news"));
+		      }else{
+		        $this->error("发布失败！");
+		      }
+		  }else{
+		     // $pubtype= 4;//教师给学生发默认发布类型为4即指定班级的学生
+
+		      $ccodes  =M('sxsetcourse as a')->join("xh_classes as b on a.ccode=b.ccode",'left')->distinct(true)->field('a.ccode,b.cname')->where("jsno='$jsno'")->select();
+		      $this->assign('ccodes',$ccodes);
+		      $this->display();
+		  }
+
 	}
 
 

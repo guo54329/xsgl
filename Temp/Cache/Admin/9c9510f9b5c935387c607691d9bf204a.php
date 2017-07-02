@@ -6,19 +6,6 @@
 <link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
 <link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
 <script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
-<style>
-.add-role{
-	display: inline-block;
-	width: 120px;
-	height: 34px;
-	line-height: 34px;
-	text-align: center;
-	border:1px solid #ccc;
-	border-radius: 4px;
-	margin-left: 20px;
-	cursor: pointer;
-}
-</style>
 <script type="text/javascript">
 	$(function(){
 		$('.add-role').click(function(){
@@ -45,10 +32,10 @@
 				<td>配置角色</td>
 				<td>
 				<div class="form-inline">
-					<select name="role_id[]" class="form-control">
+					<select name="role_id[]" class="form-control" style="width: 350px;">
 						<?php if(is_array($role)): foreach($role as $key=>$v): ?><option value="<?php echo ($v['id']); ?>"><?php echo ($v["name"]); ?>(<?php echo ($v["remark"]); ?>)</option><?php endforeach; endif; ?>
 					</select>
-					<span class='add-role'>添加一个角色</span>
+					<span class='add-role btn btn-info btn4 glyphicon glyphicon-plus'>添加角色</span>
 				</div>
 				</td>
 			</tr>
@@ -57,7 +44,8 @@
 	  </div>
 	  <div class="panel-footer">
 	    <input type="hidden" name="id" value="<?php echo ($user['id']); ?>">
-	  	<input type='submit'  value='提交配置' class="btn btn-info"/>
+	    <button type="submit" class="btn btn-info btn4"><span class="glyphicon glyphicon-check"></span> 提交配置</button>
+	  
 	  </div>
 </div>
 </form>

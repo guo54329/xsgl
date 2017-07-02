@@ -15,12 +15,12 @@
 		<table class='table table-bordered table-hover'>
 			<tr>
 				<td>课程名称</td>
-				<td><input type='text' name='name' value="<?php echo ($course["name"]); ?>" class="form-control"/></td>
+				<td><input type='text' name='name' value="<?php echo ($course["name"]); ?>" class="form-control" style="width: 500px;"/></td>
 			</tr>
 			<tr>
 				<td>课程类型</td>
 				<td>
-				   <select class="form-control" name="coursetype">
+				   <select class="form-control" name="coursetype" style="width: 500px;">
 				   		<option value="0">请选择类型...</option>
 				   		<option value="2" <?php if($course['coursetype'] == 2): ?>selected="selected"<?php endif; ?> >专业课</option>
 						<option value="1" <?php if($course['coursetype'] == 1): ?>selected="selected"<?php endif; ?> >公共课</option>
@@ -30,7 +30,7 @@
 			<tr>
 				<td>所属专业</td>
 				<td>
-					<select name='proname' class="form-control">
+					<select name='proname' class="form-control" style="width: 500px;">
 						<option value="0">请选择专业...</option>
 						<?php if(is_array($pro)): foreach($pro as $key=>$v): ?><option value="<?php echo ($v["name"]); ?>" <?php if($course['proname'] == $v['name']): ?>selected="selected"<?php endif; ?> ><?php echo ($v["name"]); ?></option><?php endforeach; endif; ?>
 					</select>

@@ -27,16 +27,22 @@ Class IndexAction extends CommonAction {
 		$g_site =M('site')->find(1);
 		$stu=session('stu');
 		
-        $ccode= $stu['ccode'];
 		$wel = "您的身份是学生，欢迎使用".$g_site['title']."！";
 		$this->assign("wel",$wel);
 		$this->assign('stu',$stu);
+		
+		$this->display();
+	}
+
+	public function sysNews(){
 		//pubtype=1 表示管理员->所有教师和学生，pubtype=3 表示管理员->所有学生 
 		//pubtype=4 表示教师->学生（指定班级）
+		$stu=session('stu');
+        $ccode= $stu['ccode'];
 		$news = M('news')->where("pubtype=1 or pubtype=3 or (pubtype=4 and ccode='$ccode')")->order('pubtime DESC')->select();
 		$this->assign('news',$news);
-
 		$this->display();
+
 	}
 
 	// public function logout()

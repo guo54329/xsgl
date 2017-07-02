@@ -40,8 +40,8 @@
 			</span>
 			<br/>
 	  		方式一：
-  			<select name="term1" class="form-control"></select>
-			<select name="coursename" class="form-control"></select>
+  			<select name="term1" class="form-control" style="width: 250px;"></select>
+			<select name="coursename" class="form-control" style="width: 250px;"></select>
 			<!-- js的使用 start-->
 			 <script type="text/javascript" src="__PUBLIC__/Js/termCourse.js"></script>
 			 <script type="text/javascript">
@@ -60,8 +60,8 @@
 			<button type="submit" class="btn btn-default"><span class='glyphicon glyphicon-search'></span> 查询</button>
 			&nbsp;&nbsp;<br/>
 	  		方式二：
-  			<select name="term2" class="form-control"></select>
-			<select name="js" class="form-control"></select>
+  			<select name="term2" class="form-control" style="width: 250px;"></select>
+			<select name="js" class="form-control" style="width: 250px;"></select>
 			<!-- js的使用 start-->
 			 <script type="text/javascript" src="__PUBLIC__/Js/termTeacher.js"></script>
 			 <script type="text/javascript">

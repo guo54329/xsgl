@@ -49,13 +49,12 @@
 				<td><?php echo ($i); $v.scid;?></td>
 				<td><?php echo ($v["term"]); ?></td>
 				<td><?php echo ($v["coursename"]); ?></td>
-				<td><?php $ccode = $v['ccode']; $scid = $v['scid']; $pubnum = M('sxpubexcise')->where("scid=$scid")->count(); echo $pubnum; ?>
+				<td><?php $scid = $v['scid']; $pubnum = M('sxpubexcise')->where("scid=$scid")->count(); echo $pubnum; ?>
     			</td>
 				<td><?php echo ($v["cname"]); ?></td>
 				<td><?php echo ($v["jsxm"]); ?></td>
 				<td><?php echo ($v["jsdh"]); ?></td>
 				<td align="left">　
-					<a href="<?php echo U(GROUP_NAME.'/Excise/coursenewsSave',array('ccode'=>$ccode));?>" class="btn btn-default btnw" ><span class="glyphicon glyphicon-bullhorn"></span> 发布消息</a>&nbsp;
 				  
 				   <a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$v['scid']));?>" class="btn btn-default btnw" ><span class="glyphicon glyphicon-eye-open"></span> 任务列表</a>&nbsp;
 

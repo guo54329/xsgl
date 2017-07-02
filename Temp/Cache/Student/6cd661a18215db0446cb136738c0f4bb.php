@@ -44,7 +44,8 @@
 		<li style="margin-top:10px;display:block;">
           <h4 class="M6"><span></span>系统信息查看</h4>
           <div class="list-item none">
-            <a href="<?php echo U(GROUP_NAME.'/Index/welcome');?>" target='nr'>查看通知消息</a>
+            <a href="<?php echo U(GROUP_NAME.'/Index/welcome');?>" target='nr'>查看登录信息</a>
+            <a href="<?php echo U(GROUP_NAME.'/Index/sysNews');?>" target='nr'>查看系统消息</a>
             </div>
         </li>
         <li style="margin-top:10px;display:block;">

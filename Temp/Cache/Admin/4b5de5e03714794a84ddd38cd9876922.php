@@ -41,7 +41,7 @@ $(function(){
 		<table class='table table-bordered table-hover'>
 			<tr>
 				<td>学期</td>
-				<td><input type='text' name='name' value="<?php echo ($term["name"]); ?>" class="form-control" id="name"/></td>
+				<td><input type='text' name='name' value="<?php echo ($term["name"]); ?>" class="form-control" id="name" style="width: 500px;"/></td>
 			</tr>
 		</table>	
 	  </div>

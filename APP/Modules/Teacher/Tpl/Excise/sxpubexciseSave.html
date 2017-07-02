@@ -53,7 +53,7 @@
 				<td>任务标题:</td>
 				<td>
 				<div class="form-inline">
-				<input type="text" placeholder="请输入标题" name="title" id="title" class="form-control" style="width:400px;" />
+				<input type="text" placeholder="请输入标题" name="title" id="title" class="form-control" style="width:500px;" />
 				
 				</div>
 			</tr>

@@ -26,7 +26,7 @@ Class LoginAction extends Action {
 			show(0,"用户名或密码错误！");
 		}
 
-		if($user['lock'])show(0,"用户被锁定！");;
+		if($user['lock'])show(0,"用户被锁定,请联系管理员解锁！");;
 
 		//更新最近一次登录的时间和ip
 		$data = array(

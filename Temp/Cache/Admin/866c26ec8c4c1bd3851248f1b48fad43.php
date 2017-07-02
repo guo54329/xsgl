@@ -49,6 +49,21 @@ input{
 	padding:10px;
 	float: left;
 }
+.btn1{
+	height: 30px;
+	width: 25px;
+}
+.btn5{
+	width: 100px;
+}
+.btn6{
+	width: 116px;
+}
+.aa span{
+	display: inline-block;
+	padding-left: 0px;
+	margin-left:-20px; 
+}
 </style>
 </head>
 <body>
@@ -56,34 +71,49 @@ input{
 <div class="panel panel-default">
 	  <div class="panel-heading">节点列表</div>
 	  <div class="panel-body">
-			<a href="<?php echo U(GROUP_NAME.'/Rbac/addNode');?>"  class="btn btn4 btn-info">添加应用</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	  	
+			<a href="<?php echo U(GROUP_NAME.'/Rbac/addNode');?>"  class="btn btn4 btn-info"><span  class="glyphicon glyphicon-plus"></span> 添加应用</a>
 			<?php if(is_array($node)): foreach($node as $key=>$app): ?><div class="app">
-					<p><strong><?php echo ($app["title"]); ?></strong>
-						[<a href="<?php echo U(GROUP_NAME.'/Rbac/editNode',array('id'=>$app['id']));?>">修改</a>|<a href="<?php echo U(GROUP_NAME.'/Rbac/delNode',array('id'=>$app['id']));?>">删除</a>]
-						<input type='text' name='<?php echo ($app["id"]); ?>' value="<?php echo ($app["sort"]); ?>" style="text-align:center" />
+				    <div class="form-inline">
+						<p><strong><?php echo ($app["title"]); ?></strong>
+							<a href="<?php echo U(GROUP_NAME.'/Rbac/editNode',array('id'=>$app['id']));?>" class="btn btn-default btn1"><span class="glyphicon glyphicon-edit"></span></a>
 
-						[<a href="<?php echo U(GROUP_NAME.'/Rbac/addNode',array('pid'=>$app['id'],'level'=>2));?>">添加控制器</a>]
-					</p>
+							<a href="<?php echo U(GROUP_NAME.'/Rbac/delNode',array('id'=>$app['id']));?>" class="btn btn-default btn1"><span class="glyphicon glyphicon-trash"></span></a>
+							
+							<input type='text' name='<?php echo ($app["id"]); ?>' value="<?php echo ($app["sort"]); ?>" style="text-align:center;width: 50px;height:30px;" class="form-control"/>
 
-					<?php if(is_array($app["child"])): foreach($app["child"] as $key=>$action): ?><dl>
+							<a href="<?php echo U(GROUP_NAME.'/Rbac/addNode',array('pid'=>$app['id'],'level'=>2));?>" class="btn btn-info btn5"><span  class="glyphicon glyphicon-plus"></span> 添加控制器</a>
+						</p>
+					</div>
+					<?php if(is_array($app["child"])): foreach($app["child"] as $key=>$action): ?><dl> 
 							<dt>
-								<strong><?php echo ($action["title"]); ?></strong>
-							[<a href="<?php echo U(GROUP_NAME.'/Rbac/editNode',array('id'=>$action['id']));?>">修改</a>|<a href="<?php echo U(GROUP_NAME.'/Rbac/delNode',array('id'=>$action['id']));?>">删除</a>]
-							<input type='text' name='<?php echo ($action["id"]); ?>' value="<?php echo ($action["sort"]); ?>" style="text-align:center" />
+								<div class="form-inline">
+									<strong><?php echo ($action["title"]); ?></strong>
+									<a href="<?php echo U(GROUP_NAME.'/Rbac/editNode',array('id'=>$action['id']));?>" class="btn btn-default btn1 aa"><span class="glyphicon glyphicon-edit"></span></a>
 
-							[<a href="<?php echo U(GROUP_NAME.'/Rbac/addNode',array('pid'=>$action['id'],'level'=>3));?>">添加动作方法</a>]
+									<a href="<?php echo U(GROUP_NAME.'/Rbac/delNode',array('id'=>$action['id']));?>" class="btn btn-default btn1 aa"><span class="glyphicon glyphicon-trash"></span></a>
+
+									<input type='text' name='<?php echo ($action["id"]); ?>'  value="<?php echo ($action["sort"]); ?>" style="text-align:center;width: 50px;height:30px;" class="form-control"/>
+
+									<a href="<?php echo U(GROUP_NAME.'/Rbac/addNode',array('pid'=>$action['id'],'level'=>3));?>" class="btn btn-info btn6 aa"><span  class="glyphicon glyphicon-plus"></span> 添加动作方法</a>
+									
+								</div>
+								
 							</dt>
+  							
+							<?php if(is_array($action["child"])): foreach($action["child"] as $key=>$method): ?><div class="form-inline">
+									<dd><span><?php echo ($method["title"]); ?></span>
+											<a href="<?php echo U(GROUP_NAME.'/Rbac/editNode',array('id'=>$method['id']));?>" class="btn btn-default btn1"><span class="glyphicon glyphicon-edit"></span></a>
 
-							<?php if(is_array($action["child"])): foreach($action["child"] as $key=>$method): ?><dd><span><?php echo ($method["title"]); ?></span>
-										[<a href="<?php echo U(GROUP_NAME.'/Rbac/editNode',array('id'=>$method['id']));?>">修改</a>|<a href="<?php echo U(GROUP_NAME.'/Rbac/delNode',array('id'=>$method['id']));?>">删除</a>]
-										<input type='text' name='<?php echo ($method["id"]); ?>' value="<?php echo ($method["sort"]); ?>" style="text-align:center" />
-								</dd><?php endforeach; endif; ?>
+											<a href="<?php echo U(GROUP_NAME.'/Rbac/delNode',array('id'=>$method['id']));?>" class="btn btn-default btn1"><span class="glyphicon glyphicon-trash"></span></a>
+
+											<input type='text' name='<?php echo ($method["id"]); ?>' value="<?php echo ($method["sort"]); ?>" style="text-align:center;width: 50px;height:30px;" class="form-control"/>
+									</dd>
+								</div><?php endforeach; endif; ?>
 						</dl><?php endforeach; endif; ?>
 				</div><?php endforeach; endif; ?>
 	  </div>
 	   <div class="panel-footer">
-	   	  <input type='submit'  value='更新排序' class="btn btn4 btn-info"/>
+	     <button type="submit" class="btn btn-info btn4"><span class="glyphicon glyphicon-check"></span> 更新排序</button>
 	   </div>
 </div>
 </form>

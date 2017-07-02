@@ -25,13 +25,13 @@
 		<table class='table table-bordered table-hover'>	
 			<tr>
 			    <td>验证码字体大小</td>
-			    <td><input type='text' name='VERIFY_SIZE' value='<?php echo (C("VERIFY_SIZE")); ?>' class="form-control" /></td>
+			    <td><input type='text' name='VERIFY_SIZE' value='<?php echo (C("VERIFY_SIZE")); ?>' class="form-control" style="width:500px;"/></td>
 			</tr>
 			<tr>
 			    <td>验证码字体颜色<br/>(16进制色值)</td>
 				<td>
 				<div class="form-inline">
-					<input type='text' name='VERIFY_COLOR' value='<?php echo (C("VERIFY_COLOR")); ?>' class="form-control" />
+					<input type='text' name='VERIFY_COLOR' value='<?php echo (C("VERIFY_COLOR")); ?>' class="form-control" style="width:500px;"/>
 				 	<span class="glyphicon glyphicon-info-sign"></span> 非专业人员不得改动,颜色如：
 					<span class="badge">
 						<span style="display:block; border:1px solid black;width:50px;height:30px;background-color:<?php echo (C("VERIFY_COLOR")); ?>;"></span>
@@ -40,12 +40,12 @@
 				</div></td>
 			</tr>
 			<tr><td>验证码长度</td>
-			    <td width='70%'><input type='text' name='VERIFY_LENGTH' value='<?php echo (C("VERIFY_LENGTH")); ?>' class="form-control" /></td>
+			    <td width='70%'><input type='text' name='VERIFY_LENGTH' value='<?php echo (C("VERIFY_LENGTH")); ?>' class="form-control" style="width:500px;"/></td>
 			</tr>
 			<tr><td>验证码背影颜色<br/>(16进制色值)</td>
 				<td>
 				<div class="form-inline">
-				<input type='text' name='VERIFY_BGCOLOR' value='<?php echo (C("VERIFY_BGCOLOR")); ?>' class="form-control" />
+				<input type='text' name='VERIFY_BGCOLOR' value='<?php echo (C("VERIFY_BGCOLOR")); ?>' class="form-control" style="width:500px;"/>
 				<span class="glyphicon glyphicon-info-sign"></span> 非专业人员不得改动,颜色如：
 				<span class="badge">
 						<span style="display:block; border:1px solid black;width:50px;height:30px;background-color:<?php echo (C("VERIFY_BGCOLOR")); ?>;"></span>
@@ -56,7 +56,7 @@
 			<tr>
 			    <td align='right'>验证码种子</td><td>
 			    <div class="form-inline">
-			    <input type='text' name='VERIFY_SEED' value='<?php echo (C("VERIFY_SEED")); ?>' class="form-control" />
+			    <input type='text' name='VERIFY_SEED' value='<?php echo (C("VERIFY_SEED")); ?>' class="form-control" style="width:500px;"/>
 				<span class="glyphicon glyphicon-info-sign"></span> 非专业人员不得改动
 
 			    </td>
