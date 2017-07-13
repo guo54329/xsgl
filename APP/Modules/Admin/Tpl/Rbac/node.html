@@ -69,9 +69,13 @@ input{
 <body>
 <form action='{:U(GROUP_NAME.'/Rbac/sortNode')}' method='post'>
 <div class="panel panel-default">
-	  <div class="panel-heading">节点列表</div>
+	  <div class="panel-heading headalign">
+		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 节点列表</a>
+		<span style="float: right;">
+	     	<a  href="{:U(GROUP_NAME.'/Rbac/addNode')}"  class="btn btn4 btn-info"><span class="glyphicon glyphicon-plus"></span> 添加应用</a>
+	     </span>
+	  </div>
 	  <div class="panel-body">
-			<a href="{:U(GROUP_NAME.'/Rbac/addNode')}"  class="btn btn4 btn-info"><span  class="glyphicon glyphicon-plus"></span> 添加应用</a>
 			<foreach name='node' item='app'>
 				<div class="app">
 				    <div class="form-inline">
@@ -118,7 +122,7 @@ input{
 				</div>
 			</foreach>
 	  </div>
-	   <div class="panel-footer">
+	   <div class="panel-footer" style="text-align: center;">
 	     <button type="submit" class="btn btn-info btn4"><span class="glyphicon glyphicon-check"></span> 更新排序</button>
 	   </div>
 </div>

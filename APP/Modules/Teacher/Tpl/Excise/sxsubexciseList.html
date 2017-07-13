@@ -26,7 +26,10 @@ function isrec(obj){
 }
 </script>
 <style type="text/css">
-	.footeralign,.desc{
+	.desc{
+		text-align:left;
+	}
+	.headalign{
 		text-align:left;
 	}
 	th{
@@ -35,12 +38,23 @@ function isrec(obj){
 	.browse{
 		width: 90px;
 	}
+	.browse1{
+		width:100px;
+	}
+	.btncoursetable{
+		width: 100px;
+		text-align: left;
+	}
+	.xiexian{
+	    width:20px;
+		margin-left:-5px;margin-right:-5px;
+	}
 	.no{
 		color: red;
 	}
 	.fresh{
 		right:20;
-		top: 210;
+		bottom: 50;
 		position: fixed;
 	}
 </style>
@@ -48,13 +62,14 @@ function isrec(obj){
 
 <body>
 <div class="panel panel-default">
-	  <div class="panel-heading">学生完成情况 </div>
-	  <div class="panel-footer footeralign"> 
-	  		<a href="{:U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$courseinfo['scid']))}" class="btn btn-info"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>&nbsp;
-	  		<button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	  <div class="panel-heading headalign">
+		  <a href="{:U(GROUP_NAME.'/Excise/courseTable')}" class="btn btncoursetable"><span class="glyphicon glyphicon-home"></span> 我的课程表</a><span class="btn xiexian">/</span><a href="{:U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$courseinfo['scid']))}" class="btn btn4">任务列表</a><span class="btn xiexian">/</span><a class="btn browse1">学生完成情况</a>
+		  <span style="float:right;">
+			<button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp;&nbsp;&nbsp;&nbsp;
 	  		<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseRedoAll',array('peid'=>$excisedesc['peid']))}" class="btn btn-info browse"><span class="glyphicon glyphicon-repeat"></span> 一键重做</a>&nbsp;
 	  		<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseTable',array('peid'=>$excisedesc['peid']))}" class="btn btn-info browse"><span class="glyphicon glyphicon-download"></span> 完成情况</a>
-
+		  </span>
+		 
 	  </div>
 	  <div class="panel-body">
 		 <table class='table table-bordered table-hover'>

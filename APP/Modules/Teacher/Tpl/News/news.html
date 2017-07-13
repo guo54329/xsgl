@@ -8,20 +8,25 @@
 	<script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
 	<script type="text/javascript" src="__PUBLIC__/Js/selects.js"></script>
 	<style type="text/css">
-		.footeralign{
-			text-align: left;
-		}
+	
 		.btnw{
 			width:90px;
+		}
+		.headalign{
+			text-align: left;
+		}
+		.btncoursetable{
+			width:110px;
+			text-align: left;
 		}
 	</style>
 </head>
 <body>
 
 <div class="panel panel-default">
-	  <div class="panel-heading">消息列表</div>
-	  <div class="panel-footer footeralign">
-         <a href="{:U(GROUP_NAME.'/News/newsSave')}" class="btn btn-info btnw" ><span class="glyphicon glyphicon-bullhorn"></span> 发布消息</a>
+	  <div class="panel-heading headalign">
+			<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 现有消息</a>
+			<span style="float: right;"><a href="{:U(GROUP_NAME.'/News/newsSave')}" class="btn btn-info btnw" ><span class="glyphicon glyphicon-bullhorn"></span> 发布消息</a></span>
 	  </div>
 	  <div class="panel-body">
 		<table class='table table-bordered table-hover'>

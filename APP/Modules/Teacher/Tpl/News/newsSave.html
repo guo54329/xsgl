@@ -13,7 +13,7 @@
 	window.UEDITOR_HOME_URL='__ROOT__/Data/Ueditor/';
 	window.onload =function(){
 		//window.UEDITOR_CONFIG.initialFrameWidth=860;
-		window.UEDITOR_CONFIG.initialFrameHeight=400;
+		window.UEDITOR_CONFIG.initialFrameHeight=240;
 		//window.UEDITOR_CONFIG.scaleEnabled=true;
 		window.UEDITOR_CONFIG.toolbars=[[
             'fullscreen', 'source', '|', 'undo', 'redo', '|',
@@ -37,11 +37,23 @@
 	}
 
 </script>
+<style type="text/css">
+	.headalign{
+		text-align: left;
+	}
+	.btncoursetable{
+		width:110px;
+		text-align: left;
+	}
+</style>
 </head>
 <body>
-<form action='{:U(GROUP_NAME.'/News/newsSave')}' method='post'>
+
 <div class="panel panel-default">
-	  <div class="panel-heading">发布消息</div>
+	  <div class="panel-heading headalign">
+			<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 发布消息</a>
+	  </div>
+	  <form action='{:U(GROUP_NAME.'/News/newsSave')}' method='post'>
 	  <div class="panel-body">
 		<table class='table table-bordered table-hover'>	
 			<tr>
@@ -70,10 +82,9 @@
 	  
 	  <div class="panel-footer">
 	 	 <button type='submit' class="btn btn-info"><span class="glyphicon glyphicon-check"></span> 提交</button>
-	  	&nbsp;&nbsp;
-	  	<a href="{:U(GROUP_NAME.'/Excise/courseTable')}" class="btn btn-info btnw"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>
 	  </div>
+	  </form>
 </div>
-</form>
+
 </body>
 </html>

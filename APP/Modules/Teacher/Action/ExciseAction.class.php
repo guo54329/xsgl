@@ -275,6 +275,7 @@ public function sxpubexciseEdit(){
    }else{
       //修改任务视图
       $peid = (int)$_GET['peid'];
+	  
       $excise=M('sxpubexcise')->find($peid);
       $coursename = M('sxsetcourse')->field('coursename')->find($excise['scid']);
       $this->assign('coursename',$coursename['coursename']);

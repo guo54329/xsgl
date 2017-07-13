@@ -5,11 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
 <link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
+<style type="text/css">
+	.headalign{
+		text-align: left;
+	}
+	.btncoursetable{
+		width:110px;
+		text-align: left;
+	}
+</style>
 </head>
 <body>
 <div class="panel panel-default">
-  <!-- Default panel contents -->
-	  <div class="panel-heading">系统配置信息</div>
+	  <div class="panel-heading headalign">
+		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 站点运行环境</a>
+	  </div>
 	  <div class="panel-body">
 	        <table class="table table-bordered table-hover">
 			<tr><td>服务器软件</td><td><?php echo ($sinfor["f1"]); ?></td></tr>

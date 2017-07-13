@@ -8,9 +8,9 @@
 	.panel-heading{
 		font-size: 16px;   
 	}
-	.panel-footer,.panel-heading{
+	/*.panel-footer,.panel-heading{
 		text-align: center;
-	}
+	}*/
 	.btn{
 		width: 70px;
 		height: 30px;
@@ -30,4 +30,5 @@
 		text-align: left;
 	}
 	
+
 

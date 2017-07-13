@@ -56,6 +56,20 @@
     	display: none;
     }
     #send{display: none;}
+    .headalign{
+		text-align: left;
+	}
+    .btncoursetable{
+		width:90px;
+		text-align: left;
+	}
+	.browse{
+		width: 90px;
+	}
+	.xiexian{
+	    width:20px;
+		margin-left:-5px;margin-right:-5px;
+	}
 </style>
 
 <script type="text/javascript">
@@ -102,10 +116,8 @@ function show(){
 
 <body>
 <div class="panel panel-default">
-	  <div class="panel-heading">学生互评表 </div>
-	  <div class="panel-footer footeralign"> 
-	  		<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseList',array('scid'=>$courseinfo['scid']))}" class="btn btn-info btnw"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>
-	  		
+	  <div class="panel-heading headalign">
+		<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseList')}" class="btn btncoursetable"><span class="glyphicon glyphicon-home"></span> 我的任务</a><span class="btn xiexian">/</span><a  class="btn btn4">交流讨论</a>	
 	  </div>
 	  <div class="panel-body">
 		 <table class='table table-bordered table-hover'>

@@ -11,13 +11,30 @@
 	.form-inline{
 		width: 100%;
 	}
+	.btncoursetable{
+		width: 100px;
+		text-align: left;
+	}
+	.browse{
+		width: 90px;
+	}
+	.xiexian{
+	    width:20px;
+		margin-left:-5px;margin-right:-5px;
+	}
+	.headalign{
+		text-align: left;
+	}
 </style>
 </head>
 
 <body>
 <form action='<?php echo U(GROUP_NAME.'/Excise/coursetableSave');?>' method='post'>
 <div class="panel panel-default">
-	  <div class="panel-heading">添加课程表</div>
+	  <div class="panel-heading headalign">
+		<a href="<?php echo U(GROUP_NAME.'/Excise/courseTable');?>" class="btn btncoursetable"><span class="glyphicon glyphicon-home"></span> 我的课程表</a><span class="btn xiexian">/</span><a  class="btn btn4">添加课程</a>
+	  </span>
+	  </div>
 	  <div class="panel-body">
 		<table class='table table-bordered table-hover'>
 			<tr>
@@ -87,8 +104,6 @@
 	  </div>
 	  <div class="panel-footer">
 	  	<button type='submit' class="btn btn-info"><span class="glyphicon glyphicon-check"></span> 提交</button>
-	  	&nbsp;&nbsp;
-	  	<a href="<?php echo U(GROUP_NAME.'/Excise/courseTable');?>" class="btn btn-info btnw"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>
 	  </div>
 </div>
 </form>

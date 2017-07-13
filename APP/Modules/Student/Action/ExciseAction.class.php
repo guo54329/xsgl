@@ -22,17 +22,16 @@ public function sxsubexciseList(){
     $this->assign('list',$list);
     $this->display();
 }
-
-//学生作业处理
+//学生作业提交处理
 public function sxsubexciseDo(){
-    
-  	if(!empty($_POST)){
+
+    if(!empty($_POST)){
         $desc =$_POST['desc'];
         if($_POST['desc']=='0'){
           $this->error("请进行自我评价！");
         }
-    		//作业提交处理
-    		import('ORG.Net.UploadFile'); //载入TP上传类
+        //作业提交处理
+        import('ORG.Net.UploadFile'); //载入TP上传类
         //获取上传作业
         $file = $_FILES['attach'];
         $fileext = explode('.',$file['name']);  
@@ -79,16 +78,22 @@ public function sxsubexciseDo(){
         }else{
           $this->error("附件上传失败！");
         }
-  	 
-  	}else{
-    		//作业提交视图
-    		$seid = (int)$_GET['seid'];
-    		$Model = M('sxsubexcise as a');
-          $dolist = $Model->join("xh_sxpubexcise as b on a.peid=b.peid")->join("xh_sxsetcourse as c on b.scid=c.scid")->where("xsno='$xsno'")->field("a.seid,b.peid,b.title,b.desc,b.filename,b.url,b.pubtime,c.coursename")->where("seid=$seid")->find();
-          $this->assign('dolist',$dolist);
-          //p($dolist);
-    		$this->display();
-  	}
+     
+    }else{
+        $seid=$_GET['seid'];
+        $this->assign('seid',$seid);
+        $this->display();
+    }
+}
+//学生作业描述
+public function sxsubexciseDesc(){
+		//作业提交视图
+		$seid = (int)$_GET['seid'];
+		$Model = M('sxsubexcise as a');
+    $dolist = $Model->join("xh_sxpubexcise as b on a.peid=b.peid")->join("xh_sxsetcourse as c on b.scid=c.scid")->where("xsno='$xsno'")->field("a.seid,b.peid,b.title,b.desc,b.filename,b.url,b.pubtime,c.coursename")->where("seid=$seid")->find();
+    $this->assign('dolist',$dolist);
+      //p($dolist);
+		$this->display();
 }
  
  	public function sxsubexciseRedo(){
@@ -111,7 +116,7 @@ public function sxsubexciseDo(){
     );
      $res = M('sxsubexcise')->save($data);
      if($res){
-      $this->success('设置成功，请重做！',U(GROUP_NAME."/Excise/sxsubexciseList",array('peid'=>$peid)));
+      $this->success('设置成功，请重做！',U(GROUP_NAME."/Excise/sxsubexciseDesc",array('seid'=>$seid)));
      }else{
       $this->error('设置失败！');
      }

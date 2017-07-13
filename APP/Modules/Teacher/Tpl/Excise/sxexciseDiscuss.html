@@ -55,6 +55,23 @@
     	display: none;
     }
     #send{display: none;}
+	.browse{
+		width: 90px;
+	}
+	.browse1{
+		width:100px;
+	}
+	.headalign{
+		text-align:left;
+	}
+	.xiexian{
+	    width:20px;
+		margin-left:-5px;margin-right:-5px;
+	}
+	.btncoursetable{
+		width: 100px;
+		text-align: left;
+	}
 </style>
 
 <script type="text/javascript">
@@ -101,9 +118,8 @@ function show(){
 
 <body>
 <div class="panel panel-default">
-	  <div class="panel-heading">评论列表 </div>
-	  <div class="panel-footer footeralign"> 
-	  		<a href="{:U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$courseinfo['scid']))}" class="btn btn-info btnw"><span class="glyphicon glyphicon-circle-arrow-left"></span> 返回</a>
+	  <div class="panel-heading headalign">
+	  	<a href="{:U(GROUP_NAME.'/Excise/courseTable')}" class="btn btncoursetable"><span class="glyphicon glyphicon-home"></span> 我的课程表</a><span class="btn xiexian">/</span><a href="{:U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$courseinfo['scid']))}" class="btn btn4">任务列表</a><span class="btn xiexian">/</span><a class="btn btn4">交流讨论</a>
 	  </div>
 	  <div class="panel-body">
 		 <table class='table table-bordered table-hover'>
@@ -134,7 +150,7 @@ function show(){
 	<div class="panel-footer footeralign">
 	    
 	     <table id="table" class='table table-bordered table-hover'>
-	       <caption><strong>讨论评价区</strong>&nbsp;
+	       <caption><strong>交流讨论</strong>&nbsp;
 			<button class="btn btn-default btnw" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp; 
 			<button class="btn btn-default" onclick="show();"><span class="glyphicon glyphicon-edit"></span> 评论</button>
 	       </caption>

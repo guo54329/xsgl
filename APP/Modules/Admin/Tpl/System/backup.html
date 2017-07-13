@@ -92,12 +92,28 @@ function yh(obj){
    .btn-default{
    	   width: 50px;
    }
+   .headalign{
+		text-align: left;
+	}
+	.btncoursetable{
+		width:110px;
+		text-align: left;
+	}
+	form{
+		padding:0px;
+		margin:5px 0px 5px 16px;
+	}
+	table{
+		margin-top:5px; 
+	}
 </style>
 </head>
 <body>
 
 <div class="panel panel-default">
-	  <div class="panel-heading">数据库管理</div>
+	  <div class="panel-heading headalign">
+		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 数据表管理</a>
+	  </div>
 	  <div class="panel-body">
 	  		<form name='myhf' action='{:U(GROUP_NAME.'/System/backup')}' method='post' onsubmit='return checkhf();'>
 			<div class="form-horizontal">  
@@ -115,7 +131,7 @@ function yh(obj){
 			    </div>
 			</div>
 			</form>
-	       <hr>
+	       
 			<form name='mybf' action='{:U(GROUP_NAME.'/System/backup')}' method='post' onsubmit='return checkbf();'>
                 <div class="form-inline">
 					<button type="button" id="all" class="btn btn-default" >全选</button>
@@ -129,7 +145,7 @@ function yh(obj){
 					<button class="btn btn-info" type="submit"  name="bf"><span class="glyphicon glyphicon-floppy-save"></span> 备份</button>
 				</div>						
 			
-
+	    
 		<table class='table table-bordered table-hover'>
 		<thead>
 			<tr class="title"><td>序号</td><td>表名</td><!--<th>表引擎</th>--><td>记录数</td><td>表大小</td><td>更新时间</td><td>操作</td><!--<th>表编码</th>--></tr>

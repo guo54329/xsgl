@@ -15,32 +15,42 @@
 	.btnw{
 		width: 90px;
 	}
-	.footeralign{
+	.btncoursetable{
+		width:100px;
 		text-align: left;
 	}
-
+	.headalign{
+		text-align:left;
+		padding-bottom:-20px;
+	}
+	.form-inline{
+		padding:5px 0px 5px 0px;
+		margin:5px 0px 5px 16px;
+		
+		height:40px;
+		line-height:40px;
+	 }
 </style>
 </head>
 
 <body>
 <div class="panel panel-default">
-	  <div class="panel-heading">我的课程表</div>
-	  <div class="panel-footer footeralign">
-
-	   <div class="form-inline"> 
-            <form action="<?php echo U(GROUP_NAME.'/Excise/courseTable');?>" method="post">
-
-            <button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp;&nbsp;&nbsp;&nbsp;
-
-            <a href="<?php echo U(GROUP_NAME.'/Excise/coursetableSave');?>" class="btn btn-info btnw"><span class="glyphicon glyphicon-plus"></span> 添加课程</a>&nbsp;&nbsp;&nbsp;&nbsp;
-  			<select name='term' class="form-control">
+	  <div class="panel-heading headalign">
+		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 我的课程表</a>
+		<span style="float:right;">
+			<button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp;&nbsp
+			<a href="<?php echo U(GROUP_NAME.'/Excise/coursetableSave');?>" class="btn btn-info btnw"><span class="glyphicon glyphicon-plus"></span> 添加课程</a>
+		</span>		
+	  </div>
+	  <div class="form-inline">
+			<form action="<?php echo U(GROUP_NAME.'/Excise/courseTable');?>" method="post">
+			<select name='term' class="form-control">
 				<option value="0">选择学期查看...</option>
 				<?php if(is_array($term)): foreach($term as $key=>$v): ?><option value="<?php echo ($v["term"]); ?>"><?php echo ($v["term"]); ?></option><?php endforeach; endif; ?>
 			</select>
 			<button type="submit" class="btn btn-default"><span class='glyphicon glyphicon-search'></span> 查询</button>
 			</form>
-        </div>
-	  </div>
+	   </div>
 	  <div class="panel-body">
 		 <table class='table table-bordered table-hover'>
 			<tr><td>序号</td><td>学期</td><td>课程</td><td>任务数量</td><td>班级</td><td>班主任</td><td>联系电话</td><td>操作</td></tr>

@@ -5,11 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
 <link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
+<style type="text/css">
+	.headalign{
+			text-align: left;
+	}
+	.btncoursetable{
+		width:110px;
+		text-align: left;
+	}
+
+</style>
 </head>
 <body>
 <div class="panel panel-default">
   <!-- Default panel contents -->
-	  <div class="panel-heading">系统消息</div>
+	  <div class="panel-heading headalign">
+			<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 系统消息</a>
+  	  </div>
 	  <div class="panel-body">
 	       <table class="table table-bordered table-hover">
 		   		<tr style="text-align: center;font-weight: bold;"><td>序号</td><td align="left">标题</td><td align="left">内容</td><td>发布者</td><td>发布时间</td></tr>

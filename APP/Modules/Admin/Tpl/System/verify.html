@@ -15,12 +15,21 @@
 	.form-inline{
 		text-align: left;
 	}
+	.headalign{
+		text-align: left;
+	}
+	.btncoursetable{
+		width:110px;
+		text-align: left;
+	}
 </style>
 </head>
 <body>
 <form action='{:U(GROUP_NAME.'/System/verify')}' method='post'>
 <div class="panel panel-default">
-	  <div class="panel-heading">验证码设置</div>
+	  <div class="panel-heading headalign">
+		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 验证码设置</a>
+	  </div>
 	  <div class="panel-body">
 		<table class='table table-bordered table-hover'>	
 			<tr>
@@ -31,7 +40,7 @@
 			    <td>验证码字体颜色<br/>(16进制色值)</td>
 				<td>
 				<div class="form-inline">
-					<input type='text' name='VERIFY_COLOR' value='{$Think.config.VERIFY_COLOR}' class="form-control" style="width:500px;"/>
+					<input type='text' name='VERIFY_COLOR' value='{$Think.config.VERIFY_COLOR}' class="form-control" style="width:500px;"/><br/>
 				 	<span class="glyphicon glyphicon-info-sign"></span> 非专业人员不得改动,颜色如：
 					<span class="badge">
 						<span style="display:block; border:1px solid black;width:50px;height:30px;background-color:{$Think.config.VERIFY_COLOR};"></span>
@@ -45,7 +54,7 @@
 			<tr><td>验证码背影颜色<br/>(16进制色值)</td>
 				<td>
 				<div class="form-inline">
-				<input type='text' name='VERIFY_BGCOLOR' value='{$Think.config.VERIFY_BGCOLOR}' class="form-control" style="width:500px;"/>
+				<input type='text' name='VERIFY_BGCOLOR' value='{$Think.config.VERIFY_BGCOLOR}' class="form-control" style="width:500px;"/><br/>
 				<span class="glyphicon glyphicon-info-sign"></span> 非专业人员不得改动,颜色如：
 				<span class="badge">
 						<span style="display:block; border:1px solid black;width:50px;height:30px;background-color:{$Think.config.VERIFY_BGCOLOR};"></span>
@@ -54,9 +63,9 @@
 				</td>
 			</tr>
 			<tr>
-			    <td align='right'>验证码种子</td><td>
+			    <td>验证码种子</td><td>
 			    <div class="form-inline">
-			    <input type='text' name='VERIFY_SEED' value='{$Think.config.VERIFY_SEED}' class="form-control" style="width:500px;"/>
+			    <input type='text' name='VERIFY_SEED' value='{$Think.config.VERIFY_SEED}' class="form-control" style="width:500px;"/><br/>
 				<span class="glyphicon glyphicon-info-sign"></span> 非专业人员不得改动
 
 			    </td>

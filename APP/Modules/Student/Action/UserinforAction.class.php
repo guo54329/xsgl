@@ -32,5 +32,12 @@ Class UserinforAction extends CommonAction {
 			$this->display();
 		}	
 	}
+	public function userinfor()
+	{
+
+		$stu=session('stu');
+		$this->assign('stu',$stu);
+		$this->display();
+	}
 }
 ?>

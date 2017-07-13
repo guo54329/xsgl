@@ -13,29 +13,37 @@
 		}
 	</script>
 	<style type="text/css">
-		.footeralign{
+		.title{
+			font-weight: bold;
+			text-align: center;
+		}
+		.headalign{
 			text-align: left;
 		}
 		.btnw{
 			width: 90px;
+		}
+	
+		.btncoursetable{
+			width:110px;
+			text-align: left;
 		}
 	</style>
 </head>
 <body>
 
 <div class="panel panel-default">
-	  <div class="panel-heading">消息列表</div>
-	  <div class="panel-footer footeralign">
-	  	<button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp;&nbsp;
-	     <a href="{:U(GROUP_NAME.'/Home/addNews')}" class="btn btn-info btnw" ><span class="glyphicon glyphicon-bullhorn"></span> 发布消息</a>
-         
+	  <div class="panel-heading headalign">
+		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 消息列表</a>
+		<span style="float: right;"><button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp;&nbsp;
+	     	<a href="{:U(GROUP_NAME.'/Home/addNews')}" class="btn btn-info btnw" ><span class="glyphicon glyphicon-bullhorn"></span> 发布消息</a>
+	     </span>
 	  </div>
+
 	  <div class="panel-body">
 		<table class='table table-bordered table-hover'>
-		   <thead>
-			 <tr><th>序号</th><th>标题</th><th>接收对象</th><th>发布者</th><th>发布时间</th><th>操作</th></tr>
-		   </thead>
-		   <tbody>
+			<tr class="title"><th>序号</th><th>标题</th><th>接收对象</th><th>发布者</th><th>发布时间</th><th>操作</th></tr>
+		   
 		   	{~$i=1}
 			<foreach name='info' item='v'>
 			<tr align='center'>
@@ -61,7 +69,7 @@
 				
 			</tr>
 			</foreach>
-		   </tbody>
+		   
 		</table>
 	  </div>
 	  

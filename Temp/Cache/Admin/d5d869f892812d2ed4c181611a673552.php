@@ -38,7 +38,7 @@
             <a href="<?php echo U(GROUP_NAME.'/System/backup');?>" target='nr'>
             数据表管理</a>
             <a href="<?php echo U(GROUP_NAME.'/System/verify');?>" target='nr'>验证码设置</a>
-            <a href="<?php echo U(GROUP_NAME.'/System/reset');?>"  target='nr'>系统初始化</a>
+            
           </div>
         </li>
 

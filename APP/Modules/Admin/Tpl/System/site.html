@@ -6,15 +6,21 @@
 <link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
 <link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
 <style type="text/css">
-	.btn-info{
-		width:100px;
+	.headalign{
+		text-align: left;
+	}
+	.btncoursetable{
+		width:110px;
+		text-align: left;
 	}
 </style>
 </head>
 <body>
 <form action='{:U(GROUP_NAME.'/System/site')}' method='post'>
 <div class="panel panel-default">
-	  <div class="panel-heading">站点设置</div>
+	  <div class="panel-heading headalign">
+		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 站点信息设置</a>
+	  </div>
 	  <div class="panel-body">
 		<table class='table table-bordered table-hover'>	
 			<tr>
