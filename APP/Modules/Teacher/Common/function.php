@@ -3,7 +3,12 @@
 function definefilename(){
 	$tea = session('tea');
 	$jsno= $tea['jsno'];
-	return $jsno."-".date("YmdHis");
+  $jsxm= $tea['jsxm'];
+  import('Class.Pinyin',APP_PATH);//引入中英文转换类
+  $py = new PinYin();
+  $jsxmpy = $py->getAllPY($jsxm);//将中文的姓名转换为拼音
+
+	return $jsno."-".$jsxmpy."-".date("YmdHis");
 }
 //附件下载公共函数
  function downAttach($filepath,$filename){

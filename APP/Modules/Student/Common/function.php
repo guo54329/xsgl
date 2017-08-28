@@ -3,7 +3,11 @@
 function definefilename(){
   $stu = session('stu');
   $xsno= $stu['xsno'];
-  return $xsno."-".date("YmdHis");
+  $xsxm= $stu['xsxm'];
+  import('Class.Pinyin',APP_PATH);//引入中英文转换类
+  $py = new PinYin();
+  $xsxmpy = $py->getAllPY($xsxm);//将中文的姓名转换为拼音
+  return $xsno."-".$xsxmpy."-".date("YmdHis");
 }
 //附件下载公共函数
  function downAttach($filepath,$filename){

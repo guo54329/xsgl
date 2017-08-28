@@ -4,6 +4,7 @@ Class ExciseAction extends CommonAction {
 public function sxsubexciseList(){
 
     $stu = session('stu');
+    
     $xsno = $stu['xsno'];
     $Model = M('sxsubexcise as a');
     if($_POST['term']!='' && $_POST['coursename']!=''){//根据条件查询
