@@ -64,7 +64,7 @@ function resetpass(obj){
 	     <form action="<?php echo U(GROUP_NAME.'/Basicdata/student');?>" method="post">
 	       <select name="ccode" class="form-control">
 			  <option value=''>请选择班级</option>
-			  <?php if(is_array($ccodes)): foreach($ccodes as $key=>$v): ?><option value="<?php echo ($v["ccode"]); ?>"><?php echo ($v["ccode"]); ?></option><?php endforeach; endif; ?>
+			  <?php if(is_array($ccodes)): foreach($ccodes as $key=>$v): ?><option value="<?php echo ($v["ccode"]); ?>"><?php echo ($v["cname"]); ?></option><?php endforeach; endif; ?>
 			</select>
 			<input type="text" name="stu" class="form-control" placeholder="清输入学号或姓名">
 			<button type="submit" class="btn btn-default"><span class='glyphicon glyphicon-search'></span> 查询</button>

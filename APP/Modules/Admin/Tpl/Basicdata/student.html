@@ -65,7 +65,7 @@ function resetpass(obj){
 	       <select name="ccode" class="form-control">
 			  <option value=''>请选择班级</option>
 			  <foreach name="ccodes" item="v">
-			      <option value="{$v.ccode}">{$v.ccode}</option>
+			      <option value="{$v.ccode}">{$v.cname}</option>
 			  </foreach>
 			</select>
 			<input type="text" name="stu" class="form-control" placeholder="清输入学号或姓名">

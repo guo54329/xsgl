@@ -780,7 +780,8 @@ public function student(){
     	$student = M('student as a')->join("xh_classes as b on a.ccode=b.ccode","left")->field("a.id,a.xsno,a.xsxm,a.xsxb,a.rxsj,b.cname")->order('a.ccode ASC,a.id ASC')->select();
     }
 	
-	$ccodes=M('student')->distinct(true)->field('ccode')->select();
+	$ccodes=M('student as a')->join("xh_classes as b on a.ccode=b.ccode")->distinct(true)->field('a.ccode,b.cname')->select();
+	//p($ccodes);
 	$this->assign('ccodes',$ccodes);
     $this->assign('student',$student);
 	$this->display();
@@ -921,8 +922,8 @@ public function delStudent(){
     }
 
 	if(count>0){
-
-		M('sxsubexcise')->where("xsno='$xsno'")->delete();}
+		M('sxsubexcise')->where("xsno='$xsno'")->delete();
+	}
 	$res=M('student')->delete($id);
 	if($res){
 		$this->success("删除成功(包含该生的所有实训作业)！",U(GROUP_NAME.'/Basicdata/student'));
