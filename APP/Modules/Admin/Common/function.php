@@ -261,8 +261,10 @@ function systemconf()
 }
 //自定义文件名
 function definefilename(){
-  $jsno = session('sxpubjsno');
-  return $jsno."-".date("YmdHis");
+  //$jsno = session('sxpubjsno');
+  //$jsxmpy = session('jsxmpy'); //来自Excise里面的发布操作
+  $gly=session('username');
+  return "gly-".$gly."-".date("YmdHis");
 }
 
 //组合一维数组：无限极分类

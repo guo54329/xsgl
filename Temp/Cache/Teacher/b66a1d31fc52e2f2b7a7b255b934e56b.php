@@ -19,6 +19,15 @@
 		width:100px;
 		text-align: left;
 	}
+	.numColor0{
+		color: red;
+
+	}
+	.numColor1{
+		color: green;
+		font-size: 20px;
+		font-weight: bold;
+	}	
 	.headalign{
 		text-align:left;
 		padding-bottom:-20px;
@@ -29,6 +38,9 @@
 		
 		height:40px;
 		line-height:40px;
+	 }
+	 .trColor{
+	 	background-color: #eee;
 	 }
 </style>
 </head>
@@ -55,11 +67,15 @@
 		 <table class='table table-bordered table-hover'>
 			<tr><td>序号</td><td>学期</td><td>课程</td><td>任务数量</td><td>班级</td><td>班主任</td><td>联系电话</td><td>操作</td></tr>
 			<?php $i=1;?>
-			<?php if(is_array($list)): foreach($list as $key=>$v): ?><tr>
-				<td><?php echo ($i); $v.scid;?></td>
+			
+			<?php if(is_array($list)): foreach($list as $key=>$v): $tr = substr($v['term'],10,1); ?>
+				<tr <?php if($tr == 1): ?>class="trColor"<?php endif; ?>  >
+				
+				<td><?php echo ($v["scid"]); ?></td>
 				<td><?php echo ($v["term"]); ?></td>
 				<td><?php echo ($v["coursename"]); ?></td>
-				<td><?php $scid = $v['scid']; $pubnum = M('sxpubexcise')->where("scid=$scid")->count(); echo $pubnum; ?>
+				<td><?php $i=0; $scid = $v['scid']; $pubnum = M('sxpubexcise')->where("scid=$scid")->count(); if($pubnum>0)$i=1; ?>
+    				<span class="numColor<?php echo ($i); ?>"><?php echo ($pubnum); ?></span>
     			</td>
 				<td><?php echo ($v["cname"]); ?></td>
 				<td><?php echo ($v["jsxm"]); ?></td>
@@ -72,6 +88,7 @@
 					<?php if( $pubnum == 0): ?><a href="<?php echo U(GROUP_NAME.'/Excise/delcourseTable',array('id'=>$v['scid']));?>" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 删除</a><?php endif; ?>
 				</td>
 			</tr>
+			
 			<?php $i++; endforeach; endif; ?>
 		</table>
 	  </div>

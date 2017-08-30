@@ -93,10 +93,10 @@ function myrefresh(){
 				<td><?php echo ($v["jsxm"]); ?></td>
 				<td><?php echo (date('m-d H:i',$v["pubtime"])); ?></td>
 
-				<td><?php if($v['status'] == 0 ): ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseDesc',array('seid'=>$v['seid']));?>" class="btn"><span class="glyphicon glyphicon-hand-right"></span> 去完成</a> <?php else: ?>已完成<?php endif; ?></td>
+				<td><?php if($v['status'] == 0 ): ?><span style="font-size: 16px;color:red;">未完成</span><?php else: ?><img src="__PUBLIC__/Images/finish.png" style="height: 40px;" /><?php endif; ?></td>
 				<td><?php echo $v['desc']*0.3+$v['isrec']*0.7; ?></td>
 			
-				<td><?php if($v['status'] == 0 ): ?>无<?php else: ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']));?>" class="btn btn-default browse" ><span class="glyphicon glyphicon-eye-open"></span> 交流讨论</a><?php endif; ?></td>
+				<td><?php if($v['status'] == 0 ): ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseDesc',array('seid'=>$v['seid']));?>" class="btn" style="font-size: 16px;"><span class="glyphicon glyphicon-hand-right"></span> 去完成</a><?php else: ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']));?>" class="btn btn-default browse" ><span class="glyphicon glyphicon-eye-open"></span> 交流讨论</a><?php endif; ?></td>
 				
 			</tr>
 			<?php $i++; endforeach; endif; ?>

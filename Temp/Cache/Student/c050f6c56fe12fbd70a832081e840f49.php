@@ -105,7 +105,7 @@
 				<td>上传作业:</td>
 				<td>
 				   <div class="form-inline">
-				     <input type="file"  name="attach"  class="form-control" /> <span class="glyphicon glyphicon-info-sign"></span> 如果附件文件类型为php、text、html，请先转换为zip文件后上传
+				     <input type="file"  name="attach"  class="form-control" /> <span class="glyphicon glyphicon-info-sign"></span> 1、如果附件文件类型为php、text、html，或者多个文件或文件夹时，请先转换为zip文件后上传；2、上传附件最大支持500MB；3、文件较大时，提交后请等待，当页面跳转成功说明上传成功！
 				    </div>
 				</td>
 			</tr>

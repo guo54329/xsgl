@@ -69,6 +69,11 @@ function del(obj){
 	.headalign{
 		text-align: left;
 	}
+	.numColor{
+		color: red;
+		font-size: 16px;
+		font-weight: bold;
+	}
 	.yes{
 		color:green;
 	}
@@ -94,7 +99,7 @@ function del(obj){
 		    班级：<strong><?php echo ($courseinfo["cname"]); ?></strong>&nbsp;&nbsp;课程：<strong><?php echo ($courseinfo["coursename"]); ?></strong>
 		    </td>
 		    </tr>
-			<tr><td>序号</td><td>任务题目</td><!--<td>任务描述</td><td>任务附件</td>--><td>发布状态</td><td>发布时间</td><td>完成情况</td><td align="left">操作(请在删除任务之前确保无学生作业)</td></tr>
+			<tr><td>序号</td><td>任务题目</td><!--<td>任务描述</td><td>任务附件</td>--><td>发布状态</td><td>发布时间</td><td>完成情况</td><td align="left">操作(请在删除任务之前确保无学生提交并且单击“发布”将发布状态改为“未发布”！)</td></tr>
 			<?php $i=1;?>
 			<?php if(is_array($list)): foreach($list as $key=>$v): ?><tr>
 				<td><?php echo ($i); $v.peid;?></td>
@@ -104,7 +109,7 @@ function del(obj){
 				<td><span id="s<?php echo ($v["peid"]); ?>"><?php if($v['status'] == 0 ): ?><span class="no">未发布</span> <?php else: ?><span class="yes">已发布</span><?php endif; ?></span></td>
 				<td><?php echo (date('Y-m-d H:i:s',$v["pubtime"])); ?></td>
 				<td>
-					<?php $peid=$v['peid']; $subtotalnum=M('sxsubexcise')->where("peid=$peid")->count(); $suboknum=M('sxsubexcise')->where("peid=$peid and status=1")->count(); echo $suboknum."/".$subtotalnum; ?>
+					<?php $peid=$v['peid']; $subtotalnum=M('sxsubexcise')->where("peid=$peid")->count(); $suboknum=M('sxsubexcise')->where("peid=$peid and status=1")->count(); if($suboknum==0){ echo "<span class='numColor'>".$suboknum."</span>/".$subtotalnum; }else{ echo "<span>".$suboknum."</span>/".$subtotalnum; } ?>
 				</td>
 				
 
@@ -112,7 +117,7 @@ function del(obj){
 				<a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseEdit',array('peid'=>$v['peid']));?>" class="btn btn-default" ><span class="glyphicon glyphicon-pencil"></span> 修改</a>&nbsp;
 
 				<button class="btn btn-default" id="<?php echo ($v["peid"]); ?>" onclick="publish(this);" title="发布后再次单击执行撤销发布操作"><span class="glyphicon glyphicon-share-alt"></span> 发布</button>&nbsp;
-				<button class="btn btn-default" id="<?php echo ($v["peid"]); ?>" onclick="del(this);" title="若有学生作业，请先设置重做！"><span class="glyphicon glyphicon-remove"></span> 删除</button>&nbsp;&nbsp;&nbsp;&nbsp;
+				<button class="btn btn-default" id="<?php echo ($v["peid"]); ?>" onclick="del(this);"><span class="glyphicon glyphicon-remove"></span> 删除</button>&nbsp;&nbsp;&nbsp;&nbsp;
 				<!--如果有附件，在提供下载按钮  || 此处取消附件下载功能
 				<?php if($v['url'] != '0' ): ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$v['peid']));?>" class="btn btn-default" ><span class="glyphicon glyphicon-save"></span> 附件</a><?php endif; ?>&nbsp;-->
 				<a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseList',array('peid'=>$v['peid']));?>" class="btn btn-default browse" ><span class="glyphicon glyphicon-eye-open"></span> 学生完成</a>&nbsp;

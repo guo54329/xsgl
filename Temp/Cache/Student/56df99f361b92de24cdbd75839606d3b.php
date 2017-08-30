@@ -25,10 +25,10 @@
   	  </div>
 	  <div class="panel-body">
 	        <table class="table table-bordered table-hover">
-				<tr><td>帐号</td><td><?php echo ($stu["xsno"]); ?></td></tr>
-				<tr><td>姓名</td><td><?php echo ($stu["xsxm"]); ?></td></tr>
-				<tr><td>班级</td><td><?php echo ($stu["cname"]); ?></td></tr>
-				<tr><td>入学时间</td><td><?php echo ($stu["rxsj"]); ?></td></tr>
+				<tr><td>帐号</td><td align="left"><?php echo ($stu["xsno"]); ?></td></tr>
+				<tr><td>姓名</td><td align="left"><?php echo ($stu["xsxm"]); ?></td></tr>
+				<tr><td>班级</td><td align="left"><?php echo ($stu["cname"]); ?></td></tr>
+				<tr><td>入学时间</td><td align="left"><?php echo ($stu["rxsj"]); ?></td></tr>
 	        </table>
 	    </div>
 </div>

@@ -39,6 +39,9 @@ function del(id){
     width:20px;
 	margin-left:-5px;margin-right:-5px;
 }
+.btn6{
+	width: 120px;
+}
 </style>
 </head>
 <body>
@@ -47,6 +50,7 @@ function del(id){
 	  
 	<div class="panel-heading headalign">
 		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 学期维护</a>
+		<a href="{:U(GROUP_NAME.'/Basicdata/resetTER')}" class="btn btn-info btn6"><span class="glyphicon glyphicon-retweet"></span> 清除演示数据</a>(注意：请在系统部署好使用之前使用该功能！)
 		<span style="float: right;">
 	  <a  href="{:U(GROUP_NAME.'/Basicdata/saveTerm')}"  class="btn btn4 btn-info"><span class="glyphicon glyphicon-plus"></span> 添加学期</a>
 	  </span>

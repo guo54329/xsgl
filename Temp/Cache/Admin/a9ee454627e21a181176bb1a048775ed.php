@@ -19,6 +19,15 @@
 	.btncoursetable{
 		width:100px;
 		text-align: left;
+	}
+	.numColor0{
+		color: red;
+
+	}
+	.numColor1{
+		color: green;
+		font-size: 20px;
+		font-weight: bold;
 	}	
 	.xiexian{
 	    width:20px;
@@ -31,6 +40,12 @@
 		height:100px;
 		line-height:34px;
 	 }
+	 .trColor{
+	 	 background-color: #eee;
+	 }
+	 .btn6{
+	 	 width: 120px;
+	 }
 </style>
 </head>
 
@@ -38,7 +53,9 @@
 <div class="panel panel-default">
 	  <div class="panel-heading headalign">
 		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 教师课表</a>
+		<a href="<?php echo U(GROUP_NAME.'/Excise/resetSX');?>" class="btn btn-info btn6"><span class="glyphicon glyphicon-retweet"></span> 清除演示数据</a>(注意：请在系统部署好使用之前使用该功能！)
 		<span style="float: right;">
+
 	     	<button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>
 			<a href="<?php echo U(GROUP_NAME.'/Excise/coursetableSave');?>" class="btn btn-info btn4"><span class="glyphicon glyphicon-plus"></span> 添加课程</a>
 	     	<div style="display: none;">如想导出，请直接选择复制下表中的数据粘贴到Excel表中即可！</div>
@@ -93,14 +110,16 @@
 	  </div>
 	  <div class="panel-body">
 		 <table class='table table-bordered table-hover'>
-			<tr><td>ID</td><td>学期</td><td>任课教师</td><td>班级</td><td>课程</td><td>任务数量</td><td>操作(如需删除，请先进入任务列表删除任务)</td></tr>
-			<?php if(is_array($coursetable)): foreach($coursetable as $key=>$v): ?><tr>
+			<tr><td>ID</td><td>学期</td><td>任课教师</td><td>班级</td><td>课程</td><td>任务数量</td><td>操作</td></tr>
+			<?php if(is_array($coursetable)): foreach($coursetable as $key=>$v): $tr = substr($v['term'],10,1); ?>
+				<tr <?php if($tr == 1): ?>class="trColor"<?php endif; ?>  >
 				<td><?php echo ($v["scid"]); ?></td>
 				<td><?php echo ($v["term"]); ?></td>
 				<td><?php echo ($v["jsxm"]); ?></td>
 				<td><?php echo ($v["cname"]); ?></td>
 				<td><?php echo ($v["coursename"]); ?></td>
-				<td><?php $scid = $v['scid']; $pubnum = M('sxpubexcise')->where("scid=$scid")->count(); echo $pubnum; ?>
+				<td><?php $i=0; $scid = $v['scid']; $pubnum = M('sxpubexcise')->where("scid=$scid")->count(); if($pubnum>0)$i=1; ?>
+    				<span class="numColor<?php echo ($i); ?>"><?php echo ($pubnum); ?></span>
     			</td>
 				<td align="left">　
 				   <a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$v['scid']));?>" class="btn btn-default btn4" title="查看指定教师发布的指定课程的任务列表！"><span class="glyphicon glyphicon-eye-open"></span> 任务列表</a>&nbsp;

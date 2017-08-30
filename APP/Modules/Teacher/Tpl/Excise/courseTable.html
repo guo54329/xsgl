@@ -19,6 +19,15 @@
 		width:100px;
 		text-align: left;
 	}
+	.numColor0{
+		color: red;
+
+	}
+	.numColor1{
+		color: green;
+		font-size: 20px;
+		font-weight: bold;
+	}	
 	.headalign{
 		text-align:left;
 		padding-bottom:-20px;
@@ -29,6 +38,9 @@
 		
 		height:40px;
 		line-height:40px;
+	 }
+	 .trColor{
+	 	background-color: #eee;
 	 }
 </style>
 </head>
@@ -57,16 +69,23 @@
 		 <table class='table table-bordered table-hover'>
 			<tr><td>序号</td><td>学期</td><td>课程</td><td>任务数量</td><td>班级</td><td>班主任</td><td>联系电话</td><td>操作</td></tr>
 			{~$i=1}
+			
 			<foreach name='list' item='v'>
-			<tr>
-				<td>{$i}{~$v.scid}</td>
+			  	<php>
+			  	 $tr = substr($v['term'],10,1);
+			  	</php>
+				<tr <if condition="$tr eq 1"> class="trColor"</if>  >
+				
+				<td>{$v.scid}</td>
 				<td>{$v.term}</td>
 				<td>{$v.coursename}</td>
 				<td><php>  
+				        $i=0;
 						$scid = $v['scid'];
     					$pubnum = M('sxpubexcise')->where("scid=$scid")->count();
-    					echo $pubnum;
+    					if($pubnum>0)$i=1;
     				</php>
+    				<span class="numColor{$i}">{$pubnum}</span>
     			</td>
 				<td>{$v.cname}</td>
 				<td>{$v.jsxm}</td>
@@ -83,6 +102,7 @@
 					</if>
 				</td>
 			</tr>
+			
 			{~$i++}
 			</foreach>
 		</table>

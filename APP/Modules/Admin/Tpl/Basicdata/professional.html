@@ -9,6 +9,9 @@
 .footeralign{
 		text-align: left;
 }
+.btn6{
+	width: 120;
+}
 </style>
 </head>
 <body>
@@ -16,7 +19,9 @@
 <div class="panel panel-default">
 	  
 	  <div class="panel-heading headalign">
-		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 专业维护</a>
+		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 专业维护  </a>
+        &nbsp;&nbsp;
+		<a href="{:U(GROUP_NAME.'/Basicdata/resetPRO')}" class="btn btn-info btn6"><span class="glyphicon glyphicon-retweet"></span> 清除演示数据</a>(注意：请在系统部署好使用之前使用该功能！)
 		<span style="float: right;">
 	     	<a  href="{:U(GROUP_NAME.'/Basicdata/saveProfessional')}"  class="btn btn4 btn-info"><span class="glyphicon glyphicon-plus"></span> 添加专业</a>
 	     	<a href="{:U(GROUP_NAME.'/Basicdata/importProfessional')}" class="btn btn4 btn-info"><span class="glyphicon glyphicoglyphicon glyphicon-plus-sign"></span> 批量导入</a>
@@ -25,14 +30,24 @@
 	  </div>
 	  <div class="panel-body">
 		 <table class='table table-bordered table-hover'>
-			<tr><td>序号</td><td>专业</td><td>操作</td></tr>
+			<tr><td>序号</td><td>专业</td><td>课程数量</td><td>操作</td></tr>
 			<foreach name='professional' item='v'>
 			<tr>
 				<td>{$v.id}</td>
 				<td>{$v.name}</td>
 				<td>
+					<php>
+						$pname = $v['name'];
+						$coursenum = M('course')->where("proname = '$pname'")->count();
+						echo $coursenum;
+					</php>
+				</td>
+				<td>
 					<a href="{:U(GROUP_NAME.'/Basicdata/saveProfessional',array('id'=>$v['id']))}"  class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> 修改</a>&nbsp;
-					<a href="{:U(GROUP_NAME.'/Basicdata/delProfessional',array('id'=>$v['id']))}"  class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 删除</a>
+					<if condition="$coursenum eq 0">
+					<a href="{:U(GROUP_NAME.'/Basicdata/delProfessional',array('id'=>$v['id']))}"  class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 删除</a><else/><a href="#"  class="btn btn-default"><span class="glyphicon glyphicon-ban-circle"></span> 有课</a></if>
+
+					
 				</td>
 			</tr>
 			</foreach>

@@ -5,6 +5,26 @@ Class ExciseAction extends CommonAction {
  * 课程表管理
  * @return [type] [description]
  */
+public function resetSX(){
+    $disnum = M('sxdisexicise')->count();
+    if($disnum>0){
+        M()->execute("TRUNCATE xh_sxdisexicise");//交流评价表
+    }
+    $subnum = M('sxsubexcise')->count();
+    if($subnum>0){
+        M()->execute("TRUNCATE xh_sxsubexcise");//任务提交表
+    }
+    $pubnum = M('sxpubexcise')->count();
+    if($pubnum>0){
+        M()->execute("TRUNCATE xh_sxpubexcise");//任务发布表
+    }
+    $setnum = M('sxsetcourse')->count();
+    if($setnum>0){
+        M()->execute("TRUNCATE xh_sxsetcourse");//课程列表
+    }
+
+    $this->success('演示数据清除成功！',U(GROUP_NAME.'/Excise/courseTable'));
+}
 public function courseTable(){
   //课程表
 
@@ -126,6 +146,7 @@ public function delcourseTable(){
  * @return [type] [description]
  */
 public function sxpubexciseList(){
+  
     $scid = (int)$_GET['scid'];
     $Model=M('sxpubexcise as a');
     $courseinfo = M('sxsetcourse as a')->join("xh_teacher as b on a.jsno = b.jsno")->join("xh_classes as c on a.ccode = c.ccode")->field("a.scid,b.jsxm,c.cname,a.coursename,a.term")->where("a.scid=$scid")->find();
@@ -172,10 +193,11 @@ public function sxpubexciseSave(){
           
           $jsxm = M('teacher')->where("jsno='$jsno'")->field("jsxm")->find();
           $jsxm =$jsxm['jsxm'];//教师姓名
-          
+           
           import('Class.Pinyin',APP_PATH);//引入中英文转换类
           $py = new PinYin();
           $jsxmpinyin = $py->getAllPY($jsxm);//将中文的教师姓名转换为拼音
+          session('jsxmpy',$jsxmpinyin);//上传附件名称定义
           $coursenamepinyin = $py->getAllPY($coursename);//将中文的课程名称转换为拼音
           //定义上传文件的路径,该路径还用于学生作业上交
           $js=$jsno.'-'.$jsxmpinyin;

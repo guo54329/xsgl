@@ -17,6 +17,9 @@
     width:20px;
 	margin-left:-5px;margin-right:-5px;
 }
+.btn6{
+	width: 120px;
+}
 </style>
 </head>
 <body>
@@ -24,6 +27,7 @@
 <div class="panel panel-default">
 	<div class="panel-heading headalign">
 		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 处室维护</a>
+		<a href="{:U(GROUP_NAME.'/Basicdata/resetOFF')}" class="btn btn-info btn6"><span class="glyphicon glyphicon-retweet"></span> 清除演示数据</a>(注意：请在系统部署好使用之前使用该功能！)
 		<span style="float: right;">
 	     	<a  href="{:U(GROUP_NAME.'/Basicdata/saveOffice')}"  class="btn btn4 btn-info"><span class="glyphicon glyphicon-plus"></span> 添加处室</a>
 	     	<a href="{:U(GROUP_NAME.'/Basicdata/importOffice')}" class="btn btn4 btn-info"><span class="glyphicon glyphicoglyphicon glyphicon-plus-sign"></span> 批量导入</a>
@@ -32,14 +36,26 @@
 	  </div>
 	  <div class="panel-body">
 		 <table class='table table-bordered table-hover'>
-			<tr><td>序号</td><td>处室</td><td>操作</td></tr>
+			<tr><td>序号</td><td>处室</td><td>教师人数</td><td>操作</td></tr>
 			<foreach name='office' item='v'>
 			<tr>
 				<td>{$v.id}</td>
 				<td>{$v.name}</td>
 				<td>
+					<php>
+						$offname = $v['name'];
+						$teanum=M('teacher')->where("offname='$offname'")->count();
+						echo $teanum;
+
+					</php>
+				</td>
+				<td>
 					<a href="{:U(GROUP_NAME.'/Basicdata/saveOffice',array('id'=>$v['id']))}"  class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> 修改</a>&nbsp;
-					<a href="{:U(GROUP_NAME.'/Basicdata/delOffice',array('id'=>$v['id']))}"  class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 删除</a>
+
+					<if condition="$teanum eq 0">
+					<a href="{:U(GROUP_NAME.'/Basicdata/delOffice',array('id'=>$v['id']))}"  class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 删除</a><else/><a href="#"  class="btn btn-default"><span class="glyphicon glyphicon-ban-circle"></span> 有人</a></if>
+
+					
 				</td>
 			</tr>
 			</foreach>

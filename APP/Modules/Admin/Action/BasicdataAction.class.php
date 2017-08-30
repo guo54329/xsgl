@@ -2,7 +2,45 @@
 Class BasicdataAction extends CommonAction {
 /**
  * 学期专业处室维护
+ * 教师与处室通过offname联系    (无连带) 但是有实训任务的布置有连带
+ * 课程与专业通过proname联系    (无连带) 
+ * 课程与课表通过coursename联系 (无连带)
+ * 
+ * 学生与班级通过班级编码联系(有连带) 与实训任务的提交有连带
+ *
+ * 删除教师需要删除教师的课程及任务以及学生的作业。
+ * jsno->sxsetcourse(jsno,scid)->sxpubexcise(scid,peid)->sxsubexcise(peid)
+ * 删除学生需要删除学生的任务
+ * xsno->sxsubexcise(xsno)
  */
+
+
+/************************开始*********学期、处室、专业数据初始化**************************************/
+public function resetTER(){
+	$num = M('term')->count();
+    if($num>0){
+        M()->execute("TRUNCATE xh_term");//学期
+    }
+    $this->success('学期数据清除成功！',U(GROUP_NAME.'/Basicdata/term'));
+}
+public function resetOFF(){
+	$num = M('office')->count();
+    if($num>0){
+        M()->execute("TRUNCATE xh_office");//处室
+    }
+    $this->success('处室数据清除成功！',U(GROUP_NAME.'/Basicdata/office'));
+}
+public function resetPRO(){
+	$num = M('professional')->count();
+    if($num>0){
+        M()->execute("TRUNCATE xh_professional");//专业
+    }
+    $this->success('专业数据清除成功！',U(GROUP_NAME.'/Basicdata/professional'));
+}
+
+/************************结束*********学期、处室、专业数据初始化**************************************/
+
+
 public function term(){
 //列表
 	$term = M('term')->order('name DESC')->select();
@@ -159,7 +197,7 @@ public function delOffice(){
 public function professional(){
 //列表
 	$professional = M('professional')->select();
-    $this->assign('professional',$professional);
+    $this->assign('professional',$professional);//专业信息
 	$this->display();
 }
 public function saveProfessional(){
@@ -242,6 +280,41 @@ public function delProfessional(){
 		$this->error("删除失败！");
 	}
 }
+
+
+/************************开始*********课程、班级、教师、学生数据初始化**************************************/
+public function resetCOU(){
+	$num = M('course')->count();
+    if($num>0){
+        M()->execute("TRUNCATE xh_course");//课程
+    }
+    $this->success('课程数据清除成功！',U(GROUP_NAME.'/Basicdata/course'));
+}
+public function resetTEA(){
+	$num = M('teacher')->count();
+    if($num>0){
+        M()->execute("TRUNCATE xh_teacher");//教师
+    }
+    $this->success('教师数据清除成功！',U(GROUP_NAME.'/Basicdata/teacher'));
+}
+public function resetCLA(){
+	$num = M('classes')->count();
+    if($num>0){
+        M()->execute("TRUNCATE xh_classes");//班级
+    }
+    $this->success('班级数据清除成功！',U(GROUP_NAME.'/Basicdata/classes'));
+}
+public function resetSTU(){
+	$num = M('student')->count();
+    if($num>0){
+        M()->execute("TRUNCATE xh_student");//学生
+    }
+    $this->success('学生数据清除成功！',U(GROUP_NAME.'/Basicdata/student'));
+}
+
+
+/************************结束**********课程、班级、教师、学生数据初始化************************************/
+
 
 /**
  * 课程维护
@@ -483,19 +556,20 @@ public function teacher(){
 	$offname=$_POST['offname'];//处室名称
 	$tea = $_POST['tea'];//帐号或姓名
     if($offname!=''&&$tea==''){
-    	$teacher = M('teacher')->where("offname='$offname'")->order('jsno ASC')->select();
+    	$teacher = M('teacher')->where("offname='$offname'")->order('id ASC')->select();
     }
     if($offname==''&&$tea!=''){
-    	$teacher = M('teacher')->where("jsno='$tea' or jsxm='$tea'")->order('offname ASC,jsno ASC')->select();
+    	$teacher = M('teacher')->where("jsno='$tea' or jsxm='$tea'")->order('offname ASC,id ASC')->select();
     }
     if($offname!=''&&$tea!=''){
-    	$teacher = M('teacher')->where("offname='$offname' and (jsno='$tea' or jsxm='$tea')")->order('jsno ASC')->select();
+    	$teacher = M('teacher')->where("offname='$offname' and (jsno='$tea' or jsxm='$tea')")->order('id ASC')->select();
     }
-    if($offname==''&&$tea==''){
-    	$teacher = M('teacher')->order('offname ASC,jsno ASC')->select();
+    if($offname==''&&$tea==''){//默认情况
+    	$teacher = M('teacher')->order('offname ASC,id ASC')->select();
     }
 	
 	$offnames=M('teacher')->distinct(true)->field('offname')->select();
+	//p($offnames);
 	$this->assign('offnames',$offnames);
     $this->assign('teacher',$teacher);
 	$this->display();
@@ -608,7 +682,75 @@ public function resetTeacherPass(){
 }
 public function delTeacher(){
 //删除操作
-	$id = $_GET['id'];
+/*删除教师需要删除教师的课程及任务以及任务下学生的作业。
+ * jsno->sxsetcourse(jsno,scid)->sxpubexcise(scid,status,peid)->sxsubexcise(peid)
+*/
+	$id = (int)$_GET['id'];
+	$js = M('teacher')->field('jsno')->find($id);
+	$jsno=$js['jsno'];
+
+//该教师的所有课程：保存至一维数组：$scids
+    $scidss = M('sxsetcourse')->where("jsno='$jsno'")->field("scid")->select();
+    for($i=0;$i<count($scidss);$i++){
+    	$scids[$i]=$scidss[$i]['scid'];
+    }
+    //echo "<hr>scid:<br>";
+    //p($scids);
+//该教师的所有任务：保存至一维数组：$peids  批量删除的正确方法
+    $where['scid']=array('in',$scids);  
+    $peidss =M('sxpubexcise')->where($where)->field("peid")->select();
+    for($i=0;$i<count($peidss);$i++){
+    	$peids[$i]=$peidss[$i]['peid'];
+    }
+    //echo "<hr>peid:<br>";
+    //p($peids);//die;
+//该教师课程下的任务下的学生提交的作业 
+    //批量删除附件和记录sxsubexcise
+    if(count($peids)>0){ //有则删
+    	for($p=0;$p<count($peids);$p++){
+	    	$peid=$peids[$p];
+		    $excisesnum = M('sxsubexcise')->where("peid=$peid")->count();
+		    if($excisesnum>0){//已发布或者重做状态或者已提交状态
+		    	$url= M('sxpubexcise')->field('url')->find($peid);
+		    	$excises = M('sxsubexcise')->where("peid=$peid")->select();
+			    //删除已提交作业的附件
+			    for($i=0;$i<count($excises);$i++){
+			         if($excises[$i]['filename']!=''){//删除已提交的作业  也可以使用提交状态status来做判断
+			             $file = $url['url'].$excises[$i]['filename'];
+			             unlink($file);//删除附件
+			         } 
+			    }
+			    //删除作业记录
+			    $res = M('sxsubexcise')->where("peid=$peid")->delete();
+			    if(!$res){
+			       $this->error('删除学生作业记录失败!');
+			    }
+		    }
+		    
+	    }
+    }
+    
+	//批量删除任务sxpubexcise
+	if(count($peids)>0){//有则删除
+		for($s=0;$s<count($scids);$s++){
+		 	$scid=$scids[$s];
+		 	$res2=M('sxpubexcise')->where("scid=$scid")->delete();
+		 	if(!$res2){
+		       $this->error('删除实训任务记录失败!');
+		    }
+		}
+	}
+   
+	 //批量删除该教师的所有课程sxsetcourse
+	 if(count($scids)>0){//有则删除
+		 $res3 = M('sxsetcourse')->where("jsno='$jsno'")->delete();
+		 if(!$res3){
+		       $this->error('删除教师课表记录失败!');
+		 }
+	 }
+
+ /*********************************************/   
+    //从教师表中删除该教师
 	$res=M('teacher')->delete($id);
 	if($res){
 				$this->success("删除成功！",U(GROUP_NAME.'/Basicdata/teacher'));
@@ -756,10 +898,34 @@ public function resetStudentPass(){
 }
 public function delStudent(){
 //删除操作
-	$id = $_GET['id'];
+/*
+ * 删除学生需要删除学生的作业：附件和记录，目前存在问题
+ * xsno->sxsubexcise(xsno)
+*/
+	$id = (int)$_GET['id'];
+	$xs = M('student')->field('xsno')->find($id);
+	$xsno=$xs['xsno'];
+	$count = M('sxsubexcise')->where("xsno='$xsno'")->count();
+	if($count>0){//已发布或者重做状态或者已提交状态
+		$excises = M('sxsubexcise')->where("xsno='$xsno'")->field("seid,peid,filename")->select();
+	    //删除已提交作业的附件
+	    for($i=0;$i<count($excises);$i++){
+	         if($excises[$i]['filename']!=''){//删除已提交的作业  也可以使用提交状态status来做判断
+	         	$url= M('sxpubexcise')->field('url')->find($excises[$i]['peid']);
+	            $file = $url['url'].$excises[$i]['filename'];
+	            unlink($file);//删除附件
+	         }
+	         $seid=$excises[$i]['seid'];
+	         M('sxsubexcise')->where("seid=$seid")->delete();//删除记录
+	    }
+    }
+
+	if(count>0){
+
+		M('sxsubexcise')->where("xsno='$xsno'")->delete();}
 	$res=M('student')->delete($id);
 	if($res){
-		$this->success("删除成功！",U(GROUP_NAME.'/Basicdata/student'));
+		$this->success("删除成功(包含该生的所有实训作业)！",U(GROUP_NAME.'/Basicdata/student'));
 	}else{
 		$this->error("删除失败！");
 	}

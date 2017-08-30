@@ -1,0 +1,753 @@
+[ 2017-08-30T07:15:54+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Login/login
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000654s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000751s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `xh_user` [ RunTime:0.004194s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `xh_user` WHERE ( `username` = 'admin' ) LIMIT 1   [ RunTime:0.000925s ]
+SQL: UPDATE `xh_user` SET `logintime`=1504048554,`loginip`='0.0.0.0' WHERE ( `id` = 1 ) [ RunTime:0.004090s ]
+
+[ 2017-08-30T07:15:55+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/jquery.min.js
+ERR: 非法操作:public
+
+[ 2017-08-30T07:15:55+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/bootstrap.min.js
+ERR: 非法操作:public
+
+[ 2017-08-30T07:15:55+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:15:58+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:16:00+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:16:34+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:16:37+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:16:42+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:16:44+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:16:52+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Basicdata/saveTermH
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000641s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000758s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `xh_site` [ RunTime:0.001131s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `xh_site` WHERE ( `id` = 1 ) LIMIT 1   [ RunTime:0.000404s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `xh_site` WHERE ( `id` = 3 ) LIMIT 1   [ RunTime:0.000314s ]
+NOTIC: [8] Use of undefined constant term - assumed 'term' C:\wamp64\www\xsgl\APP\Modules\Admin\Action\BasicdataAction.class.php 第 75 行.
+SQL: SHOW COLUMNS FROM `xh_term` [ RunTime:0.001135s ]
+SQL: INSERT INTO `xh_term` (`name`) VALUES ('2017-2018-1') [ RunTime:0.001727s ]
+
+[ 2017-08-30T07:16:53+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:16:54+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:17:00+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:17:41+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:17:42+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:17:45+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:17:53+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:17:56+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:17:57+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:18:19+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:18:58+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:18:59+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:19:09+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:19:23+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:19:24+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:19:27+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T07:19:28+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:12:06+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:35:57+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:38:18+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:38:33+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:38:36+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:38:39+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:38:40+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:41:30+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:41:31+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:41:34+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:45:24+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:45:26+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:45:33+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:45:37+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:45:41+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:45:48+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:45:53+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:45:55+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:45:56+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:45:58+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:46:00+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:46:01+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:46:03+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:46:07+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:46:10+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:46:12+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:51:44+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:51:48+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:51:51+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:52:01+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:52:02+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:52:14+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:52:24+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T08:52:34+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:08:44+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:08:47+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:08:54+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:09:06+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:11:13+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:11:17+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:11:19+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:11:22+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:11:23+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:11:37+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:11:50+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:11:53+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:13:43+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:19:16+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:19:20+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:27:18+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:27:19+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:27:22+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:27:23+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:28:43+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:28:45+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:28:45+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:28:46+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:29:15+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:29:16+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:29:16+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:29:17+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:30:05+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:30:06+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/jquery.min.js
+ERR: 非法操作:public
+
+[ 2017-08-30T09:30:06+08:00 ] 0.0.0.0 /xsgl/index.php/Admin/Index/public/js/bootstrap.min.js
+ERR: 非法操作:public
+
+[ 2017-08-30T09:30:06+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:30:08+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:30:11+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:30:15+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:30:17+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:30:18+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:30:20+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:30:56+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:31:19+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:31:23+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:33:00+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:33:39+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:33:44+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:33:46+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:33:49+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:33:50+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:33:54+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:33:56+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:33:59+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:34:02+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:34:06+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:34:08+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:34:09+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:34:10+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:34:13+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:34:14+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:34:18+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:34:20+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:34:23+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:34:24+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:34:28+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:34:29+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:34:32+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:34:45+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:34:48+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:34:49+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:34:51+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:34:55+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:34:56+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:35:03+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:35:04+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:35:19+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:35:25+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:36:25+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:36:34+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:36:37+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:36:40+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:36:43+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:36:46+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:36:50+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:36:51+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:36:52+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:37:03+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:37:07+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:37:18+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:37:19+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:37:21+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:37:30+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:37:32+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:37:33+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:37:34+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:37:36+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:37:38+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:43:19+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:43:20+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:44:13+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:44:14+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:45:02+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:45:03+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:45:07+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:45:08+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:45:14+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:45:16+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:45:21+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:49:14+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:49:16+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:49:23+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:49:25+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:49:27+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:49:29+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:50:30+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:50:39+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:50:52+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:50:53+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:51:05+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:51:16+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:51:21+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:51:34+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:51:38+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:51:41+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:52:00+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:52:01+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:52:02+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:52:03+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:52:05+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:52:28+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:52:32+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:52:39+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:53:00+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:53:01+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:53:02+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:56:42+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:56:44+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:57:43+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:58:21+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:58:30+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:58:36+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:58:48+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:58:54+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T09:59:15+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:01:06+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:01:09+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:01:11+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:01:13+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:01:13+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:01:15+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:01:16+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:01:18+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:01:19+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:01:21+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:01:22+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:01:23+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:01:24+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:01:31+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:01:32+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:01:36+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:01:45+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:01:47+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:01:49+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:01:52+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:02:00+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:02:03+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:02:04+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:02:31+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:02:33+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:02:37+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:02:38+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:02:41+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:02:50+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:02:53+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:02:55+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:03:03+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:03:05+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:03:07+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:03:09+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:03:13+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:04:26+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:04:37+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:04:38+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:09:30+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:22:00+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:24:51+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-08-30T10:25:22+08:00 ] 0.0.0.0 /xsgl/APP/Modules/Teacher/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+

@@ -17,11 +17,11 @@
   <div class="panel-heading"><?php echo ($wel); ?></div>
   <div class="panel-body">
         <table class="table table-striped">
-			<tr><td>帐号</td><td><?php echo ($tea["jsno"]); ?></td></tr>
-			<tr><td>姓名</td><td><?php echo ($tea["jsxm"]); ?></td></tr>
-			<tr><td>处室</td><td><?php echo ($tea["offname"]); ?></td></tr>
-			<tr><td>登录时间</td><td><?php echo (date('Y-m-d H:i:s',$tea["logintime"])); ?></td></tr>
-			<tr  style="border-bottom: 1px solid #ddd;"><td>登录IP</td><td><?php echo ($tea["loginip"]); ?></td></tr>
+			<tr><td>帐号</td><td align="left"><?php echo ($tea["jsno"]); ?></td></tr>
+			<tr><td>姓名</td><td align="left"><?php echo ($tea["jsxm"]); ?></td></tr>
+			<tr><td>处室</td><td align="left"><?php echo ($tea["offname"]); ?></td></tr>
+			<tr><td>登录时间</td><td  align="left"><?php echo (date('Y-m-d H:i:s',$tea["logintime"])); ?></td></tr>
+			<tr  style="border-bottom: 1px solid #ddd;"><td>登录IP</td><td align="left"><?php echo ($tea["loginip"]); ?></td></tr>
      	</table>
 	</div>		    
        

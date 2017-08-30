@@ -94,10 +94,10 @@ function myrefresh(){
 				<td>{$v.jsxm}</td>
 				<td>{$v.pubtime|date='m-d H:i',###}</td>
 
-				<td><if condition="$v['status'] eq 0 "><a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDesc',array('seid'=>$v['seid']))}" class="btn"><span class="glyphicon glyphicon-hand-right"></span> 去完成</a> <else/>已完成</if></td>
+				<td><if condition="$v['status'] eq 0 "><span style="font-size: 16px;color:red;">未完成</span><else/><img src="__PUBLIC__/Images/finish.png" style="height: 40px;" /></if></td>
 				<td><php> echo $v['desc']*0.3+$v['isrec']*0.7;</php></td>
 			
-				<td><if condition="$v['status'] eq 0 ">无<else/><a href="{:U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']))}" class="btn btn-default browse" ><span class="glyphicon glyphicon-eye-open"></span> 交流讨论</a></if></td>
+				<td><if condition="$v['status'] eq 0 "><a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDesc',array('seid'=>$v['seid']))}" class="btn" style="font-size: 16px;"><span class="glyphicon glyphicon-hand-right"></span> 去完成</a><else/><a href="{:U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']))}" class="btn btn-default browse" ><span class="glyphicon glyphicon-eye-open"></span> 交流讨论</a></if></td>
 				
 			</tr>
 			{~$i++}
