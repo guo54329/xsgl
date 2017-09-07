@@ -39,7 +39,7 @@ CREATE TABLE `xh_news` (
   `userxm` varchar(30) NOT NULL,
   `pubtime` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='新闻通知公告表';-- <xjx> --
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='新闻通知公告表';-- <xjx> --
 
 -- ±íµÄ½á¹¹£ºxh_node --
 CREATE TABLE `xh_node` (
@@ -70,7 +70,7 @@ CREATE TABLE `xh_professional` (
   `id` int(5) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='专业';-- <xjx> --
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='专业';-- <xjx> --
 
 -- ±íµÄ½á¹¹£ºxh_role --
 CREATE TABLE `xh_role` (
@@ -82,7 +82,7 @@ CREATE TABLE `xh_role` (
   PRIMARY KEY (`id`),
   KEY `pid` (`pid`),
   KEY `status` (`status`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='角色表';-- <xjx> --
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='角色表';-- <xjx> --
 
 -- ±íµÄ½á¹¹£ºxh_role_user --
 CREATE TABLE `xh_role_user` (
@@ -102,7 +102,7 @@ CREATE TABLE `xh_site` (
   `icp` varchar(200) NOT NULL,
   `address` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='站点信息表';-- <xjx> --
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='站点信息表';-- <xjx> --
 
 -- ±íµÄ½á¹¹£ºxh_student --
 CREATE TABLE `xh_student` (
@@ -197,7 +197,7 @@ CREATE TABLE `xh_user` (
   `lock` smallint(1) unsigned NOT NULL DEFAULT '0' COMMENT '0-正常 1-锁定',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='用户表';-- <xjx> --
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='用户表';-- <xjx> --
 
 -- ±íµÄÊý¾Ý£ºxh_access --
 INSERT INTO `xh_access` VALUES
@@ -308,58 +308,123 @@ INSERT INTO `xh_access` VALUES
 ('1','106','3',NULL),
 ('1','107','3',NULL),
 ('1','108','3',NULL),
-('2','1','1',NULL),
-('2','38','2',NULL),
-('2','39','3',NULL),
-('2','40','3',NULL),
-('2','41','3',NULL),
-('2','42','3',NULL),
-('2','7','2',NULL),
-('2','51','3',NULL),
-('2','52','3',NULL),
-('2','53','3',NULL),
-('2','54','3',NULL),
-('2','55','3',NULL),
-('2','56','3',NULL),
-('2','57','3',NULL),
-('2','58','3',NULL),
-('2','59','3',NULL),
-('2','60','3',NULL),
-('2','61','3',NULL),
-('2','62','3',NULL),
-('2','63','3',NULL),
-('2','64','3',NULL),
-('2','65','3',NULL),
-('2','66','3',NULL),
-('2','67','3',NULL),
-('2','68','3',NULL),
-('2','69','3',NULL),
-('2','70','3',NULL),
-('2','71','3',NULL),
-('2','72','3',NULL),
-('2','73','3',NULL),
-('2','74','3',NULL),
-('2','75','3',NULL),
-('2','76','3',NULL),
-('2','77','3',NULL),
-('2','78','3',NULL),
-('2','79','3',NULL),
-('2','80','3',NULL),
-('2','81','3',NULL),
-('2','82','3',NULL),
-('2','83','3',NULL),
+('4','64','3',NULL),
 ('2','84','3',NULL),
+('2','83','3',NULL),
+('2','82','3',NULL),
+('2','81','3',NULL),
+('2','80','3',NULL),
+('2','79','3',NULL),
+('2','78','3',NULL),
+('2','77','3',NULL),
+('2','76','3',NULL),
+('2','75','3',NULL),
+('2','74','3',NULL),
+('2','73','3',NULL),
+('2','72','3',NULL),
+('2','71','3',NULL),
+('2','70','3',NULL),
+('2','69','3',NULL),
+('2','68','3',NULL),
+('2','67','3',NULL),
+('2','66','3',NULL),
+('2','65','3',NULL),
+('2','64','3',NULL),
+('2','63','3',NULL),
+('2','62','3',NULL),
+('2','61','3',NULL),
+('2','60','3',NULL),
+('2','59','3',NULL),
+('2','58','3',NULL),
+('2','57','3',NULL),
+('2','56','3',NULL),
+('2','55','3',NULL),
+('2','54','3',NULL),
+('2','53','3',NULL),
+('2','52','3',NULL),
+('2','51','3',NULL),
+('2','7','2',NULL),
+('2','43','3',NULL),
+('2','42','3',NULL),
+('2','41','3',NULL),
+('2','40','3',NULL),
+('2','38','2',NULL),
+('2','1','1',NULL),
+('4','86','3',NULL),
+('4','85','3',NULL),
+('4','84','3',NULL),
+('4','83','3',NULL),
+('4','82','3',NULL),
+('4','81','3',NULL),
+('4','80','3',NULL),
+('4','79','3',NULL),
+('4','78','3',NULL),
+('4','77','3',NULL),
+('4','76','3',NULL),
+('4','75','3',NULL),
+('4','74','3',NULL),
+('4','73','3',NULL),
+('4','72','3',NULL),
+('4','71','3',NULL),
+('4','70','3',NULL),
+('4','69','3',NULL),
+('4','68','3',NULL),
+('4','67','3',NULL),
+('4','66','3',NULL),
+('4','65','3',NULL),
+('4','63','3',NULL),
+('4','62','3',NULL),
+('4','61','3',NULL),
+('4','60','3',NULL),
+('4','59','3',NULL),
+('4','58','3',NULL),
+('4','57','3',NULL),
+('4','56','3',NULL),
+('4','55','3',NULL),
+('4','54','3',NULL),
+('4','53','3',NULL),
+('4','52','3',NULL),
+('4','51','3',NULL),
+('4','50','3',NULL),
+('4','49','3',NULL),
+('4','48','3',NULL),
+('4','47','3',NULL),
+('4','46','3',NULL),
+('4','45','3',NULL),
+('4','44','3',NULL),
+('4','7','2',NULL),
+('4','1','1',NULL),
+('5','108','3',NULL),
+('5','107','3',NULL),
+('5','106','3',NULL),
+('5','105','3',NULL),
+('5','104','3',NULL),
+('5','103','3',NULL),
+('5','102','3',NULL),
+('5','101','3',NULL),
+('5','100','3',NULL),
+('5','99','3',NULL),
+('5','98','3',NULL),
+('5','97','3',NULL),
+('5','96','3',NULL),
+('5','93','3',NULL),
+('5','92','3',NULL),
+('5','91','3',NULL),
+('5','90','3',NULL),
+('5','89','3',NULL),
+('5','88','3',NULL),
+('5','87','3',NULL),
+('5','8','2',NULL),
+('5','1','1',NULL),
 ('2','85','3',NULL),
 ('2','86','3',NULL),
 ('2','8','2',NULL),
-('2','87','3',NULL),
 ('2','88','3',NULL),
 ('2','89','3',NULL),
 ('2','90','3',NULL),
 ('2','91','3',NULL),
 ('2','92','3',NULL),
 ('2','93','3',NULL),
-('2','94','3',NULL),
 ('2','96','3',NULL),
 ('2','97','3',NULL),
 ('2','98','3',NULL),
@@ -417,7 +482,7 @@ INSERT INTO `xh_course` VALUES
 
 -- ±íµÄÊý¾Ý£ºxh_news --
 INSERT INTO `xh_news` VALUES
-('1','111','<p>111</p>','1','','admin','1504509510');-- <xjx> --
+('1','管理员消息','<p>各位用户，系统已部署完成，请尽情使用~！</p><p>如在使用过程中遇到问题请联系开发者解决！</p><p>联系教师：郭盛（计算机教研室）</p><p>联系电话：18993351660</p><p>联系地址：平凉理工中等专业学校科技楼三楼计算机教研室</p>','1','','admin','1504766864');-- <xjx> --
 
 -- ±íµÄÊý¾Ý£ºxh_node --
 INSERT INTO `xh_node` VALUES
@@ -514,7 +579,6 @@ INSERT INTO `xh_node` VALUES
 ('91','delcourseTable','删除课程表','1',NULL,'1','8','3'),
 ('92','sxpubexciseList','任务列表','1',NULL,'1','8','3'),
 ('93','sxpubexciseSave','添加任务','1',NULL,'1','8','3'),
-('94','sxpubexciseEdit','修改任务','1',NULL,'1','8','3'),
 ('96','sxpubexciseStatus','任务发布状态修改','1',NULL,'1','8','3'),
 ('97','sxpubexciseDownAttac','任务附件下载','1',NULL,'1','8','3'),
 ('98','sxpubexciseDel','删除任务','1',NULL,'1','8','3'),
@@ -550,25 +614,29 @@ INSERT INTO `xh_professional` VALUES
 ('7','酒店管理'),
 ('8','学前教育'),
 ('9','机电一体化'),
-('10','电子商务');-- <xjx> --
+('10','电子商务'),
+('12','物联网');-- <xjx> --
 
 -- ±íµÄÊý¾Ý£ºxh_role --
 INSERT INTO `xh_role` VALUES
 ('1','SuperManager',NULL,'1','超级管理员'),
-('2','CommonManager',NULL,'1','普通管理员');-- <xjx> --
+('2','CommonManager',NULL,'1','普通管理员'),
+('4','DataManager',NULL,'1','基础数据维护员'),
+('5','ExcciseManger',NULL,'1','任务管理员');-- <xjx> --
 
 -- ±íµÄÊý¾Ý£ºxh_role_user --
 INSERT INTO `xh_role_user` VALUES
-('1','9'),
-('2','10'),
 ('1','11'),
-('2','12');-- <xjx> --
+('2','12'),
+('4','13'),
+('5','13');-- <xjx> --
 
 -- ±íµÄÊý¾Ý£ºxh_site --
 INSERT INTO `xh_site` VALUES
-('1','任务管理系统','基于B/S模式，采用PHP语言+Apache服务器+MySQL数据库设计开发。\r\n针对计算机专业项目教学中的任务管理开发。','','©版权归泾川县职业教育中心计算机教研室郭盛老师所有','','地址：泾川县城北新区新城西路  电话：0933-3308249'),
+('1','任务管理系统','基于B/S模式，采用PHP语言+Apache服务器+MySQL数据库设计开发。\r\n针对计算机专业项目教学中的任务管理开发。','','©版权归泾川县职业教育中心计算机教研室郭盛老师所有 (如有使用问题，可电话18993351660)','','地址：泾川县城北新区新城西路  电话：0933-3308249'),
 ('2','简介','<p style=\"margin-top: 0px; margin-bottom: 0px; padding: 8px; font-family: Arial, Helvetica, sans-serif, 宋体; font-size: 12px; white-space: normal; text-align: center; background-color: rgb(255, 255, 255);\"><span style=\"color: rgb(238, 19, 15); font-family: Arial, Helvetica, sans-serif, 宋体; font-weight: bold; line-height: 40px; text-align: center; font-size: 20px; background-color: rgb(255, 255, 255);\">泾川县职业教育中心简介</span><span style=\"margin: 0px; padding: 0px; line-height: 28px; color: rgb(77, 78, 83); font-size: 14px;\"></span></p><hr/><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 8px; font-family: Arial, Helvetica, sans-serif, 宋体; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><span style=\"color: rgb(77, 78, 83); font-size: 14px; line-height: 28px;\">&nbsp; &nbsp; &nbsp; <strong>泾川县职业教育中心</strong>始建于1983年7月。建校以来，三迁校址，四易校名，现已成为以中等职业技术教育为主体，集高等成人教育、专业技术人员继续教育、城镇下岗职工再就业培训和农村劳动力转移培训为一体的职业教育实体，是国家级重点中等职业学校，国家中等职业教育改革发展示范学校第三批项目建设单位。</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 8px; list-style-type: none; -webkit-padding-start: 0px; -webkit-margin-before: 0px; -webkit-margin-after: 0px; font-family: Arial, Helvetica, sans-serif, 宋体; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><span style=\"margin: 0px; padding: 0px; line-height: 28px; color: rgb(77, 78, 83); font-size: 14px;\">&nbsp; &nbsp; &nbsp; &nbsp;近年来，在省、市、县党委、政府和教育主管部门的正确领导、大力支持和亲切关怀下，泾川县职业教育中心认真贯彻落实党和国家教育方针，以发展职业教育为己任，坚持以服务为宗旨，以就业为导向，不断创新办学理念，大力深化教学改革，不断丰富教育内涵，努力突出办学特色，实现了职业教育的转型跨越发展。基础设施配套完备。</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 8px; list-style-type: none; -webkit-padding-start: 0px; -webkit-margin-before: 0px; -webkit-margin-after: 0px; font-family: Arial, Helvetica, sans-serif, 宋体; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><span style=\"margin: 0px; padding: 0px; line-height: 28px; color: rgb(77, 78, 83); font-size: 14px;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style=\"margin: 0px; padding: 0px;\">&nbsp;教学质量显著提升。</strong>学校建有教学楼、科技实验楼、学生公寓楼、实训中心、餐饮中心等。建有独立的校园网站，装备有电力拖动、维修电工、数控加工中心、CAD/CAM、PLC、数控仿真模拟等40多个高标准实训室，能满足各个专业学生实习实训及社会培训鉴定需求。</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 8px; list-style-type: none; -webkit-padding-start: 0px; -webkit-margin-before: 0px; -webkit-margin-after: 0px; font-family: Arial, Helvetica, sans-serif, 宋体; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><span style=\"margin: 0px; padding: 0px; line-height: 28px; color: rgb(77, 78, 83); font-size: 14px;\">&nbsp; &nbsp; &nbsp; &nbsp;积极推行理实一体化教学模式和“做中教，做中学”的教学方式，狠抓实训教学，实行“定标、实训、考核、鉴定、竞赛”系列管理，努力培养学生实训操作技能，学生的技能鉴定合格率达到了100%，毕业生“双证”率达到98%以上。先后有400多名学生在各级技能大赛中荣获等次奖；2013年47名学生参加全省“三校生”对口高考，本科录取4人，占参考人数的8.5%，高出全省本科录取率5个百分点，专科及以上录取率达到了100%，参加各级各类征文及课堂讲赛活动获奖师生达200余人次。</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 8px; list-style-type: none; -webkit-padding-start: 0px; -webkit-margin-before: 0px; -webkit-margin-after: 0px; font-family: Arial, Helvetica, sans-serif, 宋体; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><span style=\"margin: 0px; padding: 0px; line-height: 28px; color: rgb(77, 78, 83); font-size: 14px;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style=\"margin: 0px; padding: 0px;\">培养模式灵活多样。</strong>学校积极开展多层次办学，不断探索职业教育发展途径，加强校际、校企合作，积极推进工学结合、半工半读、订单培养（联合办学）办学模式，联手培养高素质技能型人才。与甘肃电大、陇东学院、陕西中医学院等学校联合，开办成人高等学历教育；与大金中国投资有限公司、宁波菱茂、上海英业达集团等企业签订了校外实训基地协议，建立了企业冠名班，使学生学习有方向，就业有保障。</span></p><p style=\"margin-top: 0px; margin-bottom: 0px; padding: 8px; list-style-type: none; -webkit-padding-start: 0px; -webkit-margin-before: 0px; -webkit-margin-after: 0px; font-family: Arial, Helvetica, sans-serif, 宋体; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"><span style=\"margin: 0px; padding: 0px; line-height: 28px; color: rgb(77, 78, 83); font-size: 14px;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style=\"margin: 0px; padding: 0px;\">就业网络四通八达。</strong>积极拓宽就业渠道，持续加大学校与企业的合作力度，与天津、上海、苏州、宁波等地的部分企业建立合作伙伴关系，初步形成了南到广东，西至兰州，北临北京，东达上海的四通八达的就业网络，毕业生就业率达97.4%，学生月收入达到了3500元以上, 实现了“招收一个学生，培养一个学生，就业一个学生，致富一个家庭”的目标。</span></p><p><span style=\"margin: 0px; padding: 0px; line-height: 28px; color: rgb(77, 78, 83); font-size: 14px;\"><strong style=\"margin: 0px; padding: 0px; color: rgb(77, 78, 83); font-family: Arial, Helvetica, sans-serif, 宋体; font-size: 14px; line-height: 28px; white-space: normal; background-color: rgb(255, 255, 255);\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;学校所在位置</strong></span></p><p style=\"text-align: center;\"><span style=\"margin: 0px; padding: 0px; line-height: 28px; color: rgb(77, 78, 83); font-size: 14px;\"><strong style=\"margin: 0px; padding: 0px; color: rgb(77, 78, 83); font-family: Arial, Helvetica, sans-serif, 宋体; font-size: 14px; line-height: 28px; white-space: normal; background-color: rgb(255, 255, 255);\"><iframe class=\"ueditor_baidumap\" src=\"http://localhost/xygl/Data/Ueditor/dialogs/map/show.html#center=107.368549,35.346975&zoom=17&width=530&height=340&markers=107.37427,35.338584&markerStyles=l,A\" style=\"width: 617px; height: 414px;\" frameborder=\"0\" width=\"534\" height=\"344\"></iframe></strong></span></p>','','','',''),
-('3','首页顶端显示的网站所属单位','平凉理工中等专业学校 | 泾川县职业教育中心','','','','http://www.jczyxx.com');-- <xjx> --
+('3','首页顶端显示的网站所属单位','平凉理工中等专业学校 | 泾川县职业教育中心','','','','http://www.jczyxx.com'),
+('4','10','','','','','');-- <xjx> --
 
 -- ±íµÄÊý¾Ý£ºxh_student --
 INSERT INTO `xh_student` VALUES
@@ -1085,7 +1153,8 @@ INSERT INTO `xh_term` VALUES
 
 -- ±íµÄÊý¾Ý£ºxh_user --
 INSERT INTO `xh_user` VALUES
-('1','admin','21232f297a57a5a743894a0e4a801fc3','1504512920','127.0.0.1','0'),
+('1','admin','21232f297a57a5a743894a0e4a801fc3','1504750106','127.0.0.1','0'),
 ('11','xiaohan','7911336b11c605acc3884920384d96ed','1504495895','127.0.0.1','0'),
-('12','manager','1d0258c2440a8d19e716292b231e3190','1504512881','127.0.0.1','0');-- <xjx> --
+('12','manager','1d0258c2440a8d19e716292b231e3190','1504514417','127.0.0.1','0'),
+('13','gs','e10adc3949ba59abbe56e057f20f883e','1504660772','127.0.0.1','0');-- <xjx> --
 
