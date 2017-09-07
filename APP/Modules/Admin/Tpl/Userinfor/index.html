@@ -21,13 +21,13 @@
 <body>
 <div class="panel panel-default">
 	  <div class="panel-heading headalign">
-			<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 个人信息</a>
+			<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 个人登录信息</a>
   </div>
 	  <div class="panel-body">
 		<table class='table table-bordered table-hover'>
-			<tr><td>现用帐户：</td><td>{$user.username}</td></tr>	
-		    <tr><td>上次登录时间：</td><td>{$user.logintime|date='Y-m-d H:i:s',###}</td></tr>	
-		    <tr  style="border-bottom: 1px solid #ddd;"><td>上次登录IP：</td><td>{$user.loginip}</td></tr>		   	
+			<tr><td>现用帐户：</td><td align="left">{$user.username}</td></tr>	
+		    <tr><td>上次登录时间：</td><td align="left">{$user.logintime|date='Y-m-d H:i:s',###}</td></tr>	
+		    <tr  style="border-bottom: 1px solid #ddd;"><td>上次登录IP：</td><td align="left">{$user.loginip}</td></tr>		   	
 		</table>	
 	  </div>
 	 

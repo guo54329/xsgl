@@ -6,6 +6,21 @@
 <link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
 <link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
 <script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
+<!-- 排序加入开始 -->
+<script type="text/javascript" src="__ROOT__/Data/jquerytablesorter/jquery-latest.js"></script>
+<script type="text/javascript" src="__ROOT__/Data/jquerytablesorter/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="__ROOT__/Data/jquerytablesorter/addons/pager/jquery.tablesorter.pager.js"></script>
+<script type="text/javascript" src="__ROOT__/Data/jquerytablesorter/docs/js/chili-1.8b.js"></script>
+<script type="text/javascript" src="__ROOT__/Data/jquerytablesorter/docs/js/docs.js"></script>
+<script type="text/javascript">
+$(function() {
+	$("table")
+		.tablesorter({widthFixed: true, widgets: ['zebra']})
+		.tablesorterPager({container: $("#pager")});
+});
+</script>
+<!-- 排序加入结束 -->
+
 <script type="text/javascript">
 	function myrefresh(){
 		window.location.reload();
@@ -42,6 +57,26 @@
 	 .trColor{
 	 	background-color: #eee;
 	 }
+	 .browse{
+		width: 110px;
+		height:35px;
+		line-height: 24px;
+		font-size: 16px;
+	}
+	/*排序加入开始*/ 
+	table.tablesorter thead tr .header {
+		background-image: url("__ROOT__/Data/jquerytablesorter/themes/blue/bg.gif");
+		background-repeat: no-repeat;
+		background-position: center right;
+		cursor: pointer;
+	}
+	table.tablesorter thead tr .headerSortUp {
+		background-image: url(__ROOT__/Data/jquerytablesorter/themes/blue/asc.gif);
+	}
+	table.tablesorter thead tr .headerSortDown {
+		background-image: url(__ROOT__/Data/jquerytablesorter/themes/blue/desc.gif);
+	}
+	/*排序加入结束*/
 </style>
 </head>
 
@@ -50,7 +85,8 @@
 	  <div class="panel-heading headalign">
 		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 我的课程表</a>
 		<span style="float:right;">
-			<button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp;&nbsp
+		<a href="<?php echo U(GROUP_NAME.'/News/sysNews');?>" class="btn btn-success browse" ><span class="glyphicon glyphicon-bullhorn"></span> 查看消息</a>&nbsp;
+			<button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp;
 			<a href="<?php echo U(GROUP_NAME.'/Excise/coursetableSave');?>" class="btn btn-info btnw"><span class="glyphicon glyphicon-plus"></span> 添加课程</a>
 		</span>		
 	  </div>
@@ -64,10 +100,12 @@
 			</form>
 	   </div>
 	  <div class="panel-body">
-		 <table class='table table-bordered table-hover'>
-			<tr><td>序号</td><td>学期</td><td>课程</td><td>任务数量</td><td>班级</td><td>班主任</td><td>联系电话</td><td>操作</td></tr>
+		 <table class="table table-bordered table-hover tablesorter">
+		  <thead>
+			<tr style="text-align: center;font-weight: bold;"><th style="text-align: center;" width="6%">序号</th><th style="text-align: center;" width="12%">学期</th><th style="text-align: center;" width="14%">课程</th><th style="text-align: center;" width="11%">任务数量</th><th style="text-align: center;" width="14%">班级</th><td width="8%">班主任</td><td>联系电话</td><td>操作</td></tr>
 			<?php $i=1;?>
-			
+			</thead>
+			<tbody>
 			<?php if(is_array($list)): foreach($list as $key=>$v): $tr = substr($v['term'],10,1); ?>
 				<tr <?php if($tr == 1): ?>class="trColor"<?php endif; ?>  >
 				
@@ -90,9 +128,26 @@
 			</tr>
 			
 			<?php $i++; endforeach; endif; ?>
+			</tbody>
 		</table>
-	  </div>
-	  
+		<!-- 排序分页开始 -->
+		<div id="pager" class="pager">
+			<form>
+			    <span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前授课数 <?php echo ($num); ?></span>
+				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/first.png" class="first"/>
+				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/prev.png" class="prev"/>
+				<input type="text" class="pagedisplay" style="width: 50px;border-radius:4px;text-align: center;height: 25px;" disabled />
+				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/next.png" class="next"/>
+				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/last.png" class="last"/>
+				<select class="pagesize" style="width: 50px;border-radius:4px;text-align: center;height: 25px;">
+					<option selected="selected"  value="10">10</option>
+					<option value="30">30</option>
+					<option  value="50">50</option>
+				</select>
+			</form>
+		</div>
+		<!-- 排序  分页结束 -->
+	  </div> 
 </div>
 </body>
 </html>

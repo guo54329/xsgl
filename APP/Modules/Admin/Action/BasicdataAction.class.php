@@ -23,13 +23,6 @@ public function resetTER(){
     }
     $this->success('学期数据清除成功！',U(GROUP_NAME.'/Basicdata/term'));
 }
-public function resetOFF(){
-	$num = M('office')->count();
-    if($num>0){
-        M()->execute("TRUNCATE xh_office");//处室
-    }
-    $this->success('处室数据清除成功！',U(GROUP_NAME.'/Basicdata/office'));
-}
 public function resetPRO(){
 	$num = M('professional')->count();
     if($num>0){
@@ -37,13 +30,22 @@ public function resetPRO(){
     }
     $this->success('专业数据清除成功！',U(GROUP_NAME.'/Basicdata/professional'));
 }
+public function resetOFF(){
+	$num = M('office')->count();
+    if($num>0){
+        M()->execute("TRUNCATE xh_office");//处室
+    }
+    $this->success('处室数据清除成功！',U(GROUP_NAME.'/Basicdata/office'));
+}
 
 /************************结束*********学期、处室、专业数据初始化**************************************/
 
 
 public function term(){
 //列表
+    $num=M('term')->count();
 	$term = M('term')->order('name DESC')->select();
+	$this->assign('num',$num);
     $this->assign('term',$term);
 	$this->display();
 }
@@ -105,8 +107,10 @@ public function delTerm(){
  */
 public function office(){
 //列表
+    $num=M('office')->count();
 	$office = M('office')->select();
 	//print_r($office);die;
+	$this->assign('num',$num);
     $this->assign('office',$office);
 	$this->display();
 }
@@ -159,19 +163,22 @@ public function importOffice(){
 		for($i=0;$i<count($offices);$i++){
 		   $office[$i] = explode("\t",$offices[$i]);
 		}
+		//p($office);
 		//开始写入数据库表		
 		$data = array();
+		$index=0;
 	   for($i=0;$i<count($office);$i++){
-			$data[$i] = array(
-				'name'=>trim($office[$i][1]),
-			);
+	   	   if(!empty(trim($office[$i][1]))){
+	   	   		$data[$index++] = array(
+					'name'=>trim($office[$i][1]),
+				);
+	   	   }		
     	}
-        //p($data);die;
+        
 		$res= M('office')->addAll($data);
-		
 		$this->display();
 		if($res){
-			$this->success("导入处室成功！",U(GROUP_NAME.'/Basicdata/office'));
+			$this->success("导入处室($index)成功！",U(GROUP_NAME.'/Basicdata/office'));
 		}else{
 			$this->error("导入处室失败！");
 		}
@@ -196,7 +203,9 @@ public function delOffice(){
  */
 public function professional(){
 //列表
+    $num=M('professional')->count();
 	$professional = M('professional')->select();
+	$this->assign('num',$num);
     $this->assign('professional',$professional);//专业信息
 	$this->display();
 }
@@ -251,17 +260,20 @@ public function importProfessional(){
 		}
 		//开始写入数据库表		
 		$data = array();
+		$index=0;
 	   for($i=0;$i<count($Professional);$i++){
-			$data[$i] = array(
-				'name'=>trim($Professional[$i][1]),
-			);
+	   		if(!empty(trim($Professional[$i][1]))){
+				$data[$index++] = array(
+					'name'=>trim($Professional[$i][1]),
+				);
+			}
     	}
         //p($data);die;
 		$res= M('professional')->addAll($data);
 		
 		$this->display();
 		if($res){
-			$this->success("导入专业成功！",U(GROUP_NAME.'/Basicdata/professional'));
+			$this->success("导入专业($index)成功！",U(GROUP_NAME.'/Basicdata/professional'));
 		}else{
 			$this->error("导入专业失败！");
 		}
@@ -324,12 +336,16 @@ public function course(){
     //p($_POST);
     if($_POST['proname']!=''){
     	$proname = $_POST['proname'];
-    	$course = M('course')->where("proname='$proname'")->select();
+    	$num=M('course')->where("proname='$proname'")->count();
+
+    	$course = M('course')->where("proname='$proname'")->order("id ASC")->select();
     }else{//默认显示所有
-    	$course = M('course')->order('proname ASC')->select();
+    	$num=M('course')->order('proname ASC,id ASC')->count();
+    	$course = M('course')->order('proname ASC,id ASC')->select();
     }
 	$pronames = M('course')->distinct(true)->field("proname")->select();
 	$this->assign('pronames',$pronames);
+	$this->assign('num',$num);
     $this->assign('course',$course);
 	$this->display();
 }
@@ -393,19 +409,22 @@ public function importCourse(){
 		}
 		//开始写入数据库表		
 		$data = array();
+		$index=0;
 	    for($i=0;$i<count($course);$i++){
-			$data[$i] = array(
-				'name'=>trim($course[$i][1]),
-				'coursetype'=>trim($course[$i][2]),
-				'proname'=>trim($course[$i][3]),
-			);
+	    	if(!empty(trim($course[$i][1]))){
+	    		$data[$index++] = array(
+					'name'=>trim($course[$i][1]),
+					'coursetype'=>trim($course[$i][2]),
+					'proname'=>trim($course[$i][3]),
+				);
+	    	}
     	}
         //p($data);die;
 		$res= M('course')->addAll($data);
 		
 		$this->display();
 		if($res){
-			$this->success("导入课程成功！",U(GROUP_NAME.'/Basicdata/course'));
+			$this->success("导入课程($index)成功！",U(GROUP_NAME.'/Basicdata/course'));
 		}else{
 			$this->error("导入课程失败！");
 		}
@@ -433,13 +452,18 @@ public function classes(){
    
     if($_POST['zjsj']!=''){
     	$zjsj=$_POST['zjsj'];
-		$classes = M('classes as a')->join("xh_teacher as b on a.master=b.jsno")->where("a.zjsj='$zjsj'")->field("a.id,a.ccode,a.cname,b.offname,b.jsxm,b.jsdh,a.zjsj,a.proname")->order('proname ASC,ccode ASC')->select();
+    	$num=M('classes as a')->join("xh_teacher as b on a.master=b.jsno")->where("a.zjsj='$zjsj'")->field("a.id,a.ccode,a.cname,b.offname,b.jsxm,b.jsdh,a.zjsj,a.proname")->count();
+
+		$classes = M('classes as a')->join("xh_teacher as b on a.master=b.jsno")->where("a.zjsj='$zjsj'")->field("a.id,a.ccode,a.cname,b.offname,b.jsxm,b.jsdh,a.zjsj,a.proname")->order('ccode ASC')->select();
     }else{
-    	$classes = M('classes as a')->join("xh_teacher as b on a.master=b.jsno")->field("a.id,a.ccode,a.cname,b.offname,b.jsxm,b.jsdh,a.zjsj,a.proname")->order('ccode ASC,proname ASC')->select();
+    	$num=M('classes as a')->join("xh_teacher as b on a.master=b.jsno")->field("a.id,a.ccode,a.cname,b.offname,b.jsxm,b.jsdh,a.zjsj,a.proname")->count();
+
+    	$classes = M('classes as a')->join("xh_teacher as b on a.master=b.jsno")->field("a.id,a.ccode,a.cname,b.offname,b.jsxm,b.jsdh,a.zjsj,a.proname")->order('ccode ASC')->select();
     }
 	
 	$zjsjs = M('classes')->distinct(true)->field("zjsj")->select();
     $this->assign('zjsjs',$zjsjs);
+    $this->assign('num',$num);
     $this->assign('classes',$classes);
 	$this->display();
 }
@@ -514,21 +538,26 @@ public function importClasses(){
 		}
 		//开始写入数据库表		
 		$data = array();
+		$index=0;
 	    for($i=0;$i<count($classes);$i++){
-			$data[$i] = array(
-				'ccode'=>trim($classes[$i][1]),
-				'cname'=>trim($classes[$i][2]),
-				'master'=>trim($classes[$i][3]),
-				'zjsj'=>trim($classes[$i][4]),
-				'proname'=>trim($classes[$i][5]),
-			);
+	    	if(!empty(trim($classes[$i][1]))){
+				$data[$index++] = array(
+					'ccode'=>trim($classes[$i][1]),
+					'cname'=>trim($classes[$i][2]),
+					'master'=>trim($classes[$i][3]),
+					'zjsj'=>trim($classes[$i][4]),
+					'proname'=>trim($classes[$i][5]),
+				);
+
+	    	}
+
     	}
         //p($data);die;
 		$res= M('classes')->addAll($data);
 		
 		$this->display();
 		if($res){
-			$this->success("导入班级成功！",U(GROUP_NAME.'/Basicdata/classes'));
+			$this->success("导入班级($index)成功！",U(GROUP_NAME.'/Basicdata/classes'));
 		}else{
 			$this->error("导入班级失败！");
 		}
@@ -556,21 +585,26 @@ public function teacher(){
 	$offname=$_POST['offname'];//处室名称
 	$tea = $_POST['tea'];//帐号或姓名
     if($offname!=''&&$tea==''){
+    	$num=M('teacher')->where("offname='$offname'")->count();
     	$teacher = M('teacher')->where("offname='$offname'")->order('id ASC')->select();
     }
     if($offname==''&&$tea!=''){
+    	$num=M('teacher')->where("jsno='$tea' or jsxm='$tea'")->count();
     	$teacher = M('teacher')->where("jsno='$tea' or jsxm='$tea'")->order('offname ASC,id ASC')->select();
     }
     if($offname!=''&&$tea!=''){
+    	$num=M('teacher')->where("offname='$offname' and (jsno='$tea' or jsxm='$tea')")->count();
     	$teacher = M('teacher')->where("offname='$offname' and (jsno='$tea' or jsxm='$tea')")->order('id ASC')->select();
     }
     if($offname==''&&$tea==''){//默认情况
-    	$teacher = M('teacher')->order('offname ASC,id ASC')->select();
+    	$num=M('teacher')->count();
+    	$teacher = M('teacher')->order('id ASC')->select();//offname ASC,
     }
 	
 	$offnames=M('teacher')->distinct(true)->field('offname')->select();
 	//p($offnames);
 	$this->assign('offnames',$offnames);
+	$this->assign('num',$num);
     $this->assign('teacher',$teacher);
 	$this->display();
 }
@@ -642,24 +676,28 @@ public function importTeacher(){
 
 		//开始写入数据库表		
 		$data = array();
+		$index=0;
 	   for($i=0;$i<count($teacher);$i++){
-			$data[$i] = array(
-				'jsno'=>trim($teacher[$i][1]),
-				'jsxm'=>trim($teacher[$i][2]),
-				'jsxb'=>trim($teacher[$i][3]),
-				'jsdh'=>trim($teacher[$i][4]),
-				'jsmm'=>'123456',
-				'offname'=>trim($teacher[$i][5])
-			);
+		   	if(!empty(trim($teacher[$i][1]))){
+		   		$data[$index++] = array(
+					'jsno'=>trim($teacher[$i][1]),
+					'jsxm'=>trim($teacher[$i][2]),
+					'jsxb'=>trim($teacher[$i][3]),
+					'jsdh'=>trim($teacher[$i][4]),
+					'jsmm'=>'123456',
+					'offname'=>trim($teacher[$i][5])
+				);
+		   	}
+			
     	}
         //p($data);die;
 		$res= M('teacher')->addAll($data);
 		
 		$this->display();
 		if($res){
-			$this->success("导入成功！",U(GROUP_NAME.'/Basicdata/teacher'));
+			$this->success("导入教师($index)成功！",U(GROUP_NAME.'/Basicdata/teacher'));
 		}else{
-			$this->error("导入失败！");
+			$this->error("导入教师失败！");
 		}
 	}else{
 		$this->display();
@@ -768,21 +806,31 @@ public function student(){
 	$ccode=$_POST['ccode'];//班级代码
 	$stu = $_POST['stu'];//学号或姓名
     if($ccode!=''&&$stu==''){
+    	$num=$student = M('student as a')->join("xh_classes as b on a.ccode=b.ccode","left")->field("a.id,a.xsno,a.xsxm,a.xsxb,a.rxsj,b.cname")->where("a.ccode='$ccode'")->count();
+
     	$student = M('student as a')->join("xh_classes as b on a.ccode=b.ccode","left")->field("a.id,a.xsno,a.xsxm,a.xsxb,a.rxsj,b.cname")->where("a.ccode='$ccode'")->order('a.id ASC')->select();
     }
     if($ccode==''&&$stu!=''){
+    	$num=$student = M('student as a')->join("xh_classes as b on a.ccode=b.ccode","left")->field("a.id,a.xsno,a.xsxm,a.xsxb,a.rxsj,b.cname")->where("a.xsno='$stu' or a.xsxm='$stu'")->count();
+
     	$student = M('student as a')->join("xh_classes as b on a.ccode=b.ccode","left")->field("a.id,a.xsno,a.xsxm,a.xsxb,a.rxsj,b.cname")->where("a.xsno='$stu' or a.xsxm='$stu'")->order('a.ccode ASC,a.id ASC')->select();
     }
     if($ccode!=''&&$stu!=''){
+    	$num=$student = M('student as a')->join("xh_classes as b on a.ccode=b.ccode","left")->field("a.id,a.xsno,a.xsxm,a.xsxb,a.rxsj,b.cname")->where("a.ccode='$ccode' and (a.xsno='$stu' or a.xsxm='$stu')")->count();
+
     	$student = M('student as a')->join("xh_classes as b on a.ccode=b.ccode","left")->field("a.id,a.xsno,a.xsxm,a.xsxb,a.rxsj,b.cname")->where("a.ccode='$ccode' and (a.xsno='$stu' or a.xsxm='$stu')")->order('a.ccode ASC,a.id ASC')->select();
     }
     if($ccode==''&&$stu==''){
+    	$num=$student = M('student as a')->join("xh_classes as b on a.ccode=b.ccode","left")->field("a.id,a.xsno,a.xsxm,a.xsxb,a.rxsj,b.cname")->count();
+
     	$student = M('student as a')->join("xh_classes as b on a.ccode=b.ccode","left")->field("a.id,a.xsno,a.xsxm,a.xsxb,a.rxsj,b.cname")->order('a.ccode ASC,a.id ASC')->select();
     }
 	
-	$ccodes=M('student as a')->join("xh_classes as b on a.ccode=b.ccode")->distinct(true)->field('a.ccode,b.cname')->select();
+	$ccodes=M('student as a')->join("xh_classes as b on a.ccode=b.ccode")->distinct(true)->field('a.ccode,b.cname')->order("a.ccode ASC")->select();
 	//p($ccodes);
+	
 	$this->assign('ccodes',$ccodes);
+	$this->assign('num',$num);
     $this->assign('student',$student);
 	$this->display();
 }
@@ -859,24 +907,28 @@ public function importStudent(){
 
 		//开始写入数据库表		
 		$data = array();
+		$index=0;
 	   for($i=0;$i<count($student);$i++){
-			$data[$i] = array(
-				'xsno'=>trim($student[$i][1]),
-				'xsxm'=>trim($student[$i][2]),
-				'xsxb'=>trim($student[$i][3]),
-				'rxsj'=>trim($student[$i][4]),
-				'xsmm'=>'123456',
-				'ccode'=>trim($student[$i][5])
-			);
+	   		if(!empty(trim($student[$i][1]))){
+				$data[$index++] = array(
+					'xsno'=>trim($student[$i][1]),
+					'xsxm'=>trim($student[$i][2]),
+					'xsxb'=>trim($student[$i][3]),
+					'rxsj'=>trim($student[$i][4]),
+					'xsmm'=>'123456',
+					'ccode'=>trim($student[$i][5])
+				);
+
+	   		}
+
     	}
         //p($data);die;
 		$res= M('student')->addAll($data);
-		
 		$this->display();
 		if($res){
-			$this->success("导入成功！",U(GROUP_NAME.'/Basicdata/student'));
+			$this->success("导入学生($index)成功！",U(GROUP_NAME.'/Basicdata/student'));
 		}else{
-			$this->error("导入失败！");
+			$this->error("导入学生失败！");
 		}
 	}else{
 		$this->display();

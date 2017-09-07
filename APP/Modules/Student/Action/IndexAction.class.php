@@ -39,7 +39,10 @@ Class IndexAction extends CommonAction {
 		//pubtype=4 表示教师->学生（指定班级）
 		$stu=session('stu');
         $ccode= $stu['ccode'];
+
+        $num = M('news')->where("pubtype=1 or pubtype=3 or (pubtype=4 and ccode='$ccode')")->count();
 		$news = M('news')->where("pubtype=1 or pubtype=3 or (pubtype=4 and ccode='$ccode')")->order('pubtime DESC')->select();
+		$this->assign('num',$num);
 		$this->assign('news',$news);
 		$this->display();
 

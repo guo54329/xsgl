@@ -195,6 +195,7 @@ function getTeacherinfor(){
           case "pdf": $ctype="application/pdf"; break;
       case "exe": $ctype="application/octet-stream"; break;
       case "zip": $ctype="application/zip"; break;
+      case "rar": $ctype="application/rar"; break;
       case "doc": $ctype="application/msword"; break;
       case "xls": $ctype="application/vnd.ms-excel"; break;
       case "ppt": $ctype="application/vnd.ms-powerpoint"; break;
@@ -214,7 +215,8 @@ function getTeacherinfor(){
       case "php":
       case "htm":
       case "html":
-      case "txt": die("<b> ". $file_extension ." 类型的文件请执行另存为操作！</b>"); break;
+      case "txt": echo $filepath.$filename ; break;
+    //被上面的echo替换。die("<b> ". $file_extension ." 类型文件不支持，请提醒提交者压缩后重新提交！</b>")
  
       default: $ctype="application/force-download";
     }

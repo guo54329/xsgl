@@ -7,8 +7,10 @@ Class NewsAction extends CommonAction {
 		$tea = session('tea');
 		$userxm=$tea['jsxm'];
 		//只查询自己发布的
-		$info = M('news as a')->join('xh_classes as b on a.ccode=b.ccode','left' )->where("userxm='$userxm' and pubtype=4")->field("a.id,a.title,a.ccode,b.cname,a.pubtime")->order('a.id DESC')->select();
+		$num=M('news as a')->join('xh_classes as b on a.ccode=b.ccode','left' )->where("userxm='$userxm' and pubtype=4")->count();
+		$info = M('news as a')->join('xh_classes as b on a.ccode=b.ccode','left' )->where("userxm='$userxm' and pubtype=4")->field("a.id,a.title,a.ccode,b.cname,a.pubtime,a.content")->order('a.id DESC')->select();
 		//p($info);
+		$this->assign('num',$num);
 		$this->assign("info",$info);
 		$this->display();
 
@@ -17,7 +19,9 @@ Class NewsAction extends CommonAction {
 	//管理员发布的消息列表
 	public function sysNews(){
 		//pubtype=1 表示管理员->所有教师和学生，pubtype=3 表示管理员->所有学生
+		$num=$news = M('news')->where("pubtype=1 or pubtype=2")->count();
 		$news = M('news')->where("pubtype=1 or pubtype=2")->order('pubtime DESC')->select();
+		$this->assign('num',$num);
 		$this->assign('news',$news);
 		$this->display();
 

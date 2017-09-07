@@ -19,12 +19,12 @@
 <form action='{:U(GROUP_NAME.'/System/site')}' method='post'>
 <div class="panel panel-default">
 	  <div class="panel-heading headalign">
-		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 站点信息设置</a>
+		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 系统全局设置</a>
 	  </div>
 	  <div class="panel-body">
 		<table class='table table-bordered table-hover'>	
 			<tr>
-				<td>网站名称</td>
+				<td width="20%">网站名称</td>
 				<td><input type='text' name='title' value='{$site.title}' class="form-control" /></td>
 			</tr>
 			<tr>
@@ -58,7 +58,7 @@
 
 		</table>	
 	  </div>
-	  <div class="panel-footer">
+	  <div class="panel-footer" style="text-align: center;">
 	  		<button type='submit' class="btn btn4 btn-info"><span class="glyphicon glyphicon-check"></span> 提交设置</button>
 	  </div>
 </div>

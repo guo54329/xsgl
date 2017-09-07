@@ -9,6 +9,22 @@
 <script type="text/javascript" src="__PUBLIC__/Js/selects.js"></script>
 <script src="__PUBLIC__/Js/dialog/layer.js"></script>
 <script src="__PUBLIC__/Js/dialog.js"></script>
+
+<!-- 排序加入开始 -->
+<script type="text/javascript" src="__ROOT__/Data/jquerytablesorter/jquery-latest.js"></script>
+<script type="text/javascript" src="__ROOT__/Data/jquerytablesorter/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="__ROOT__/Data/jquerytablesorter/addons/pager/jquery.tablesorter.pager.js"></script>
+<script type="text/javascript" src="__ROOT__/Data/jquerytablesorter/docs/js/chili-1.8b.js"></script>
+<script type="text/javascript" src="__ROOT__/Data/jquerytablesorter/docs/js/docs.js"></script>
+<script type="text/javascript">
+$(function() {
+	$("table")
+		.tablesorter({widthFixed: true, widgets: ['zebra']})
+		.tablesorterPager({container: $("#pager")});
+});
+</script>
+<!-- 排序加入结束 -->
+
 <script type="text/javascript">
 function myrefresh(){
 	window.location.reload();
@@ -46,6 +62,20 @@ function myrefresh(){
 		height:40px;
 		line-height:40px;
 	 }
+	 /*排序加入开始*/ 
+	table.tablesorter thead tr .header {
+		background-image: url("__ROOT__/Data/jquerytablesorter/themes/blue/bg.gif");
+		background-repeat: no-repeat;
+		background-position: center right;
+		cursor: pointer;
+	}
+	table.tablesorter thead tr .headerSortUp {
+		background-image: url(__ROOT__/Data/jquerytablesorter/themes/blue/asc.gif);
+	}
+	table.tablesorter thead tr .headerSortDown {
+		background-image: url(__ROOT__/Data/jquerytablesorter/themes/blue/desc.gif);
+	}
+	/*排序加入结束*/
 </style>
 </head>
 
@@ -78,12 +108,14 @@ function myrefresh(){
 			s.parent(a,b);
 		 </script>
 		 <button type="submit" class="btn btn-default"><span class='glyphicon glyphicon-search'></span> 查询</button>
-
 		</form>
 	</div>
 	  <div class="panel-body">
-		 <table class='table table-bordered table-hover'>
-			<tr><th>学期</th><th>课程</th><th>序号</th><th>任务标题</th><th>发布教师</th><th>发布时间</th><th>完成状态</th><th>实训成绩</th><th>操作</th></tr>
+		 <table class="table table-bordered table-hover tablesorter">
+		   <thead>
+			<tr style="text-align: center;font-weight: bold;"><td>学期</td><th style="text-align: center;">课程</th><th style="text-align: center;" width="6%">序号</th><td>任务标题</td><th style="text-align: center;" width="10%">发布教师</th><th style="text-align: center;">发布时间</th><th style="text-align: center;" width="10%">完成状态</th><td>实训成绩</td><td width="10%">操作</td></tr>
+			</thead>
+			<tbody>
 			{~$i=1}
 			<foreach name='list' item='v'>
 			<tr>
@@ -97,14 +129,34 @@ function myrefresh(){
 				<td><if condition="$v['status'] eq 0 "><span style="font-size: 16px;color:red;">未完成</span><else/><img src="__PUBLIC__/Images/finish.png" style="height: 40px;" /></if></td>
 				<td><php> echo $v['desc']*0.3+$v['isrec']*0.7;</php></td>
 			
-				<td><if condition="$v['status'] eq 0 "><a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDesc',array('seid'=>$v['seid']))}" class="btn" style="font-size: 16px;"><span class="glyphicon glyphicon-hand-right"></span> 去完成</a><else/><a href="{:U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']))}" class="btn btn-default browse" ><span class="glyphicon glyphicon-eye-open"></span> 交流讨论</a></if></td>
-				
+				<td><if condition="$v['status'] eq 0 "><a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDesc',array('seid'=>$v['seid']))}" class="btn" style="font-size: 16px;"><span class="glyphicon glyphicon-hand-right"></span> 去完成</a><else/><a href="{:U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']))}" class="btn btn-default browse" ><span class="glyphicon glyphicon-eye-open"></span> 评价交流</a></if></td>
 			</tr>
 			{~$i++}
 			</foreach>
+			</tbody>
 		</table>
+		<!-- 排序分页开始 -->
+		<div id="pager" class="pager">
+			<form>
+			    <span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前任务数 {$num}</span>
+				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/first.png" class="first"/>
+				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/prev.png" class="prev"/>
+				<input type="text" class="pagedisplay" style="width: 50px;border-radius:4px;text-align: center;height: 25px;" disabled />
+				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/next.png" class="next"/>
+				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/last.png" class="last"/>
+				<select class="pagesize" style="width: 50px;border-radius:4px;text-align: center;height: 25px;">
+					<option selected="selected"  value="10">10</option>
+					<option value="30">30</option>
+					<option  value="50">50</option>
+				</select>
+			</form>
+		</div>
+		<!-- 排序  分页结束 -->
 	  </div>
-	  
+	 <div>
+	    <div style="right:20;bottom: 50;position: fixed;"><button class="btn btn-info btnw" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button></div>
+		<div style="right:20;bottom: 15;position: fixed;"><a href="#top" class="btn btn-info"><span class="glyphicon glyphicon-chevron-up"></span> 回顶</a></div>
+	  </div>	 
 </div>
 </body>
 </html>

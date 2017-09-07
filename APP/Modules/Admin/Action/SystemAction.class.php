@@ -1,17 +1,7 @@
 <?php
 
 Class SystemAction extends CommonAction {
-
-    /*
-    系统配置信息，如开发运行环境
-     */
-    public function systeminfor()
-    {
-    		$sinfor = systemconf();
-	    	$this->assign('sinfor',$sinfor);
-	    	$this->display();
-    }	
-
+	
 	/*
 	站点设置：站点标题、关键字、版权信息等
 	 */
@@ -64,53 +54,6 @@ Class SystemAction extends CommonAction {
 		}
 		
 	}
-
-	/*
-	系统重置
-	 */
-    public function reset(){ 
-		if(!empty($_POST)){
-			//p($_POST);
-			$this->error('此功能暂时未实现！');
-		}
-		else{
-			//对不影响系统本身使用的其他基础数据进行清空处理。
-			//“学校xh_school”、“教师xh_teacher”、“班级xh_classes”、“学员xh_student”和“友情链接xh_link”、“留言板xh_discuss”、“新闻通知公告xh_newsnotice”
-			//教师班级表xh_teacher_classes
-			
-			//先判断表是否为空，不为空则执行清空操作
-			/*$count1 = M('school')->count();
-			$count2 = M('teacher')->count();
-			$count3 = M('classes')->count();
-			$count4 = M('student')->count();
-			$count5 = M('link')->count();
-			$count6 = M('discuss')->count();
-			$count7 = M('newsnotice')->count();
-			$count8 = M('teacher_classes')->count();*/
-
-			//$sql1="TRUNCATE `xh_school`";
-			/*$sql2="TRUNCATE `xh_teacher`";
-			$sql3="TRUNCATE `xh_classes`";
-			$sql4="TRUNCATE `xh_student`";
-			$sql5="TRUNCATE `xh_link`";
-			$sql6="TRUNCATE `xh_discuss`";
-			$sql7="TRUNCATE `xh_newsnotice`";
-			$sql8="TRUNCATE `xh_teacher_classes`";
-			$sql9="TRUNCATE `xh_courseresourse`";
-			mysql_query($sql2);
-			mysql_query($sql3);
-			mysql_query($sql4);
-			mysql_query($sql5);
-			mysql_query($sql6);
-			mysql_query($sql7);
-			mysql_query($sql8);
-			mysql_query($sql9);
-			*/
-		   $this->display();
-			
-			
-		}
-    }
 
     /**
      * 数据备份/恢复

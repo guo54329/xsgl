@@ -16,7 +16,7 @@ return array(
     //加载verify.php配置文件（配置验证码）
     'LOAD_EXT_CONFIG' => 'verify',
 
-    'SHOW_PAGE_TRACE' =>true,
+    //'SHOW_PAGE_TRACE' =>true,
     
     //点语法：只让其解析数组
     //'TMPL_VAR_IDENTIFY' => 'array',

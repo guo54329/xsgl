@@ -13,7 +13,7 @@
 	window.UEDITOR_HOME_URL='__ROOT__/Data/Ueditor/';
 	window.onload =function(){
 		//window.UEDITOR_CONFIG.initialFrameWidth=860;
-		window.UEDITOR_CONFIG.initialFrameHeight=240;
+		window.UEDITOR_CONFIG.initialFrameHeight=200;
 		//window.UEDITOR_CONFIG.scaleEnabled=true;
 		window.UEDITOR_CONFIG.toolbars=[[
             'fullscreen', 'source', '|', 'undo', 'redo', '|',

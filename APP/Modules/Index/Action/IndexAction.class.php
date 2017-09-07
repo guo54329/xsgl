@@ -71,7 +71,7 @@ class IndexAction extends CommonAction {
 				if($resetpass){
 					$this->success('您的密码重置为123456，请登录后修改！',U(GROUP_NAME.'/Index/index'));
 				}else{
-					$this->error('从未修改过，何谈重置，请使用默认密码登录!');
+					$this->error('您的密码未曾修改，请使用默认密码登录!');
 				}
 			}elseif($stu){
     			$data=array('xsmm'=>'123456');
@@ -79,7 +79,7 @@ class IndexAction extends CommonAction {
 				if($resetpass){
 					$this->success('您的密码重置为123456，请登录后修改！',U(GROUP_NAME.'/Index/index'));
 				}else{
-					$this->error('从未修改过，何谈重置，请使用默认密码登录!');
+					$this->error('您的密码未曾修改，请使用默认密码登录!');
 				}
 			}else{
 				$this->error('登录用户名或真实姓名输入有误！');

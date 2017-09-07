@@ -11,12 +11,13 @@
 <script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="__ROOT__/Data/Ueditor/ueditor.config.js"></script>
 <script type="text/javascript" src="__ROOT__/Data/Ueditor/ueditor.all.min.js"></script>
-
+<script src="__ROOT__/Data/Uploader/jquery.uploadify.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="__ROOT__/Data/Uploader/uploadify.css">
 <script type="text/javascript">	
 	window.UEDITOR_HOME_URL='__ROOT__/Data/Ueditor/';
 	window.onload =function(){
 		window.UEDITOR_CONFIG.initialFrameWidth=800;
-		window.UEDITOR_CONFIG.initialFrameHeight=150;
+		window.UEDITOR_CONFIG.initialFrameHeight=120;
 		//window.UEDITOR_CONFIG.scaleEnabled=true;
 		window.UEDITOR_CONFIG.toolbars=[[
             
@@ -83,6 +84,17 @@
 	    width:20px;
 		margin-left:-5px;margin-right:-5px;
 	}
+	/*定义上传按钮*/
+	.uploadify-button {
+		background:url(__ROOT__/Data/Uploader/btnbg.PNG ) no-repeat;
+		border:0px;
+		border-radius:0;
+	}
+	.uploadify:hover .uploadify-button {
+		background:url(__ROOT__/Data/Uploader/btnbg.PNG )  no-repeat;
+		border:1px solid #009999;
+		border-radius:0;
+	}
 </style>
 </head>
 <body>
@@ -98,21 +110,13 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="left" style="height: 50px;line-height: 30px;background-color: #F5F5F5;">
-					提示：请先上传作业，然后进行自评，最后单击“提交完成”！
+					提示：请自评并上传作业，最后单击“提交完成”！
 				</td>			
-			</tr>		
-			<tr>
-				<td>上传作业:</td>
-				<td>
-				   <div class="form-inline">
-				     <input type="file"  name="attach"  class="form-control" /> <span class="glyphicon glyphicon-info-sign"></span> 1、如果附件文件类型为php、text、html，或者多个文件或文件夹时，请先转换为zip文件后上传；2、上传附件最大支持500MB；3、文件较大时，提交后请等待，当页面跳转成功说明上传成功！
-				    </div>
-				</td>
 			</tr>
 			<tr>
-				<td>自评成绩:</td>
+				<td align="center"><span style="height: 40px;line-height: 40px;">自评成绩:</span></td>
 				<td>
-				<div class="item" style="margin-top: -14px;margin-left: -5px;">
+				<div class="item" style="margin-left: -5px;height: 50px;line-height: 50px;">
 		          <div class="formItemDiff formItemDiffFirst"></div>
 		          <div class="formItemDiff"></div>
 		          <div class="formItemDiff"></div>
@@ -123,15 +127,53 @@
 		          <div class="formItemDiff"></div>
 		          <div class="formItemDiff"></div>
 		          <div class="formItemDiff"></div>
-		          <p id="pointP" style="float:left; margin-left:20px;margin-top: 15px;"></p>
+		          <p id="pointP" style="float:left; margin-left:20px;">0</p>分
 		        </div>
 				<input type="hidden" id="desc" name="desc" value="0"><!--自我评价-->
 				</td>
+			</tr>		
+			<tr>
+				<td align="center"><span style="height: 84px;line-height: 84px;">上传作业:</span></td>
+				<td>
+				   <form>
+						<div id="queue"></div>
+						<input id="file_upload" name="file_upload" type="file">
+						 <span class="glyphicon glyphicon-info-sign"></span> 附件<font size="4" color="red">最大支持100M</font>,必须上传(附件的内容可以是任务描述或要求).<br/>建议压缩成zip文件后再上传.
+					   </form>
+					<script type="text/javascript">
+					<?php $timestamp = time();?>
+					$(function() {
+						$('#file_upload').uploadify({
+							'formData'     : {
+								'seido':'<?php echo $seid;?>',
+								'timestamp' : '<?php echo $timestamp;?>',
+								'token'     : '<?php echo md5('unique_salt' . $timestamp);?>'
+							},
+							'swf'      : '__ROOT__/Data/Uploader/uploadify.swf',
+							'uploader' : '<?php echo U(GROUP_NAME.'/Excise/uploadfile');?>',
+							
+							'height'   : 32,
+							'width'    : 120,
+							'buttonText': '',
+							'multi'     : false,
+							'buttonClass' : 'uploadify-button',
+							'fileSizeLimit' : '100MB',
+							'onUploadSuccess':function(file,data,res){
+  								var seid=data.replace(/\ufeff/g,'')
+								$("#seid").val(seid);
+								//alert(seid);
+							}
+							
+							});
+						});
+					</script>
+				</td>
 			</tr>
+			
 		</table>
 	  </div>
 	  <div class="panel-footer">
-       <input type="hidden" name="seid" value="<?php echo ($seid); ?>">
+       <input type="hidden" id="seid" name="seid" value="0">
 	  <button type="submit"  class="btn btn-info browse"><span class="glyphicon glyphicon-check"></span> 提交完成</button>
 	  </div>
 </div>

@@ -1,14 +1,51 @@
 <?php
 Class RbacAction extends CommonAction {
 
+/**************初始化操作****************/
+	public function resetUSER(){
+    	$num1 = M('user')->count();
+	    if($num1>1){
+	        M('user')->where("id>1")->delete();//用户
+	    }
+	    $this->success('用户数据清除成功！',U(GROUP_NAME.'/Rbac/index'));	
+    }
+
+	public function resetROLE(){
+    	$num1 = M('role')->count();
+	    if($num1>0){
+	        M()->execute("TRUNCATE xh_role");//角色
+	    }
+	    //给用户添加的角色清空
+		$num2 = M('role_user')->count();
+	    if($num2>0){
+	        M()->execute("TRUNCATE xh_role_user");//用户的角色列表
+	    }
+	    $this->success('角色数据及用户的角色数据清除成功！',U(GROUP_NAME.'/Rbac/role'));	
+    }
+    public function resetNODE(){
+    	$num1 = M('node')->count();
+	    if($num1>0){
+	        M()->execute("TRUNCATE xh_node");//节点
+	    }
+	    //给角色配置的权限清空
+		$num2 = M('access')->count();
+	    if($num2>0){
+	        M()->execute("TRUNCATE xh_access");//角色的权限列表
+	    }
+	    $this->success('节点数据及角色的权限数据清除成功！',U(GROUP_NAME.'/Rbac/node'));	
+    }
+
 	/*
 	 默认用户列表
 	 */
 	Public function index(){
 		//主表不查询password字段
 		//relation方法为true时 表示只关联一个表，可以将true改为具体表名，这样可以关联多表
+		$num = D('UserRelation')->field('password',true)->order('id')->relation(true)->count();
+
 		$user = D('UserRelation')->field('password',true)->order('id')->relation(true)->select();
 		//p($user);die;
+		$this->assign('num',$num);
 		$this->user=$user;
 		$this->display();
 	}
@@ -17,6 +54,7 @@ Class RbacAction extends CommonAction {
      角色列表
      */
 	Public function role(){
+		$this->num = M('role')->count();
 		$this->role = M('role')->select();
 		$this->display();
 	}
@@ -26,9 +64,11 @@ Class RbacAction extends CommonAction {
 	 */
 	Public function node(){
 		$field=array('id','name','title','sort','pid');
+		$num = M('node')->count();
 		$node = M('node')->field($field)->order('sort,id')->select();
 		$node = node_merge($node);
 		//p($node);die;
+		$this->num=$num;
 		$this->node=$node;
 		$this->display();
 
@@ -142,7 +182,12 @@ Class RbacAction extends CommonAction {
     Public function delUser(){
 		
 		$id = (int) $_GET['id'];
-		M('role_user')->where("user_id=$id")->delete();//删除该用户的角色
+		//先在用户角色表中删除该用户的角色
+		$num=M('role_user')->where("user_id=$id")->count();
+		if($num>0){
+			M('role_user')->where("user_id=$id")->delete();
+		}
+		//再删除该用户
 		if(M('user')->where(array('id'=>$id))->delete()){
 			$this->success('删除用户成功',U(GROUP_NAME.'/Rbac/index'));
 		}else{
@@ -163,8 +208,7 @@ Class RbacAction extends CommonAction {
 			}
 		}else{//视图
 
-			$this->display();
-			
+			$this->display();	
 		}
 		
 	}
@@ -185,9 +229,7 @@ Class RbacAction extends CommonAction {
 				$this->success('修改角色成功',U(GROUP_NAME.'/Rbac/role'));
 			}else{
 				$this->error('修改失败');
-			}
-
-	        
+			} 
     	}else{ //视图
 
 			$id = (int) $_GET['id'];
@@ -199,10 +241,21 @@ Class RbacAction extends CommonAction {
     }
    
     /*
-     删除角色
+     删除角色,需要先在用户角色表中删除对应的关系，在权限分配表中删除该角色对应的权限关系
      */
     Public function delRole(){
     	$id = (int) $_GET['id'];
+    	//先在用户角色表中删除用户角色关系
+    	$num1 = M('role_user')->where(array('role_id'=>$id))->count();
+    	if($num1>0){
+    		M('role_user')->where(array('role_id'=>$id))->delete();
+    	}
+    	//在权限配置表中删除角色权限关系
+    	$num2 = M('access')->where(array('role_id'=>$id))->count();
+    	if($num2>0){
+    		M('access')->where(array('role_id'=>$id))->delete();
+    	}
+    	//再删除角色
 		if(M('role')->where(array('id'=>$id))->delete()){
 			$this->success('删除角色成功',U(GROUP_NAME.'/Rbac/role'));
 		}else{
@@ -276,7 +329,7 @@ Class RbacAction extends CommonAction {
 	}
 	
 	/*
-	  删除节点
+	  删除节点，先删除角色权限分配表中的关系
 	 */
 	Public function delNode(){
 		
@@ -285,8 +338,17 @@ Class RbacAction extends CommonAction {
 		$node=M("node")->select();
     	$ids = getChildsId($node,$id);
    		$ids[]=$id;//本身的id及其所有子id
+        
         $where['id']=array('in',$ids);  //批量删除的正确方法
-
+        
+        $where2['node_id']=array('in',$ids);  //批量删除的正确方法
+        
+        //先在权限配置表中删除角色与节点的关系
+        $num=M('access')->where($where2)->count();
+        if($num>0){
+        	M('access')->where($where2)->delete();
+        }
+        //再删除节点
 		if(M('node')->where($where)->delete()){
 			$this->success('删除节点成功',U(GROUP_NAME.'/Rbac/node'));
 		}else{

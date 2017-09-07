@@ -31,7 +31,7 @@
 </div>
 <div class="footer">	
     <div class="copyright">       	
-        <p><?php echo ($g_site["copyright"]); ?>&nbsp;&nbsp;<?php echo ($g_site["icp"]); ?> <a href="/xsgl/index.php/Admin/">后台登录</a></p>
+        <p><?php echo ($g_site["copyright"]); ?>&nbsp;&nbsp;<?php echo ($g_site["icp"]); ?> <!--<a href="/xsgl/index.php/Admin/">后台登录</a>--></p>
         <p><?php echo ($g_site["address"]); ?></p>        
     </div>    
 </div>

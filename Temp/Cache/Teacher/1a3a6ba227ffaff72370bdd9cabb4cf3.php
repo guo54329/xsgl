@@ -8,6 +8,7 @@
 <script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
 <script src="__PUBLIC__/Js/dialog/layer.js"></script>
 <script src="__PUBLIC__/Js/dialog.js"></script>
+
 <script type="text/javascript">
 function myrefresh(){
 	window.location.reload();
@@ -87,19 +88,23 @@ function del(obj){
 <div class="panel panel-default">
 	  <div class="panel-heading headalign">
 		<a href="<?php echo U(GROUP_NAME.'/Excise/courseTable');?>" class="btn btncoursetable"><span class="glyphicon glyphicon-home"></span> 我的课程表</a><span class="btn xiexian">/</span><a  class="btn btn4">任务列表</a>
+		
 		<span style="float:right;"><button class="btn btn-info btnw" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp;
 	  	<a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseSave',array('scid'=>$courseinfo['scid']));?>" class="btn btn-info browse"><span class="glyphicon glyphicon-plus"></span> 添加任务</a>
 	  </span>
 	  </div>
 	  <div class="panel-body">
-		 <table class='table table-bordered table-hover'>
+		 <table class="table table-bordered table-hover tablesorter">
+
 		    <tr>
 		    <td colspan="7">
 		    学期：<strong><?php echo ($courseinfo["term"]); ?></strong>&nbsp;&nbsp;
-		    班级：<strong><?php echo ($courseinfo["cname"]); ?></strong>&nbsp;&nbsp;课程：<strong><?php echo ($courseinfo["coursename"]); ?></strong>
+		    班级：<strong><?php echo ($courseinfo["cname"]); ?></strong>&nbsp;&nbsp;课程：<strong><?php echo ($courseinfo["coursename"]); ?></strong>&nbsp;&nbsp;
+		    <span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前任务数 <?php echo ($num); ?></span>
 		    </td>
 		    </tr>
-			<tr><td>序号</td><td>任务题目</td><!--<td>任务描述</td><td>任务附件</td>--><td>发布状态</td><td>发布时间</td><td>完成情况</td><td align="left">操作(请在删除任务之前确保无学生提交并且单击“发布”将发布状态改为“未发布”！)</td></tr>
+		    
+			<tr style="text-align: center;font-weight: bold;"><td width="5%">序号</td><td width="16%">任务题目</td><!--<td>任务描述</td><td>任务附件</td>--><td width="9%">发布状态</td><td width="16%">发布时间</td><td width="8%">完成情况</td><td align="left">操作(删除：1、无学生提交(若有一键重做)，2、单击“发布”撤销发布状态！)</td></tr>
 			<?php $i=1;?>
 			<?php if(is_array($list)): foreach($list as $key=>$v): ?><tr>
 				<td><?php echo ($i); $v.peid;?></td>
@@ -114,21 +119,16 @@ function del(obj){
 				
 
 				<td align="left">
-				<a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseEdit',array('peid'=>$v['peid']));?>" class="btn btn-default" ><span class="glyphicon glyphicon-pencil"></span> 修改</a>&nbsp;
-
+				
 				<button class="btn btn-default" id="<?php echo ($v["peid"]); ?>" onclick="publish(this);" title="发布后再次单击执行撤销发布操作"><span class="glyphicon glyphicon-share-alt"></span> 发布</button>&nbsp;
-				<button class="btn btn-default" id="<?php echo ($v["peid"]); ?>" onclick="del(this);"><span class="glyphicon glyphicon-remove"></span> 删除</button>&nbsp;&nbsp;&nbsp;&nbsp;
+				<button class="btn btn-default" id="<?php echo ($v["peid"]); ?>" onclick="del(this);"><span class="glyphicon glyphicon-remove"></span> 删除</button>&nbsp;&nbsp;
 				<!--如果有附件，在提供下载按钮  || 此处取消附件下载功能
 				<?php if($v['url'] != '0' ): ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$v['peid']));?>" class="btn btn-default" ><span class="glyphicon glyphicon-save"></span> 附件</a><?php endif; ?>&nbsp;-->
 				<a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseList',array('peid'=>$v['peid']));?>" class="btn btn-default browse" ><span class="glyphicon glyphicon-eye-open"></span> 学生完成</a>&nbsp;
-				
-				<a href="<?php echo U(GROUP_NAME.'/Excise/sxexcisePackage',array('peid'=>$v['peid']));?>" class="btn btn-default browse" title="将该任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 学生作业</a>&nbsp;
-
 				<a href="<?php echo U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']));?>" class="btn btn-default browse" ><span class="glyphicon glyphicon-comment"></span> 交流讨论</a>&nbsp;
-
+				<a href="<?php echo U(GROUP_NAME.'/Excise/sxexcisePackage',array('peid'=>$v['peid']));?>" class="btn btn-default browse" title="将该任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 学生作业</a>
 				<input type="hidden" id="status<?php echo ($v["peid"]); ?>" value="<?php echo ($v["status"]); ?>" />
 				<input type="hidden" id="scid<?php echo ($v["peid"]); ?>" value="<?php echo ($courseinfo["scid"]); ?>" />
-
 				</td>
 			</tr>
 			<?php $i++; endforeach; endif; ?>

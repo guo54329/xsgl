@@ -49,7 +49,7 @@
             </div>
         </li>
         <li style="margin-top:10px;display:block;">
-          <h4 class="M4"><span></span>实训课作业管理</h4>
+          <h4 class="M4"><span></span>实训任务管理</h4>
           <div class="list-item none">
             <a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseList');?>" target='nr'>我的实训作业</a>
             </div>

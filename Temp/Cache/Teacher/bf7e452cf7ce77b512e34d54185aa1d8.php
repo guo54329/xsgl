@@ -72,6 +72,11 @@
 		width: 100px;
 		text-align: left;
 	}
+	.fresh{
+		right:20;
+		bottom: 50;
+		position: fixed;
+	}
 </style>
 
 <script type="text/javascript">
@@ -131,7 +136,7 @@ function show(){
 		    <br/>
 		    <strong>任务标题：</strong><?php echo ($excisedesc["title"]); ?><br/><strong>发布时间：</strong><?php echo (date('Y-m-d H:i:s',$excisedesc["pubtime"])); ?>
 		    <br/>
-		    <strong>作业列表:</strong> 当前共有<span class="count"> <?php echo ($count); ?> </span>份作业，请下载查阅后进行评价讨论！
+		    <strong>作业列表:</strong> <span class="label label-default">当前共有 <?php echo ($count); ?> 份作业</span>，请下载学习后进行交流评价！
 		    </td>
 		    </tr>
 			<tr><td class="desc">
@@ -151,6 +156,7 @@ function show(){
 	       <caption><strong>交流讨论</strong>&nbsp;
 			<button class="btn btn-default btnw" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp; 
 			<button class="btn btn-default" onclick="show();"><span class="glyphicon glyphicon-edit"></span> 评论</button>
+			<span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前评论条数 <?php echo ($num); ?></span>
 	       </caption>
 		   
 		   <?php if(is_array($discuss)): foreach($discuss as $key=>$v): ?><tr>
@@ -182,5 +188,9 @@ function show(){
 	</form>	
 	</div>
 </div>
+<div>
+	    <div style="right:20;bottom: 50;position: fixed;"><button class="btn btn-info btnw" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button></div>
+		<div style="right:20;bottom: 15;position: fixed;"><a href="#top" class="btn btn-info"><span class="glyphicon glyphicon-chevron-up"></span> 回顶</a></div>
+	  </div>
 </body>
 </html>

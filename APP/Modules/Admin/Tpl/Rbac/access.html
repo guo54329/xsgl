@@ -83,7 +83,7 @@ $(function(){
 });
 
 </script>
-<head>
+
 </head>
 <body>
 <form action="{:U(GROUP_NAME.'/Rbac/access')}" method="post">
@@ -92,6 +92,7 @@ $(function(){
 		<a href="{:U(GROUP_NAME.'/Rbac/role')}" class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 角色列表</a><span class="btn xiexian">/</span><a  class="btn btn4">配置权限</a>
 	  </div>
 	  <div class="panel-body">  
+	  注意：登录管理、首页管理、个人信息无需配置，默认不验证！
 	    <div id='wrap'>
 			<foreach name='node' item='app'>
 				<div class="app">

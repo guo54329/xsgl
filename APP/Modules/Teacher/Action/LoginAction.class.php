@@ -17,7 +17,7 @@ Class LoginAction extends Action {
 			show(0,"验证码错误！");
 		}
 
-		$tea=M('teacher')->where(array('jsno'=>$_POST['username'],'jsmm'=>$_POST['password']))->find();
+		$tea=M('teacher')->where(array('jsno'=>strtoupper($_POST['username']),'jsmm'=>$_POST['password']))->find();
 		if($tea){
 			$tea['logintime']=time();
 			$tea['loginip'] = get_client_ip();

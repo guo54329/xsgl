@@ -10,12 +10,13 @@
 <script src="__PUBLIC__/Js/dialog.js"></script>
 <js file="__ROOT__/Data/Ueditor/ueditor.config.js" />
 <js file="__ROOT__/Data/Ueditor/ueditor.all.min.js" />
-
+<script src="__ROOT__/Data/Uploader/jquery.uploadify.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="__ROOT__/Data/Uploader/uploadify.css">
 <script type="text/javascript">	
 	window.UEDITOR_HOME_URL='__ROOT__/Data/Ueditor/';
 	window.onload =function(){
 		window.UEDITOR_CONFIG.initialFrameWidth=800;
-		window.UEDITOR_CONFIG.initialFrameHeight=150;
+		window.UEDITOR_CONFIG.initialFrameHeight=120;
 		//window.UEDITOR_CONFIG.scaleEnabled=true;
 		window.UEDITOR_CONFIG.toolbars=[[
             
@@ -55,6 +56,19 @@
 		width: 100px;
 		text-align: left;
 	}
+	/*定义上传按钮*/
+	.uploadify-button {
+		background:url(__ROOT__/Data/Uploader/btnbg.PNG ) no-repeat;
+		border:0px;
+		border-radius:0;
+		margin-left:62px; 
+
+	}
+	.uploadify:hover .uploadify-button {
+		background:url(__ROOT__/Data/Uploader/btnbg.PNG )  no-repeat;
+		border:1px solid #009999;
+		border-radius:0;
+	}
 </style>												
 </head>
 <body>
@@ -84,10 +98,39 @@
 			<tr>
 				<td>任务附件:</td>
 				<td>
-				   <div class="form-inline">
-				     <input type="file"  name="attach"  class="form-control" /><br/> <span class="glyphicon glyphicon-info-sign"></span> 必须上传附件(附件的内容可以是任务描述或要求),如果附件文件类型为php、text、html,请先转换为zip文件后再上传.<br/>
-				      <span class="glyphicon glyphicon-flash"></span> 注意：学生提交作业时使用的是任务附件的保存路径，如果发布的任务没有附件，则相应没有文件保存路径，学生的作业就无路径无法提交！
-				    </div>
+				    <form>
+						<div id="queue"></div>
+						<input id="file_upload" name="file_upload" type="file">
+						 <div style="text-align: left;">
+						 <span class="glyphicon glyphicon-info-sign"></span> 附件<font size="4" color="red">最大支持100M</font>,必须上传(学生的作业使用任务附件的路径保存).建议上传文件为zip格式.
+				         </div>
+					 </form>
+					<script type="text/javascript">
+					<?php $timestamp = time();?>
+					$(function() {
+						$('#file_upload').uploadify({
+							'formData'     : {
+								'scid':'<?php echo $scid;?>', /*scid此处传递*/
+								'timestamp' : '<?php echo $timestamp;?>',
+								'token'     : '<?php echo md5('unique_salt' . $timestamp);?>'
+							},
+							'swf'      : '__ROOT__/Data/Uploader/uploadify.swf',
+							'uploader' : '{:U(GROUP_NAME.'/Excise/uploadfile')}',
+							
+							'height'   : 32,
+							'width'    : 120,
+							'buttonText': '',
+							'multi'     : false,
+							'buttonClass' : 'uploadify-button',
+							'fileSizeLimit' : '100MB',
+							'onUploadSuccess':function(file,data,response){
+								var peid=data.replace(/\ufeff/g,'')
+								$("#peid").val(peid);
+			                    //alert(peid);
+			                 }
+							});
+						});
+					</script>
 				</td>
 			</tr>
 		</table>	
@@ -95,6 +138,7 @@
 	  
 	  <div class="panel-footer">
 	      <input name="scid" type='hidden'  value="{$scid}"/>
+	      <input id="peid" name="peid" type='hidden' value="0" />
 	      <button class="btn btn-info" type="submit" ><span class="glyphicon glyphicon-check"></span> 提交</button>
 	  </div>
 </div>

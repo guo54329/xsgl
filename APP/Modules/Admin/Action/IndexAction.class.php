@@ -7,6 +7,12 @@
  	Public function index(){	
  		$this->display();
  	}
+ 	//系统开发环境信息
+ 	public function infor(){
+    		$sinfor = systemconf();
+	    	$this->assign('sinfor',$sinfor);
+	    	$this->display();
+    }
  }
 
 

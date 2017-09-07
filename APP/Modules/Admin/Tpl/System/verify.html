@@ -28,12 +28,15 @@
 <form action='{:U(GROUP_NAME.'/System/verify')}' method='post'>
 <div class="panel panel-default">
 	  <div class="panel-heading headalign">
-		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 验证码设置</a>
+		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 登录验证码设置</a>
 	  </div>
 	  <div class="panel-body">
-		<table class='table table-bordered table-hover'>	
+		<table class='table table-bordered table-hover'>
+		    <tr><td width="20%">验证码长度<br/>(<font color="red"><b>建议只修改此处</b></font>)</td>
+			    <td width='70%'><input type='text' name='VERIFY_LENGTH' value='{$Think.config.VERIFY_LENGTH}' class="form-control" style="width:500px;"/></td>
+			</tr>	
 			<tr>
-			    <td>验证码字体大小</td>
+			    <td>验证码字体大小<br/>(单位:像素)</td>
 			    <td><input type='text' name='VERIFY_SIZE' value='{$Think.config.VERIFY_SIZE}' class="form-control" style="width:500px;"/></td>
 			</tr>
 			<tr>
@@ -47,9 +50,6 @@
 					</span>
 				
 				</div></td>
-			</tr>
-			<tr><td>验证码长度</td>
-			    <td width='70%'><input type='text' name='VERIFY_LENGTH' value='{$Think.config.VERIFY_LENGTH}' class="form-control" style="width:500px;"/></td>
 			</tr>
 			<tr><td>验证码背影颜色<br/>(16进制色值)</td>
 				<td>
@@ -86,7 +86,7 @@
         -->
 		</table>	
 	  </div>
-	  <div class="panel-footer">
+	  <div class="panel-footer"  style="text-align: center;">
 	     <button type='submit' class="btn btn-info"><span class="glyphicon glyphicon-check"></span> 提交设置</button>
 	  </div>
 </div>

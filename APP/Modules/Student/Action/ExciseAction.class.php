@@ -10,77 +10,115 @@ public function sxsubexciseList(){
     if($_POST['term']!='' && $_POST['coursename']!=''){//根据条件查询
         $term=$_POST['term'];
         $coursename=$_POST['coursename'];
-        $list = $Model->join("xh_sxpubexcise as b on a.peid=b.peid")->join("xh_sxsetcourse as c on b.scid=c.scid")->join("xh_teacher as d on c.jsno=d.jsno")->where("xsno='$xsno' and c.term='$term' and c.coursename='$coursename'")->field("a.seid,a.status,a.desc,a.isrec,b.peid,b.title,b.filename,b.url,b.pubtime,c.coursename,c.term,d.jsxm,b.pubtime")->order("d.jsxm ASC,a.peid ASC")->select();
+        $num=$Model->join("xh_sxpubexcise as b on a.peid=b.peid")->join("xh_sxsetcourse as c on b.scid=c.scid")->join("xh_teacher as d on c.jsno=d.jsno")->where("xsno='$xsno' and c.term='$term' and c.coursename='$coursename'")->count();
+
+        $list = $Model->join("xh_sxpubexcise as b on a.peid=b.peid")->join("xh_sxsetcourse as c on b.scid=c.scid")->join("xh_teacher as d on c.jsno=d.jsno")->where("xsno='$xsno' and c.term='$term' and c.coursename='$coursename'")->field("a.seid,a.status,a.desc,a.isrec,b.peid,b.title,b.filename,b.url,b.pubtime,c.coursename,c.term,d.jsxm,b.pubtime")->order("d.jsxm ASC,c.scid ASC,a.peid ASC")->select();
     }else{//查询所有,默认只显示当前学期的任务
         $termarr=M('term')->order('id DESC')->limit(1)->find();
         $term=$termarr['name'];
-        $list = $Model->join("xh_sxpubexcise as b on a.peid=b.peid")->join("xh_sxsetcourse as c on b.scid=c.scid")->join("xh_teacher as d on c.jsno=d.jsno")->where("xsno='$xsno' and c.term='$term'")->field("a.seid,a.status,a.desc,a.isrec,b.peid,b.title,b.filename,b.url,b.pubtime,c.coursename,c.term,d.jsxm,b.pubtime")->order("c.term DESC,b.scid ASC,d.jsxm ASC,a.peid ASC")->select();
+        $num=$Model->join("xh_sxpubexcise as b on a.peid=b.peid")->join("xh_sxsetcourse as c on b.scid=c.scid")->join("xh_teacher as d on c.jsno=d.jsno")->where("xsno='$xsno' and c.term='$term'")->count();
+
+        $list = $Model->join("xh_sxpubexcise as b on a.peid=b.peid")->join("xh_sxsetcourse as c on b.scid=c.scid")->join("xh_teacher as d on c.jsno=d.jsno")->where("xsno='$xsno' and c.term='$term'")->field("a.seid,a.status,a.desc,a.isrec,b.peid,b.title,b.filename,b.url,b.pubtime,c.coursename,c.term,d.jsxm,b.pubtime")->order("c.term DESC,d.jsxm ASC,c.scid ASC,a.peid ASC")->select();
     }
     
 
     $ccode = $stu['ccode'];
 	//p($stu);
     getCourseinfor($ccode);//创建由学期联动课程查询的select
+    $this->assign('num',$num);
     $this->assign('list',$list);
     $this->display();
 }
 //学生作业提交处理
-public function sxsubexciseDo(){
-
-    if(!empty($_POST)){
-        $desc =$_POST['desc'];
-        if($_POST['desc']=='0'){
-          $this->error("请进行自我评价！");
-        }
-        //作业提交处理
-        import('ORG.Net.UploadFile'); //载入TP上传类
-        //获取上传作业
-        $file = $_FILES['attach'];
-        $fileext = explode('.',$file['name']);  
-        $fileext = strtolower($fileext[count($fileext)-1]);
-       
-        $filedenyext = array('php','txt','html','htm');
-        if(in_array($fileext, $filedenyext)){
-          $this->error("上传附件格式不支持！");
-        }
-        if($file['size']>512000000){
-          $this->error("附件不能超过500MB！");
-        }
-
+public function uploadfile(){
+    $file = $_FILES['Filedata'];
+    /*
+    //下面两个判断失效
+    if($file['name']==""||$file['error']==4){
+        echo "任务必须上传!" ;
+    }
+    if($file['size']>102400000){
+        echo "附件大小不能超过100MB!";
+    }
+    
+    $fileext = explode('.',$file['name']);  
+    $fileext = strtolower($fileext[count($fileext)-1]);
+    $filedenyext = array('php','txt','html','htm');
+    if(in_array($fileext, $filedenyext)){
+        echo "文件类型不支持(php、txt、html、htm),请压缩为zip再上传!";
+    }
+    */
+    
+    $verifyToken = md5('unique_salt' . $_POST['timestamp']);
+    //作业提交处理
+    if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
+        $seid=$_POST['seido'];//uploady里面的一个值
+        $peid=M('sxsubexcise')->field('peid')->find($seid);
+        $peid = $peid['peid'];
 //注意：学生提交作业时使用的是任务附件的保存路径
 //如果发布的任务没有附件，则相应没有文件保存路径，学生的作业也就没路径可以提交了，所以每次会提交失败。
 //处理办法：教师发布任务时，必须发布附件(至少附件中的内容可以是任务表述或要求)
-//
-        $seid=$_POST['seid'];
-        $peid=M('sxsubexcise')->field('peid')->find($seid);
-        $peid = $peid['peid'];
         $url = M('sxpubexcise')->field('url')->find($peid);
-        $filepath=$url['url'];  
+        $filepath=$url['url'];
+        import('ORG.Net.UploadFile'); //载入TP上传类
         $uploadfile = new UploadFile();
         $uploadfile->saveRule ='definefilename'; 
         $info = $uploadfile->uploadOne($file,$filepath);
         if($info){ //上传成功
-        
-              $filename=$info[0]['savename']; 
-              //准备保存数据
-              $data=array(
-              'seid'=>$seid,
-              'desc'=>$desc,
-              'filename'=>$filename,
-              'status'=>1,
-              'subtime'=>time(),
-              );
-              $id = M('sxsubexcise')->save($data);
-              if($id>0){
-                $this->success("作业提交成功！",U(GROUP_NAME."/Excise/sxsubexciseList"));
-              }else{
-                $this->error("作业提交失败！");
-              }
-
+            $filename=$info[0]['savename']; 
+            //准备保存数据
+            $data=array(
+            'seid'=>$seid,
+            'filename'=>$filename,
+            );
+            M('sxsubexcise')->save($data);
+            echo $seid;
         }else{
-          $this->error("附件上传失败！");
+          echo "您的作业上传失败！";
         }
-     
+    }
+}
+public function sxsubexciseDo(){
+    if(!empty($_POST)){
+        $seid=$_POST['seid'];//隐藏域中的seid
+        if($seid==0){ 
+            $this->error("请上传您的作业！");
+        }
+        
+        $desc =$_POST['desc'];
+        if($_POST['desc']=='0'){
+            //删除上传文件和记录
+            $file = M('sxsubexcise')->field('filename,peid')->find($seid);
+            $filename = $file['filename'];
+            $peid = $file['peid'];
+            $url = M('sxpubexcise')->field('url')->find($peid);
+            $filepath=$url['url'];
+            $file = $filepath.$filename;
+            unlink($file);//删除附件
+
+            $data=array(
+            'seid'=>$seid,
+            'filename'=>''
+            );
+            M('sxsubexcise')->save($data);
+            $this->error("请先自我评价后重新上传作业！");
+        }
+        if($seid!=0 && $_POST['desc']!='0'){
+            //准备保存数据
+            $data=array(
+            'seid'=>$seid,
+            'desc'=>$desc,
+            'status'=>1,
+            'subtime'=>time(),
+            );
+            $id = M('sxsubexcise')->save($data);
+            $this->display();
+            if($id>0){
+              $this->success("您的作业提交成功！",U(GROUP_NAME."/Excise/sxsubexciseList"));
+            }else{
+              $this->error("您的作业提交失败！");
+            }
+        }
     }else{
         $seid=$_GET['seid'];
         $this->assign('seid',$seid);
@@ -173,12 +211,13 @@ public function sxsubexciseDesc(){
         $this->assign('userxm',$userxm);
         //查询当前讨论情况
         $discuss=M('sxdisexicise')->where("peid=$peid")->order("peid ASC, deid ASC")->select();
-        
+        $num=M('sxdisexicise')->where("peid=$peid")->count();
         $discuss = unlimitedForLevel($discuss,"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",0);
 
         $stu = session('stu');
         $userxm = $stu['xsxm']; //评论人员姓名
         $this->assign('userxm',$userxm);
+        $this->assign('num',$num);
         $this->assign('discuss',$discuss);
         $this->assign('peid',$peid);
         //p($discuss);die;
