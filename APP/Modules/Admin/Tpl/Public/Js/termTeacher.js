@@ -1,1 +1,1 @@
-var xq=[{data:[['','请选择学期...']]}];var js=[{value:'',disabled:true,data:[['','请选择教师...']]}];
+var xq=[{data:[['','请选择学期...'],'2017-2018-1']}];var js=[{value:'',disabled:true,data:[['','请选择教师...']]},{value:'2017-2018-1',data:[['','请选择教师...'],'YZH-姚振华','XHT-薛红涛']}];
