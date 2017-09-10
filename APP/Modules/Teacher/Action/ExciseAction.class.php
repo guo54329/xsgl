@@ -175,7 +175,9 @@ public function uploadfile(){
     $coursenamepinyin = $py->getAllPY($coursename);//将中文的课程名称转换为拼音
     //定义上传文件的路径,该路径还用于学生作业上交
     $js=$jsno.'-'.$jsxmpinyin;
-    $filepath="./Public/Excise/".$term."/".$js."/".$coursenamepinyin."/".date("YmdHis")."/";
+    $uptime=date("YmdHis");
+    session('uptime',$uptime);//用于定义教师上传附件的名称（决定先后次序）
+    $filepath="./Public/Excise/".$term."/".$js."/".$coursenamepinyin."/".$uptime."/";
     //echo $filepath;die;
 
   if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
@@ -270,6 +272,10 @@ public function sxpubexciseDownAttach(){
     $attach = M('sxpubexcise')->find($peid);
     $filepath = $attach['url'];
     $filename = $attach['filename'];
+    if($filename==""){
+        $this->error("任务附件不存在！");
+    }
+    
     downAttach($filepath,$filename);
 }
 //删除教师发布的任务
@@ -536,7 +542,9 @@ public function sxsubexciseDownAttach(){
     $url= M('sxpubexcise')->field('url')->find($filename['peid']);
     $filepath = $url['url'];
   	$filename = $filename['filename'];
-    $filepath.$filename;
+    if($filename==""){
+        $this->error("任务附件不存在！");
+    }
   	downAttach($filepath,$filename);
 }
 //删除指定学生作业

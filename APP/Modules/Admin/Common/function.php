@@ -179,11 +179,19 @@ function getTeacherinfor(){
       exit;
     }
   }
+
+//自定义文件名
+function definefilename(){
+  
+  $uptime=session('uptime');
+  $gly=session('username');
+  return $uptime."-GLY-".$gly;
+}
  //附件下载公共函数
  function downAttach($filepath,$filename){
     $file= $filepath.$filename;
     //First, see if the file exists
-    if (!is_file($file)) { die("<b>文件没找到!</b>"); }
+    //if (!is_file($file)) { die("<b>文件没找到!</b>"); }
  
     //Gather relevent info about file
     $len = filesize($file);
@@ -261,13 +269,7 @@ function systemconf()
    
     return $sinfor;
 }
-//自定义文件名
-function definefilename(){
-  //$jsno = session('sxpubjsno');
-  //$jsxmpy = session('jsxmpy'); //来自Excise里面的发布操作
-  $gly=session('username');
-  return "gly-".$gly."-".date("YmdHis");
-}
+
 
 //组合一维数组：无限极分类
 function unlimitedForLevel($cate,$html='',$pid=0,$level=0){

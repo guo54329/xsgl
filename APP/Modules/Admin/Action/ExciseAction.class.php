@@ -181,8 +181,8 @@ public function uploadfile(){
       	$this->error("文件类型不支持,请压缩为zip再上传！");
   	}
     */
-	$verifyToken = md5('unique_salt' . $_POST['timestamp']);
-	$scid = (int)$_POST['scid'];//课程id
+	  $verifyToken = md5('unique_salt' . $_POST['timestamp']);
+	  $scid = (int)$_POST['scid'];//课程id
     $courseinfo = M('sxsetcourse')->field('term,jsno,coursename')->find($scid);//在课程表获取该课程的信息
     $coursename = $courseinfo['coursename'];//课程名称
     $term = $courseinfo['term'];//学期
@@ -198,7 +198,9 @@ public function uploadfile(){
     $coursenamepinyin = $py->getAllPY($coursename);//将中文的课程名称转换为拼音
     //定义上传文件的路径,该路径还用于学生作业上交
     $js=$jsno.'-'.$jsxmpinyin;
-    $filepath="./Public/Excise/".$term."/".$js."/".$coursenamepinyin."/".date("YmdHis")."/";
+    $uptime=date("YmdHis");
+    session('uptime',$uptime);//用于上传文件名的定义
+    $filepath="./Public/Excise/".$term."/".$js."/".$coursenamepinyin."/".$uptime."/";
     //echo $filepath;die;
 
 	if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
@@ -298,6 +300,9 @@ public function sxpubexciseDownAttach(){
     $attach = M('sxpubexcise')->find($peid);
     $filepath = $attach['url'];
     $filename = $attach['filename'];
+    if($filename==""){
+       $this-error("任务附件不存在！");
+    }
     downAttach($filepath,$filename);
 }
 //删除教师发布的任务
@@ -561,7 +566,9 @@ public function sxsubexciseDownAttach(){
     $url= M('sxpubexcise')->field('url')->find($filename['peid']);
     $filepath = $url['url'];
     $filename = $filename['filename'];
-    $filepath.$filename;
+    if($filename==""){
+       $this-error("作业文件不存在！");
+    }
     downAttach($filepath,$filename);
 }
 

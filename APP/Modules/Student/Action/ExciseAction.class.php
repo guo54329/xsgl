@@ -58,9 +58,15 @@ public function uploadfile(){
 //注意：学生提交作业时使用的是任务附件的保存路径
 //如果发布的任务没有附件，则相应没有文件保存路径，学生的作业也就没路径可以提交了，所以每次会提交失败。
 //处理办法：教师发布任务时，必须发布附件(至少附件中的内容可以是任务表述或要求)
-        $url = M('sxpubexcise')->field('url')->find($peid);
+        $url = M('sxpubexcise')->field('url,filename')->find($peid);
         $filepath=$url['url'];
+        $attachname=$url['filename'];
+        
+        $uptime=substr($attachname,0,14);
+        session('uptime',$uptime);//用于上传文件定义
+        
         import('ORG.Net.UploadFile'); //载入TP上传类
+        session('peid',$peid);//用于上传文件定义
         $uploadfile = new UploadFile();
         $uploadfile->saveRule ='definefilename'; 
         $info = $uploadfile->uploadOne($file,$filepath);
@@ -169,18 +175,23 @@ public function sxsubexciseDesc(){
 	    $attach = M('sxpubexcise')->find($peid);
 	    $filename = $attach['filename'];
 	    $filepath = $attach['url'];
+      if($filename==""){
+        $this->error("任务附件不存在！");
+      }
 	    downAttach($filepath,$filename);
 	}
   
   public function sxsubexciseDownAttach(){
-  //下载附件
+  //下载作业
     $seid = $_GET['seid'];
     $attach = M('sxsubexcise')->field('peid,filename')->find($seid);
     $peid = $attach['peid']; //用于返回
     $url=M('sxpubexcise')->field('url')->find($peid);
     $filepath = $url['url'];
     $filename = $attach['filename'];
-    
+    if($filename==""){
+        $this->error("作业文件不存在！");
+    }
     downAttach($filepath,$filename);
   }
   

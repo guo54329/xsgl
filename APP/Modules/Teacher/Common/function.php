@@ -1,6 +1,7 @@
 ﻿<?php
 //自定义文件名
 function definefilename(){
+  /*
 	$tea = session('tea');
 	$jsno= $tea['jsno'];
   $jsxm= $tea['jsxm'];
@@ -9,12 +10,17 @@ function definefilename(){
   $jsxmpy = $py->getAllPY($jsxm);//将中文的姓名转换为拼音
 
 	return $jsno."-".$jsxmpy."-".date("YmdHis");
+  */
+    $tea = session('tea');
+    $uptime=session('uptime');
+    $jsxm= $tea['jsxm'];
+    return date("YmdHis")."-JS-".$jsxm;//上传日期-JS-姓名
 }
 //附件下载公共函数
  function downAttach($filepath,$filename){
     $file= $filepath.$filename;
     //First, see if the file exists
-    if (!is_file($file)) { die("<b>文件没找到!</b>"); }
+    // if (!is_file($file)) { die("<b>文件没找到!</b>"); }
  
     //Gather relevent info about file
     $len = filesize($file);

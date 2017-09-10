@@ -1,20 +1,34 @@
 ﻿<?php
 //自定义文件名
 function definefilename(){
+  /*上传的作业名称定义为英文名
   $stu = session('stu');
   $xsno= $stu['xsno'];
   $xsxm= $stu['xsxm'];
+  $peid=session('peid');
   import('Class.Pinyin',APP_PATH);//引入中英文转换类
   $py = new PinYin();
   $xsxmpy = $py->getAllPY($xsxm);//将中文的姓名转换为拼音
-  return $xsno."-".$xsxmpy."-".date("YmdHis");
+  //return $peid."-".$xsno."-".$xsxmpy;
+  */
+  
+  $stu = session('stu');
+  $xsno= $stu['xsno'];
+  $xsxm= $stu['xsxm'];
+  $uptime=session('uptime');
+  $peid=session('peid');
+  return $uptime."-".$peid."-".$xsno."-".$xsxm;
 }
 //附件下载公共函数
  function downAttach($filepath,$filename){
+   
+
     $file= $filepath.$filename;
-    //First, see if the file exists
-    if (!is_file($file)) { die("<b>文件没找到!</b>"); }
- 
+
+    //检查文件是否存在，在action里面判断，此处不在判断
+    // $tempfile=iconv('UTF-8','GB2312',$filename);
+    // if (!is_file($tempfile)) { die("<b>文件没找到!</b>"); }//中文名不识别
+    
     //Gather relevent info about file
     $len = filesize($file);
     $filename = basename($file);
