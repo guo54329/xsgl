@@ -1,40 +1,6 @@
 <?php
 Class RbacAction extends CommonAction {
 
-/**************初始化操作****************/
-	public function resetUSER(){
-    	$num1 = M('user')->count();
-	    if($num1>1){
-	        M('user')->where("id>1")->delete();//用户
-	    }
-	    $this->success('用户数据清除成功！',U(GROUP_NAME.'/Rbac/index'));	
-    }
-
-	public function resetROLE(){
-    	$num1 = M('role')->count();
-	    if($num1>0){
-	        M()->execute("TRUNCATE xh_role");//角色
-	    }
-	    //给用户添加的角色清空
-		$num2 = M('role_user')->count();
-	    if($num2>0){
-	        M()->execute("TRUNCATE xh_role_user");//用户的角色列表
-	    }
-	    $this->success('角色数据及用户的角色数据清除成功！',U(GROUP_NAME.'/Rbac/role'));	
-    }
-    public function resetNODE(){
-    	$num1 = M('node')->count();
-	    if($num1>0){
-	        M()->execute("TRUNCATE xh_node");//节点
-	    }
-	    //给角色配置的权限清空
-		$num2 = M('access')->count();
-	    if($num2>0){
-	        M()->execute("TRUNCATE xh_access");//角色的权限列表
-	    }
-	    $this->success('节点数据及角色的权限数据清除成功！',U(GROUP_NAME.'/Rbac/node'));	
-    }
-
 	/*
 	 默认用户列表
 	 */

@@ -59,9 +59,6 @@ $(function() {
 	 .trColor{
 	 	 background-color: #eee;
 	 }
-	 .btn6{
-	 	 width: 120px;
-	 }
 	 /*排序加入开始*/ 
 	table.tablesorter thead tr .header {
 		background-image: url("__ROOT__/Data/jquerytablesorter/themes/blue/bg.gif");
@@ -83,9 +80,7 @@ $(function() {
 <div class="panel panel-default">
 	  <div class="panel-heading headalign">
 		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 教师课表</a>
-		<a href="{:U(GROUP_NAME.'/Excise/resetSX')}" class="btn btn-info btn6"><span class="glyphicon glyphicon-retweet"></span> 清除演示数据</a> <span class="glyphicon glyphicon-info-sign"></span>  请在系统部署好使用之前使用该功能！
 		<span style="float: right;">
-
 	     	<button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>
 			<a href="{:U(GROUP_NAME.'/Excise/coursetableSave')}" class="btn btn-info btn4"><span class="glyphicon glyphicon-plus"></span> 添加课程</a>
 	     	<div style="display: none;">如想导出，请直接选择复制下表中的数据粘贴到Excel表中即可！</div>
@@ -190,11 +185,8 @@ $(function() {
 				<select class="pagesize" style="width: 50px;border-radius:4px;text-align: center;height: 25px;">
 					<option selected="selected"  value="10">10</option>
 					<option value="30">30</option>
-					<option value="40">40</option>
 					<option  value="50">50</option>
-					<option  value="60">60</option>
 					<option  value="100">100</option>
-					<option  value="200">200</option>
 				</select>
 			</form>
 		</div>

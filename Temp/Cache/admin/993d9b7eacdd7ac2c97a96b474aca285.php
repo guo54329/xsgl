@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,12 +21,20 @@ $(function() {
 </script>
 <!-- 排序加入结束 -->
 
-<style type="text/css">
-	.headalign{
-		text-align: left;
-	}
+<style>
 	.title{
 		font-weight: bold;
+	}
+	.headalign{
+	text-align: left;
+	}
+	.btncoursetable{
+		width:90px;
+		text-align: left;
+	}	
+	.xiexian{
+	    width:20px;
+		margin-left:-5px;margin-right:-5px;
 	}
 	/*排序加入开始*/ 
 	 table.tablesorter thead tr .header {
@@ -44,40 +52,47 @@ $(function() {
 	}
 	/*排序加入结束*/
 </style>
+
 </head>
 <body>
 <div class="panel panel-default">
-	 <div class="panel-heading headalign">
-		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 角色列表</a>
+	  
+	<div class="panel-heading headalign">
+		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 用户列表</a>
 		<span style="float: right;">
-	     	<a  href="{:U(GROUP_NAME.'/Rbac/addRole')}"  class="btn btn4 btn-info"><span class="glyphicon glyphicon-plus"></span> 添加角色</a>
+	     	<a  href="<?php echo U(GROUP_NAME.'/Rbac/addUser');?>"  class="btn btn4 btn-info"><span class="glyphicon glyphicon-plus"></span> 添加用户</a>
 	     </span>
 	  </div>
 	  <div class="panel-body">
 		<table class="table table-bordered table-hover tablesorter">
 		  <thead>
-			<tr class="title"><th style="text-align: center;">序号</th><td>角色名称(英文)</td><td>角色描述(中文)</td><th style="text-align: center;">开启状态</th><td>操作</td></tr>
+			<tr class="title"><th style="font-weight: bold;" width="6%">序号</th><th  style="font-weight: bold;">用户名</th><th style="font-weight: bold;">上次登录</th><td width="10px;">上次登录IP</td><th  style="font-weight: bold;" width="8%;">状态</th><td>角色</td><td>操作</td></tr>
 			</thead>
 			<tbody>
-			<foreach name='role' item='v'>
-			<tr>
-				<td>{$v.id}</td>
-				<td>{$v.name}</td>
-				<td>{$v.remark}</td>
-				<td><if condition='$v["status"]'>开启<else/>关闭</if></td>
-				<td><a href="{:U(GROUP_NAME.'/Rbac/access',array('rid'=>$v['id']))}" class="btn btn-default btn4"><span class="glyphicon glyphicon-cog"></span> 配置权限</a> 
-					<a href="{:U(GROUP_NAME.'/Rbac/editRole',array('id'=>$v['id']))}" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> 修改</a>
-					<a href="{:U(GROUP_NAME.'/Rbac/delRole',array('id'=>$v['id']))}" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 删除</a>
-				   
+			<?php if(is_array($user)): foreach($user as $key=>$v): ?><tr>
+				<td><?php echo ($v["id"]); ?></td>
+				<td><?php echo ($v["username"]); ?></td>
+				<td><?php echo (date('Y-m-d H:i:s',$v["logintime"])); ?></td>
+				<td><?php echo ($v["loginip"]); ?></td>
+				<td><?php if($v["lock"]): ?><span class="glyphicon glyphicon-ban-circle"></span> 锁定<?php else: ?><span class="glyphicon glyphicon-ok-circle"></span> 正常<?php endif; ?></td>
+				<td>
+					<?php if($v["username"] == C("RBAC_SUPERADMIN")): ?>超级管理员
+					<?php else: ?>
+						<?php if(is_array($v["role"])): foreach($v["role"] as $key=>$value): ?><div><?php echo ($value["name"]); ?>(<?php echo ($value["remark"]); ?>)</div><?php endforeach; endif; endif; ?>
 				</td>
-			</tr>
-			</foreach>
+				<td> 
+					<?php if($v['id'] != 1): ?><a href="<?php echo U(GROUP_NAME.'/Rbac/editUser',array('id'=>$v['id']));?>" class="btn btn-default btn4"><span class="glyphicon glyphicon-cog"></span> 配置角色</a>
+					 <?php if($v["lock"]): ?><a href="<?php echo U(GROUP_NAME.'/Rbac/lock',array('id'=>$v['id'],'lock'=>1));?>" class="btn btn-default"><span class="glyphicon glyphicon-lock"></span> 解锁</a>
+					<?php else: ?><a href="<?php echo U(GROUP_NAME.'/Rbac/lock',array('id'=>$v['id'],'lock'=>0));?>" class="btn btn-default"><span class="glyphicon glyphicon-lock"></span> 锁定</a><?php endif; ?>
+					<a href="<?php echo U(GROUP_NAME.'/Rbac/delUser',array('id'=>$v['id']));?>" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 删除</a><?php endif; ?> 
+				</td>
+			</tr><?php endforeach; endif; ?>
 			</tbody>
 		</table>
 		<!-- 排序分页开始 -->
 		<div id="pager" class="pager">
 			<form>
-			    <span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前角色个数  {$num}</span>
+			    <span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前用户人数 <?php echo ($num); ?></span>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/first.png" class="first"/>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/prev.png" class="prev"/>
 				<input type="text" class="pagedisplay" style="width: 50px;border-radius:4px;text-align: center;height: 25px;" disabled />
@@ -93,7 +108,7 @@ $(function() {
 		</div>
 		<!-- 排序  分页结束 -->	
 	  </div>
-	  
+	   
 </div>
 </body>
 </html>

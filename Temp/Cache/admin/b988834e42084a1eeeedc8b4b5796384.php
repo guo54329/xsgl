@@ -37,8 +37,8 @@
             <a href="<?php echo U(GROUP_NAME.'/System/site');?>" target='nr'>系统全局设置</a>
             <a href="<?php echo U(GROUP_NAME.'/System/backup');?>" target='nr'>
             数据备份恢复</a>
-            <a href="<?php echo U(GROUP_NAME.'/System/verify');?>" target='nr'>登录验证码设置</a>
-            
+            <a href="<?php echo U(GROUP_NAME.'/System/verify');?>" target='nr'>验证码的设置</a>
+            <a href="<?php echo U(GROUP_NAME.'/System/install');?>" target='nr'>系统部署设置</a>
           </div>
         </li>
 

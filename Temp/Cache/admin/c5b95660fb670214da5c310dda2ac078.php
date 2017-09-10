@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,7 +30,7 @@ $("#sortTable").tablesorter({
 function resetpass(obj){
      var teacherid = obj.id;
      $.ajax({
-            url:"{:U(GROUP_NAME.'/Basicdata/resetTeacherPass')}",
+            url:"<?php echo U(GROUP_NAME.'/Basicdata/resetTeacherPass');?>",
             data: { id: teacherid },
             type:"POST",
             success: function (res) {
@@ -86,18 +86,16 @@ function resetpass(obj){
 	  <div class="panel-heading headalign">
 		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 教师维护</a>
 		<span style="float: right;">
-	     	<a  href="{:U(GROUP_NAME.'/Basicdata/saveTeacher')}"  class="btn btn4 btn-info"><span class="glyphicon glyphicon-plus"></span> 添加教师</a>
-	     	<a href="{:U(GROUP_NAME.'/Basicdata/importTeacher')}" class="btn btn4 btn-info"><span class="glyphicon glyphicoglyphicon glyphicon-plus-sign"></span> 批量导入</a>
+	     	<a  href="<?php echo U(GROUP_NAME.'/Basicdata/saveTeacher');?>"  class="btn btn4 btn-info"><span class="glyphicon glyphicon-plus"></span> 添加教师</a>
+	     	<a href="<?php echo U(GROUP_NAME.'/Basicdata/importTeacher');?>" class="btn btn4 btn-info"><span class="glyphicon glyphicoglyphicon glyphicon-plus-sign"></span> 批量导入</a>
 	     	<div style="display: none;">如想导出，请直接选择复制下表中的数据粘贴到Excel表中即可！</div>
 	     </span>
 	  </div>
 	  <div class="form-inline">
-	  	  <form action="{:U(GROUP_NAME.'/Basicdata/teacher')}" method="post">
+	  	  <form action="<?php echo U(GROUP_NAME.'/Basicdata/teacher');?>" method="post">
 	  	    <select name="offname" class="form-control">
 			   <option value=''>请选择处室</option>
-			   <foreach name="offnames" item="v">
-			      <option value="{$v.offname}">{$v.offname}</option>
-			   </foreach>
+			   <?php if(is_array($offnames)): foreach($offnames as $key=>$v): ?><option value="<?php echo ($v["offname"]); ?>"><?php echo ($v["offname"]); ?></option><?php endforeach; endif; ?>
 			</select>
 			<input type="text" name="tea" class="form-control" placeholder="清输入帐号或姓名">
 			<button type="submit" class="btn btn-default"><span class='glyphicon glyphicon-search'></span> 查询</button>
@@ -108,26 +106,24 @@ function resetpass(obj){
 		 <thead>
 			<tr  style="text-align: center;font-weight: bold;"><th style="text-align: center;" width="6%">序号</th><th style="text-align: center;">编号</th><th style="text-align: center;">姓名</th><th style="text-align: center;" width="6%">性别</th><td style="text-align: center;font-weight: bold;">联系电话</td><th style="text-align: center;">所在处室</th><td style="text-align: center;font-weight: bold;">操作</td></tr></thead>
 			<tbody>
-			<foreach name='teacher' item='v'>
-			<tr>
-				<td>{$v.id}</td>
-				<td>{$v.jsno}</td>
-				<td>{$v.jsxm}</td>
-				<td>{$v.jsxb}</td>
-				<td>{$v.jsdh}</td>
-				<td>{$v.offname}</td>
+			<?php if(is_array($teacher)): foreach($teacher as $key=>$v): ?><tr>
+				<td><?php echo ($v["id"]); ?></td>
+				<td><?php echo ($v["jsno"]); ?></td>
+				<td><?php echo ($v["jsxm"]); ?></td>
+				<td><?php echo ($v["jsxb"]); ?></td>
+				<td><?php echo ($v["jsdh"]); ?></td>
+				<td><?php echo ($v["offname"]); ?></td>
 				<td>
-					<button  class="btn btn-danger btn4" id="{$v.id}" onclick="resetpass(this)"><span class="glyphicon glyphicon-asterisk"></span> 重置密码</button>&nbsp;
-					<a href="{:U(GROUP_NAME.'/Basicdata/saveTeacher',array('id'=>$v['id']))}"  class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> 修改</a>&nbsp;
-					<a href="{:U(GROUP_NAME.'/Basicdata/delTeacher',array('id'=>$v['id']))}"  class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 删除</a>
+					<button  class="btn btn-danger btn4" id="<?php echo ($v["id"]); ?>" onclick="resetpass(this)"><span class="glyphicon glyphicon-asterisk"></span> 重置密码</button>&nbsp;
+					<a href="<?php echo U(GROUP_NAME.'/Basicdata/saveTeacher',array('id'=>$v['id']));?>"  class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> 修改</a>&nbsp;
+					<a href="<?php echo U(GROUP_NAME.'/Basicdata/delTeacher',array('id'=>$v['id']));?>"  class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 删除</a>
 				</td>
-			</tr>
-			</foreach>
+			</tr><?php endforeach; endif; ?>
 			</tbody>
 		</table>
 		<div id="pager" class="pager">
 			<form>
-			    <span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前教师人数 {$num}</span>
+			    <span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前教师人数 <?php echo ($num); ?></span>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/first.png" class="first"/>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/prev.png" class="prev"/>
 				<input type="text" class="pagedisplay" style="width: 50px;border-radius:4px;text-align: center;" disabled />

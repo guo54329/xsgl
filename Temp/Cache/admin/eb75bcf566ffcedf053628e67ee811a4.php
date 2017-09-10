@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -64,7 +64,7 @@
 	  <div class="panel-heading headalign">
 		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 消息列表</a>
 		<span style="float: right;"><button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp;&nbsp;
-	     	<a href="{:U(GROUP_NAME.'/Home/addNews')}" class="btn btn-info btnw" ><span class="glyphicon glyphicon-bullhorn"></span> 发布消息</a>
+	     	<a href="<?php echo U(GROUP_NAME.'/Home/addNews');?>" class="btn btn-info btnw" ><span class="glyphicon glyphicon-bullhorn"></span> 发布消息</a>
 	     </span>
 	  </div>
 	  
@@ -82,34 +82,31 @@
 </tr>
 		   </thead>
 		   <tbody>
-                             {~$i=1}
-			     <foreach name="info" item="v">
-					<tr>
-					<td align="center">{$i++}</td>
-					<td align="left">{$v.title}</td>
-					<td align="left">{$v.content}</td>
+                             <?php $i=1;?>
+			     <?php if(is_array($info)): foreach($info as $key=>$v): ?><tr>
+					<td align="center"><?php echo ($i++); ?></td>
+					<td align="left"><?php echo ($v["title"]); ?></td>
+					<td align="left"><?php echo ($v["content"]); ?></td>
 					<td align='left'>
-					<if condition="$v['pubtype'] eq 1">所有教师和学生</if>
-					<if condition="$v['pubtype'] eq 2">所有教师</if>
-					<if condition="$v['pubtype'] eq 3">所有学生</if>
-					<if condition="$v['pubtype'] eq 4">班级:{$v.cname}</if>
+					<?php if($v['pubtype'] == 1): ?>所有教师和学生<?php endif; ?>
+					<?php if($v['pubtype'] == 2): ?>所有教师<?php endif; ?>
+					<?php if($v['pubtype'] == 3): ?>所有学生<?php endif; ?>
+					<?php if($v['pubtype'] == 4): ?>班级:<?php echo ($v["cname"]); endif; ?>
 					</td>
-					<td align="center">{$v.userxm}</td>
-					<td align="center">{$v.pubtime|date='Y-m-d H:i:s',###}</td>
+					<td align="center"><?php echo ($v["userxm"]); ?></td>
+					<td align="center"><?php echo (date('Y-m-d H:i:s',$v["pubtime"])); ?></td>
 					<td align='left'>
-					<if condition="$v['pubtype'] neq 4">
-					<a href="{:U(GROUP_NAME.'/Home/editNews',array('id'=>$v['id']))}" class="btn btn-default"><span class="glyphicon glyphicon-edit" ></span> 编辑</a></if>
-					<a href="{:U(GROUP_NAME.'/Home/delNews',array('id'=>$v['id']))}" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 删除</a>
+					<?php if($v['pubtype'] != 4): ?><a href="<?php echo U(GROUP_NAME.'/Home/editNews',array('id'=>$v['id']));?>" class="btn btn-default"><span class="glyphicon glyphicon-edit" ></span> 编辑</a><?php endif; ?>
+					<a href="<?php echo U(GROUP_NAME.'/Home/delNews',array('id'=>$v['id']));?>" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 删除</a>
 
 					</td>
-					</tr>
-				</foreach>
+					</tr><?php endforeach; endif; ?>
 			</tbody>
 			</table>
 			<!-- 排序分页开始 -->
 			<div id="pager" class="pager">
 				<form>
-				    <span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前消息条数 {$num}</span>
+				    <span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前消息条数 <?php echo ($num); ?></span>
 					<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/first.png" class="first"/>
 					<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/prev.png" class="prev"/>
 					<input type="text" class="pagedisplay" style="width: 50px;border-radius:4px;text-align: center;height: 25px;" disabled />

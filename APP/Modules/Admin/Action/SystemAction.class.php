@@ -133,6 +133,130 @@ Class SystemAction extends CommonAction {
 			//展示视图
 			$this->display();			
     	}  
+    }
+    public function install(){
+    	//系统部署时设置，清空演示数据视图
+    	$this->display();
     }  
+
+/**系统数部署后清空系统演示数据或者以往数据**/
+    public function resetUSER(){ //用户
+    	$num1 = M('user')->count();
+	    if($num1>1){
+	        M('user')->where("id>1")->delete();//用户
+	    }
+	    $this->success('用户数据清除成功！',U(GROUP_NAME.'/System/install'));	
+    }
+
+	public function resetROLE(){//角色
+    	$num1 = M('role')->count();
+	    if($num1>0){
+	        M()->execute("TRUNCATE xh_role");//角色
+	    }
+	    //给用户添加的角色清空
+		$num2 = M('role_user')->count();
+	    if($num2>0){
+	        M()->execute("TRUNCATE xh_role_user");//用户的角色列表
+	    }
+	    $this->success('角色数据及用户的角色数据清除成功！',U(GROUP_NAME.'/System/install'));	
+    }
+    public function resetNODE(){//节点
+    	$num1 = M('node')->count();
+	    if($num1>0){
+	        M()->execute("TRUNCATE xh_node");//节点
+	    }
+	    //给角色配置的权限清空
+		$num2 = M('access')->count();
+	    if($num2>0){
+	        M()->execute("TRUNCATE xh_access");//角色的权限列表
+	    }
+	    $this->success('节点数据及角色的权限数据清除成功！',U(GROUP_NAME.'/System/install'));	
+    }
+    public function resetNEWS(){//消息
+		$num = M('news')->count();
+	    if($num>0){
+	        M()->execute("TRUNCATE xh_news");
+	    }
+	    $this->success('消息数据清除成功！',U(GROUP_NAME.'/System/install'));
+	}
+	/************************开始*********学期、处室、专业数据初始化**************************************/
+	public function resetTER(){
+		$num = M('term')->count();
+	    if($num>0){
+	        M()->execute("TRUNCATE xh_term");//学期
+	    }
+	    $this->success('学期数据清除成功！',U(GROUP_NAME.'/System/install'));
+	}
+	public function resetPRO(){
+		$num = M('professional')->count();
+	    if($num>0){
+	        M()->execute("TRUNCATE xh_professional");//专业
+	    }
+	    $this->success('专业数据清除成功！',U(GROUP_NAME.'/System/install'));
+	}
+	public function resetOFF(){
+		$num = M('office')->count();
+	    if($num>0){
+	        M()->execute("TRUNCATE xh_office");//处室
+	    }
+	    $this->success('处室数据清除成功！',U(GROUP_NAME.'/System/install'));
+	}
+
+	/************************结束*********学期、处室、专业数据初始化**************************************/
+
+	/************************开始*********课程、班级、教师、学生数据初始化**************************************/
+	public function resetCOU(){
+		$num = M('course')->count();
+	    if($num>0){
+	        M()->execute("TRUNCATE xh_course");//课程
+	    }
+	    $this->success('课程数据清除成功！',U(GROUP_NAME.'/System/install'));
+	}
+	public function resetTEA(){
+		$num = M('teacher')->count();
+	    if($num>0){
+	        M()->execute("TRUNCATE xh_teacher");//教师
+	    }
+	    $this->success('教师数据清除成功！',U(GROUP_NAME.'/System/install'));
+	}
+	public function resetCLA(){
+		$num = M('classes')->count();
+	    if($num>0){
+	        M()->execute("TRUNCATE xh_classes");//班级
+	    }
+	    $this->success('班级数据清除成功！',U(GROUP_NAME.'/System/install'));
+	}
+	public function resetSTU(){
+		$num = M('student')->count();
+	    if($num>0){
+	        M()->execute("TRUNCATE xh_student");//学生
+	    }
+	    $this->success('学生数据清除成功！',U(GROUP_NAME.'/System/install'));
+	}
+
+	/************************结束**********课程、班级、教师、学生数据初始化************************************/
+
+	public function resetSX(){//实训任务所有清空操作
+	    $disnum = M('sxdisexicise')->count();
+	    if($disnum>0){
+	        M()->execute("TRUNCATE xh_sxdisexicise");//交流评价表
+	    }
+	    $subnum = M('sxsubexcise')->count();
+	    if($subnum>0){
+	        M()->execute("TRUNCATE xh_sxsubexcise");//任务提交表
+	    }
+	    $pubnum = M('sxpubexcise')->count();
+	    if($pubnum>0){
+	        M()->execute("TRUNCATE xh_sxpubexcise");//任务发布表
+	    }
+	    $setnum = M('sxsetcourse')->count();
+	    if($setnum>0){
+	        M()->execute("TRUNCATE xh_sxsetcourse");//课程列表
+	    }
+
+	    $this->success('演示数据清除成功！',U(GROUP_NAME.'/System/install'));
+	}
+
+
 }
 ?>

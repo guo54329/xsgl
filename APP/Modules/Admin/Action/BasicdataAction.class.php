@@ -14,33 +14,6 @@ Class BasicdataAction extends CommonAction {
  * xsno->sxsubexcise(xsno)
  */
 
-
-/************************开始*********学期、处室、专业数据初始化**************************************/
-public function resetTER(){
-	$num = M('term')->count();
-    if($num>0){
-        M()->execute("TRUNCATE xh_term");//学期
-    }
-    $this->success('学期数据清除成功！',U(GROUP_NAME.'/Basicdata/term'));
-}
-public function resetPRO(){
-	$num = M('professional')->count();
-    if($num>0){
-        M()->execute("TRUNCATE xh_professional");//专业
-    }
-    $this->success('专业数据清除成功！',U(GROUP_NAME.'/Basicdata/professional'));
-}
-public function resetOFF(){
-	$num = M('office')->count();
-    if($num>0){
-        M()->execute("TRUNCATE xh_office");//处室
-    }
-    $this->success('处室数据清除成功！',U(GROUP_NAME.'/Basicdata/office'));
-}
-
-/************************结束*********学期、处室、专业数据初始化**************************************/
-
-
 public function term(){
 //列表
     $num=M('term')->count();
@@ -292,41 +265,6 @@ public function delProfessional(){
 		$this->error("删除失败！");
 	}
 }
-
-
-/************************开始*********课程、班级、教师、学生数据初始化**************************************/
-public function resetCOU(){
-	$num = M('course')->count();
-    if($num>0){
-        M()->execute("TRUNCATE xh_course");//课程
-    }
-    $this->success('课程数据清除成功！',U(GROUP_NAME.'/Basicdata/course'));
-}
-public function resetTEA(){
-	$num = M('teacher')->count();
-    if($num>0){
-        M()->execute("TRUNCATE xh_teacher");//教师
-    }
-    $this->success('教师数据清除成功！',U(GROUP_NAME.'/Basicdata/teacher'));
-}
-public function resetCLA(){
-	$num = M('classes')->count();
-    if($num>0){
-        M()->execute("TRUNCATE xh_classes");//班级
-    }
-    $this->success('班级数据清除成功！',U(GROUP_NAME.'/Basicdata/classes'));
-}
-public function resetSTU(){
-	$num = M('student')->count();
-    if($num>0){
-        M()->execute("TRUNCATE xh_student");//学生
-    }
-    $this->success('学生数据清除成功！',U(GROUP_NAME.'/Basicdata/student'));
-}
-
-
-/************************结束**********课程、班级、教师、学生数据初始化************************************/
-
 
 /**
  * 课程维护

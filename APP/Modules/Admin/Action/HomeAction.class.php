@@ -5,15 +5,6 @@ Class HomeAction extends CommonAction {
 /**
  * 消息
  */
-/************************消息初始化**************************************/
-	public function resetNEWS(){
-		$num = M('news')->count();
-	    if($num>0){
-	        M()->execute("TRUNCATE xh_news");
-	    }
-	    $this->success('消息数据清除成功！',U(GROUP_NAME.'/Home/news'));
-	}
-
      //消息列表
 	public function news(){
 		$num=M('news as a')->join('xh_classes as b on a.ccode=b.ccode','left')->count();

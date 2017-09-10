@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,7 +27,7 @@ $(function() {
 <script type="text/javascript">
 function del(id){
 	var termid = id;
-	var url = "{:U(GROUP_NAME.'/Basicdata/delTerm')}";
+	var url = "<?php echo U(GROUP_NAME.'/Basicdata/delTerm');?>";
 	var data = {'id':termid};
         // 执行异步请求  $.post
         $.post(url,data,function(result){
@@ -36,7 +36,7 @@ function del(id){
                 return dialog.error(result.message);
             }
             if(result.status == 1) {
-                return dialog.success(result.message, "{:U(GROUP_NAME.'/Basicdata/term')}");
+                return dialog.success(result.message, "<?php echo U(GROUP_NAME.'/Basicdata/term');?>");
             }
 
         },'JSON');
@@ -81,7 +81,7 @@ table.tablesorter thead tr .headerSortDown {
 	<div class="panel-heading headalign">
 		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 学期维护</a>
 		<span style="float: right;">
-	  <a  href="{:U(GROUP_NAME.'/Basicdata/saveTerm')}"  class="btn btn4 btn-info"><span class="glyphicon glyphicon-plus"></span> 添加学期</a>
+	  <a  href="<?php echo U(GROUP_NAME.'/Basicdata/saveTerm');?>"  class="btn btn4 btn-info"><span class="glyphicon glyphicon-plus"></span> 添加学期</a>
 	  </span>
 	 </div>
 	  <div class="panel-body">
@@ -90,25 +90,23 @@ table.tablesorter thead tr .headerSortDown {
 			<tr style="text-align: center;font-weight: bold;"><th style="text-align: center;">序号</th><th style="text-align: center;">学期</th><td>操作</td></tr>
 			</thead>
 			<tbody>
-			<foreach name='term' item='v'>
-			<tr>
-				<td>{$v.id}</td>
-				<td>{$v.name}</td>
+			<?php if(is_array($term)): foreach($term as $key=>$v): ?><tr>
+				<td><?php echo ($v["id"]); ?></td>
+				<td><?php echo ($v["name"]); ?></td>
 				<td>
-					<a href="{:U(GROUP_NAME.'/Basicdata/saveTerm',array('id'=>$v['id']))}" class="btn btn-default" ><span class="glyphicon glyphicon-pencil"></span> 修改</a>&nbsp; 
-					<!--<a href="{:U(GROUP_NAME.'/Basicdata/delTerm',array('id'=>$v['id']))}">-->
-					<button class="btn btn-default" onclick="del({$v.id});" ><span class="glyphicon glyphicon-remove"></span> 删除</button>
+					<a href="<?php echo U(GROUP_NAME.'/Basicdata/saveTerm',array('id'=>$v['id']));?>" class="btn btn-default" ><span class="glyphicon glyphicon-pencil"></span> 修改</a>&nbsp; 
+					<!--<a href="<?php echo U(GROUP_NAME.'/Basicdata/delTerm',array('id'=>$v['id']));?>">-->
+					<button class="btn btn-default" onclick="del(<?php echo ($v["id"]); ?>);" ><span class="glyphicon glyphicon-remove"></span> 删除</button>
 
 					<!--</a>-->
 				</td>
-			</tr>
-			</foreach>
+			</tr><?php endforeach; endif; ?>
 			</tbody>
 		</table>
 		<!-- 排序分页开始 -->
 		<div id="pager" class="pager">
 			<form>
-			    <span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前学期个数 {$num}</span>
+			    <span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前学期个数 <?php echo ($num); ?></span>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/first.png" class="first"/>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/prev.png" class="prev"/>
 				<input type="text" class="pagedisplay" style="width: 50px;border-radius:4px;text-align: center;height: 25px;" disabled />

@@ -5,26 +5,7 @@ Class ExciseAction extends CommonAction {
  * 课程表管理
  * @return [type] [description]
  */
-public function resetSX(){
-    $disnum = M('sxdisexicise')->count();
-    if($disnum>0){
-        M()->execute("TRUNCATE xh_sxdisexicise");//交流评价表
-    }
-    $subnum = M('sxsubexcise')->count();
-    if($subnum>0){
-        M()->execute("TRUNCATE xh_sxsubexcise");//任务提交表
-    }
-    $pubnum = M('sxpubexcise')->count();
-    if($pubnum>0){
-        M()->execute("TRUNCATE xh_sxpubexcise");//任务发布表
-    }
-    $setnum = M('sxsetcourse')->count();
-    if($setnum>0){
-        M()->execute("TRUNCATE xh_sxsetcourse");//课程列表
-    }
 
-    $this->success('演示数据清除成功！',U(GROUP_NAME.'/Excise/courseTable'));
-}
 public function courseTable(){
   //课程表
 

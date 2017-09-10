@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -62,18 +62,16 @@ $(function() {
 	  <div class="panel-heading headalign">
 		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 课程维护</a>
 		<span style="float: right;">
-	     	<a  href="{:U(GROUP_NAME.'/Basicdata/saveCourse')}"  class="btn btn4 btn-info"><span class="glyphicon glyphicon-plus"></span> 添加课程</a>
-	     	<a href="{:U(GROUP_NAME.'/Basicdata/importCourse')}" class="btn btn4 btn-info"><span class="glyphicon glyphicoglyphicon glyphicon-plus-sign"></span> 批量导入</a>
+	     	<a  href="<?php echo U(GROUP_NAME.'/Basicdata/saveCourse');?>"  class="btn btn4 btn-info"><span class="glyphicon glyphicon-plus"></span> 添加课程</a>
+	     	<a href="<?php echo U(GROUP_NAME.'/Basicdata/importCourse');?>" class="btn btn4 btn-info"><span class="glyphicon glyphicoglyphicon glyphicon-plus-sign"></span> 批量导入</a>
 	     	<div style="display: none;">如想导出，请直接选择复制下表中的数据粘贴到Excel表中即可！</div>
 	     </span>
 	  </div>
 	  <div class="form-inline">
-		<form action="{:U(GROUP_NAME.'/Basicdata/course')}" method="post">
+		<form action="<?php echo U(GROUP_NAME.'/Basicdata/course');?>" method="post">
           <select name="proname" class="form-control">
 		    <option value=''>请选择专业</option>
-		    <foreach name="pronames" item="v">
-		      	<option value="{$v.proname}">{$v.proname}</option>
-		      	 </foreach>
+		    <?php if(is_array($pronames)): foreach($pronames as $key=>$v): ?><option value="<?php echo ($v["proname"]); ?>"><?php echo ($v["proname"]); ?></option><?php endforeach; endif; ?>
 		   </select>
 		   <button type="submit" class="btn btn-default"><span class='glyphicon glyphicon-search'></span> 查询</button>
 		  </form>
@@ -86,23 +84,21 @@ $(function() {
 			<tr><th style="text-align: center;">序号</th><th style="text-align: center;">课程</th><th style="text-align: center;">课程类型</th><th style="text-align: center;">所属专业</th><td style="text-align: center;font-weight: bold;">操作</td></tr>
 			</thead>
 			<tbody>
-			<foreach name='course' item='v'>
-			<tr>
-				<td>{$v.id}</td>
-				<td>{$v.name}</td>
-				<td><if condition="$v['coursetype'] eq 2">专业课<else/>公共课</if></td>
-				<td>{$v.proname}</td>
+			<?php if(is_array($course)): foreach($course as $key=>$v): ?><tr>
+				<td><?php echo ($v["id"]); ?></td>
+				<td><?php echo ($v["name"]); ?></td>
+				<td><?php if($v['coursetype'] == 2): ?>专业课<?php else: ?>公共课<?php endif; ?></td>
+				<td><?php echo ($v["proname"]); ?></td>
 				<td>
-					<a href="{:U(GROUP_NAME.'/Basicdata/saveCourse',array('id'=>$v['id']))}"  class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> 修改</a>&nbsp;
-					<a href="{:U(GROUP_NAME.'/Basicdata/delCourse',array('id'=>$v['id']))}"  class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 删除</a>
+					<a href="<?php echo U(GROUP_NAME.'/Basicdata/saveCourse',array('id'=>$v['id']));?>"  class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> 修改</a>&nbsp;
+					<a href="<?php echo U(GROUP_NAME.'/Basicdata/delCourse',array('id'=>$v['id']));?>"  class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 删除</a>
 				</td>
-			</tr>
-			</foreach>
+			</tr><?php endforeach; endif; ?>
 			</tbody>
 		</table>
 		<div id="pager" class="pager">
 			<form>
-			    <span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前课程门数 {$num}</span>
+			    <span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前课程门数 <?php echo ($num); ?></span>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/first.png" class="first"/>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/prev.png" class="prev"/>
 				<input type="text" class="pagedisplay" style="width: 50px;border-radius:4px;text-align: center;" disabled />

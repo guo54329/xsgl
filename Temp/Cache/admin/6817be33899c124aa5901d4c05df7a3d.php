@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -50,7 +50,7 @@ $(function() {
 	 <div class="panel-heading headalign">
 		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 角色列表</a>
 		<span style="float: right;">
-	     	<a  href="{:U(GROUP_NAME.'/Rbac/addRole')}"  class="btn btn4 btn-info"><span class="glyphicon glyphicon-plus"></span> 添加角色</a>
+	     	<a  href="<?php echo U(GROUP_NAME.'/Rbac/addRole');?>"  class="btn btn4 btn-info"><span class="glyphicon glyphicon-plus"></span> 添加角色</a>
 	     </span>
 	  </div>
 	  <div class="panel-body">
@@ -59,25 +59,23 @@ $(function() {
 			<tr class="title"><th style="text-align: center;">序号</th><td>角色名称(英文)</td><td>角色描述(中文)</td><th style="text-align: center;">开启状态</th><td>操作</td></tr>
 			</thead>
 			<tbody>
-			<foreach name='role' item='v'>
-			<tr>
-				<td>{$v.id}</td>
-				<td>{$v.name}</td>
-				<td>{$v.remark}</td>
-				<td><if condition='$v["status"]'>开启<else/>关闭</if></td>
-				<td><a href="{:U(GROUP_NAME.'/Rbac/access',array('rid'=>$v['id']))}" class="btn btn-default btn4"><span class="glyphicon glyphicon-cog"></span> 配置权限</a> 
-					<a href="{:U(GROUP_NAME.'/Rbac/editRole',array('id'=>$v['id']))}" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> 修改</a>
-					<a href="{:U(GROUP_NAME.'/Rbac/delRole',array('id'=>$v['id']))}" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 删除</a>
+			<?php if(is_array($role)): foreach($role as $key=>$v): ?><tr>
+				<td><?php echo ($v["id"]); ?></td>
+				<td><?php echo ($v["name"]); ?></td>
+				<td><?php echo ($v["remark"]); ?></td>
+				<td><?php if($v["status"]): ?>开启<?php else: ?>关闭<?php endif; ?></td>
+				<td><a href="<?php echo U(GROUP_NAME.'/Rbac/access',array('rid'=>$v['id']));?>" class="btn btn-default btn4"><span class="glyphicon glyphicon-cog"></span> 配置权限</a> 
+					<a href="<?php echo U(GROUP_NAME.'/Rbac/editRole',array('id'=>$v['id']));?>" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> 修改</a>
+					<a href="<?php echo U(GROUP_NAME.'/Rbac/delRole',array('id'=>$v['id']));?>" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 删除</a>
 				   
 				</td>
-			</tr>
-			</foreach>
+			</tr><?php endforeach; endif; ?>
 			</tbody>
 		</table>
 		<!-- 排序分页开始 -->
 		<div id="pager" class="pager">
 			<form>
-			    <span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前角色个数  {$num}</span>
+			    <span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前角色个数  <?php echo ($num); ?></span>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/first.png" class="first"/>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/prev.png" class="prev"/>
 				<input type="text" class="pagedisplay" style="width: 50px;border-radius:4px;text-align: center;height: 25px;" disabled />
