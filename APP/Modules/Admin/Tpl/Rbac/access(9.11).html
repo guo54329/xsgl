@@ -1,0 +1,128 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
+<link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
+<script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
+<style>
+.add-app{
+	display: block;
+	width:100px;
+	height: 28px;
+	line-height: 28px;
+	text-align: center;
+	background: #670768;
+	color: #fff;
+	border-radius: 4px;
+}
+.app{
+	padding:10px;
+	margin-top: 20px;
+	border: 1px solid #f6f6f6;
+	border-radius: 4px;
+}
+
+.app p{
+	height: 30px;
+	line-height: 30px;
+}
+.app p strong{
+	font-size: 20px;
+	color: #0b99d8;
+}
+.app dl{
+	margin:10px 0;
+	border:1px solid #dcdcdc;
+	height: auto;
+	overflow: hidden;
+}
+.app dl dt{
+	display: block;
+	height: 36px;
+	line-height: 36px;
+	background: #e6e6e6;
+	text-indent: 10px;
+}
+.app dl dt strong{
+	/*margin-left: 30px;*/
+	font-size: 16px;
+	color: #61aefa;
+}
+.app dl dd{
+	/*margin-left: 60px;*/
+	padding:10px;
+	float: left;
+}
+.headalign{
+	text-align: left;
+}
+.btncoursetable{
+	width:90px;
+	text-align: left;
+}	
+.xiexian{
+    width:20px;
+	margin-left:-5px;margin-right:-5px;
+}
+</style>
+<script type="text/javascript">
+	
+$(function(){
+
+	$('input[level=1]').click(function(){
+		var inputs = $(this).parents('.app').find('input');
+		$(this).attr('checked')?inputs.attr('checked','checked'):inputs.removeAttr('checked');
+	});
+	$('input[level=2]').click(function(){
+		var inputs = $(this).parents('dl').find('input');
+		$(this).attr('checked')?inputs.attr('checked','checked'):inputs.removeAttr('checked');
+	});
+
+});
+
+</script>
+
+</head>
+<body>
+<form action="{:U(GROUP_NAME.'/Rbac/access')}" method="post">
+<div class="panel panel-default">
+	  <div class="panel-heading headalign">
+		<a href="{:U(GROUP_NAME.'/Rbac/role')}" class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 角色列表</a><span class="btn xiexian">/</span><a  class="btn btn4">配置权限</a>
+	  </div>
+	  <div class="panel-body">  
+	  注意：登录管理、首页管理、个人信息无需配置，默认不验证！
+	    <div id='wrap'>
+			<foreach name='node' item='app'>
+				<div class="app">
+					<p><strong>{$app.title}</strong>
+						<input type='checkbox' name='access[]' value='{$app.id}_1' level='1' <if condition='$app["access"]'>checked='checked'</if> /> 
+					</p>
+
+					<foreach name='app.child' item='action'>
+						<dl>
+							<dt>
+								<strong>{$action.title}</strong>
+								<input type='checkbox' name='access[]' value='{$action.id}_2' level='2' <if condition='$action["access"]'>checked='checked'</if>/>
+							</dt>
+
+							<foreach name='action.child' item='method'>
+								<dd><span>{$method.title}</span>
+								<input type='checkbox' name='access[]' value='{$method.id}_3' level='3' <if condition='$method["access"]'>checked='checked'</if>/>
+								</dd>
+							</foreach>
+						</dl>
+					</foreach>
+				</div>
+			</foreach>
+		</div><!--id wrap-->
+	  </div>
+	  <div class="panel-footer" style="text-align: center;">
+		<input type='hidden' name='rid' value='{$rid}' />
+	  	<button type="submit" class="btn btn-info btn4"><span class="glyphicon glyphicon-check"></span> 保存配置</button>
+	  </div>
+</div>
+</form>
+</body>
+</html>

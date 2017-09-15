@@ -9,16 +9,18 @@
 	.headalign{
 		text-align: left;
 	}
-	tr{
+	td{
 		text-align: left;
+		margin-top: -10px;
 	}
 	.btn6{
-		width: 140px;
+		width: 120px;
 		height: 34px;
 	}
 	.pos{
 		display: inline-block;
 		margin-left: 20px;
+		margin-top: -2px;
 		padding-top:5px;
 		padding-bottom:5px;
 	}
@@ -27,11 +29,19 @@
 <body>
 <div class="panel panel-default">
 	  <div class="panel-heading headalign">
-		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 系统全局设置</a>
+		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 系统部署设置</a>
 	  </div>
 	  <div class="panel-body">
 		<table class='table table-bordered table-hover'>	
-			<tr><td><h3>请管理员在系统部署好之后</h3></td></tr>
+			
+			<tr>
+			    <td>
+			    <h3>系统缓存管理</h3>
+			     	<span class="pos">
+			        	<a href="{:U(GROUP_NAME.'/System/resetTEMP')}" class="btn btn-info btn6"><span class="glyphicon glyphicon-retweet"></span> 缓存数据清空</a>   <span class="glyphicon glyphicon-info-sign"></span> 删除系统运行当中产生的临时文件(<b>建议定期清理</b>)
+			        </span>
+			    </td>
+			</tr>
 			<tr>
 				<td>
 				<h3>系统权限管理</h3>
@@ -85,7 +95,9 @@
 			    <h3>实训任务管理</h3>
 			    	<span class="pos">
 			        	<a href="{:U(GROUP_NAME.'/System/resetSX')}" class="btn btn-info btn6"><span class="glyphicon glyphicon-retweet"></span> 实训任务清空</a> <span class="glyphicon glyphicon-info-sign"></span>
-			        注意：此操作会删除时序任务管理下的所有数据库保存的数据，之后请手动删除系统Public/Excise/下的所有文件及文件夹！
+			        <span class="pos">
+			        	<a href="{:U(GROUP_NAME.'/System/resetUPFILE')}" class="btn btn-info btn6"><span class="glyphicon glyphicon-retweet"></span> 任务文件删除</a> <span class="glyphicon glyphicon-info-sign"></span>
+			        注意：此操作会删除实训任务管理中所有老师发布的任务附件和学生作业！
 			        <span class="pos">
 			    </td>
 			</tr>

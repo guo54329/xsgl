@@ -51,16 +51,26 @@ Class NewsAction extends CommonAction {
 		$jsno = $tea['jsno'];
 		$jsxm = $tea['jsxm'];
 		  if(!empty($_POST)){
+			  
+			  $title = trim($_POST['title']);
 		      $ccode  =trim($_POST['ccode']);
-		      if($ccode==0){
+		      $content = trim($_POST['content']);
+		      //输入验证
+		      if($title==""){
+		      	  $this->error('请输入消息标题！');
+		      }
+		      if($ccode==""){
 		      	  $this->error('请选择接收对象！');
+		      }
+		      if($content==""){
+		      	  $this->error('请输入消息内容！');
 		      }
 		      //添加消息
 		      $data=array(
-		      'title'=>$_POST['title'],
+		      'title'=>$title,
 		      'pubtype'=>4,
 		      'ccode' =>$ccode,
-		      'content'=>$_POST['content'],
+		      'content'=>$content,
 		      'userxm'=>$jsxm,
 		      'pubtime'=>time()
 		      );

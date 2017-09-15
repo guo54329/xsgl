@@ -36,7 +36,7 @@
 				<td>课程类型</td>
 				<td>
 				   <select class="form-control" name="coursetype" style="width: 500px;">
-				   		<option value="0">请选择类型...</option>
+				   		<option value="">请选择类型...</option>
 				   		<option value="2" <if condition="$course['coursetype'] eq 2">selected="selected"</if> >专业课</option>
 						<option value="1" <if condition="$course['coursetype'] eq 1">selected="selected"</if> >公共课</option>
 				   </select>
@@ -46,7 +46,7 @@
 				<td>所属专业</td>
 				<td>
 					<select name='proname' class="form-control" style="width: 500px;">
-						<option value="0">请选择专业...</option>
+						<option value="">请选择专业...</option>
 						<foreach name='pro' item='v'>
 							<option value="{$v.name}" <if condition="$course['proname'] eq $v['name']">selected="selected"</if> >{$v.name}</option>
 						</foreach>

@@ -35,6 +35,18 @@ Class LoginAction extends Action {
            'loginip' =>get_client_ip()
 		);
 		$db->save($data);
+		$uid=$user['id'];
+		if($uid==1){//该用户的角色
+			session('role',"超级管理员");
+		}else{
+			$role=M('role_user as a')->join("xh_role as b on a.role_id=b.id")->where("a.user_id=$uid")->field('b.remark,b.id')->find();
+			$rolename=$role['remark'];
+			//$roleid=$role['id'];
+			//p($role);
+			session('role',$rolename);
+
+		}
+        
 		//session('uid',$user['id']);
 
 		session(C('USER_AUTH_KEY'),$user['id']);//配置访问权限

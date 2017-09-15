@@ -8,7 +8,7 @@ Class SystemAction extends CommonAction {
 	public function site(){
 
 		if(!empty($_POST)){
-
+            
 			//site1 网站基本信息
 			$data=array(
 				'title'=>$_POST['title'],
@@ -43,7 +43,9 @@ Class SystemAction extends CommonAction {
 	验证码设置
 	 */
 	Public function verify(){ 
+
 		if(!empty($_POST)){
+			//p($_POST);die;
 			if(F('verify',$_POST,CONF_PATH)){
 				$this->success('修改成功！',U(GROUP_NAME.'/System/verify'));
 			}else{
@@ -82,25 +84,41 @@ Class SystemAction extends CommonAction {
 					$this->error("数据表备份失败！");
 				}
 			}
-			if($_POST['hffilename']){
-				//获取要备份的表名和文件名
-				$pdata = I('post.');
-		        $filename =$pdata['hffilename'];
+			if($_POST['hf']){
+		        $filename =$_POST['hffilename'];
 				//echo "恢复文件名：".$filename ;
 				if($x->huanyuan($filename)){
 					$this->success("数据恢复成功！",U(GROUP_NAME."/System/backup"));
 				}else{
 					$this->error("数据恢复失败！"); 
 				}
+			}
+			if($_POST['delbackup']){
+
+				$pathinfo= './DBback/'; 
+				$filename =$_POST['hffilename'];
+				$filename = iconv("UTF-8", "GB2312", $filename);
+				$file=$pathinfo.$filename;
+				unlink($file);
+				$this->success("文件删除成功！",U(GROUP_NAME."/System/backup"));
 			}	
 			if($_POST['yh']){
-				$sql="OPTIMIZE TABLE ".$_POST['tabname'];
-				if(mysql_query($sql)){
-					show(1,"数据库表已优化！");	
+				$tablename=$_POST['tabname'];
+				$sql="OPTIMIZE TABLE ".$tablename;
+				if(M()->execute($sql)){
+					show(1,$tablename."表已优化！");	
 				}else{
 					show(0,"请重试！");
+				}	
+			}
+			if($_POST['yjyh']){
+				$tbdesc=$x->tbdesc();
+				for($i=0;$i<count($tbdesc);$i++){
+					$tablename=$tbdesc[$i][0];
+					$sql="OPTIMIZE TABLE ".$tablename;
+				    M()->execute($sql);
 				}
-				
+				show(1,"数据库表已优化！");	
 			}
     	}else{ //视图
 
@@ -112,8 +130,7 @@ Class SystemAction extends CommonAction {
             //回复展示数据
             //打开备份数据文件的目录，列出要恢复使用的备份文件
 			$pathinfo= './DBback';   
-			$openhandle= opendir($pathinfo);
-			$filelist=scandir($pathinfo);           //列出指定路径中的文件和目录
+			$filelist=scandir($pathinfo); //列出指定路径中的文件和目录
 			$files = array();
 			$flag="您还没有备份过数据表，请先备份！";
 			$j=0;
@@ -140,6 +157,15 @@ Class SystemAction extends CommonAction {
     }  
 
 /**系统数部署后清空系统演示数据或者以往数据**/
+    public function resetTEMP(){//系统缓存文件删除
+    	$temppath1 = "./Temp";
+    	delDirAndFile($temppath1);
+    	$temppath2 = "./Public/ExcisetempZIP";
+    	delDirAndFile($temppath2);
+    	$temppath3="./Public/Upload";
+    	delDirAndFile($temppath3);
+    	$this->success('系统缓存数据清除成功！',U(GROUP_NAME.'/System/install'));	
+    }
     public function resetUSER(){ //用户
     	$num1 = M('user')->count();
 	    if($num1>1){
@@ -158,19 +184,19 @@ Class SystemAction extends CommonAction {
 	    if($num2>0){
 	        M()->execute("TRUNCATE xh_role_user");//用户的角色列表
 	    }
-	    $this->success('角色数据及用户的角色数据清除成功！',U(GROUP_NAME.'/System/install'));	
-    }
-    public function resetNODE(){//节点
-    	$num1 = M('node')->count();
-	    if($num1>0){
-	        M()->execute("TRUNCATE xh_node");//节点
-	    }
 	    //给角色配置的权限清空
-		$num2 = M('access')->count();
-	    if($num2>0){
+		$num3 = M('access')->count();
+	    if($num3>0){
 	        M()->execute("TRUNCATE xh_access");//角色的权限列表
 	    }
-	    $this->success('节点数据及角色的权限数据清除成功！',U(GROUP_NAME.'/System/install'));	
+	    $this->success('角色\角色权限\用户角色数据清除成功！',U(GROUP_NAME.'/System/install'));	
+    }
+    public function resetNODE(){//节点
+    	$num = M('node')->count();
+	    if($num>0){
+	        M()->execute("TRUNCATE xh_node");//节点
+	    }
+	    $this->success('节点数据清除成功！',U(GROUP_NAME.'/System/install'));
     }
     public function resetNEWS(){//消息
 		$num = M('news')->count();
@@ -256,6 +282,11 @@ Class SystemAction extends CommonAction {
 
 	    $this->success('演示数据清除成功！',U(GROUP_NAME.'/System/install'));
 	}
+	public function resetUPFILE(){//实训任务上传的所有文件删除
+    	$temppath = "./Public/Excise";//Public/Excise
+    	delDirAndFile($temppath);
+    	$this->success('所有任务和作业删除成功！',U(GROUP_NAME.'/System/install'));
+    }
 
 
 }

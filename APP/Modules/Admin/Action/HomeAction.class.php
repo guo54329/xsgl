@@ -18,6 +18,19 @@ Class HomeAction extends CommonAction {
 	//添加消息
 	public function addNews(){
 		if(!empty($_POST)){
+			$title = trim($_POST['title']);
+			$pubtype = trim($_POST['pubtype']);
+			$content=trim($_POST['content']);
+			//输入验证
+		      if($title==""){
+		      	  $this->error('请输入消息标题！');
+		      }
+		      if($pubtype==""){
+		      	  $this->error('请选择接收对象！');
+		      }
+		      if($content==""){
+		      	  $this->error('请输入消息内容！');
+		      }
 			//添加消息
 			$data=array(
 			'title'=>$_POST['title'],

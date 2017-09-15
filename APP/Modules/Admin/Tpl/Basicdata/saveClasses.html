@@ -76,7 +76,7 @@
 				<td>组建时间</td>
 				<td>
 				    <select name='zjsj' class="form-control" style="width: 500px;">
-						<option value="0">请选择时间...</option>
+						<option value="">请选择时间...</option>
 						<foreach name='term' item='v'>
 							<option value="{$v.name}"  <if condition="$classes['zjsj'] eq $v['name']">selected="selected"</if>  >{$v.name}</option>
 						</foreach>
@@ -87,7 +87,7 @@
 				<td>所属专业</td>
 				<td>
 					<select name='proname' class="form-control" style="width: 500px;">
-						<option value="0">请选择专业...</option>
+						<option value="">请选择专业...</option>
 						<foreach name='pro' item='v'>
 							<option value="{$v.name}"  <if condition="$classes['proname'] eq $v['name']">selected="selected"</if>  >{$v.name}</option>
 						</foreach>

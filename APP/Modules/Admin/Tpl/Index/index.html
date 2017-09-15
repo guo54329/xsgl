@@ -17,8 +17,7 @@
 	<div class="logo">{$g_site.title}</div>
 	<div class="navigation">
 		<ul>
-		 	<li>欢迎您！</li>
-			<li><a href="{:U(GROUP_NAME.'/Userinfor/index')}" target='nr'>{$username}</a></li>
+			<li>欢迎您，<a href="{:U(GROUP_NAME.'/Userinfor/index')}" target='nr'>{$username}</a>！&nbsp;&nbsp;您的身份：<if condition="$uid eq 1">超级管理员<else/><a href="{:U(GROUP_NAME.'/Userinfor/access')}" target='nr'>{$role}</a></if></li>
 			<li><a href="{:U(GROUP_NAME.'/Userinfor/editUserpass')}" target='nr'>修改密码</a></li>
 			<li><a href="{:U(GROUP_NAME.'/Login/logout')}">退出</a></li>
 		</ul>
@@ -85,6 +84,7 @@
           <h4   class="M10"><span></span>个人信息维护</h4>
           <div class="list-item none">
             <a href="{:U(GROUP_NAME.'/Userinfor/index')}" target='nr'>个人登录信息</a>
+            <if condition="$uid neq 1"><a href="{:U(GROUP_NAME.'/Userinfor/access')}" target='nr'>查看个人权限</a></if>
             <a href="{:U(GROUP_NAME.'/Userinfor/editUserpass')}" target='nr'>修改登录密码</a>
           </div>
         </li>

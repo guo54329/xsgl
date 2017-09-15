@@ -60,14 +60,13 @@ body {
     padding-bottom:20px;
     text-align: center;
     position:fixed;
-    bottom:0;
-	  
+    bottom:0; 
 }
 .footer p{
-  line-height: 20px;
-  color:black;
-    font-family:微软雅黑;
-    font-size:12px;
+    line-height: 20px;
+    color:black;
+    
+    font-size:14px;
     font-weight:none;
 }
 a,a:hover,a:visited{

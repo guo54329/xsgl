@@ -27,8 +27,11 @@ $(function() {
 .footeralign{
 		text-align: left;
 }
+.btn5{
+	width: 90px;
+}
 .btn6{
-	width: 120;
+	width: 120px;
 }
 /*排序加入开始*/ 
 table.tablesorter thead tr .header {
@@ -72,6 +75,8 @@ table.tablesorter thead tr .headerSortDown {
 				<td>
 					<a href="<?php echo U(GROUP_NAME.'/Basicdata/saveProfessional',array('id'=>$v['id']));?>"  class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> 修改</a>&nbsp;
 					<?php if($coursenum == 0): ?><a href="<?php echo U(GROUP_NAME.'/Basicdata/delProfessional',array('id'=>$v['id']));?>"  class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 删除</a><?php else: ?><a href="#"  class="btn btn-default"><span class="glyphicon glyphicon-ban-circle"></span> 有课</a><?php endif; ?>
+					&nbsp;
+					<a href="<?php echo U(GROUP_NAME.'/Basicdata/delProfessionalCou',array('name'=>$pname));?>"  class="btn btn-default btn5 "><span class="glyphicon glyphicon-remove"></span> 清空课程</a>
 				</td>
 			</tr><?php endforeach; endif; ?>
 			</tbody>
@@ -79,13 +84,13 @@ table.tablesorter thead tr .headerSortDown {
 		<!-- 排序分页开始 -->
 		<div id="pager" class="pager">
 			<form>
-			    <span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前专业个数 <?php echo ($num); ?></span>
+			    <span class="label label-default" style="display:inline-block;height: 26px;line-height: 20px;">当前专业个数 <?php echo ($num); ?></span>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/first.png" class="first"/>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/prev.png" class="prev"/>
-				<input type="text" class="pagedisplay" style="width: 50px;border-radius:4px;text-align: center;height: 25px;" disabled />
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/next.png" class="next"/>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/last.png" class="last"/>
-				<select class="form-inline pagesize" style="width: 50px;border-radius:4px;text-align: center;height: 25px;">
+				<input type="text" class="pagedisplay" style="width: 50px;height: 26px;border-radius:4px;text-align: center;" />
+				<select class="pagesize" style="width: 50px;height: 26px;line-height:18px;border-radius:4px;text-align: center;">
 					<option selected="selected" value="10">10</option>
 					<option value="15">15</option>
 					<option value="30">30</option>

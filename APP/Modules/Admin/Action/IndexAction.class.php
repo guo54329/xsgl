@@ -4,7 +4,9 @@
  Class IndexAction extends CommonAction {
  	
     //后台首页视图
- 	Public function index(){	
+ 	Public function index(){
+ 	    $id = (int)$_SESSION['uid'];
+ 	    $this->assign('uid',$id);
  		$this->display();
  	}
  	//系统开发环境信息

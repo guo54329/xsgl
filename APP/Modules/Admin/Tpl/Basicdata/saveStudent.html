@@ -34,8 +34,8 @@
 			<tr>
 				<td>编号</td>
 				<td>
-				<div class="form-inline">
-				<input style="width: 500px;" type='text' name='xsno' value="{$student.xsno}" class="form-control" <if condition="$student['xsnostatus'] eq 0"> disabled </if> /> <span class="glyphicon glyphicon-info-sign"></span> 学号编码格式:班级编码(6位)+班内序号(2位)
+				<div class="form-inline"><!-- <if condition="$student['xsnostatus'] neq 0"> disabled </if> -->
+				<input style="width: 500px;" type='text' name='xsno' value="{$student.xsno}" class="form-control"  /> <span class="glyphicon glyphicon-info-sign"></span> 学号编码格式:班级编码(6位)+班内序号(2位)
 				</div>
 				</td>
 			</tr>
@@ -61,7 +61,7 @@
 				<td>入学时间</td>
 				<td>
 					<select name="rxsj" class="form-control" style="width: 500px;">
-						<option value="0">请选择入学时间...</option>
+						<option value="">请选择入学时间...</option>
 						<foreach name="term" item="v">
 							<option value="{$v.name}" <if condition="$student['rxsj'] eq $v['name']">selected="selected"</if> >{$v.name}</option>
 						</foreach>

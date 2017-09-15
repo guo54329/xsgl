@@ -12,6 +12,33 @@ Class UserinforAction extends CommonAction {
 		$this->display();
 	}
 
+	public function access(){
+		$id = (int)$_SESSION['uid'];
+		//echo $id;
+		$rids= M('role_user')->where("user_id=$id")->field('role_id')->select();
+		for($i=0;$i<count($rids);$i++){
+    		$rids[$i]=$rids[$i]['role_id'];
+    	}
+        //p($rids);
+		$where['role_id']=array('in',$rids);
+		$nids=M('access')->distinct(true)->field('node_id')->where($where)->select();
+		
+		for($i=0;$i<count($nids);$i++){
+    		$nids[$i]=$nids[$i]['node_id'];
+    	}
+		
+		$field=array('id','name','title','sort','pid');
+		$where2['id']=array('in',$nids);
+		
+		$num = M('node')->where($where2)->count();
+		$node = M('node')->field($field)->where($where2)->order('sort,id')->select();
+		$node = node_merge($node);
+		
+		$this->num=$num;
+		$this->node=$node;
+		$this->display();
+	}
+
 	Public function editUserpass(){
 		if(!empty($_POST)){
 			$id = (int)$_SESSION['uid'];
@@ -34,5 +61,6 @@ Class UserinforAction extends CommonAction {
 			$this->display();
 		}	
 	}
+
 }
 ?>

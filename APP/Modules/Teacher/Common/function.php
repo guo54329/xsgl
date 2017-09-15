@@ -1,24 +1,21 @@
 ﻿<?php
 //自定义文件名
 function definefilename(){
-  /*
-	$tea = session('tea');
-	$jsno= $tea['jsno'];
+
+  $tea = session('tea');
   $jsxm= $tea['jsxm'];
+  $uptime=session('uptime');
   import('Class.Pinyin',APP_PATH);//引入中英文转换类
   $py = new PinYin();
   $jsxmpy = $py->getAllPY($jsxm);//将中文的姓名转换为拼音
+  return $uptime."_JS_".$jsxmpy;
 
-	return $jsno."-".$jsxmpy."-".date("YmdHis");
-  */
-    $tea = session('tea');
-    $uptime=session('uptime');
-    $jsxm= $tea['jsxm'];
-    return date("YmdHis")."-JS-".$jsxm;//上传日期-JS-姓名
 }
+/*
 //附件下载公共函数
  function downAttach($filepath,$filename){
     $file= $filepath.$filename;
+    echo $file;
     //First, see if the file exists
     // if (!is_file($file)) { die("<b>文件没找到!</b>"); }
  
@@ -29,7 +26,7 @@ function definefilename(){
     // $file_extension;die;
     //适配各种类型文件
     switch( $file_extension ) {
-          case "pdf": $ctype="application/pdf"; break;
+      case "pdf": $ctype="application/pdf"; break;
       case "exe": $ctype="application/octet-stream"; break;
       case "zip": $ctype="application/zip"; break;
       case "doc": $ctype="application/msword"; break;
@@ -51,8 +48,9 @@ function definefilename(){
       case "php":
       case "htm":
       case "html":
-      case "txt": echo $filepath.$filename ; break;
-    //被上面的echo替换。die("<b> ". $file_extension ." 类型文件不支持，请提醒提交者压缩后重新提交！</b>")
+      case "txt": die("<b>文件类型". $file_extension ."不支持！</b>") ; break;
+     //类型文件不支持，请提醒提交者压缩后重新提交！
+     //被上面的echo替换。echo $filepath.$filename
       default: $ctype="application/force-download";
     }
      
@@ -77,7 +75,7 @@ function definefilename(){
     exit;
  }
 
-
+*/
  //信息提示
 function  show($status, $message,$data=array()) {
     $reuslt = array(

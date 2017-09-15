@@ -22,11 +22,11 @@ $(function() {
 });
 </script>
 <!-- 排序加入结束 -->
-
 <script type="text/javascript">
 	function myrefresh(){
 		window.location.reload();
 	}
+	$("#tob").show();
 </script>
 <style type="text/css">
     .headalign{
@@ -138,7 +138,7 @@ $(function() {
 		  <thead>
 			<tr><th style="text-align: center;" width="6%">ID</th><th style="text-align: center;">学期</th><th style="text-align: center;" width="12%">任课教师</th><th style="text-align: center;">班级</th><th style="text-align: center;">课程</th><th style="text-align: center;" width="12%">任务数量</th><td style="text-align: center;font-weight: bold;">操作</td></tr>
 			</thead>
-			<tbody>
+			<tbody id="tob">
 			<?php if(is_array($coursetable)): foreach($coursetable as $key=>$v): $tr = substr($v['term'],10,1); ?>
 				<tr <?php if($tr == 1): ?>class="trColor"<?php endif; ?>  >
 				<td><?php echo ($v["scid"]); ?></td>
@@ -162,13 +162,13 @@ $(function() {
 		<!-- 排序分页开始 -->
 		<div id="pager" class="pager">
 			<form>
-			    <span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前任课数 <?php echo ($num); ?></span>
+			    <span class="label label-default" style="display:inline-block;height: 26px;line-height: 20px;">当前任课数 <?php echo ($num); ?></span>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/first.png" class="first"/>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/prev.png" class="prev"/>
-				<input type="text" class="pagedisplay" style="width: 50px;border-radius:4px;text-align: center;height: 25px;" disabled />
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/next.png" class="next"/>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/last.png" class="last"/>
-				<select class="pagesize" style="width: 50px;border-radius:4px;text-align: center;height: 25px;">
+				<input type="text" class="pagedisplay" style="width: 50px;height: 26px;border-radius:4px;text-align: center;" />
+				<select class="pagesize" style="width: 50px;height: 26px;line-height:18px;border-radius:4px;text-align: center;">
 					<option selected="selected"  value="10">10</option>
 					<option value="30">30</option>
 					<option  value="50">50</option>

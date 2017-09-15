@@ -56,7 +56,7 @@ $(function(){
 </HEAD> 
 <BODY>
 <DIV class="top_div"></DIV>
-<DIV style="background:white; margin: -120px auto auto; border: 1px solid #E7E7E7; border-image: none; width: 400px; height: 340px; text-align: center;">
+<DIV style="background:white; margin: -120px auto auto; border: 1px solid #E7E7E7; border-image: none; width: 400px; height: 270px; text-align: center;">
 		<DIV style="width: 165px; height: 95px; position: absolute;">
 			<DIV class="tou"></DIV>
 			<DIV class="initial_left_hand" id="left_hand"></DIV>

@@ -185,8 +185,9 @@ function definefilename(){
   
   $uptime=session('uptime');
   $gly=session('username');
-  return $uptime."-GLY-".$gly;
+  return $uptime."_GLY_".$gly;
 }
+/*
  //附件下载公共函数
  function downAttach($filepath,$filename){
     $file= $filepath.$filename;
@@ -250,6 +251,7 @@ function definefilename(){
     @readfile($file);
     exit;
  }
+ */
  //系统环境
 function systemconf()
 {
@@ -407,5 +409,37 @@ function getCourseinfor3(){
       exit;
     }
 }
+
+//删除系统运行产生的临时文件和实训任务管理系统中上传的所有文件
+/**
+ * 删除目录及目录下所有文件或删除指定文件
+ * @param str $path   待删除目录路径
+ * @param int $delDir 是否删除目录，1或true删除目录，0或false则只删除文件保留目录（包含子目录）
+ * @return bool 返回删除状态
+ */
+function delDirAndFile($dirname){
+    $dir=opendir($dirname);
+    while($filename=readdir($dir)){
+      //要判断的是$dirname下的路径是否是目录
+        $newfile=$dirname."/".$filename;
+        if($filename!="." && $filename!=".."){
+            //is_dir()函数判断的是当前脚本的路径是不是目录
+            if(is_dir($newfile)){
+              //通过递归函数再遍历其子目录下的目录或文件
+              delDirAndFile($newfile);
+              //$newfile = iconv("GB2312", "UTF-8", $newfile);
+              rmdir($newfile);
+              //echo "DIR:".$newfile."<br/>"; 
+            }else{
+              //$newfile = iconv("GB2312", "UTF-8", $newfile);
+              unlink($newfile);
+              //echo "FILE:".$newfile."<br/>";
+            }
+        }
+    }
+    closedir($dir);
+  //遍历指定文件目录与文件数量结束
+}
+
 
 ?>

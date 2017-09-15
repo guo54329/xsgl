@@ -38,15 +38,34 @@ public function courseTable(){
 //添加课程表
 public function coursetableSave(){
      if(!empty($_POST)){//添加处理
-        $jsno=explode('-',$_POST['js']);
+        $js = trim($_POST['js']);
+        $jsno=explode('-',$js);
         $jsno = $jsno[0]; //教师编号
         $ccode = explode('-',$_POST['ccode']);
+        
         $ccode =$ccode[0];//班级编码
+        $term=trim($_POST['term']);
+        $ccode=trim($_POST['ccode']);
+        $kc = trim($_POST['kc']);
+        //验证输入
+        if($term==""){
+            $this->error('请选择学期！');
+        }
+        if($js==""){
+            $this->error('请选择教师！');
+        }
+        if($ccode==""){
+            $this->error('请选择班级！');
+        }
+        if($kc==""){
+            $this->error('请选择课程！');
+        }
+        //数据处理
         $data=array(
             'jsno'=>$jsno,
             'ccode'=>$ccode,
-            'coursename'=>$_POST['kc'],
-            'term'=>$_POST['term']
+            'coursename'=>$kc,
+            'term'=>$term
         );
         if(M('sxsetcourse')->add($data)){
             $this->success('提交成功！',U(GROUP_NAME.'/Excise/courseTable'));
@@ -80,7 +99,7 @@ public function sxcoursePackage(){
     $coursenamepinyin = $py->getAllPY($coursename);//将中文的课程名称转换为拼音
     
 
-    $zippath = "./Public/Excise/tempfile/";//定义存放打包文件的路径
+    $zippath = "./Public/ExcisetempZIP/";//定义存放打包文件的路径
     $zipname=$coursenamepinyin;//文件名(无扩展名)
     $zipfile=$zippath.$zipname;//路径加文件名(无扩展名)
     unlink($zipfile.'.zip'); //删除上次下载前生成的文件
@@ -209,11 +228,19 @@ public function sxpubexciseSave(){
    
    if(!empty($_POST)){
    	  $peid=$_POST['peid'];
-   	  if($peid==0){
-   	   	  $this->error("请上传任务附件！");
-   	  }	
-      $title=$_POST['title'];
-      $desc= $_POST['desc'];
+      $title=trim($_POST['title']);
+      $desc= trim($_POST['desc']);
+      //输入验证
+      if($title==""){
+          $this->error("请输入任务标题！");
+      }
+      if($desc==""){
+          $this->error("请输入任务描述！");
+      }
+      if($peid==0){
+          $this->error("请上传任务附件！");
+      }
+      //数据处理
       $pubtime=time();
       
       $sql="UPDATE `xh_sxpubexcise` SET `title` = '$title', `desc` = '$desc', `pubtime` = '$pubtime' WHERE `peid` = $peid";   
@@ -233,7 +260,108 @@ public function sxpubexciseSave(){
    } 
 }
 
+//任务克隆
+public function sxpubexciseClone(){//克隆视图
+    if($_POST['scidlist'] || !empty($_POST['peid'])){
+        //scid是想要克隆任务的课程id
+        //提供克隆任务的课程id为scidlist
+        $scid= session('scid');
+        
+        if($_POST['scidlist']){ //提交查询
+           //查询继续显示
+           $course=M('sxsetcourse as a')->join('xh_teacher as b on a.jsno=b.jsno')->join('xh_classes as c on a.ccode=c.ccode')->where("scid=$scid")->field('a.scid,a.coursename,a.term,b.jsxm,b.jsno,c.ccode,c.cname')->find();//当前等待克隆任务的课程信息
+           $jsno = $course['jsno'];
+           $courseother=M('sxsetcourse as a')->join('xh_classes as b on a.ccode=b.ccode')->where("a.jsno='$jsno' and a.scid <> $scid")->field('a.scid,a.coursename,a.term,b.cname')->select();//
+           $this->assign('courseother',$courseother);//提供克隆的课程
+           //显示查询结果
+           $scidlist = $_POST['scidlist'];
+           $publist = M('sxpubexcise')->where("scid=$scidlist")->order('peid ASC')->select();
+           $this->assign('scidlist',$scidlist);
+           $this->assign('publist',$publist);
+           $this->assign('scid',$scid);
+           //echo "search:".$scid;
+           $this->display();
+       }
+       if(!empty($_POST['peid'])){//提交选择的任务并克隆
+        //查询提交过来的任务
+            $peids=array();
+            $i=0;
+            foreach($_POST['peid'] as $k => $v) {
+               $peids[$i++]=$v;
+            }
+            $where['peid']=array('in',$peids);
+            $pubexcises=M('sxpubexcise')->where($where)->select();//提交过来的
+            $oldpubexcises=M('sxpubexcise')->where("scid=$scid")->select();//原先的
+            //p($pubexcises);
+        //生成文件保存路径
+            $course = session('course');//原课程信息
+            import('Class.Pinyin',APP_PATH);//引入中英文转换类
+            $py = new PinYin();
+            $jsxmpinyin = $py->getAllPY($course['jsxm']);//将中文的教师姓名转换为拼音
+            $coursenamepinyin = $py->getAllPY($course['coursename']);//将中文的课程名称转换为拼音
+            //定义上传文件的路径,该路径还用于学生作业上交
+            $js=$course['jsno'].'-'.$jsxmpinyin;
+            //$filepath="./Public/Excise/".$course['term']."/".$js."/".$coursenamepinyin."/".time()."/";
+            $filepathprev="./Public/Excise/".$course['term']."/".$js."/".$coursenamepinyin."/";
 
+        //处理的数据
+            $data=array();
+            import('Class.FileUtil',APP_PATH);//引入中英文转换类
+            $num=0;//符合条件的任务
+            for($i=0;$i<count($pubexcises);$i++){
+                $index=0;
+                for($j=0;$j<count($oldpubexcises);$j++){
+                    if($pubexcises[$i]['title'] != $oldpubexcises[$j]['title']){
+                        $index++;
+                    }
+                }
+                //echo "j=".$j.",index=".$index;
+                if($j==$index){//说明被克隆的任务在原任务列表中不存在，则执行克隆
+                    $data[$num]['scid']=$scid;
+                    $data[$num]['title']=$pubexcises[$i]['title'];
+                    $data[$num]['desc']=$pubexcises[$i]['desc'];
+                    //定义新路径和文件名
+                    $newurl=$filepathprev.date("YmdHis")."-".$pubexcises[$i]['peid'].rand(1000,9999)."/";
+                    $oldurl=$pubexcises[$i]['url'];
+                    $filename=$pubexcises[$i]['filename'];
+                    //如：/Public/Excise/2017-2018-1/GS-guosheng/jisuanjiyingyongjichu/20170915130417-21025/20170914104016_JS_guosheng.txt
+                    $newfile=$newurl.$filename;//echo "<br/>";
+                    $oldfile=$oldurl.$filename;
+                    //echo "<hr/>";
+                    FileUtil::copyFile($oldfile,$newfile);
+                    $data[$num]['url']=$newurl;
+                    $data[$num]['filename']=$filename;
+                    $data[$num]['status']=0;
+                    $data[$num]['pubtime']=time();
+                    $num++;
+                }   
+            }
+            //p($data);die;
+            if($num<=0){
+                $this->success("任务已存在，无需克隆！",U(GROUP_NAME."/Excise/sxpubexciseList",array('scid'=>$scid)));
+            }else{
+                if(M('sxpubexcise')->addAll($data)){
+                    $this->success("克隆任务成功！",U(GROUP_NAME."/Excise/sxpubexciseList",array('scid'=>$scid)));
+                }else{
+                    $this->error("克隆任务失败！");
+                }
+            }  
+       }
+    }else{
+         $scid =$_GET['scid'];
+         $course=M('sxsetcourse as a')->join('xh_teacher as b on a.jsno=b.jsno')->join('xh_classes as c on a.ccode=c.ccode')->where("scid=$scid")->field('a.scid,a.coursename,a.term,b.jsxm,b.jsno,c.ccode,c.cname')->find();//当前等待克隆任务的课程信息
+         $jsno = $course['jsno'];
+         session('course',$course);//用于克隆提价的任务时生成路径等
+         $courseother=M('sxsetcourse as a')->join('xh_classes as b on a.ccode=b.ccode')->where("a.jsno='$jsno' and a.scid <> $scid")->field('a.scid,a.coursename,a.term,b.cname')->select();//当前提供克隆任务的课程列表
+         //p($courseother);
+         session('scid',$scid);
+         $this->assign('scid',$scid);
+         $this->assign('course',$course);//目标课程
+         $this->assign('courseother',$courseother);//提供克隆的课程
+         $this->display();
+    }
+      
+}
 //修改发布状态(发布和撤销发布)
 public function sxpubexciseStatus(){
     $peid = (int)$_POST['peid'];
@@ -273,8 +401,6 @@ public function sxpubexciseStatus(){
     }
 }
 
-
-
 //下载教师发布的任务的附件
 public function sxpubexciseDownAttach(){
     $peid = (int)$_GET['peid'];
@@ -301,6 +427,7 @@ public function sxpubexciseDel(){
             $filepath = $attach['url'];
             $file = $filepath.$filename;
             unlink($file);
+            rmdir($filepath);
        }
        $res1=M('sxpubexcise')->delete($peid);
        if($res1){
@@ -320,7 +447,7 @@ public function sxexcisePackage(){
      
     $exciseurl = M('sxpubexcise')->field('url')->find($peid);//获取该任务url
 
-    $zippath = "./Public/Excise/tempfile/";//定义存放打包文件的路径
+    $zippath = "./Public/ExcisetempZIP/";//定义存放打包文件的路径
     $zipname=$peid;//文件名为任务id(无扩展名)
     $zipfile=$zippath.$zipname;//路径加文件名(无扩展名)
     unlink($zipfile.'.zip'); //删除上次下载前生成的文件
@@ -503,8 +630,8 @@ public function sxexciseDiscuss(){
 public function sxexciseDiscussSave(){
     if(!empty($_POST)){
         $peid = (int)$_POST['peid'];
-        $content = $_POST['content'];
-        if (empty($content)) {
+        $content = trim($_POST['content']);
+        if ($content=="") {
            $this->error("评论内容不能为空！");
         }else{
             $data =array(

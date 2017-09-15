@@ -1,24 +1,19 @@
 ﻿<?php
 //自定义文件名
 function definefilename(){
-  /*上传的作业名称定义为英文名
-  $stu = session('stu');
-  $xsno= $stu['xsno'];
-  $xsxm= $stu['xsxm'];
-  $peid=session('peid');
-  import('Class.Pinyin',APP_PATH);//引入中英文转换类
-  $py = new PinYin();
-  $xsxmpy = $py->getAllPY($xsxm);//将中文的姓名转换为拼音
-  //return $peid."-".$xsno."-".$xsxmpy;
-  */
-  
+   //上传的作业名称定义为英文名
   $stu = session('stu');
   $xsno= $stu['xsno'];
   $xsxm= $stu['xsxm'];
   $uptime=session('uptime');
   $peid=session('peid');
-  return $uptime."-".$peid."-".$xsno."-".$xsxm;
+  import('Class.Pinyin',APP_PATH);//引入中英文转换类
+  $py = new PinYin();
+  $xsxmpy = $py->getAllPY($xsxm);//将中文的姓名转换为拼音
+  return $uptime."_".$peid."_".$xsno."_".$xsxmpy;
+  
 }
+/*
 //附件下载公共函数
  function downAttach($filepath,$filename){
    
@@ -84,7 +79,7 @@ function definefilename(){
     exit;
  }
 
-
+*/
  //信息提示
 function  show($status, $message,$data=array()) {
     $reuslt = array(

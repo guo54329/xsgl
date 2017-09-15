@@ -42,6 +42,7 @@ Class IndexAction extends CommonAction {
 
         $num = M('news')->where("pubtype=1 or pubtype=3 or (pubtype=4 and ccode='$ccode')")->count();
 		$news = M('news')->where("pubtype=1 or pubtype=3 or (pubtype=4 and ccode='$ccode')")->order('pubtime DESC')->select();
+		//p($news);
 		$this->assign('num',$num);
 		$this->assign('news',$news);
 		$this->display();

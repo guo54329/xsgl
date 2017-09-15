@@ -99,7 +99,6 @@ function resetpass(obj){
 		</form>
 	  </div>
 	  <div class="panel-body">
-
 		 <table class="table table-bordered table-hover tablesorter">
 		   <thead>
 			<tr><th style="text-align: center;" width="6%">序号</th><th style="text-align: center;">学号</th><th style="text-align: center;">姓名</th><th style="text-align: center;" width="6%">性别</th><th style="text-align: center;">入学时间</th><th style="text-align: center;">所在班级</th><td style="text-align: center;font-weight: bold;">操作</td></tr></thead>
@@ -125,13 +124,13 @@ function resetpass(obj){
 		</table>
 		<div id="pager" class="pager">
 			<form>
-			    <span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前学生人数 {$num}</span>
+			    <span class="label label-default" style="display:inline-block;height: 26px;line-height: 20px;">当前学生人数 {$num}</span>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/first.png" class="first"/>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/prev.png" class="prev"/>
-				<input type="text" class="pagedisplay" style="width: 50px;border-radius:4px;text-align: center;" disabled />
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/next.png" class="next"/>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/last.png" class="last"/>
-				<select class="pagesize">
+				<input type="text" class="pagedisplay" style="width: 50px;height: 26px;border-radius:4px;text-align: center;" />
+				<select class="pagesize" style="width: 50px;height: 26px;line-height:18px;border-radius:4px;text-align: center;">
 					<option selected="selected"  value="10">10</option>
 					<option value="30">30</option>
 					<option value="40">40</option>

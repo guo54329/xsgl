@@ -5,6 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
 <link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
+<script src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
+<script src="__PUBLIC__/Js/jquery.simple-color.js"></script>
+<script  type="text/javascript">
+$(document).ready(function(){
+  $('.simple_color_kitchen_sink1').simpleColor({
+    boxHeight: 40,
+    cellWidth: 20,
+    cellHeight: 20,
+    chooserCSS: { 'border': '1px solid #660033' },
+    displayCSS: { 'border': '1px solid #ccc' },
+    displayColorCode: true,
+    livePreview: true,
+    onSelect: function(hex, element) {
+       var id=element.attr('id');
+       //alert(id);
+       $(id).val("#"+hex);
+      //alert("You selected #" + hex + " for input #" + element.attr('class'));
+    }
+  });
+
+  $('.simple_color_kitchen_sink2').simpleColor({
+    boxHeight: 40,
+    cellWidth: 20,
+    cellHeight: 20,
+    chooserCSS: { 'border': '1px solid #660033' },
+    displayCSS: { 'border': '1px solid #ccc' },
+    displayColorCode: true,
+    livePreview: true,
+    onSelect: function(hex, element) {
+       var id=element.attr('id');
+       //alert(id);
+       $(id).val("#"+hex);
+      //alert("You selected #" + hex + " for input #" + element.attr('class'));
+    }
+  });
+
+});
+</script>
 <style type="text/css">
 	.btn-info{
 		width:100px;
@@ -42,32 +80,18 @@
 			<tr>
 			    <td>验证码字体颜色<br/>(16进制色值)</td>
 				<td>
-				<div class="form-inline">
-					<input type='text' name='VERIFY_COLOR' value='{$Think.config.VERIFY_COLOR}' class="form-control" style="width:500px;"/><br/>
-				 	<span class="glyphicon glyphicon-info-sign"></span> 非专业人员不得改动,颜色如：
-					<span class="badge">
-						<span style="display:block; border:1px solid black;width:50px;height:30px;background-color:{$Think.config.VERIFY_COLOR};"></span>
-					</span>
-				
-				</div></td>
+					<input class='simple_color_kitchen_sink1' id='VERIFY_COLOR' name='VERIFY_COLOR' value="{$Think.config.VERIFY_COLOR}" />
+				</td>
 			</tr>
 			<tr><td>验证码背影颜色<br/>(16进制色值)</td>
 				<td>
-				<div class="form-inline">
-				<input type='text' name='VERIFY_BGCOLOR' value='{$Think.config.VERIFY_BGCOLOR}' class="form-control" style="width:500px;"/><br/>
-				<span class="glyphicon glyphicon-info-sign"></span> 非专业人员不得改动,颜色如：
-				<span class="badge">
-						<span style="display:block; border:1px solid black;width:50px;height:30px;background-color:{$Think.config.VERIFY_BGCOLOR};"></span>
-				</span>
-				</div>
+					<input class='simple_color_kitchen_sink2' id='VERIFY_BGCOLOR' name='VERIFY_BGCOLOR' value="{$Think.config.VERIFY_BGCOLOR}" />
 				</td>
 			</tr>
 			<tr>
 			    <td>验证码种子</td><td>
 			    <div class="form-inline">
-			    <input type='text' name='VERIFY_SEED' value='{$Think.config.VERIFY_SEED}' class="form-control" style="width:500px;"/><br/>
-				<span class="glyphicon glyphicon-info-sign"></span> 非专业人员不得改动
-
+			    <input type='text' name='VERIFY_SEED' value='{$Think.config.VERIFY_SEED}' class="form-control" style="width:500px;"/>
 			    </td>
 			</tr>
 

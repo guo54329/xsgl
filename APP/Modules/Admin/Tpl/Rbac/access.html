@@ -6,55 +6,49 @@
 <link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
 <link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
 <script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
-<style>
-.add-app{
-	display: block;
-	width:100px;
-	height: 28px;
-	line-height: 28px;
-	text-align: center;
-	background: #670768;
-	color: #fff;
-	border-radius: 4px;
-}
-.app{
-	padding:10px;
-	margin-top: 20px;
-	border: 1px solid #f6f6f6;
-	border-radius: 4px;
-}
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/checked.min.css">
+<script type="text/javascript" src="__PUBLIC__/Js/dtree.js"></script>
+<script src="__PUBLIC__/Js/dialog/layer.js"></script>
+<script src="__PUBLIC__/Js/dialog.js"></script>
+<script>
 
-.app p{
-	height: 30px;
-	line-height: 30px;
-}
-.app p strong{
-	font-size: 20px;
-	color: #0b99d8;
-}
-.app dl{
-	margin:10px 0;
-	border:1px solid #dcdcdc;
-	height: auto;
-	overflow: hidden;
-}
-.app dl dt{
-	display: block;
-	height: 36px;
-	line-height: 36px;
-	background: #e6e6e6;
-	text-indent: 10px;
-}
-.app dl dt strong{
-	/*margin-left: 30px;*/
-	font-size: 16px;
-	color: #61aefa;
-}
-.app dl dd{
-	/*margin-left: 60px;*/
-	padding:10px;
-	float: left;
-}
+$("input[type='checkbox']").addClass("checked-focus");
+
+$(function(){
+      $("#save").click(function(){
+	      	var count = 0;
+			var obj = document.all.authority;	
+			var arr=new Array();
+			var j=0;
+			for(i=0;i<obj.length;i++){
+				if(obj[i].checked){	
+		         	arr[j++]=obj[i].value;
+					//alert(arr[i]);
+					count ++;				
+				}
+			}	
+      		var rid=$("#rid").val().trim();
+            if(arr.length>0 && rid!=0){
+            	var url="{:U(GROUP_NAME.'/Rbac/access')}";
+				var data = {'access':arr,'rid':rid};
+		        // 执行异步请求  $.post
+		        $.post(url,data,function(result){
+		        	
+		            if(result.status == 0) {
+		                return dialog.error(result.message);
+		            }
+		            if(result.status == 1) {
+		            	//alert(result.message);
+		                return dialog.success(result.message, "{:U(GROUP_NAME.'/Rbac/role')}");
+		            }
+
+		        },'JSON');
+            }
+      });
+});
+</SCRIPT>
+
+<style>
 .headalign{
 	text-align: left;
 }
@@ -67,22 +61,6 @@
 	margin-left:-5px;margin-right:-5px;
 }
 </style>
-<script type="text/javascript">
-	
-$(function(){
-
-	$('input[level=1]').click(function(){
-		var inputs = $(this).parents('.app').find('input');
-		$(this).attr('checked')?inputs.attr('checked','checked'):inputs.removeAttr('checked');
-	});
-	$('input[level=2]').click(function(){
-		var inputs = $(this).parents('dl').find('input');
-		$(this).attr('checked')?inputs.attr('checked','checked'):inputs.removeAttr('checked');
-	});
-
-});
-
-</script>
 
 </head>
 <body>
@@ -93,34 +71,57 @@ $(function(){
 	  </div>
 	  <div class="panel-body">  
 	  注意：登录管理、首页管理、个人信息无需配置，默认不验证！
-	    <div id='wrap'>
+	   
+	   <div class="dtree">
+			<p><a href="javascript:  d.closeAll();">展开</a> | <a href="javascript: d.openAll();">收起</a></p>
+			<script type="text/javascript">
+				d = new dTree('d');
+				d.add(0,-1,'给角色配置权限');
+			</script>
+
 			<foreach name='node' item='app'>
-				<div class="app">
-					<p><strong>{$app.title}</strong>
-						<input type='checkbox' name='access[]' value='{$app.id}_1' level='1' <if condition='$app["access"]'>checked='checked'</if> /> 
-					</p>
-
-					<foreach name='app.child' item='action'>
-						<dl>
-							<dt>
-								<strong>{$action.title}</strong>
-								<input type='checkbox' name='access[]' value='{$action.id}_2' level='2' <if condition='$action["access"]'>checked='checked'</if>/>
-							</dt>
-
-							<foreach name='action.child' item='method'>
-								<dd><span>{$method.title}</span>
-								<input type='checkbox' name='access[]' value='{$method.id}_3' level='3' <if condition='$method["access"]'>checked='checked'</if>/>
-								</dd>
-							</foreach>
-						</dl>
+			    <if condition='$app["access"]'>
+					<script type="text/javascript">
+						d.add({$app.id},0,'authority',"{$app.id}_1","{$app.title}",true,false);
+					</script>
+				<else />
+					<script type="text/javascript">
+						d.add({$app.id},0,'authority',"{$app.id}_1","{$app.title}");
+					</script>
+				</if>
+				<foreach name='app.child' item='action'>
+					<if condition='$action["access"]'>
+						<script type="text/javascript">
+							d.add({$action.id},{$app.id},'authority',"{$action.id}_2","{$action.title}",true,false);	
+						</script>
+					<else />
+						<script type="text/javascript">
+							d.add({$action.id},{$app.id},'authority',"{$action.id}_2","{$action.title}");	
+						</script>
+					</if>
+					<foreach name='action.child' item='method'>
+						<if condition='$method["access"]'>
+							<script type="text/javascript">
+								d.add({$method.id},{$action.id},'authority',"{$method.id}_3","{$method.title}",true,false);
+							</script>
+						<else />
+							<script type="text/javascript">
+								d.add({$method.id},{$action.id},'authority',"{$method.id}_3","{$method.title}");
+							</script>
+						</if>		
 					</foreach>
-				</div>
+				</foreach>
 			</foreach>
-		</div><!--id wrap-->
+			<script type="text/javascript">
+				document.write(d);
+				d.openAll();
+				//-->
+			</script>
+		</div>
 	  </div>
 	  <div class="panel-footer" style="text-align: center;">
-		<input type='hidden' name='rid' value='{$rid}' />
-	  	<button type="submit" class="btn btn-info btn4"><span class="glyphicon glyphicon-check"></span> 保存配置</button>
+		<input type='hidden' id='rid' name='rid' value='{$rid}' />
+	  	<button type="button" id="save" class="btn btn-info btn4"><span class="glyphicon glyphicon-check"></span> 保存配置</button>
 	  </div>
 </div>
 </form>

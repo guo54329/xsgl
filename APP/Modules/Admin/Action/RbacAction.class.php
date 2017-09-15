@@ -328,7 +328,6 @@ Class RbacAction extends CommonAction {
 	 */
 	Public function access(){
 		if(!empty($_POST)){ //处理，为角色指定权限或者修改角色的权限
-			
 			$data = array();
 			$rid = I('rid',0,'intval');
 			foreach ($_POST['access'] as $v) {
@@ -344,10 +343,12 @@ Class RbacAction extends CommonAction {
 			$db->where(array('role_id'=>$rid))->delete();
 			//添加新的权限
 			if($db->addAll($data)){
-				$this->success('角色权限配置成功',U(GROUP_NAME.'/Rbac/role'));
+				show(1,"角色权限配置成功！");
+				//$this->success('角色权限配置成功',U(GROUP_NAME.'/Rbac/role'));
 
 			}else{
-				$this->error('角色权限配置失败');
+				show(0,"角色权限配置失败！");
+				//$this->error('角色权限配置失败');
 			}
 
 		}else{ //视图

@@ -44,7 +44,12 @@ public function saveTermH(){
     $res=0;
 	 if(!empty($_POST)){
 	 	$id=(int)$_POST['id'];
-	 	$data=array('name'=>trim($_POST['name']));
+	 	$name=trim($_POST['name']);
+	 	$data=array('name'=>$name);
+	 	//验证输入
+	 	if($name==""){
+	 		show(0,"学期不能为空！");
+	 	}
 	 	if($id==0){
 	 		//添加处理
 		 	$res=M(term)->add($data);
@@ -109,7 +114,14 @@ public function saveOfficeH(){
     $res=0;
 	 if(!empty($_POST)){
 	 	$id=(int)$_POST['id'];
-	 	$data=array('name'=>trim($_POST['name']));
+	 	$name=trim($_POST['name']);
+	 	$data=array('name'=>$name);
+	 	
+	 	//验证输入
+	 	if($name==""){
+	 		$this->error("处室名称不能为空！");
+	 	}
+
 	 	if($id==0){
 	 		//添加处理
 		 	$res=M(office)->add($data);
@@ -129,7 +141,12 @@ public function saveOfficeH(){
 public function importOffice(){
 //批量导入处室
 	if(!empty($_POST)){
-		$offices = $_POST['offices'];	    
+		$offices = trim($_POST['offices']);
+		//输入验证
+		if($offices==""){
+			$this->error("请粘贴需要导入的处室信息！");
+		}
+			    	    
 		//按行将数据保存至数组中
 		$offices = explode("\n",$offices);	
 		//对一维数组进行进一步处理，让其成为二维数组
@@ -141,9 +158,10 @@ public function importOffice(){
 		$data = array();
 		$index=0;
 	   for($i=0;$i<count($office);$i++){
-	   	   if(!empty(trim($office[$i][1]))){
+		   $name=trim($office[$i][1]);
+	   	   if(!empty($name)){
 	   	   		$data[$index++] = array(
-					'name'=>trim($office[$i][1]),
+					'name'=>$name,
 				);
 	   	   }		
     	}
@@ -171,6 +189,17 @@ public function delOffice(){
 	}
 }
 
+public function delOfficeTea(){
+//请控指定处室的教师
+	$name=$_GET['name'];
+	$num = M('teacher')->where("offname='$name'")->count();
+	if($num>0){
+		M('teacher')->where("offname='$name'")->delete();
+		$this->success($name."处室教师清空成功！",U(GROUP_NAME.'/Basicdata/office'));
+	}else{
+		$this->error($name."处室无教师！");
+	}
+}
 /**
  * 专业维护
  */
@@ -204,7 +233,14 @@ public function saveProfessionalH(){
     $res=0;
 	 if(!empty($_POST)){
 	 	$id=(int)$_POST['id'];
-	 	$data=array('name'=>trim($_POST['name']));
+	 	$name=trim($_POST['name']);
+	 	$data=array('name'=>$name);
+	 	
+	 	//验证输入
+	 	if($name==""){
+	 		$this->error("专业名称不能为空！");
+	 	}
+
 	 	if($id==0){
 	 		//添加处理
 		 	$res=M('professional')->add($data);
@@ -224,7 +260,12 @@ public function saveProfessionalH(){
 public function importProfessional(){
 //批量导入专业
 	if(!empty($_POST)){
-		$Professionals = $_POST['professionals'];	    
+		$Professionals = trim($_POST['professionals']);
+		//输入验证
+		if($Professionals==""){
+			$this->error("请粘贴需要导入的专业信息！");
+		}
+
 		//按行将数据保存至数组中
 		$Professionals = explode("\n",$Professionals);	
 		//对一维数组进行进一步处理，让其成为二维数组
@@ -235,9 +276,10 @@ public function importProfessional(){
 		$data = array();
 		$index=0;
 	   for($i=0;$i<count($Professional);$i++){
-	   		if(!empty(trim($Professional[$i][1]))){
+		    $name=trim($Professional[$i][1]);
+	   		if(!empty($name)){
 				$data[$index++] = array(
-					'name'=>trim($Professional[$i][1]),
+					'name'=>$name,
 				);
 			}
     	}
@@ -263,6 +305,18 @@ public function delProfessional(){
 		$this->success("删除成功！",U(GROUP_NAME.'/Basicdata/professional'));
 	}else{
 		$this->error("删除失败！");
+	}
+}
+
+public function delProfessionalCou(){
+//清空指定专业课程
+	$name=$_GET['name'];
+	$num = M('course')->where("proname='$name'")->count();
+	if($num>0){
+		M('course')->where("proname='$name'")->delete();
+		$this->success($name."专业课程清空成功！",U(GROUP_NAME.'/Basicdata/professional'));
+	}else{
+		$this->error($name."专业无课程！");
 	}
 }
 
@@ -312,10 +366,25 @@ public function saveCourseH(){
     $res=0;
 	 if(!empty($_POST)){
 	 	$id=(int)$_POST['id'];
+	 	$name=trim($_POST['name']);
+	 	$coursetype=trim($_POST['coursetype']);
+	 	$proname=trim($_POST['proname']);
+	 	//输入验证
+	 	if($name==""){
+	 		$this->error("课程名称不能为空！");
+	 	}
+	 	if($coursetype==""){
+	 		$this->error("请选择课程类型！");
+	 	}
+	 	if($proname==""){
+	 		$this->error("请选择课程的专业！");
+	 	}
+
+	 	//数据处理
 	 	$data=array(
-	 		'name'=>trim($_POST['name']),
-	 		'proname'=>trim($_POST['proname']),
-	 		'coursetype'=>trim($_POST['coursetype'])
+	 		'name'=>$name,
+	 		'proname'=>$proname,
+	 		'coursetype'=>$coursetype
 	 	);
 
 	 	if($id==0){
@@ -338,7 +407,11 @@ public function saveCourseH(){
 public function importCourse(){
 //批量导入课程
 	if(!empty($_POST)){
-		$courses = $_POST['courses'];	    
+		$courses = trim($_POST['courses']);
+		//验证输入
+		if($courses==""){
+			$this->error("请粘贴需要导入的课程信息！");
+		}	    
 		//按行将数据保存至数组中
 		$courses = explode("\n",$courses);	
 		//对一维数组进行进一步处理，让其成为二维数组
@@ -349,9 +422,10 @@ public function importCourse(){
 		$data = array();
 		$index=0;
 	    for($i=0;$i<count($course);$i++){
-	    	if(!empty(trim($course[$i][1]))){
+			$name=trim($course[$i][1]);
+	    	if(!empty($name)){
 	    		$data[$index++] = array(
-					'name'=>trim($course[$i][1]),
+					'name'=>$name,
 					'coursetype'=>trim($course[$i][2]),
 					'proname'=>trim($course[$i][3]),
 				);
@@ -439,16 +513,42 @@ public function saveClassesH(){
 	 if(!empty($_POST)){
 	 	$id=(int)$_POST['id'];
 	 	//某些php版本不支持explode("-",$_POST['master'])[0]的写法
+	 	if($id==0){
+	 		$ccode = trim($_POST['ccode']);
+	 		if($ccode==""){
+	 			$this->error("班级编码不能为空！");
+	 		}
+	 	}
+	 	
 	 	$master = explode("-",$_POST['master']);
 	 	$master = $master[0];
+	 	$cname = trim($_POST['cname']);
+	 	$master = trim($master);
+	 	$zjsj = trim($_POST['zjsj']);
+	 	$proname = trim($_POST['proname']);
+	 	//验证输入
+	 	if($cname==""){
+	 		$this->error("班级名称不能为空！");
+	 	}
+	 	if($master==""){
+	 		$this->error("请选择班主任！");
+	 	}
+	 	if($zjsj==""){
+	 		$this->error("请选择组建时间！");
+	 	}
+	 	if($proname==""){
+	 		$this->error("请选择班级的专业！");
+	 	}
+	 	//数据处理
 	 	$data=array(
-	 	 		'cname'=>trim($_POST['cname']),
-	 	 		'master'=>trim($master),
-	 	 		'zjsj'=>trim($_POST['zjsj']),
-	 	 		'proname'=>trim($_POST['proname'])
+	 	 		'cname'=>$cname,
+	 	 		'master'=>$master,
+	 	 		'zjsj'=>$zjsj,
+	 	 		'proname'=>$proname
 	 	 );
 	 	if($id==0){
-	 		$data['ccode']=trim($_POST['ccode']); //编辑时，由于ccode不允许改动，会被系统过滤
+	 		
+	 		$data['ccode']=$ccode; //编辑时，由于ccode不允许改动，会被系统过滤
 	 		//添加处理
 		 	$res=M('classes')->add($data);
 		}else{
@@ -467,7 +567,11 @@ public function saveClassesH(){
 public function importClasses(){
 //批量导入班级
 	if(!empty($_POST)){
-		$classesm = $_POST['classesm'];	
+		$classesm = trim($_POST['classesm']);
+		//验证输入
+		if($classesm==""){
+			$this->error("请粘贴需要导入的班级信息！");
+		}	
 		//按行将数据保存至数组中
 		$classesm = explode("\n",$classesm);	
 		//对一维数组进行进一步处理，让其成为二维数组
@@ -478,9 +582,10 @@ public function importClasses(){
 		$data = array();
 		$index=0;
 	    for($i=0;$i<count($classes);$i++){
-	    	if(!empty(trim($classes[$i][1]))){
+			$ccode=trim($classes[$i][1]);
+	    	if(!empty($ccode)){
 				$data[$index++] = array(
-					'ccode'=>trim($classes[$i][1]),
+					'ccode'=>$ccode,
 					'cname'=>trim($classes[$i][2]),
 					'master'=>trim($classes[$i][3]),
 					'zjsj'=>trim($classes[$i][4]),
@@ -512,6 +617,19 @@ public function delClasses(){
 				$this->success("删除成功！",U(GROUP_NAME.'/Basicdata/classes'));
 	}else{
 		$this->error("删除失败！");
+	}
+}
+
+public function delClassesStu(){
+//清空指定班级的学生
+	$ccode=$_GET['ccode'];
+	$cname=$_GET['cname'];
+	$num = M('student')->where("ccode='$ccode'")->count();
+	if($num>0){
+		M('student')->where("ccode='$ccode'")->delete();
+		$this->success($cname."学生清空成功！",U(GROUP_NAME.'/Basicdata/classes'));
+	}else{
+		$this->error($cname."无学生！");
 	}
 }
 /**
@@ -573,16 +691,41 @@ public function saveTeacherH(){
     $res=0;
 	 if(!empty($_POST)){
 	 	$id=(int)$_POST['id'];
-	 	$data=array(
-	 	 		'jsxm'=>trim($_POST['jsxm']),
-	 	 		'jsxb'=>trim($_POST['jsxb']),
-	 	 		'jsdh'=>trim($_POST['jsdh']),
-	 	 		'jsmm'=>'123456',
-	 	 		'offname'=>trim($_POST['offname'])
-	 	 	);
+	 	if($id==0){
+	 		$jsno = trim($_POST['jsno']);
+	 		if($jsno==""){
+	 			$this->error("教师编码不能为空！");
+	 		}
+	 	}
+ 		$jsxm=trim($_POST['jsxm']);
+ 		$jsxb=trim($_POST['jsxb']);
+ 		$jsdh=trim($_POST['jsdh']);
+ 		$offname=trim($_POST['offname']);
+ 	 	//输入验证
+ 	 	if($jsxm==""){
+ 	 		$this->error("姓名不能为空！");	
+ 	 	}
+ 	 	if($jsxb==""){
+ 	 		$this->error("性别不能为空！");	
+ 	 	}
+ 	 	if($jsdh==""){
+ 	 		$this->error("联系电话不能为空！");	
+ 	 	}
+ 	 	if($offname==""){
+ 	 		$this->error("请选择其所在处室！");	
+ 	 	}
+
+	 	//数据处理
+ 		$data=array(
+ 	 		'jsxm'=>$jsxm,
+ 	 		'jsxb'=>$jsxb,
+ 	 		'jsdh'=>$jsdh,
+ 	 		'jsmm'=>'123456',
+ 	 		'offname'=>$offname
+ 	 	);
 
 	 	if($id==0){
-	 		$data['jsno']=trim($_POST['jsno']);
+	 		$data['jsno']=$jsno;
 	 		//添加处理
 		 	$res=M('teacher')->add($data);
 		}else{
@@ -602,7 +745,10 @@ public function importTeacher(){
 //批量导入教师
 	if(!empty($_POST)){
 
-		$teachers = $_POST['teachers'];
+		$teachers = trim($_POST['teachers']);
+		if($teachers==""){
+			$this->error("请粘贴教师信息！");
+		}
 	    //p($teachers);die;
 		//按行将数据保存至数组中
 		$teachers = explode("\n",$teachers);
@@ -616,9 +762,10 @@ public function importTeacher(){
 		$data = array();
 		$index=0;
 	   for($i=0;$i<count($teacher);$i++){
-		   	if(!empty(trim($teacher[$i][1]))){
+		    $jsno=trim($teacher[$i][1]);
+		   	if(!empty($jsno)){
 		   		$data[$index++] = array(
-					'jsno'=>trim($teacher[$i][1]),
+					'jsno'=>$jsno,
 					'jsxm'=>trim($teacher[$i][2]),
 					'jsxb'=>trim($teacher[$i][3]),
 					'jsdh'=>trim($teacher[$i][4]),
@@ -803,18 +950,42 @@ public function saveStudentH(){
 	 if(!empty($_POST)){
 
 	 	$id=(int)$_POST['id'];
+	 	if($id==0){
+	 		$xsno=trim($_POST['xsno']);
+	 		if($xsno==0){
+	 			$this->error("学生编号不能为空！");
+	 		}
+	 	}
+        
+        $xsxm=trim($_POST['xsxm']);
+ 		$xsxb=trim($_POST['xsxb']);
+ 		$rxsj=trim($_POST['rxsj']);
+ 		$ccode=trim($_POST['ccode']);
+ 		//验证输入
+ 		if($xsxm==""){
+ 			$this->error("姓名不能为空！");
+ 		}
+ 		if($xsxb==""){
+ 			$this->error("请选择性别！");
+ 		}
+ 		if($rxsj==""){
+ 			$this->error("请选择学生的入学时间！");
+ 		}
+ 		if($ccode==""){
+ 			$this->error("请选择所在班级！");
+ 		}
 	 	//处理班级编号
-	 	$ccode = explode("-",$_POST['ccode']);
+	 	$ccode = explode("-",$ccode);
 	 	$ccode=$ccode[0];
 	 	$data=array(
-	 	 		'xsxm'=>trim($_POST['xsxm']),
-	 	 		'xsxb'=>trim($_POST['xsxb']),
-	 	 		'rxsj'=>trim($_POST['rxsj']),
+	 	 		'xsxm'=>$xsxm,
+	 	 		'xsxb'=>$xsxb,
+	 	 		'rxsj'=>$rxsj,
 	 	 		'xsmm'=>'123456',
-	 	 		'ccode'=>trim($ccode)
+	 	 		'ccode'=>$ccode
 	 	);
 	 	if($id==0){
-	 		$data['xsno']=trim($_POST['xsno']);
+	 		$data['xsno']=$xsno;
 	 		//添加处理
 		 	$res=M('student')->add($data);
 		}else{
@@ -833,7 +1004,10 @@ public function importStudent(){
 //批量导入学生
 	if(!empty($_POST)){
 
-		$students = $_POST['students'];
+		$students = trim($_POST['students']);
+		if($students==""){
+			$this->error("请粘贴学生信息！");
+		}
 	    
 		//按行将数据保存至数组中
 		$students = explode("\n",$students);
@@ -847,9 +1021,10 @@ public function importStudent(){
 		$data = array();
 		$index=0;
 	   for($i=0;$i<count($student);$i++){
-	   		if(!empty(trim($student[$i][1]))){
+		    $xsno=trim($student[$i][1]);
+	   		if(!empty($xsno)){
 				$data[$index++] = array(
-					'xsno'=>trim($student[$i][1]),
+					'xsno'=>$xsno,
 					'xsxm'=>trim($student[$i][2]),
 					'xsxb'=>trim($student[$i][3]),
 					'rxsj'=>trim($student[$i][4]),

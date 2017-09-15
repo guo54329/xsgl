@@ -24,6 +24,7 @@ Class CommonAction extends Action{
 
 		//用户登录之后首页显示的用户名
 		$this->assign("username",$_SESSION['username']);
+		$this->assign("role",$_SESSION['role']);
 		
 	}
 }
