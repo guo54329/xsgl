@@ -27,7 +27,7 @@ class IndexAction extends CommonAction {
 			$tea['loginip'] = get_client_ip();
 			session('tea',$tea);
 			//print_r($tea);
-			$this->success("登录成功！",U('Teacher/Index/index'));
+			$this->success("恭喜您，登录成功！",U('Teacher/Index/index'));
 			//$this->redirect('Teacher/Index/index');
 		}
 		elseif($stu){
@@ -38,7 +38,7 @@ class IndexAction extends CommonAction {
 			$stu['loginip'] = get_client_ip();
 			session('stu',$stu);
 			//print_r($stu);
-			$this->success("登录成功！",U('Student/Index/index'));
+			$this->success("恭喜您，登录成功！",U('Student/Index/index'));
 			//$this->redirect('Student/Index/index');
 		}else{
 			$this->error('用户名或密码错误！');
@@ -84,6 +84,29 @@ class IndexAction extends CommonAction {
 			}else{
 				$this->error('登录用户名或真实姓名输入有误！');
 			}
+		}
+	}
+	
+	//满意度调查
+	public function  survey()
+	{
+		if(!$_POST){
+			$this->display();
+		}else{
+			$choice=trim($_POST['choice']);
+			$content=trim($_POST['content']);
+			//输入验证
+			if($choice==""){
+				$this->error('请选择满意度！');
+			}
+			$data['title']=$choice;
+			$data['description']=$content;
+			if(M('site')->add($data)){
+				$this->success('感谢您的支持,使用愉快！',U(GROUP_NAME.'/Index/index'));
+			}else{
+				$this->error('抱歉，提交失败！');
+			}
+			
 		}
 	}
 

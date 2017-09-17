@@ -162,10 +162,9 @@ Class SystemAction extends CommonAction {
     	delDirAndFile($temppath1);
     	$temppath2 = "./Public/ExcisetempZIP";
     	delDirAndFile($temppath2);
-    	$temppath3="./Public/Upload";
-    	delDirAndFile($temppath3);
     	$this->success('系统缓存数据清除成功！',U(GROUP_NAME.'/System/install'));	
     }
+    
     public function resetUSER(){ //用户
     	$num1 = M('user')->count();
 	    if($num1>1){
@@ -197,6 +196,15 @@ Class SystemAction extends CommonAction {
 	        M()->execute("TRUNCATE xh_node");//节点
 	    }
 	    $this->success('节点数据清除成功！',U(GROUP_NAME.'/System/install'));
+    }
+    public function resetsurvey(){//富文本编辑器：消息和满意度调查产生的文件清除
+    	$num =M('site')->where('id>3')->count();
+    	if($num>0){
+    		M('site')->where('id>3')->delete();
+    	}
+    	$temppath="./Public/Upload";
+    	delDirAndFile($temppath);
+    	$this->success('消息和调查上传文件清除成功！',U(GROUP_NAME.'/System/install'));	
     }
     public function resetNEWS(){//消息
 		$num = M('news')->count();

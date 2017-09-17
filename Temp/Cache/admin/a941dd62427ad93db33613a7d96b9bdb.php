@@ -1,19 +1,19 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
 <link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
-<js file="__PUBLIC__/Js/jquery-1.8.3.min.js" />
-<js file="__ROOT__/Data/Ueditor/ueditor.config.js" />
-<js file="__ROOT__/Data/Ueditor/ueditor.all.min.js" />
+<script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Data/Ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__ROOT__/Data/Ueditor/ueditor.all.min.js"></script>
 
 <script type="text/javascript">	
 	window.UEDITOR_HOME_URL='__ROOT__/Data/Ueditor/';
 	window.onload =function(){
 		//window.UEDITOR_CONFIG.initialFrameWidth=860;
-		window.UEDITOR_CONFIG.initialFrameHeight=220;
+		window.UEDITOR_CONFIG.initialFrameHeight=240;
 		//window.UEDITOR_CONFIG.scaleEnabled=true;
 		window.UEDITOR_CONFIG.toolbars=[[
             'fullscreen', 'source', '|', 'undo', 'redo', '|',
@@ -27,11 +27,13 @@
 
 		window.UEDITOR_CONFIG.maximumWords=100000;
 		//TP里面的上传类，相关配置，此处没用到
-		  //window.UEDITOR_CONFIG.imageUrl="{:U(GROUP_NAME.'/Blog/upload')}"; 
+		  //window.UEDITOR_CONFIG.imageUrl="<?php echo U(GROUP_NAME.'/Blog/upload');?>"; 
 		  //window.UEDITOR_CONFIG.imagePath='__ROOT__/uploads/';
 
 		//图片保存路径直接在Ueditor/php/config.json中配置imagePathFormat的值
 		UE.getEditor('content'); //实例化编辑器
+
+	
 	}
 
 </script>
@@ -51,38 +53,41 @@
 </style>
 </head>
 <body>
-<form action='{:U(GROUP_NAME.'/Home/addNews')}' method='post'>
+<form action='<?php echo U(GROUP_NAME.'/Home/editNews');?>' method='post'>
+<input type="hidden" name="id" value="<?php echo ($n["id"]); ?>" />
 <div class="panel panel-default">
-	  <div class="panel-heading headalign">
-		<a class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 发布消息</a>
+	 <div class="panel-heading headalign">
+		<a href="<?php echo U(GROUP_NAME.'/Home/News');?>" class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 消息列表</a><span class="btn xiexian">/</span><a  class="btn btn4">修改消息</a>
 	  </div>
 	  <div class="panel-body">
 		<table class='table table-bordered table-hover'>	
 			<tr>
 				<td align='right' width='20%'>标题</td>
-				<td><input type="text" placeholder="请输入标题" name="title" id="title" class="form-control" style="width: 500px;"/>
+				<td><input type="text"  name="title" id="title"  value="<?php echo ($n["title"]); ?>" class="form-control" style="width: 500px;"/>
 			</tr>
 			<tr><td align='right'>接收对象</td>
-				<td><select id="pubtype" name="pubtype" class="form-control" style="width: 500px;">
-						<option value="">请选择接收对象</option>
-						<option value="1">所有教师和学生</option>
-						<option value="2">所有教师</option>
-						<option value="3">所有学生</option>
+				<td>
+				
+				<select id="pubtype" name="pubtype" class="form-control" style="width: 500px;">
+						
+						<option value="1" <?php if($n['pubtype'] == 1): ?>selected='selected'<?php endif; ?>  >所有教师和学生</option>
+						<option value="2" <?php if($n['pubtype'] == 2): ?>selected='selected'<?php endif; ?> >所有教师</option>
+						<option value="3" <?php if($n['pubtype'] == 3): ?>selected='selected'<?php endif; ?> >所有学生</option>
 						
 					</select>
 					
 				</td>
 			</tr>
 			<tr>
-				<td align='right'>内容<br/><br/><br/>推荐字号<br/>字号<=16px </td>
-				<td width='70%'><textarea name='content' id='content' placeholder="不推荐使用富文本"></textarea></td>
+				<td align='right'>内容</td>
+				<td width='70%'><textarea name='content' id='content'><?php echo ($n["content"]); ?></textarea></td>
 			</tr>
 
 		</table>	
 	  </div>
-	  
+	  <span id="ddjjid"></span>
 	  <div class="panel-footer" style="text-align: center;">
-			<button type='submit' class="btn btn-info"><span class="glyphicon glyphicon-check"></span> 提交</button>
+			<button type='submit' class="btn btn-info browse"><span class="glyphicon glyphicon-check"></span> 提交修改</button>
 	  </div>
 </div>
 </form>

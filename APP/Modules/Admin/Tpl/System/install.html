@@ -52,7 +52,7 @@
 			        	<a href="{:U(GROUP_NAME.'/System/resetROLE')}" class="btn btn-info btn6" ><span class="glyphicon glyphicon-retweet"></span> 角色数据清空</a>   <span class="glyphicon glyphicon-info-sign"></span>  同时删除已分配的权限
 			        </span>
 			         <span class="pos">
-			       		 <a href="{:U(GROUP_NAME.'/System/resetNODE')}" class="btn btn-info btn6" ><span class="glyphicon glyphicon-retweet"></span> 节点数据清空</a>  <span class="glyphicon glyphicon-info-sign"></span> 此操作仅为开发者admin使用!
+			       		 <!-- <a href="{:U(GROUP_NAME.'/System/resetNODE')}" class="btn btn-info btn6" > --><span class="glyphicon glyphicon-retweet"></span> 节点数据清空<!-- </a> -->  <span class="glyphicon glyphicon-info-sign"></span> 此操作仅为<b>开发者admin</b>使用!
 			       	</span>
 				</td>
 			</tr>
@@ -61,6 +61,9 @@
 			    <h3>系统消息管理</h3>
 			     	<span class="pos">
 			        	<a href="{:U(GROUP_NAME.'/System/resetNEWS')}" class="btn btn-info btn6"><span class="glyphicon glyphicon-retweet"></span> 消息数据清空</a>   <span class="glyphicon glyphicon-info-sign"></span> 删除管理员和教师发布的消息
+			        </span>
+			        <span class="pos">
+			        	<a href="{:U(GROUP_NAME.'/System/resetsurvey')}" class="btn btn-info btn6"><span class="glyphicon glyphicon-retweet"></span> 调查数据清空</a>   <span class="glyphicon glyphicon-info-sign"></span> 满意度调查,删除数据库记录和使用UE上传的所有文件(含发布消息时上传的文件)
 			        </span>
 			    </td>
 			</tr>

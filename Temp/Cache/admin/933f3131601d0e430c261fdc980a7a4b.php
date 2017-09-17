@@ -1,13 +1,13 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
 <link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
-<js file="__PUBLIC__/Js/jquery-1.8.3.min.js" />
-<js file="__ROOT__/Data/Ueditor/ueditor.config.js" />
-<js file="__ROOT__/Data/Ueditor/ueditor.all.min.js" />
+<script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Data/Ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__ROOT__/Data/Ueditor/ueditor.all.min.js"></script>
 
 <script type="text/javascript">	
 	window.UEDITOR_HOME_URL='__ROOT__/Data/Ueditor/';
@@ -27,7 +27,7 @@
 
 		window.UEDITOR_CONFIG.maximumWords=100000;
 		//TP里面的上传类，相关配置，此处没用到
-		  //window.UEDITOR_CONFIG.imageUrl="{:U(GROUP_NAME.'/Blog/upload')}"; 
+		  //window.UEDITOR_CONFIG.imageUrl="<?php echo U(GROUP_NAME.'/Blog/upload');?>"; 
 		  //window.UEDITOR_CONFIG.imagePath='__ROOT__/uploads/';
 
 		//图片保存路径直接在Ueditor/php/config.json中配置imagePathFormat的值
@@ -51,7 +51,7 @@
 </style>
 </head>
 <body>
-<form action='{:U(GROUP_NAME.'/Home/addNews')}' method='post'>
+<form action='<?php echo U(GROUP_NAME.'/Home/addNews');?>' method='post'>
 <div class="panel panel-default">
 	  <div class="panel-heading headalign">
 		<a class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 发布消息</a>
