@@ -41,11 +41,11 @@ public function coursetableSave(){
         $js = trim($_POST['js']);
         $jsno=explode('-',$js);
         $jsno = $jsno[0]; //教师编号
-        $ccode = explode('-',$_POST['ccode']);
+        $ccode = trim($_POST['ccode']);
+        $ccode = explode('-',$ccode);
         
         $ccode =$ccode[0];//班级编码
         $term=trim($_POST['term']);
-        $ccode=trim($_POST['ccode']);
         $kc = trim($_POST['kc']);
         //验证输入
         if($term==""){
@@ -67,6 +67,14 @@ public function coursetableSave(){
             'coursename'=>$kc,
             'term'=>$term
         );
+
+        //查重
+        $count= M('sxsetcourse')->where("jsno='$jsno' and ccode='$ccode' and coursename='$kc' and term='$term'")->count();
+        if($count>0){
+            $this->error('该条记录已存在！');
+        }
+        
+        //插入
         if(M('sxsetcourse')->add($data)){
             $this->success('提交成功！',U(GROUP_NAME.'/Excise/courseTable'));
         }else{

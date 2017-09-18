@@ -59,6 +59,13 @@ public function coursetableSave(){
           'coursename'=>$kc,
           'term'=>$term
         );
+        //查重
+        $count= M('sxsetcourse')->where("jsno='$jsno' and ccode='$ccode' and coursename='$kc' and term='$term'")->count();
+        if($count>0){
+            $this->error('该条记录已存在！');
+        }
+
+        //插入
         if(M('sxsetcourse')->add($data)){
             $this->success('添加课程表成功！',U(GROUP_NAME.'/Excise/courseTable'));
         }else{
