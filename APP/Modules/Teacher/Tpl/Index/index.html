@@ -8,21 +8,20 @@
 <script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="__PUBLIC__/Js/menu.js"></script>
 <script type="text/javascript" src="__PUBLIC__/Js/time.js"></script>
-<!--
-<script type="text/javascript">
-	$(function(){
 
-		$(".subm").click(function(){
-			var dis = $(".ssubm").css('display','none');
-			 if(dis=='none'){
-			 	$(".ssubm").show();
-			 }else{
-				$(".ssubm").hide();
-			 }
-		});
-	});
-</script>
--->
+<!--[if lt IE 9]>
+      <script src="__PUBLIC__/Js/html5shiv.min.js"></script>
+      <script src="__PUBLIC__/Js/respond.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+      <script src="__PUBLIC__/Js/jquery.placeholder.min.js"></script>
+	  <script src="__PUBLIC__/Js/backgroundsize.min.htc"></script>	  
+      <script>
+        $(function(){ $('input, textarea').placeholder(); });
+      </script>
+	  
+ <![endif]-->
 </head>
 
 <body onload="startTime()">

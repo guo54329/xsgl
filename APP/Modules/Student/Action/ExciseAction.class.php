@@ -30,107 +30,70 @@ public function sxsubexciseList(){
     $this->display();
 }
 //学生作业提交处理
-public function uploadfile(){
-    $file = $_FILES['Filedata'];
-    /*
-    //下面两个判断失效
-    if($file['name']==""||$file['error']==4){
-        echo "任务必须上传!" ;
-    }
-    if($file['size']>102400000){
-        echo "附件大小不能超过100MB!";
-    }
-    
-    $fileext = explode('.',$file['name']);  
-    $fileext = strtolower($fileext[count($fileext)-1]);
-    $filedenyext = array('php','txt','html','htm');
-    if(in_array($fileext, $filedenyext)){
-        echo "文件类型不支持(php、txt、html、htm),请压缩为zip再上传!";
-    }
-    */
-    
-    $verifyToken = md5('unique_salt' . $_POST['timestamp']);
-    //作业提交处理
-    if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
-        $seid=$_POST['seido'];//uploady里面的一个值
-        $peid=M('sxsubexcise')->field('peid')->find($seid);
-        $peid = $peid['peid'];
+public function sxsubexciseDo(){
+
+    if(!empty($_POST)){
+        $desc =trim($_POST['desc']);
+        if($desc=='0'){
+          $this->error("请进行自我评价！");
+        }
+        
+        //获取上传作业
+        $file = $_FILES['file_upload'];
+
+        if($file['name']==""){
+            $this->error("请上传任务作业！");
+        }
+        if($file['size']>512000000){
+            $this->error("附件不能超过500MB！");
+        }
+
 //注意：学生提交作业时使用的是任务附件的保存路径
 //如果发布的任务没有附件，则相应没有文件保存路径，学生的作业也就没路径可以提交了，所以每次会提交失败。
 //处理办法：教师发布任务时，必须发布附件(至少附件中的内容可以是任务表述或要求)
-        $url = M('sxpubexcise')->field('url,filename')->find($peid);
-        $filepath=$url['url'];
-        $attachname=$url['filename'];
-        
-        $uptime=substr($attachname,0,14);
-        session('uptime',$uptime);//用于上传文件定义
-        
-        import('ORG.Net.UploadFile'); //载入TP上传类
-        session('peid',$peid);//用于上传文件定义
+//
+        $seid=$_POST['seid'];
+        $peid=M('sxsubexcise')->field('peid')->find($seid);
+        $peid = $peid['peid'];
+		    session('peid',$peid);//用于上传文件定义
+        $url = M('sxpubexcise')->field('url')->find($peid);
+        $filepath=$url['url']; 
+        //作业提交处理
+        import('ORG.Net.UploadFile'); //载入TP上传类 
         $uploadfile = new UploadFile();
+        $uptime=date("YmdHis");
+        session('uptime',$uptime);//用于定义教师上传附件的名称（决定先后次序）
         $uploadfile->saveRule ='definefilename'; 
         $info = $uploadfile->uploadOne($file,$filepath);
         if($info){ //上传成功
-            $filename=$info[0]['savename']; 
-            //准备保存数据
-            $data=array(
-            'seid'=>$seid,
-            'filename'=>$filename,
-            );
-            M('sxsubexcise')->save($data);
-            echo $seid;
-        }else{
-          echo "您的作业上传失败！";
-        }
-    }
-}
-public function sxsubexciseDo(){
-    if(!empty($_POST)){
-        $seid=$_POST['seid'];//隐藏域中的seid
-        if($seid==0){ 
-            $this->error("请上传您的作业！");
-        }
         
-        $desc =$_POST['desc'];
-        if($_POST['desc']=='0'){
-            //删除上传文件和记录
-            $file = M('sxsubexcise')->field('filename,peid')->find($seid);
-            $filename = $file['filename'];
-            $peid = $file['peid'];
-            $url = M('sxpubexcise')->field('url')->find($peid);
-            $filepath=$url['url'];
-            $file = $filepath.$filename;
-            unlink($file);//删除附件
+              $filename=$info[0]['savename']; 
+              //准备保存数据
+              $data=array(
+              'seid'=>$seid,
+              'desc'=>$desc,
+              'filename'=>$filename,
+              'status'=>1,
+              'subtime'=>time(),
+              );
+              $id = M('sxsubexcise')->save($data);
+              if($id>0){
+                $this->success("作业提交成功！",U(GROUP_NAME."/Excise/sxsubexciseList"));
+              }else{
+                $this->error("作业提交失败！");
+              }
 
-            $data=array(
-            'seid'=>$seid,
-            'filename'=>''
-            );
-            M('sxsubexcise')->save($data);
-            $this->error("请先自我评价后重新上传作业！");
+        }else{
+          $this->error("附件上传失败！");
         }
-        if($seid!=0 && $_POST['desc']!='0'){
-            //准备保存数据
-            $data=array(
-            'seid'=>$seid,
-            'desc'=>$desc,
-            'status'=>1,
-            'subtime'=>time(),
-            );
-            $id = M('sxsubexcise')->save($data);
-            $this->display();
-            if($id>0){
-              $this->success("您的作业提交成功！",U(GROUP_NAME."/Excise/sxsubexciseList"));
-            }else{
-              $this->error("您的作业提交失败！");
-            }
-        }
+     
     }else{
         $seid=$_GET['seid'];
         $this->assign('seid',$seid);
         $this->display();
     }
 }
+
 //学生作业描述
 public function sxsubexciseDesc(){
 		//作业提交视图

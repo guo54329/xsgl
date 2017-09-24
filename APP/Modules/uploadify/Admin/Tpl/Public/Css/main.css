@@ -1,0 +1,34 @@
+
+	body{
+		font-family:Microsoft YaHei,Verdana,Arial,SimSun;padding-bottom:40px;
+	}
+	.panel{
+		margin-top:-16px; 
+	}
+	.panel-heading{
+		font-size: 16px;   
+	}
+	/*.panel-footer,.panel-heading{
+		text-align: center;
+	}*/
+	.btn{
+		width: 70px;
+		height: 30px;
+		padding:5px;
+		text-align:center;
+	}
+	.btn4{
+		width:90px;
+	}
+	tr{
+		text-align: center;
+	}
+	.form-inline{
+		text-align: left;
+	}
+	.op{
+		text-align: left;
+	}
+	
+
+

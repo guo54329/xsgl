@@ -1,0 +1,105 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
+<link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
+<style>
+input{
+	width:30px;
+	height: 24px;
+	font-weight: normal;
+}
+.app{
+	padding:10px;
+	margin-top: 20px;
+	border: 1px solid #f6f6f6;
+	border-radius: 4px;
+}
+
+.app p{
+	height: 24px;
+	line-height: 24px;
+}
+.app p strong{
+	font-size: 16px;
+	color: #0b99d8;
+}
+.app dl{
+	margin:10px 0;
+	border:1px solid #dcdcdc;
+	height: auto;
+	overflow: hidden;
+}
+.app dl dt{
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	background: #e6e6e6;
+	text-indent: 10px;
+}
+.app dl dt strong{
+	/*margin-left: 30px;*/
+	font-size: 14px;
+	color: #61aefa;
+}
+.app dl dd{
+	/*margin-left: 60px;*/
+	padding:10px;
+	float: left;
+}
+.btn1{
+	height: 30px;
+	width: 25px;
+}
+.btn5{
+	width: 100px;
+}
+.btn6{
+	width: 116px;
+}
+.aa span{
+	display: inline-block;
+	padding-left: 0px;
+	margin-left:-20px; 
+}
+.panel-body{
+	margin-top:-30px; 
+}
+</style>
+</head>
+<body>
+<div class="panel panel-default">
+	  <div class="panel-heading headalign">
+		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 个人权限</a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-default text-left">当前节点个数 {$num}</span>
+	  </div>
+	  <div class="panel-body">
+			<foreach name='node' item='app'>
+				<div class="app">
+				    <div class="form-inline">
+						<p><strong>{$app.title}</strong></p>
+					</div>
+					<foreach name='app.child' item='action'>
+						<dl> 
+							<dt>
+								<div class="form-inline">
+									<strong>{$action.title}</strong>
+								</div>
+								
+							</dt>
+  							
+							<foreach name='action.child' item='method'>
+							    <div class="form-inline">
+									<dd><span>{$method.title}</span></dd>
+								</div>
+							</foreach>
+						</dl>
+					</foreach>
+				</div>
+			</foreach>
+			
+	  </div>
+</div>
+</body>
+</html>

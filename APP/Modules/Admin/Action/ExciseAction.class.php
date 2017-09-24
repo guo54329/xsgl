@@ -169,75 +169,12 @@ public function sxpubexciseList(){
     $this->display();
 }
 
-//添加和修改指定课程的任务 
-//先自动上传附件
-public function uploadfile(){
-    
-	$file = $_FILES['Filedata'];
-  	
-  	/*
-  	if($file['name']==""||$file['error']==4){
-      	$this->error("任务附件必须上传！");
-  	}
-  	if($file['size']>102400000){
-   	   $this->error("附件大小不能超过100MB！");
-  	} 
-  	$fileext = explode('.',$file['name']);  
-  	$fileext = strtolower($fileext[count($fileext)-1]);
-  	$filedenyext = array('php','txt','html','htm');
-  	if(in_array($fileext, $filedenyext)){
-      	$this->error("文件类型不支持,请压缩为zip再上传！");
-  	}
-    */
-	  $verifyToken = md5('unique_salt' . $_POST['timestamp']);
-	  $scid = (int)$_POST['scid'];//课程id
-    $courseinfo = M('sxsetcourse')->field('term,jsno,coursename')->find($scid);//在课程表获取该课程的信息
-    $coursename = $courseinfo['coursename'];//课程名称
-    $term = $courseinfo['term'];//学期
-    $jsno = $courseinfo['jsno'];//教师编码
-          
-    $jsxm = M('teacher')->where("jsno='$jsno'")->field("jsxm")->find();
-    $jsxm =$jsxm['jsxm'];//教师姓名
-           
-    import('Class.Pinyin',APP_PATH);//引入中英文转换类
-    $py = new PinYin();
-    $jsxmpinyin = $py->getAllPY($jsxm);//将中文的教师姓名转换为拼音
-    session('jsxmpy',$jsxmpinyin);//上传附件名称定义
-    $coursenamepinyin = $py->getAllPY($coursename);//将中文的课程名称转换为拼音
-    //定义上传文件的路径,该路径还用于学生作业上交
-    $js=$jsno.'-'.$jsxmpinyin;
-    $uptime=date("YmdHis");
-    session('uptime',$uptime);//用于上传文件名的定义
-    $filepath="./Public/Excise/".$term."/".$js."/".$coursenamepinyin."/".$uptime."/";
-    //echo $filepath;die;
-
-	if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
-		import('ORG.Net.UploadFile'); //载入TP上传类
-		$uploadfile = new UploadFile();
-        $uploadfile->uploadReplace=true;//允许同名文件覆盖
-        $uploadfile->saveRule ='definefilename';  //文件命名自定义：在functon里面定义
-        if($info = $uploadfile->uploadOne($file,$filepath)){ //上传成功
-           $filename=$info[0]['savename']; 
-            //准备保存数据
-            $data['scid']=$scid;
-            $data['url']=$filepath;
-            $data['filename']=$filename;
-			$peid = M('sxpubexcise')->add($data); 
-            echo $peid;
-            
-        }else{
-        	echo '上传失败!';
-        }
-	}
-
-}
-//再保存记录     
-public function sxpubexciseSave(){ 
-   
-   if(!empty($_POST)){
-   	  $peid=$_POST['peid'];
+//添加和指定课程的任务 
+public function sxpubexciseSave(){   
+  if(!empty($_POST)){
       $title=trim($_POST['title']);
       $desc= trim($_POST['desc']);
+      $file = $_FILES['file_upload'];
       //输入验证
       if($title==""){
           $this->error("请输入任务标题！");
@@ -245,29 +182,67 @@ public function sxpubexciseSave(){
       if($desc==""){
           $this->error("请输入任务描述！");
       }
-      if($peid==0){
-          $this->error("请上传任务附件！");
+      if($file['name']==""||$file['error']==4){
+          $this->error("任务附件必须上传！");
       }
-      //数据处理
-      $pubtime=time();
-      
-      $sql="UPDATE `xh_sxpubexcise` SET `title` = '$title', `desc` = '$desc', `pubtime` = '$pubtime' WHERE `peid` = $peid";   
-      if(M()->execute($sql)){
-          $this->success("添加任务成功,请发布！",U(GROUP_NAME."/Excise/sxpubexciseList",array('scid'=>$_POST['scid'])));
-      }else{
-          $this->error("添加任务失败！");
+      if($file['size']>102400000){
+          $this->error("附件大小不能超过100MB！");
       }
-   }else{
-      //发布任务视图
-		$scid = (int)$_GET['scid'];
-	    $coursename = M('sxsetcourse')->field('coursename,jsno')->find($scid);
-	    $this->assign('coursename',$coursename['coursename']);
-	    session('sxpubjsno',$coursename['jsno']);
-	    $this->assign('scid',$scid);
-	    $this->display();
-   } 
-}
+   
+       //上传附件
+      $scid = (int)$_POST['scid'];//课程id
+      $courseinfo = M('sxsetcourse')->field('term,jsno,coursename')->find($scid);//在课程表获取该课程的信息
+      $coursename = $courseinfo['coursename'];//课程名称
+      $term = $courseinfo['term'];//学期
+      $jsno = $courseinfo['jsno'];//教师编码
+            
+      $jsxm = M('teacher')->where("jsno='$jsno'")->field("jsxm")->find();
+      $jsxm =$jsxm['jsxm'];//教师姓名
+             
+      import('Class.Pinyin',APP_PATH);//引入中英文转换类
+      $py = new PinYin();
+      $jsxmpinyin = $py->getAllPY($jsxm);//将中文的教师姓名转换为拼音
+      $coursenamepinyin = $py->getAllPY($coursename);//将中文的课程名称转换为拼音
+      //定义上传文件的路径,该路径还用于学生作业上交
+      $js=$jsno.'-'.$jsxmpinyin;
+      $uptime=date("YmdHis");
+      session('uptime',$uptime);//用于定义教师上传附件的名称（决定先后次序）
+      $filepath="./Public/Excise/".$term."/".$js."/".$coursenamepinyin."/".$uptime."/";
+      //echo $filepath;die;
 
+      if (!empty($_FILES)) {
+          import('ORG.Net.UploadFile'); //载入TP上传类
+          $uploadfile = new UploadFile();
+          $uploadfile->uploadReplace=true;//允许同名文件覆盖
+          $uploadfile->saveRule ='definefilename';  //文件命名自定义：在functon里面定义
+          if($info = $uploadfile->uploadOne($file,$filepath)){ //上传成功
+               $filename=$info[0]['savename']; 
+              //准备保存数据
+              $data['scid']=$scid;
+              $data['title']=$title;
+              $data['desc']=$desc;
+              $data['url']=$filepath;
+              $data['filename']=$filename;
+              $data['pubtime']=time();
+              if(M('sxpubexcise')->add($data)){
+                  $this->success("任务添加成功！",U(GROUP_NAME."/Excise/sxpubexciseList",array('scid'=>$scid)));
+              }else{
+                  $this->error("任务添加失败!");
+              }
+              
+          }else{
+             $this->error("任务附件上传失败!");
+          }
+      }    
+  }else{
+        //发布任务视图
+        $scid = (int)$_GET['scid'];
+        $coursename = M('sxsetcourse')->field('coursename')->find($scid);
+        $this->assign('coursename',$coursename['coursename']);
+        $this->assign('scid',$scid);
+        $this->display();
+  } 
+}
 //任务克隆
 public function sxpubexciseClone(){//克隆视图
     if($_POST['scidlist'] || !empty($_POST['peid'])){
