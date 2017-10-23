@@ -151,6 +151,57 @@ Class SystemAction extends CommonAction {
 			$this->display();			
     	}  
     }
+    public function uejson(){
+    	//UE的JSON文件位置，包含文件
+    	$filename= './Data/Ueditor/php/config.json'; 
+    	$content = file_get_contents($filename);
+    	$jsonArr = json_decode($content,true);
+
+    	if(!empty($_POST)){
+
+    		$jsonArr['imagePathFormat'] =$_POST['imagePathFormat'];
+    		$jsonArr['imageMaxSize']    =$_POST['imageMaxSize'];
+    		$jsonArr['imageAllowFiles'] =strToArr($_POST['imageAllowFiles']);
+    		$jsonArr['scrawlPathFormat']=$_POST['scrawlPathFormat'];
+    		$jsonArr['scrawlMaxSize']   =$_POST['scrawlMaxSize'];
+    		$jsonArr['snapscreenPathFormat']=$_POST['snapscreenPathFormat'];
+    		$jsonArr['catcherPathFormat']=$_POST['catcherPathFormat'];
+    		$jsonArr['catcherMaxSize']   =$_POST['catcherMaxSize'];
+    		$jsonArr['catcherAllowFiles'] =strToArr($_POST['catcherAllowFiles']);
+    		$jsonArr['videoPathFormat']   =$_POST['videoPathFormat'];
+    		$jsonArr['videoMaxSize']      =$_POST['videoMaxSize'];  		
+    		$jsonArr['videoAllowFiles']   =strToArr($_POST['videoAllowFiles']);
+    		$jsonArr['filePathFormat']    =$_POST['filePathFormat'];
+    		$jsonArr['fileMaxSize']       =$_POST['fileMaxSize'];
+    		$jsonArr['fileAllowFiles']    =strToArr($_POST['fileAllowFiles']);
+    		$jsonArr['imageManagerListPath']=$_POST['imageManagerListPath'];
+    		$jsonArr['imageManagerListSize']=$_POST['imageManagerListSize'];
+    		$jsonArr['imageManagerAllowFiles']=strToArr($_POST['imageManagerAllowFiles']);
+    		$jsonArr['fileManagerListPath']  =$_POST['fileManagerListPath'];
+    		$jsonArr['fileManagerListSize']  =$_POST['fileManagerListSize'];
+    		$jsonArr['fileManagerAllowFiles']=strToArr($_POST['fileManagerAllowFiles']);
+
+    		$jsonStr = json_encode($jsonArr,true);
+    		$jsonStr = str_replace("\\n","",$jsonStr);
+    		$jsonStr = str_replace("\\t","",$jsonStr);
+			$jsonStr = str_replace("\\","",$jsonStr);
+			//echo $jsonStr;die;
+			//$jsonStr = substr($jsonStr,1);
+			//$jsonStr = substr($jsonStr,0,$jsonStr.length-1);
+
+    		@unlink($filename);//删除原先的配置文件
+    		file_put_contents($filename,$jsonStr);
+    		$this->success("UE参数配置成功！",U(GROUP_NAME.'/System/uejson'));
+    	
+
+    	}else{
+    		
+    		$this->assign('uejson',$jsonArr);
+    		$this->display();
+    	}
+    	
+    }
+ /*******************************分隔线********************************/   
     public function install(){
     	//系统部署时设置，清空演示数据视图
     	$this->display();

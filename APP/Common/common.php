@@ -4,6 +4,28 @@
 	   if(empty($str)) return '';
 	   return  iconv('gb2312', 'utf-8', $str);
 	}
+    
+    //将数组转换为字符串
+    function arrToStr($arr){
+
+    	$str = '';
+    	for($i=0;$i<count($arr)-1;$i++) {
+    		$str = $str.$arr[$i].'|';
+    	}
+    	$str = $str.$arr[$i];
+    	return $str;
+
+    }
+    //将字符串转换为数组
+    function strToArr($str){
+    	//$arr=array();
+    	$arr = explode('|',$str); 
+    	for($i=0;$i<count($arr);$i++){
+    		$arr[$i] = trim($arr[$i]);
+    	}
+    	return $arr;
+    }
+
     //打印：主要用于测试获取的数据是否正常
     function p($arr){
   	   echo '<pre>' .print_r($arr,true).'</pre>';

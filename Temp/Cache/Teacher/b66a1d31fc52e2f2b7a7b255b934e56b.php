@@ -133,7 +133,8 @@ $(function() {
 				  
 				   <a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$v['scid']));?>" class="btn btn-default btnw" ><span class="glyphicon glyphicon-eye-open"></span> 任务列表</a>&nbsp;
 
-					<?php if( $pubnum != 0): ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxcoursePackage',array('scid'=>$v['scid']));?>" class="btn btn-default btnw" title="将该课程所有任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 资料存档</a><?php endif; ?>&nbsp;
+					<?php if( $pubnum != 0): ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxfinishCount',array('scid'=>$v['scid']));?>" class="btn btn-default btnw" title="将课程任务完成情况统计下载！"><span class="glyphicon glyphicon-save"></span> 任务统计</a>&nbsp;
+						<a href="<?php echo U(GROUP_NAME.'/Excise/sxcoursePackage',array('scid'=>$v['scid']));?>" class="btn btn-default btnw" title="将该课程所有任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 资料存档</a><?php endif; ?>&nbsp;
 					<?php if( $pubnum == 0): ?><a href="<?php echo U(GROUP_NAME.'/Excise/delcourseTable',array('id'=>$v['scid']));?>" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> 删除</a><?php endif; ?>
 				</td>
 			</tr>

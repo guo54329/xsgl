@@ -7,10 +7,47 @@
 <link rel="stylesheet" href="__PUBLIC__/Css/main.css" />
 <script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/checked.min.css">
-<script type="text/javascript" src="__PUBLIC__/Js/dtree.js"></script>
+
 <script src="__PUBLIC__/Js/dialog/layer.js"></script>
 <script src="__PUBLIC__/Js/dialog.js"></script>
 <script>
+// Tree object
+function dTree(objName) {
+	this.config = {
+		target				: null,
+		folderLinks			: false,
+		useSelection		: false,
+		useCookies			: false,
+		useLines			: true,
+		useIcons			: false,
+		useStatusText		: true,
+		closeSameLevel		: false,
+		inOrder				: false
+	}
+	this.icon = {
+		root		: '__PUBLIC__/Images/img/base.gif',
+		folder		: '__PUBLIC__/Images/img/folder.gif',
+		folderOpen	: '__PUBLIC__/Images/img/folderopen.gif',
+		node		: '__PUBLIC__/Images/img/page.gif',
+		empty		: '__PUBLIC__/Images/img/empty.gif',
+		line		: '__PUBLIC__/Images/img/line.gif',
+		join		: '__PUBLIC__/Images/img/join.gif',
+		joinBottom	: '__PUBLIC__/Images/img/joinbottom.gif',
+		plus		: '__PUBLIC__/Images/img/plus.gif',
+		plusBottom	: '__PUBLIC__/Images/img/plusbottom.gif',
+		minus		: '__PUBLIC__/Images/img/minus.gif',
+		minusBottom	: '__PUBLIC__/Images/img/minusbottom.gif',
+		nlPlus		: '__PUBLIC__/Images/img/nolines_plus.gif',
+		nlMinus		: '__PUBLIC__/Images/img/nolines_minus.gif'
+	};
+	this.obj = objName;
+	this.aNodes = [];
+	this.aIndent = [];
+	this.root = new Node(-1);
+	this.selectedNode = null;
+	this.selectedFound = false;
+	this.completed = false;
+};
 
 $("input[type='checkbox']").addClass("checked-focus");
 
@@ -47,7 +84,7 @@ $(function(){
       });
 });
 </SCRIPT>
-
+<script type="text/javascript" src="__PUBLIC__/Js/dtree.js"></script>
 <style>
 .headalign{
 	text-align: left;

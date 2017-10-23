@@ -6,6 +6,7 @@ Class CommonAction extends Action{
 		if(!isset($_SESSION[C('USER_AUTH_KEY')])) {
 			$this->redirect(GROUP_NAME.'/Login/index');
 		}
+
 		// echo ACTION_NAME;die;
 		$notAuth = in_array(MODULE_NAME, explode(',',C('NOT_AUTH_MODULE'))) || in_array(ACTION_NAME, explode(',', C('NOT_AUTH_ACTION')));
 
@@ -15,6 +16,9 @@ Class CommonAction extends Action{
 			RBAC::AccessDecision(GROUP_NAME) || $this->error('没有权限！');
 		}
 
+		//调用公共函数读物UE的json配置文件内容进行修改
+		//configUeditorJson();
+        
 		//查询站点信息
 		$g_site =M('site')->find(1);
 		$this->assign("g_site",$g_site);

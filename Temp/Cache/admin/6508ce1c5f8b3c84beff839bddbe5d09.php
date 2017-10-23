@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -82,12 +82,12 @@ $(function() {
 		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 教师课表</a>
 		<span style="float: right;">
 	     	<button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>
-			<a href="{:U(GROUP_NAME.'/Excise/coursetableSave')}" class="btn btn-info btn4"><span class="glyphicon glyphicon-plus"></span> 添加课程</a>
+			<a href="<?php echo U(GROUP_NAME.'/Excise/coursetableSave');?>" class="btn btn-info btn4"><span class="glyphicon glyphicon-plus"></span> 添加课程</a>
 	     	<div style="display: none;">如想导出，请直接选择复制下表中的数据粘贴到Excel表中即可！</div>
 	     </span>
 	  </div>
 	  <div class="form-inline">
-		<form action='{:U(GROUP_NAME.'/Excise/courseTable')}' method="post">
+		<form action='<?php echo U(GROUP_NAME.'/Excise/courseTable');?>' method="post">
              <span class="bpx">
 			 提示：请选择其中一种方式，然后单击查询！
 			</span>
@@ -139,46 +139,31 @@ $(function() {
 			<tr><th style="text-align: center;" width="6%">ID</th><th style="text-align: center;">学期</th><th style="text-align: center;" width="12%">任课教师</th><th style="text-align: center;">班级</th><th style="text-align: center;">课程</th><th style="text-align: center;" width="12%">任务数量</th><td style="text-align: center;font-weight: bold;">操作</td></tr>
 			</thead>
 			<tbody id="tob">
-			<foreach name='coursetable' item='v'>
-				<php>
-			  	 $tr = substr($v['term'],10,1);
-			  	</php>
-				<tr <if condition="$tr eq 1"> class="trColor"</if>  >
-				<td>{$v.scid}</td>
-				<td>{$v.term}</td>
-				<td>{$v.jsxm}</td>
-				<td>{$v.cname}</td>
-				<td>{$v.coursename}</td>
-				<td><php>   
-				        $i=0; 
-						$scid = $v['scid'];
-    					$pubnum = M('sxpubexcise')->where("scid=$scid")->count();
-    					
-    					if($pubnum>0)$i=1;
-    				</php>
-    				<span class="numColor{$i}">{$pubnum}</span>
+			<?php if(is_array($coursetable)): foreach($coursetable as $key=>$v): $tr = substr($v['term'],10,1); ?>
+				<tr <?php if($tr == 1): ?>class="trColor"<?php endif; ?>  >
+				<td><?php echo ($v["scid"]); ?></td>
+				<td><?php echo ($v["term"]); ?></td>
+				<td><?php echo ($v["jsxm"]); ?></td>
+				<td><?php echo ($v["cname"]); ?></td>
+				<td><?php echo ($v["coursename"]); ?></td>
+				<td><?php $i=0; $scid = $v['scid']; $pubnum = M('sxpubexcise')->where("scid=$scid")->count(); if($pubnum>0)$i=1; ?>
+    				<span class="numColor<?php echo ($i); ?>"><?php echo ($pubnum); ?></span>
     			</td>
 				<td align="left">　
-				   <a href="{:U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$v['scid']))}" class="btn btn-default btn4" title="查看指定教师发布的指定课程的任务列表！"><span class="glyphicon glyphicon-eye-open"></span> 任务列表</a>&nbsp;
+				   <a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$v['scid']));?>" class="btn btn-default btn4" title="查看指定教师发布的指定课程的任务列表！"><span class="glyphicon glyphicon-eye-open"></span> 任务列表</a>&nbsp;
 					
-					<if condition=" $pubnum neq 0">
-						<a href="{:U(GROUP_NAME.'/Excise/sxfinishCount',array('scid'=>$v['scid']))}" class="btn btn-default btn4" title="将课程任务完成情况统计下载！"><span class="glyphicon glyphicon-save"></span> 任务统计</a>&nbsp;
-						<a href="{:U(GROUP_NAME.'/Excise/sxcoursePackage',array('scid'=>$v['scid']))}" class="btn btn-default btn4" title="将该课程所有任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 资料存档</a>&nbsp;
-
-					</if>
+					<?php if( $pubnum != 0): ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxfinishCount',array('scid'=>$v['scid']));?>" class="btn btn-default btn4" title="将课程任务完成情况统计下载！"><span class="glyphicon glyphicon-save"></span> 任务统计</a>&nbsp;
+						<a href="<?php echo U(GROUP_NAME.'/Excise/sxcoursePackage',array('scid'=>$v['scid']));?>" class="btn btn-default btn4" title="将该课程所有任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 资料存档</a>&nbsp;<?php endif; ?>
 					
-					<if condition="$pubnum eq 0">
-					<a href="{:U(GROUP_NAME.'/Excise/delcourseTable',array('id'=>$v['scid']))}" class="btn btn-default" title="如果没有任务可以直接删除，否则需要删尽其下的任务再进行删除！"><span class="glyphicon glyphicon-remove"></span> 删除</a>
-					</if>
+					<?php if($pubnum == 0): ?><a href="<?php echo U(GROUP_NAME.'/Excise/delcourseTable',array('id'=>$v['scid']));?>" class="btn btn-default" title="如果没有任务可以直接删除，否则需要删尽其下的任务再进行删除！"><span class="glyphicon glyphicon-remove"></span> 删除</a><?php endif; ?>
 				</td>
-			</tr>
-			</foreach>
+			</tr><?php endforeach; endif; ?>
 			</tbody>
 		</table>
 		<!-- 排序分页开始 -->
 		<div id="pager" class="pager">
 			<form>
-			    <span class="label label-default" style="display:inline-block;height: 26px;line-height: 20px;">当前任课数 {$num}</span>
+			    <span class="label label-default" style="display:inline-block;height: 26px;line-height: 20px;">当前任课数 <?php echo ($num); ?></span>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/first.png" class="first"/>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/prev.png" class="prev"/>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/next.png" class="next"/>

@@ -83,6 +83,121 @@ public function coursetableSave(){
     }
 }
 
+//对该门课程的所有任务完成情况进行统计生成Excel表共下载
+public function sxfinishCount(){
+   $scid = (int)$_GET['scid'];//课程id
+   $Model=M('sxpubexcise as a');
+   //课程有关信息：
+   //学期：2017-2018-1   教师：郭盛   班级：2016级计算机班  课程：计算机应用基础
+    $courseinfo = M('sxsetcourse as a')->join("xh_teacher as b on a.jsno = b.jsno")->join("xh_classes as c on a.ccode = c.ccode")->field("a.scid,b.jsxm,c.cname,a.coursename,a.term")->where("a.scid=$scid")->find();
+    $title ="学期:".$courseinfo['term']."　　授课教师:".$courseinfo['jsxm']."　　授课班级:".$courseinfo['cname']."　　所授课程:《".$courseinfo['coursename']."》";
+   $filename =$courseinfo['term']."-".$courseinfo['jsxm']."-".$courseinfo['cname']."-《".$courseinfo['coursename']."》";
+   //任务总数量
+    $num=$list = $Model->where("a.scid=$scid")->count();
+   //任务列表
+   $data = $Model->field("a.scid,a.peid,a.title,a.desc,a.filename,a.url,a.status,a.pubtime,a.isrec")->where("a.scid=$scid and a.status!=0")->order('a.pubtime ASC')->select();
+    
+    //引入PHPExcel
+    import('Class.PHPExcel',APP_PATH); 
+    require APP_PATH.'Class/PHPExcel/Writer/Excel2007.php' ; //xlsx格式  
+    $objPHPExcel = new PHPExcel();
+    $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel); //xlsx格式 
+
+    //设置宽度
+    //$objPHPExcel->getActiveSheet()->getColumnDimension()->setAutoSize(true);
+    $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
+    $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(50);
+    $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(24);  
+    $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(20);
+    $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
+    $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(20);
+ 
+    //设置行高度
+    $objPHPExcel->getActiveSheet()->getRowDimension('1')->setRowHeight(40);
+    $objPHPExcel->getActiveSheet()->getRowDimension('2')->setRowHeight(32);
+    $objPHPExcel->getActiveSheet()->getRowDimension('3')->setRowHeight(32);
+  
+    //设置字体大小
+    $objPHPExcel->getActiveSheet()->getStyle('A1:F3')->getFont()->setName('Microsoft YaHei');
+    $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setSize(14);
+    $objPHPExcel->getActiveSheet()->getDefaultStyle()->getFont()->setSize(12);
+    $objPHPExcel->getActiveSheet()->getStyle('A1:F3')->getFont()->setBold(true);
+  
+    $objPHPExcel->getActiveSheet()->getStyle('A1:F3')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+    $objPHPExcel->getActiveSheet()->getStyle('A1:F3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+    
+    //设置水平居中
+    $objPHPExcel->getActiveSheet()->getStyle('A')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+    // $objPHPExcel->getActiveSheet()->getStyle('B')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+    $objPHPExcel->getActiveSheet()->getStyle('C')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+    $objPHPExcel->getActiveSheet()->getStyle('D')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+    $objPHPExcel->getActiveSheet()->getStyle('E')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+    $objPHPExcel->getActiveSheet()->getStyle('F')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+   //设置垂直居中
+    $objPHPExcel->getActiveSheet()->getStyle('A')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+    $objPHPExcel->getActiveSheet()->getStyle('B')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+    $objPHPExcel->getActiveSheet()->getStyle('C')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+    $objPHPExcel->getActiveSheet()->getStyle('D')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+    $objPHPExcel->getActiveSheet()->getStyle('E')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+    $objPHPExcel->getActiveSheet()->getStyle('F')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+    //合并
+    $objPHPExcel->getActiveSheet()->mergeCells('A1:F1');
+    $objPHPExcel->getActiveSheet()->mergeCells('A2:F2');
+    //设置表格头部内容
+
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A1', $title);
+
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A3', '序号');
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('B3', '任务题目');
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('C3', '发布时间');
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('D3', '发布人数');
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('E3', '完成人数');
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('F3', '完成率');
+
+    //将数据库中的数据转码 UTF-8
+    //p($data);die;
+    $totalpub=0;$totalok=0;//统计任务总数和完成总数
+    for($i=0;$i<count($data);$i++) {
+        //如果是从数据库中读取的数据，需要对数据进行转码操作，convertUTF8($str)
+        $objPHPExcel->getActiveSheet(0)->setCellValue('A' . ($i + 4), $data[$i]['peid']." ");
+        $objPHPExcel->getActiveSheet(0)->setCellValue('B' . ($i + 4), $data[$i]['title']);
+       
+        $objPHPExcel->getActiveSheet(0)->setCellValue('C' . ($i + 4), date('Y-m-d H:i:s',$data[$i]['pubtime']));
+        //计算发布人数和完成人数
+        $peid=$data[$i]['peid'];
+        $subtotalnum=M('sxsubexcise')->where("peid=$peid")->count();
+        $suboknum=M('sxsubexcise')->where("peid=$peid and status=1")->count();
+        $totalpub = $totalpub + $subtotalnum;
+        $totalok = $totalok + $suboknum;
+        $objPHPExcel->getActiveSheet(0)->setCellValue('D' . ($i + 4), $subtotalnum);
+        $objPHPExcel->getActiveSheet(0)->setCellValue('E' . ($i + 4), $suboknum);
+
+        $completeness = round($suboknum/$subtotalnum,4)*100;
+        $objPHPExcel->getActiveSheet(0)->setCellValue('F' . ($i + 4), $completeness."%");
+        $objPHPExcel->getActiveSheet()->getRowDimension($i + 4)->setRowHeight(28);  
+    }
+    
+    //用于第2行的统计
+    $totalRes = "教师发布任务:" . $i."个　　共发布学生:". $totalpub ."人　　学生共提交:". $totalok ."个　　最终完成率为:". (round($totalok/$totalpub,4)*100) ."%(完成人数/发布人数)　　统计时间:".date("Y-m-d H:i:s"); 
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A2', $totalRes);
+
+    // 设置工作表名
+    $objPHPExcel->getActiveSheet()->setTitle('Sheet1');
+    $objPHPExcel->setActiveSheetIndex(0); 
+    //支持xls和xlsx格式
+    $outputFileName = $filename.".xlsx";
+    
+    ob_end_clean();//清除缓冲区,避免乱码 
+    header("Content-Type: application/force-download");
+    header("Content-Type: application/octet-stream");
+    header("Content-Type: application/download");
+    header('Content-Disposition:attachment;filename="' . $outputFileName . '"');  //到文件
+    header("Content-Transfer-Encoding: binary");
+    header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+    header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+    header("Pragma: no-cache");
+    $objWriter->save('php://output'); 
+}
 //对该门课程的所有任务和学生作业打包成zip文件下载
 public function sxcoursePackage(){
     $scid = (int)$_GET['scid'];//课程id

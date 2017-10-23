@@ -45,7 +45,7 @@ function Node(id, pid, cname, cvalue, cshow, cchecked, cdisabled, url, title, ta
 	this._ai = 0;
 	this._p;
 };
-
+/*
 // Tree object
 function dTree(objName) {
 	this.config = {
@@ -83,7 +83,7 @@ function dTree(objName) {
 	this.selectedFound = false;
 	this.completed = false;
 };
-
+*/
 // Adds a new node to the node array
 dTree.prototype.add = function(id, pid, cname, cvalue, cshow, cchecked, cdisabled, url, title, target, icon, iconOpen, open) {
 	this.aNodes[this.aNodes.length] = new Node(id, pid, cname, cvalue, cshow, cchecked, cdisabled, url, title, target, icon, iconOpen, open);
