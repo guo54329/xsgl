@@ -113,7 +113,7 @@ function myrefresh(){
 	  <div class="panel-body">
 		 <table class="table table-bordered table-hover tablesorter">
 		   <thead>
-			<tr style="text-align: center;font-weight: bold;"><td>学期</td><th style="text-align: center;">课程</th><th style="text-align: center;" width="6%">序号</th><td>任务标题</td><th style="text-align: center;" width="10%">发布教师</th><th style="text-align: center;">发布时间</th><th style="text-align: center;" width="10%">完成状态</th><td>实训成绩</td><td width="10%">操作</td></tr>
+			<tr style="text-align: center;font-weight: bold;"><td>学期</td><th style="text-align: center;">课程</th><th style="text-align: center;" width="6%">序号</th><td>任务标题</td><th style="text-align: center;" width="10%">发布教师</th><th style="text-align: center;">发布时间</th><th style="text-align: center;" width="10%">完成状态</th><td>作业下载</td><td>实训成绩</td><td width="10%">操作</td></tr>
 			</thead>
 			<tbody>
 			<?php $i=1;?>
@@ -126,6 +126,9 @@ function myrefresh(){
 				<td><?php echo (date('m-d H:i',$v["pubtime"])); ?></td>
 
 				<td><?php if($v['status'] == 0 ): ?><span style="font-size: 16px;color:red;">未完成</span><?php else: ?><img src="__PUBLIC__/Images/finish.png" style="height: 40px;" /><?php endif; ?></td>
+				<td>
+					<a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseDownAttach',array('seid'=>$v['seid']));?>" class="btn btn-default file"><span class="glyphicon glyphicon-save"></span>下载</a>
+				</td>
 				<td><?php echo $v['desc']*0.3+$v['isrec']*0.7; ?></td>
 			
 				<td><?php if($v['status'] == 0 ): ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseDesc',array('seid'=>$v['seid']));?>" class="btn" style="font-size: 16px;"><span class="glyphicon glyphicon-hand-right"></span> 去完成</a><?php else: ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']));?>" class="btn btn-default browse" ><span class="glyphicon glyphicon-eye-open"></span> 评价交流</a><?php endif; ?></td>

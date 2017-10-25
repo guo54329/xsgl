@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -124,29 +124,27 @@ function show(){
 <body>
 <div class="panel panel-default">
 	  <div class="panel-heading headalign">
-	  	<a href="{:U(GROUP_NAME.'/Excise/courseTable')}" class="btn btncoursetable"><span class="glyphicon glyphicon-home"></span> 我的课程表</a><span class="btn xiexian">/</span><a href="{:U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$courseinfo['scid']))}" class="btn btn4">任务列表</a><span class="btn xiexian">/</span><a class="btn btn4">交流讨论</a>
+	  	<a href="<?php echo U(GROUP_NAME.'/Excise/courseTable');?>" class="btn btncoursetable"><span class="glyphicon glyphicon-home"></span> 我的课程表</a><span class="btn xiexian">/</span><a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$courseinfo['scid']));?>" class="btn btn4">任务列表</a><span class="btn xiexian">/</span><a class="btn btn4">交流讨论</a>
 	  </div>
 	  <div class="panel-body">
 		 <table class='table table-bordered table-hover'>
 		    <tr class="desc">
 		    <td>
-		    学期：{$courseinfo.term}&nbsp;&nbsp;
-		    班级：{$classes.cname}&nbsp;&nbsp;
-		    课程：{$courseinfo.coursename}
+		    学期：<?php echo ($courseinfo["term"]); ?>&nbsp;&nbsp;
+		    班级：<?php echo ($classes["cname"]); ?>&nbsp;&nbsp;
+		    课程：<?php echo ($courseinfo["coursename"]); ?>
 		    <br/>
-		    <strong>任务标题：</strong>{$excisedesc.title}<br/><strong>发布时间：</strong>{$excisedesc.pubtime|date='Y-m-d H:i:s',###}
+		    <strong>任务标题：</strong><?php echo ($excisedesc["title"]); ?><br/><strong>发布时间：</strong><?php echo (date('Y-m-d H:i:s',$excisedesc["pubtime"])); ?>
 		    <br/>
-		    <strong>作业列表:</strong> <span class="label label-default">当前共有 {$count} 份作业</span>，请下载学习后进行交流评价！
+		    <strong>作业列表:</strong> <span class="label label-default">当前共有 <?php echo ($count); ?> 份作业</span>，请下载学习后进行交流评价！
 		    </td>
 		    </tr>
 			<tr><td class="desc">
-			{~$i=1}
-			<foreach name='exciselist' item='v'>
-				<span>
-					<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDownAttach',array('seid'=>$v['seid']))}" class="btn btn-default file"><span class="glyphicon glyphicon-save"></span> {$i}-{$v.xsxm}</a>	
+			<?php $i=1;?>
+			<?php if(is_array($exciselist)): foreach($exciselist as $key=>$v): ?><span>
+					<a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseDownAttach',array('seid'=>$v['seid']));?>" class="btn btn-default file"><span class="glyphicon glyphicon-save"></span> <?php echo ($i); ?>-<?php echo ($v["xsxm"]); ?></a>	
 				</span>
-				{~$i++}
-			</foreach>
+				<?php $i++; endforeach; endif; ?>
 			</td></tr>
 			
 		</table>
@@ -158,33 +156,31 @@ function show(){
 	       <caption><strong>交流讨论</strong>&nbsp;
 			<button class="btn btn-default btnw" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp; 
 			<button class="btn btn-default" onclick="show();"><span class="glyphicon glyphicon-edit"></span> 评论</button>
-			<span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前评论条数 {$num}</span>
+			<span class="label label-default" style="display:inline-block;height: 25px;line-height: 20px;">当前评论条数 <?php echo ($num); ?></span>
 	       </caption>
 		   
-		   <foreach name="discuss" item="v">
-				<tr>
+		   <?php if(is_array($discuss)): foreach($discuss as $key=>$v): ?><tr>
 				<td class="desc">
 	                <div class="form-inline">
-						<span>{$v.html}</span>
-						<span id="u{$v.deid}" <if condition="$v['userxm'] eq $userxm"> class="self bold"<else/>class="bold" </if>>[{$v.usertype}]{$v.userxm} </span>
+						<span><?php echo ($v["html"]); ?></span>
+						<span id="u<?php echo ($v["deid"]); ?>" <?php if($v['userxm'] == $userxm): ?>class="self bold"<?php else: ?>class="bold"<?php endif; ?>>[<?php echo ($v["usertype"]); ?>]<?php echo ($v["userxm"]); ?> </span>
 						
-						<if condition="$v['atuser'] neq ''"><span class="bold">{$v.atuser}</span></if>
+						<?php if($v['atuser'] != ''): ?><span class="bold"><?php echo ($v["atuser"]); ?></span><?php endif; ?>
 						
-						<span>: {$v.content}</span>
-						<span>&nbsp;&nbsp;&nbsp;&nbsp;({$v.distime|date='m/d H:i:s',###})</span>&nbsp;
-						<button class="btn btn-default send" onclick="hf(this)" id="{$v.deid}">回复</button>&nbsp;
-						<a href="{:U(GROUP_NAME.'/Excise/sxexciseDiscussDel',array('deid'=>$v['deid'],'peid'=>$v['peid']))}" class="btn btn-default send">删除</a>
+						<span>: <?php echo ($v["content"]); ?></span>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;(<?php echo (date('m/d H:i:s',$v["distime"])); ?>)</span>&nbsp;
+						<button class="btn btn-default send" onclick="hf(this)" id="<?php echo ($v["deid"]); ?>">回复</button>&nbsp;
+						<a href="<?php echo U(GROUP_NAME.'/Excise/sxexciseDiscussDel',array('deid'=>$v['deid'],'peid'=>$v['peid']));?>" class="btn btn-default send">删除</a>
 					</div>
 				</td>
-		        </tr>
-			</foreach>
+		        </tr><?php endforeach; endif; ?>
 		
 		</table>
-	<form action="{:U(GROUP_NAME.'/Excise/sxexciseDiscussSave')}" method="post">
+	<form action="<?php echo U(GROUP_NAME.'/Excise/sxexciseDiscussSave');?>" method="post">
 		<div class="form-inline">
 		   <textarea id="content" name="content" placeholder=""></textarea>
-		   <input type="hidden" id="peid" name="peid" value="{$peid}">
-		   <input type="hidden" id="userxm" name="userxm" value="{$userxm}">
+		   <input type="hidden" id="peid" name="peid" value="<?php echo ($peid); ?>">
+		   <input type="hidden" id="userxm" name="userxm" value="<?php echo ($userxm); ?>">
 		   <input type="hidden" id="atuser" name="atuser" value="">
 		   <input type="hidden" id="pdeid" name="pdeid" value="0"><!--pdeid默认为0，表示顶级评论，若不为0，则表示对别人的评论进行评论-->
 		   <button class="btn btn-default btnw" style="margin-top: 2px;" id="send" onclick="send();" style="display: none;">发表</button>

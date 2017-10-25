@@ -37,7 +37,6 @@ function publish(obj){
 	    var data = {'peid':peid,'status':status.val(),'scid':scid};
 	    $.post(url,data,function(result){
 	    	if(result.status == 0) {
-	            //return dialog.error(result.message);
 	            window.location.reload();
 	        }
 	        if(result.status == 1) {
@@ -49,7 +48,7 @@ function publish(obj){
 	        	
 	        	$("#s"+peid).html(result.data);
 	        	window.location.reload();
-	            //return dialog.successtip(result.message);
+	            
 	        }
 	    },'JSON');
 	}else{
@@ -141,7 +140,7 @@ function del(obj){
 	  <div class="panel-body">
 		 <table class="table table-bordered table-hover tablesorter">
 			<thead>
-			<tr style="text-align: center;font-weight: bold;"><th width="6%">序号</th><th width="24%" style="text-align: center;">任务题目</th><!--<td>任务描述</td><td>任务附件</td>--><td width="7%">状态</td><td width="10%">发布时间</td><td width="8%">完成</td><td align="left">操作(删除:1.有作业设置重做2.单击“发布”撤销发布状态)</td></tr>
+			<tr style="text-align: center;font-weight: bold;"><th width="5%">序号</th><td width="20%">任务题目</td><!--<td>任务描述</td><td>任务附件</td>--><td width="7%">发布状态</td><th width="10%" style="text-align: center;">学生下载他人作业</th><td width="10%">发布时间</td><th width="8%" style="text-align: center;">完成</th><td>操 作</td></tr>
 			</thead>
 			<tbody>
 			<?php $i=1;?>
@@ -150,24 +149,33 @@ function del(obj){
 				<td align="left"><?php echo ($v["title"]); ?></td>
 				<!--<td><?php echo ($v["desc"]); ?></td>
 				<td><?php echo ($v["title"]); ?></td>-->
-				<td><span id="s<?php echo ($v["peid"]); ?>"><?php if($v['status'] == 0 ): ?><span class="no">未发布</span> <?php else: ?><span class="yes">已发布</span><?php endif; ?></span></td>
+				<td><span id="s<?php echo ($v["peid"]); ?>"><?php if($v['status'] == 0): ?><span class="no">未发布</span> <?php else: ?><span class="yes">已发布</span><?php endif; ?></span></td>
+				<td>
+					<?php if($v['isrec'] == 0): ?><span class="no">禁止</span>
+					<?php else: ?><span class="yes">允许</span><?php endif; ?>
+				    <a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseIsrec',array('peid'=>$v['peid']));?>" class="btn btn-default" title="设置在评价交流页面是否允许学生下载他人作业评价"><span class="glyphicon glyphicon-eye-close"></span> 设置</a>
+				</td>
 				<td><?php echo (date('m-d H:i',$v["pubtime"])); ?></td>
 				<td>
 					<?php $peid=$v['peid']; $subtotalnum=M('sxsubexcise')->where("peid=$peid")->count(); $suboknum=M('sxsubexcise')->where("peid=$peid and status=1")->count(); if($suboknum==0){ echo "<span class='numColor'>".$suboknum."</span>/".$subtotalnum; }else{ echo "<span>".$suboknum."</span>/".$subtotalnum; } ?>
 				</td>
 				
-
 				<td align="left">
 				
-				<button class="btn btn-default" id="<?php echo ($v["peid"]); ?>" onclick="publish(this);" title="发布后再次单击执行撤销发布操作"><span class="glyphicon glyphicon-share-alt"></span> 发布</button>&nbsp;
-				<button class="btn btn-default" id="<?php echo ($v["peid"]); ?>" onclick="del(this);"><span class="glyphicon glyphicon-remove"></span> 删除</button>&nbsp;&nbsp;
-				<!--如果有附件，在提供下载按钮  || 此处取消附件下载功能
-				<?php if($v['url'] != '0' ): ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$v['peid']));?>" class="btn btn-default" ><span class="glyphicon glyphicon-save"></span> 附件</a><?php endif; ?>&nbsp;-->
 				<a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseList',array('peid'=>$v['peid']));?>" class="btn btn-default browse" ><span class="glyphicon glyphicon-eye-open"></span> 学生完成</a>&nbsp;
-				<a href="<?php echo U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']));?>" class="btn btn-default browse" ><span class="glyphicon glyphicon-comment"></span> 评价交流</a>&nbsp;
+
 				<a href="<?php echo U(GROUP_NAME.'/Excise/sxexcisePackage',array('peid'=>$v['peid']));?>" class="btn btn-default browse" title="将该任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 学生作业</a>
 				<input type="hidden" id="status<?php echo ($v["peid"]); ?>" value="<?php echo ($v["status"]); ?>" />
 				<input type="hidden" id="scid<?php echo ($v["peid"]); ?>" value="<?php echo ($courseinfo["scid"]); ?>" />
+				<a href="<?php echo U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']));?>" class="btn btn-default" ><span class="glyphicon glyphicon-comment"></span> 交流</a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+				<?php if($v['status'] == 0): ?><button class="btn btn-default" id="<?php echo ($v["peid"]); ?>" onclick="publish(this);"><span class="glyphicon glyphicon-share-alt"></span> 发布</button>&nbsp;
+				<?php else: ?>
+					<button class="btn btn-default" id="<?php echo ($v["peid"]); ?>" onclick="publish(this);"><span class="glyphicon glyphicon-share-alt"></span> 撤销</button>&nbsp;<?php endif; ?>
+
+				<button class="btn btn-default" id="<?php echo ($v["peid"]); ?>" onclick="del(this);"><span class="glyphicon glyphicon-remove"></span> 删除</button>
+				<!--如果有附件，在提供下载按钮  || 此处取消附件下载功能
+				<?php if($v['url'] != '0' ): ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$v['peid']));?>" class="btn btn-default" ><span class="glyphicon glyphicon-save"></span> 附件</a><?php endif; ?>&nbsp;-->
 				</td>
 			</tr>
 			<?php $i++; endforeach; endif; ?>

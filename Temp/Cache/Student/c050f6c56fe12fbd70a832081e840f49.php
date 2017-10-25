@@ -125,7 +125,7 @@
 				<td>
 				   <div class="form-inline">
 				     <input type="file"  name="file_upload"  class="form-control" />   <div style="text-align: left;">
-						 <span class="glyphicon glyphicon-info-sign"></span> 附件<font size="4" color="red">最大支持100M</font>,必须上传(学生的作业使用任务附件的路径保存).建议上传文件为zip格式.<br/><b>多文件时,请先压缩再上传.如果压缩包上传成功但提交时提示“请上传附件”,请另选择压缩软件压缩上传!”</b>
+						 <span class="glyphicon glyphicon-info-sign"></span> 附件<font size="4" color="red">最大支持100M</font><b>.多文件时,请先使用360压缩后再上传!”</b>
 				         </div>
 				    </div>
 				</td>

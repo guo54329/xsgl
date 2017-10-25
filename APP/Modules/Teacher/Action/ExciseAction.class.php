@@ -264,7 +264,7 @@ public function sxpubexciseList(){
     $Model=M('sxpubexcise as a');
     $courseinfo = M('sxsetcourse as a')->join("xh_classes as b on a.ccode = b.ccode")->field("a.scid,b.cname,a.coursename,a.term")->where("a.scid=$scid")->find();
     $num=$Model->where("a.scid=$scid")->count();
-    $list = $Model->field("a.scid,a.peid,a.title,a.desc,a.filename,a.url,a.status,a.pubtime,a.isrec")->where("a.scid=$scid")->order('a.pubtime ASC')->select();
+    $list = $Model->field("a.scid,a.peid,a.title,a.desc,a.filename,a.url,a.status,a.isrec,a.pubtime,a.isrec")->where("a.scid=$scid")->order('a.pubtime ASC')->select();
     
     $this->assign('courseinfo',$courseinfo);
     $this->assign('num',$num);
@@ -677,12 +677,28 @@ public function sxsubexciseTable(){
     $objWriter->save('php://output'); 
 
 } 
-//教师评价
+
+//在学生交流页面是否允许其他人下载已提交的作业
 public function sxsubexciseIsrec(){
-    $seid=(int)$_POST['seid'];
-    $isrec=$_POST['isrec'];
-    $data=array('seid'=>$seid,'isrec'=>$isrec);
-    $res=M('sxsubexcise')->save($data);
+    $peid=(int)$_GET['peid'];
+    $scid = M('sxpubexcise')->field('scid')->find($peid);
+    $scid = $scid['scid'];//用于成功返回
+    $isrec = M('sxpubexcise')->field('isrec')->find($peid);
+    $isrec = $isrec['isrec'];
+    //echo "peid--".$peid.",scid--".$scid.",isrec--".$isrec;die;
+    if($isrec==0){
+       $data=array('peid'=>$peid,'isrec'=>1);
+       if(M('sxpubexcise')->save($data)){
+          $this->success("允许下载别人作业!$scid",U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$scid)));
+       }
+       
+    }else{
+       $data=array('peid'=>$peid,'isrec'=>0);
+       if(M('sxpubexcise')->save($data)){
+          $this->success("禁止下载别人作业!$scid",U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$scid)));
+       }
+       
+    }
 }
 //评论列表
 public function sxexciseDiscuss(){

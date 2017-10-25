@@ -164,6 +164,8 @@ public function sxsubexciseDesc(){
         
         //查询任务描述
         $excisedesc = M('sxpubexcise')->find($peid);//任务
+       //isrec是否允许下载他人的作业 0-不 1-可以
+       
         //课程和学期
         $courseinfo =M('sxsetcourse')->find($excisedesc['scid']);
         //班级名称

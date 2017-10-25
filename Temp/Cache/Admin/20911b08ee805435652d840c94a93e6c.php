@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,7 +28,7 @@ function publish(obj){
 		var peid = obj.id;
 		var status = $("#status"+peid);
 		var scid = $("#scid"+peid).val();
-	    var url ="{:U(GROUP_NAME.'/Excise/sxpubexciseStatus')}";
+	    var url ="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseStatus');?>";
 	    var data = {'peid':peid,'status':status.val(),'scid':scid};
 	    $.post(url,data,function(result){
 	    	if(result.status == 0) {
@@ -55,7 +55,7 @@ function publish(obj){
 function del(obj){
 	var peid = obj.id;
 	var scid = $("#scid"+peid).val();
-	var url = "{:U(GROUP_NAME.'/Excise/sxpubexciseDel')}";
+	var url = "<?php echo U(GROUP_NAME.'/Excise/sxpubexciseDel');?>";
 	$.post(url,{'peid':peid,'scid':scid},function(result){
 		//alert(result.data);
     	if(result.status == 0) {
@@ -125,83 +125,66 @@ function myrefresh(){
 <body>
 <div class="panel panel-default">
 	  <div class="panel-heading headalign">
-	   <a href="{:U(GROUP_NAME.'/Excise/courseTable')}" class="btn btncoursetable"><span class="glyphicon glyphicon-home"></span> 教师课表</a><span class="btn xiexian">/</span><a  class="btn btn4">任务列表</a>
+	   <a href="<?php echo U(GROUP_NAME.'/Excise/courseTable');?>" class="btn btncoursetable"><span class="glyphicon glyphicon-home"></span> 教师课表</a><span class="btn xiexian">/</span><a  class="btn btn4">任务列表</a>
 	   <span style="float: right;">
 	   		<button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp;
-	  		<a href="{:U(GROUP_NAME.'/Excise/sxpubexciseSave',array('scid'=>$courseinfo['scid']))}" class="btn btn-info browse"><span class="glyphicon glyphicon-plus"></span> 添加任务</a>
-	  		<a href="{:U(GROUP_NAME.'/Excise/sxpubexciseClone',array('scid'=>$courseinfo['scid']))}" class="btn btn-info browse"><span class="glyphicon glyphicon-share"></span> 克隆任务</a>&nbsp;
+	  		<a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseSave',array('scid'=>$courseinfo['scid']));?>" class="btn btn-info browse"><span class="glyphicon glyphicon-plus"></span> 添加任务</a>
+	  		<a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseClone',array('scid'=>$courseinfo['scid']));?>" class="btn btn-info browse"><span class="glyphicon glyphicon-share"></span> 克隆任务</a>&nbsp;
 	   </span>
 	</div>
 	<div class="form-inline">
-		学期：<strong>{$courseinfo.term}</strong>&nbsp;&nbsp;
-	    教师：<strong>{$courseinfo.jsxm}</strong>&nbsp;&nbsp;
-	    班级：<strong>{$courseinfo.cname}</strong>&nbsp;&nbsp;课程：<strong>{$courseinfo.coursename}</strong><br/>
+		学期：<strong><?php echo ($courseinfo["term"]); ?></strong>&nbsp;&nbsp;
+	    教师：<strong><?php echo ($courseinfo["jsxm"]); ?></strong>&nbsp;&nbsp;
+	    班级：<strong><?php echo ($courseinfo["cname"]); ?></strong>&nbsp;&nbsp;课程：<strong><?php echo ($courseinfo["coursename"]); ?></strong><br/>
 	</div>
 	  <div class="panel-body">
 		 <table class="table table-bordered table-hover tablesorter">
 		 	<thead>
-			<tr style="text-align: center;font-weight: bold;"><th width="5%">序号</th><td width="20%">任务题目</td><!--<td>任务描述</td><td>任务附件</td>--><td width="7%">发布状态</td><th width="10%" style="text-align: center;">学生下载他人作业</th><td width="10%">发布时间</td><th width="8%" style="text-align: center;">完成</th><td>操 作</td></tr>
+			<tr style="text-align: center;font-weight: bold;"><th width="5%">序号</th><th width="24%" style="text-align: center;">任务题目</th><!--<td>任务描述</td><td>任务附件</td>--><td width="7%">发布状态</td><td width="10%">学生下载他人作业</td><td width="10%">发布时间</td><th width="8%" style="text-align: center;">完成</th><td>操 作</td></tr>
 			</thead>
 			<tbody>
-			{~$i=1}
-			<foreach name='list' item='v'>
-			<tr>
-				<td>{$i}{~$v.peid}</td>
-				<td align="left">{$v.title}</td>
-				<!--<td>{$v.desc}</td>
-				<td>{$v.title}</td>-->
-				<td><span id="s{$v.peid}"><if condition="$v['status'] eq 0"><span class="no">未发布</span> <else/><span class="yes">已发布</span></if></span></td>
+			<?php $i=1;?>
+			<?php if(is_array($list)): foreach($list as $key=>$v): ?><tr>
+				<td><?php echo ($i); $v.peid;?></td>
+				<td align="left"><?php echo ($v["title"]); ?></td>
+				<!--<td><?php echo ($v["desc"]); ?></td>
+				<td><?php echo ($v["title"]); ?></td>-->
+				<td><span id="s<?php echo ($v["peid"]); ?>"><?php if($v['status'] == 0): ?><span class="no">未发布</span> <?php else: ?><span class="yes">已发布</span><?php endif; ?></span></td>
 				<td>
-					<if condition="$v['isrec'] eq 0"><span class="no">禁止</span>
-					<else/><span class="yes">允许</span>
-				    </if>
-				    <a href="{:U(GROUP_NAME.'/Excise/sxsubexciseIsrec',array('peid'=>$v['peid']))}" class="btn btn-default" title="设置在评价交流页面是否允许学生下载他人作业评价"><span class="glyphicon glyphicon-eye-close"></span> 设置</a>
+					<?php if($v['isrec'] == 0): ?><span class="no">禁止</span>
+					<?php else: ?><span class="yes">允许</span><?php endif; ?>
+				    <a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseIsrec',array('peid'=>$v['peid']));?>" class="btn btn-default" title="设置在评价交流页面是否允许学生下载他人作业评价"><span class="glyphicon glyphicon-eye-close"></span> 设置</a>
 				</td>
-				<td>{$v.pubtime|date='m-d H:i',###}</td>
+				<td><?php echo (date('m-d H:i',$v["pubtime"])); ?></td>
 				<td>
-					<php>
-                        $peid=$v['peid'];
-                    	$subtotalnum=M('sxsubexcise')->where("peid=$peid")->count();
-                    	$suboknum=M('sxsubexcise')->where("peid=$peid and status=1")->count();
-                    	if($suboknum==0){
-                    		echo "<span class='numColor'>".$suboknum."</span>/".$subtotalnum;
-                    	}else{
-                    	    echo "<span>".$suboknum."</span>/".$subtotalnum;
-                    	}
-                    	
-                    </php>
+					<?php $peid=$v['peid']; $subtotalnum=M('sxsubexcise')->where("peid=$peid")->count(); $suboknum=M('sxsubexcise')->where("peid=$peid and status=1")->count(); if($suboknum==0){ echo "<span class='numColor'>".$suboknum."</span>/".$subtotalnum; }else{ echo "<span>".$suboknum."</span>/".$subtotalnum; } ?>
 				</td>
 				
 				<td align="left">
 				
-				<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseList',array('peid'=>$v['peid']))}" class="btn btn-default browse" ><span class="glyphicon glyphicon-eye-open"></span> 学生完成</a>&nbsp;
+				<a href="<?php echo U(GROUP_NAME.'/Excise/sxsubexciseList',array('peid'=>$v['peid']));?>" class="btn btn-default browse" ><span class="glyphicon glyphicon-eye-open"></span> 学生完成</a>&nbsp;
 
-				<a href="{:U(GROUP_NAME.'/Excise/sxexcisePackage',array('peid'=>$v['peid']))}" class="btn btn-default browse" title="将该任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 学生作业</a>
-				<input type="hidden" id="status{$v.peid}" value="{$v.status}" />
-				<input type="hidden" id="scid{$v.peid}" value="{$courseinfo.scid}" />
-				<a href="{:U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']))}" class="btn btn-default" ><span class="glyphicon glyphicon-comment"></span> 交流</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="<?php echo U(GROUP_NAME.'/Excise/sxexcisePackage',array('peid'=>$v['peid']));?>" class="btn btn-default browse" title="将该任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 学生作业</a>
+				<input type="hidden" id="status<?php echo ($v["peid"]); ?>" value="<?php echo ($v["status"]); ?>" />
+				<input type="hidden" id="scid<?php echo ($v["peid"]); ?>" value="<?php echo ($courseinfo["scid"]); ?>" />
+				<a href="<?php echo U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']));?>" class="btn btn-default" ><span class="glyphicon glyphicon-comment"></span> 交流</a>&nbsp;&nbsp;&nbsp;&nbsp;
 
-				<if condition="$v['status'] eq 0">
-					<button class="btn btn-default" id="{$v.peid}" onclick="publish(this);"><span class="glyphicon glyphicon-share-alt"></span> 发布</button>&nbsp;
-				<else/>
-					<button class="btn btn-default" id="{$v.peid}" onclick="publish(this);"><span class="glyphicon glyphicon-share-alt"></span> 撤销</button>&nbsp;
-				</if>
+				<?php if($v['status'] == 0): ?><button class="btn btn-default" id="<?php echo ($v["peid"]); ?>" onclick="publish(this);"><span class="glyphicon glyphicon-share-alt"></span> 发布</button>&nbsp;
+				<?php else: ?>
+					<button class="btn btn-default" id="<?php echo ($v["peid"]); ?>" onclick="publish(this);"><span class="glyphicon glyphicon-share-alt"></span> 撤销</button>&nbsp;<?php endif; ?>
 
-				<button class="btn btn-default" id="{$v.peid}" onclick="del(this);"><span class="glyphicon glyphicon-remove"></span> 删除</button>
+				<button class="btn btn-default" id="<?php echo ($v["peid"]); ?>" onclick="del(this);"><span class="glyphicon glyphicon-remove"></span> 删除</button>
 				<!--如果有附件，在提供下载按钮  || 此处取消附件下载功能
-				<if condition="$v['url'] neq '0' ">
-				<a href="{:U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$v['peid']))}" class="btn btn-default" ><span class="glyphicon glyphicon-save"></span> 附件</a>
-				</if>&nbsp;-->
+				<?php if($v['url'] != '0' ): ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$v['peid']));?>" class="btn btn-default" ><span class="glyphicon glyphicon-save"></span> 附件</a><?php endif; ?>&nbsp;-->
 				</td>
 			</tr>
-			{~$i++}
-			</foreach>
+			<?php $i++; endforeach; endif; ?>
 			</tbody>
 		</table>
 		<!-- 排序分页开始 -->
 		<div id="pager" class="pager">
 			<form>
-			    <span class="label label-default" style="display:inline-block;height: 26px;line-height: 20px;">当前任务数 {$num}</span>
+			    <span class="label label-default" style="display:inline-block;height: 26px;line-height: 20px;">当前任务数 <?php echo ($num); ?></span>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/first.png" class="first"/>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/prev.png" class="prev"/>
 				<img src="__ROOT__/Data/jquerytablesorter/addons/pager/icons/next.png" class="next"/>

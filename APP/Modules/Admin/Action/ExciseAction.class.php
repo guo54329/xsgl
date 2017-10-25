@@ -209,6 +209,28 @@ public function sxfinishCount(){
     header("Pragma: no-cache");
     $objWriter->save('php://output'); 
 }
+//在学生交流页面是否允许其他人下载已提交的作业
+public function sxsubexciseIsrec(){
+    $peid=(int)$_GET['peid'];
+    $scid = M('sxpubexcise')->field('scid')->find($peid);
+    $scid = $scid['scid'];//用于成功返回
+    $isrec = M('sxpubexcise')->field('isrec')->find($peid);
+    $isrec = $isrec['isrec'];
+    //echo "peid--".$peid.",scid--".$scid.",isrec--".$isrec;die;
+    if($isrec==0){
+       $data=array('peid'=>$peid,'isrec'=>1);
+       if(M('sxpubexcise')->save($data)){
+          $this->success("允许下载别人作业!$scid",U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$scid)));
+       }
+       
+    }else{
+       $data=array('peid'=>$peid,'isrec'=>0);
+       if(M('sxpubexcise')->save($data)){
+          $this->success("禁止下载别人作业!$scid",U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$scid)));
+       }
+       
+    }
+}
 
 //对该门课程的所有任务和学生作业打包成zip文件下载
 public function sxcoursePackage(){

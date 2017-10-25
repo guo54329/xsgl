@@ -1,0 +1,431 @@
+.LOG
+
+京东、淘宝登录:zp_2010
+8:24 2016/12/27
+PLlgzyxx&JCzjzx
+22:56 2017/1/12
+
+20:35 2017/1/25
+oray-cnc-101
+
+NrdSjGrd
+23:11 2017/2/18
+　　网上报名时间：2016年10月15日8:00至24日18:00
+　　查询资格审查结果时间：2016年10月15日至26日
+　　查询报名序号时间：2016年10月28日8:00后
+　　报名确认时间：2016年11月2日9:00至7日16:00
+　　打印准考证时间：2016年11月21日至27日
+　　笔试时间：2016年11月27日
+
+http://www.chinagwy.org/html/kszc/gj/201701/42_185044.html
+21:44 2017/3/4
+在www目录下找到index.php 
+
+然后修改里面查找$projectContents 或直接查看338行代码 修改'http://'为'http://localhost/'即可
+
+
+
+例如:$projectContents .= '<li><a href="'.($suppress_localhost ? 'http://localhost/' : '').$
+23:12 2017/4/15
+优化数据库表
+OPTIMIZE TABLE `xh_courseresourse`
+17:09 2017/5/13
+
+
+
+
+22:33 2017/5/19
+
+15:39 2017/6/20
+C:\Program Files (x86)\Grass Valley\EDIUS 6.5
+C:\Program Files (x86)\Grass Valley\EDIUS 6.5
+20:34 2017/6/20
+Output folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\data2.irt
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\License Info.htm
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\License.htm
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Readme\License-en.htm
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Readme\License-en.txt
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Readme\License-jp.htm
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Readme\License-jp.txt
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Readme\Readme-en.htm
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Readme\Readme-jp.htm
+Remove folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Readme\
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\CodecOption\Setup.exe
+Remove folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\CodecOption\
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Apr2005_d3dx9_25_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Apr2005_d3dx9_25_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Apr2006_d3dx9_30_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Apr2006_d3dx9_30_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Apr2006_MDX1_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Apr2006_MDX1_x86_Archive.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Apr2006_XACT_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Apr2006_XACT_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Apr2006_xinput_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Apr2006_xinput_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\APR2007_d3dx10_33_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\APR2007_d3dx10_33_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\APR2007_d3dx9_33_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\APR2007_d3dx9_33_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\APR2007_XACT_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\APR2007_XACT_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\APR2007_xinput_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\APR2007_xinput_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2005_d3dx9_27_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2005_d3dx9_27_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\AUG2006_XACT_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\AUG2006_XACT_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\AUG2006_xinput_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\AUG2006_xinput_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\AUG2007_d3dx10_35_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\AUG2007_d3dx10_35_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\AUG2007_d3dx9_35_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\AUG2007_d3dx9_35_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\AUG2007_XACT_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\AUG2007_XACT_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2008_d3dx10_39_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2008_d3dx10_39_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2008_d3dx9_39_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2008_d3dx9_39_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2008_XACT_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2008_XACT_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2008_XAudio_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2008_XAudio_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2009_D3DCompiler_42_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2009_D3DCompiler_42_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2009_d3dcsx_42_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2009_d3dcsx_42_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2009_d3dx10_42_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2009_d3dx10_42_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2009_d3dx11_42_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2009_d3dx11_42_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2009_d3dx9_42_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2009_d3dx9_42_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2009_XACT_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2009_XACT_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2009_XAudio_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Aug2009_XAudio_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Dec2005_d3dx9_28_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Dec2005_d3dx9_28_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\DEC2006_d3dx10_00_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\DEC2006_d3dx10_00_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\DEC2006_d3dx9_32_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\DEC2006_d3dx9_32_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\DEC2006_XACT_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\DEC2006_XACT_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\DSETUP.dll
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\dsetup32.dll
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\dxdllreg_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\DXSETUP.exe
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\dxupdate.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Feb2005_d3dx9_24_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Feb2005_d3dx9_24_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Feb2006_d3dx9_29_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Feb2006_d3dx9_29_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Feb2006_XACT_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Feb2006_XACT_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\FEB2007_XACT_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\FEB2007_XACT_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Feb2010_X3DAudio_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Feb2010_X3DAudio_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Feb2010_XACT_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Feb2010_XACT_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Feb2010_XAudio_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Feb2010_XAudio_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Jun2005_d3dx9_26_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Jun2005_d3dx9_26_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\JUN2006_XACT_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\JUN2006_XACT_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\JUN2007_d3dx10_34_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\JUN2007_d3dx10_34_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\JUN2007_d3dx9_34_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\JUN2007_d3dx9_34_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\JUN2007_XACT_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\JUN2007_XACT_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\JUN2008_d3dx10_38_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\JUN2008_d3dx10_38_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\JUN2008_d3dx9_38_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\JUN2008_d3dx9_38_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\JUN2008_X3DAudio_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\JUN2008_X3DAudio_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\JUN2008_XACT_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\JUN2008_XACT_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\JUN2008_XAudio_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\JUN2008_XAudio_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Jun2010_D3DCompiler_43_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Jun2010_D3DCompiler_43_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Jun2010_d3dcsx_43_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Jun2010_d3dcsx_43_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Jun2010_d3dx10_43_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Jun2010_d3dx10_43_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Jun2010_d3dx11_43_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Jun2010_d3dx11_43_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Jun2010_d3dx9_43_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Jun2010_d3dx9_43_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Jun2010_XACT_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Jun2010_XACT_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Jun2010_XAudio_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Jun2010_XAudio_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Mar2008_d3dx10_37_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Mar2008_d3dx10_37_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Mar2008_d3dx9_37_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Mar2008_d3dx9_37_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Mar2008_X3DAudio_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Mar2008_X3DAudio_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Mar2008_XACT_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Mar2008_XACT_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Mar2008_XAudio_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Mar2008_XAudio_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Mar2009_d3dx10_41_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Mar2009_d3dx10_41_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Mar2009_d3dx9_41_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Mar2009_d3dx9_41_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Mar2009_X3DAudio_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Mar2009_X3DAudio_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Mar2009_XACT_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Mar2009_XACT_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Mar2009_XAudio_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Mar2009_XAudio_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Nov2007_d3dx10_36_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Nov2007_d3dx10_36_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Nov2007_d3dx9_36_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Nov2007_d3dx9_36_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\NOV2007_X3DAudio_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\NOV2007_X3DAudio_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\NOV2007_XACT_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\NOV2007_XACT_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Nov2008_d3dx10_40_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Nov2008_d3dx10_40_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Nov2008_d3dx9_40_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Nov2008_d3dx9_40_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Nov2008_X3DAudio_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Nov2008_X3DAudio_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Nov2008_XACT_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Nov2008_XACT_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Nov2008_XAudio_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Nov2008_XAudio_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Oct2005_xinput_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\Oct2005_xinput_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\OCT2006_d3dx9_31_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\OCT2006_d3dx9_31_x86.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\OCT2006_XACT_x64.cab
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\OCT2006_XACT_x86.cab
+Remove folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX\
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\GV LicenseManager\Setup.exe
+Remove folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\GV LicenseManager\
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\HardwareSetupTool\HardwareSetupTool.exe
+Remove folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\HardwareSetupTool\
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\VC100Runtime\vcredist_x86.exe
+Remove folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\VC100Runtime\
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\VC80Runtime\8_0_50727_6195\vcredist_x86.EXE
+Remove folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\VC80Runtime\8_0_50727_6195\
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\VC80Runtime\vcredist_x86.exe
+Remove folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\VC80Runtime\
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\VC90Runtime\vcredist_x86.exe
+Remove folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\VC90Runtime\
+Remove folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Setup.exe
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\VcrParam.csv
+Remove folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\Settings\Edius.ico
+Delete file: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\Settings\SetupManagerForEDIUS.cst
+Remove folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\Settings\
+Output folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS
+Extract: License Info.htm... 100%
+Extract: License.htm... 100%
+Extract: Setup.exe... 100%
+Extract: VcrParam.csv... 100%
+Extract: data2.irt... 100%
+Output folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Readme
+Extract: License-en.htm... 100%
+Extract: License-en.txt... 100%
+Extract: License-jp.htm... 100%
+Extract: License-jp.txt... 100%
+Extract: Readme-en.htm... 100%
+Extract: Readme-jp.htm... 100%
+Output folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime
+Output folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\CodecOption
+Extract: Setup.exe... 100%
+Output folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\DirectX
+Extract: APR2007_XACT_x64.cab... 100%
+Extract: APR2007_XACT_x86.cab... 100%
+Extract: APR2007_d3dx10_33_x64.cab... 100%
+Extract: APR2007_d3dx10_33_x86.cab... 100%
+Extract: APR2007_d3dx9_33_x64.cab... 100%
+Extract: APR2007_d3dx9_33_x86.cab... 100%
+Extract: APR2007_xinput_x64.cab... 100%
+Extract: APR2007_xinput_x86.cab... 100%
+Extract: AUG2006_XACT_x64.cab... 100%
+Extract: AUG2006_XACT_x86.cab... 100%
+Extract: AUG2006_xinput_x64.cab... 100%
+Extract: AUG2006_xinput_x86.cab... 100%
+Extract: AUG2007_XACT_x64.cab... 100%
+Extract: AUG2007_XACT_x86.cab... 100%
+Extract: AUG2007_d3dx10_35_x64.cab... 100%
+Extract: AUG2007_d3dx10_35_x86.cab... 100%
+Extract: AUG2007_d3dx9_35_x64.cab... 100%
+Extract: AUG2007_d3dx9_35_x86.cab... 100%
+Extract: Apr2005_d3dx9_25_x64.cab... 100%
+Extract: Apr2005_d3dx9_25_x86.cab... 100%
+Extract: Apr2006_MDX1_x86.cab... 100%
+Extract: Apr2006_MDX1_x86_Archive.cab... 100%
+Extract: Apr2006_XACT_x64.cab... 100%
+Extract: Apr2006_XACT_x86.cab... 100%
+Extract: Apr2006_d3dx9_30_x64.cab... 100%
+Extract: Apr2006_d3dx9_30_x86.cab... 100%
+Extract: Apr2006_xinput_x64.cab... 100%
+Extract: Apr2006_xinput_x86.cab... 100%
+Extract: Aug2005_d3dx9_27_x64.cab... 100%
+Extract: Aug2005_d3dx9_27_x86.cab... 100%
+Extract: Aug2008_XACT_x64.cab... 100%
+Extract: Aug2008_XACT_x86.cab... 100%
+Extract: Aug2008_XAudio_x64.cab... 100%
+Extract: Aug2008_XAudio_x86.cab... 100%
+Extract: Aug2008_d3dx10_39_x64.cab... 100%
+Extract: Aug2008_d3dx10_39_x86.cab... 100%
+Extract: Aug2008_d3dx9_39_x64.cab... 100%
+Extract: Aug2008_d3dx9_39_x86.cab... 100%
+Extract: Aug2009_D3DCompiler_42_x64.cab... 100%
+Extract: Aug2009_D3DCompiler_42_x86.cab... 100%
+Extract: Aug2009_XACT_x64.cab... 100%
+Extract: Aug2009_XACT_x86.cab... 100%
+Extract: Aug2009_XAudio_x64.cab... 100%
+Extract: Aug2009_XAudio_x86.cab... 100%
+Extract: Aug2009_d3dcsx_42_x64.cab... 100%
+Extract: Aug2009_d3dcsx_42_x86.cab... 100%
+Extract: Aug2009_d3dx10_42_x64.cab... 100%
+Extract: Aug2009_d3dx10_42_x86.cab... 100%
+Extract: Aug2009_d3dx11_42_x64.cab... 100%
+Extract: Aug2009_d3dx11_42_x86.cab... 100%
+Extract: Aug2009_d3dx9_42_x64.cab... 100%
+Extract: Aug2009_d3dx9_42_x86.cab... 100%
+Extract: DEC2006_XACT_x64.cab... 100%
+Extract: DEC2006_XACT_x86.cab... 100%
+Extract: DEC2006_d3dx10_00_x64.cab... 100%
+Extract: DEC2006_d3dx10_00_x86.cab... 100%
+Extract: DEC2006_d3dx9_32_x64.cab... 100%
+Extract: DEC2006_d3dx9_32_x86.cab... 100%
+Extract: DSETUP.dll... 100%
+Extract: DXSETUP.exe... 100%
+Extract: Dec2005_d3dx9_28_x64.cab... 100%
+Extract: Dec2005_d3dx9_28_x86.cab... 100%
+Extract: FEB2007_XACT_x64.cab... 100%
+Extract: FEB2007_XACT_x86.cab... 100%
+Extract: Feb2005_d3dx9_24_x64.cab... 100%
+Extract: Feb2005_d3dx9_24_x86.cab... 100%
+Extract: Feb2006_XACT_x64.cab... 100%
+Extract: Feb2006_XACT_x86.cab... 100%
+Extract: Feb2006_d3dx9_29_x64.cab... 100%
+Extract: Feb2006_d3dx9_29_x86.cab... 100%
+Extract: Feb2010_X3DAudio_x64.cab... 100%
+Extract: Feb2010_X3DAudio_x86.cab... 100%
+Extract: Feb2010_XACT_x64.cab... 100%
+Extract: Feb2010_XACT_x86.cab... 100%
+Extract: Feb2010_XAudio_x64.cab... 100%
+Extract: Feb2010_XAudio_x86.cab... 100%
+Extract: JUN2006_XACT_x64.cab... 100%
+Extract: JUN2006_XACT_x86.cab... 100%
+Extract: JUN2007_XACT_x64.cab... 100%
+Extract: JUN2007_XACT_x86.cab... 100%
+Extract: JUN2007_d3dx10_34_x64.cab... 100%
+Extract: JUN2007_d3dx10_34_x86.cab... 100%
+Extract: JUN2007_d3dx9_34_x64.cab... 100%
+Extract: JUN2007_d3dx9_34_x86.cab... 100%
+Extract: JUN2008_X3DAudio_x64.cab... 100%
+Extract: JUN2008_X3DAudio_x86.cab... 100%
+Extract: JUN2008_XACT_x64.cab... 100%
+Extract: JUN2008_XACT_x86.cab... 100%
+Extract: JUN2008_XAudio_x64.cab... 100%
+Extract: JUN2008_XAudio_x86.cab... 100%
+Extract: JUN2008_d3dx10_38_x64.cab... 100%
+Extract: JUN2008_d3dx10_38_x86.cab... 100%
+Extract: JUN2008_d3dx9_38_x64.cab... 100%
+Extract: JUN2008_d3dx9_38_x86.cab... 100%
+Extract: Jun2005_d3dx9_26_x64.cab... 100%
+Extract: Jun2005_d3dx9_26_x86.cab... 100%
+Extract: Jun2010_D3DCompiler_43_x64.cab... 100%
+Extract: Jun2010_D3DCompiler_43_x86.cab... 100%
+Extract: Jun2010_XACT_x64.cab... 100%
+Extract: Jun2010_XACT_x86.cab... 100%
+Extract: Jun2010_XAudio_x64.cab... 100%
+Extract: Jun2010_XAudio_x86.cab... 100%
+Extract: Jun2010_d3dcsx_43_x64.cab... 100%
+Extract: Jun2010_d3dcsx_43_x86.cab... 100%
+Extract: Jun2010_d3dx10_43_x64.cab... 100%
+Extract: Jun2010_d3dx10_43_x86.cab... 100%
+Extract: Jun2010_d3dx11_43_x64.cab... 100%
+Extract: Jun2010_d3dx11_43_x86.cab... 100%
+Extract: Jun2010_d3dx9_43_x64.cab... 100%
+Extract: Jun2010_d3dx9_43_x86.cab... 100%
+Extract: Mar2008_X3DAudio_x64.cab... 100%
+Extract: Mar2008_X3DAudio_x86.cab... 100%
+Extract: Mar2008_XACT_x64.cab... 100%
+Extract: Mar2008_XACT_x86.cab... 100%
+Extract: Mar2008_XAudio_x64.cab... 100%
+Extract: Mar2008_XAudio_x86.cab... 100%
+Extract: Mar2008_d3dx10_37_x64.cab... 100%
+Extract: Mar2008_d3dx10_37_x86.cab... 100%
+Extract: Mar2008_d3dx9_37_x64.cab... 100%
+Extract: Mar2008_d3dx9_37_x86.cab... 100%
+Extract: Mar2009_X3DAudio_x64.cab... 100%
+Extract: Mar2009_X3DAudio_x86.cab... 100%
+Extract: Mar2009_XACT_x64.cab... 100%
+Extract: Mar2009_XACT_x86.cab... 100%
+Extract: Mar2009_XAudio_x64.cab... 100%
+Extract: Mar2009_XAudio_x86.cab... 100%
+Extract: Mar2009_d3dx10_41_x64.cab... 100%
+Extract: Mar2009_d3dx10_41_x86.cab... 100%
+Extract: Mar2009_d3dx9_41_x64.cab... 100%
+Extract: Mar2009_d3dx9_41_x86.cab... 100%
+Extract: NOV2007_X3DAudio_x64.cab... 100%
+Extract: NOV2007_X3DAudio_x86.cab... 100%
+Extract: NOV2007_XACT_x64.cab... 100%
+Extract: NOV2007_XACT_x86.cab... 100%
+Extract: Nov2007_d3dx10_36_x64.cab... 100%
+Extract: Nov2007_d3dx10_36_x86.cab... 100%
+Extract: Nov2007_d3dx9_36_x64.cab... 100%
+Extract: Nov2007_d3dx9_36_x86.cab... 100%
+Extract: Nov2008_X3DAudio_x64.cab... 100%
+Extract: Nov2008_X3DAudio_x86.cab... 100%
+Extract: Nov2008_XACT_x64.cab... 100%
+Extract: Nov2008_XACT_x86.cab... 100%
+Extract: Nov2008_XAudio_x64.cab... 100%
+Extract: Nov2008_XAudio_x86.cab... 100%
+Extract: Nov2008_d3dx10_40_x64.cab... 100%
+Extract: Nov2008_d3dx10_40_x86.cab... 100%
+Extract: Nov2008_d3dx9_40_x64.cab... 100%
+Extract: Nov2008_d3dx9_40_x86.cab... 100%
+Extract: OCT2006_XACT_x64.cab... 100%
+Extract: OCT2006_XACT_x86.cab... 100%
+Extract: OCT2006_d3dx9_31_x64.cab... 100%
+Extract: OCT2006_d3dx9_31_x86.cab... 100%
+Extract: Oct2005_xinput_x64.cab... 100%
+Extract: Oct2005_xinput_x86.cab... 100%
+Extract: dsetup32.dll... 100%
+Extract: dxdllreg_x86.cab... 100%
+Extract: dxupdate.cab... 100%
+Output folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\GV LicenseManager
+Extract: Setup.exe... 100%
+Output folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\HardwareSetupTool
+Extract: HardwareSetupTool.exe... 100%
+Output folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\VC100Runtime
+Extract: vcredist_x86.exe... 100%
+Output folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\VC80Runtime
+Extract: vcredist_x86.exe... 100%
+Output folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\VC80Runtime\8_0_50727_6195
+Extract: vcredist_x86.EXE... 100%
+Output folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Runtime\VC90Runtime
+Extract: vcredist_x86.exe... 100%
+Output folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\Settings
+Extract: Edius.ico... 100%
+Extract: SetupManagerForEDIUS.cst... 100%
+Output folder: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55
+Execute: C:\Users\Thinkpad\AppData\Local\Temp\EDIUS6.55\EDIUS\Setup.exe /EXEDIR=C:\Users\Thinkpad\AppData\Local\Temp\360zip$Temp\360$1\6.55注册版
+
+20:47 2017/6/20
+EDius注册
+185718480@qq.com
+ZPguo_2010
+
+744972-E8RX2N0PN7TQWMB1
+12:15 2017/7/14
