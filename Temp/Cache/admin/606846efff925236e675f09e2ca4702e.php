@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -199,16 +199,16 @@ $(function () {
             name: '满意度占比',
             data: [
                 
-                ['满意', {$my}],
-                ['比较满意', {$bjmy}],
+                ['满意', <?php echo ($my); ?>],
+                ['比较满意', <?php echo ($bjmy); ?>],
                 {
                     name: '非常满意',
-                    y: {$fcmy},
+                    y: <?php echo ($fcmy); ?>,
                     sliced: true,
                     selected: true
                 },
                 
-                ['不满意',{$bmy}]
+                ['不满意',<?php echo ($bmy); ?>]
             ]
         }]
     });
@@ -232,7 +232,7 @@ $(function () {
             <div class="col-md-12">
                 <div class="alert alert-success fade in" style="font-size:18px;margin-bottom:2px;">
                     <i class="glyphicon glyphicon-ok"></i>
-                    <strong>提示</strong> {$wel}
+                    <strong>提示</strong> <?php echo ($wel); ?>
                 </div>
             </div>
         </div>
@@ -245,42 +245,40 @@ $(function () {
                             <div class="form-inline" style="text-align: center;">
                                 <select id="scid" class="form-control" style="width:446px;">
                                     <option value='0'>请选择课程查看/添加任务[学期-教师-班级-课程]</option>
-                                    <foreach name='courses' item='v'>
-                                        <option value="{$v.scid}">{$v.term}-{$v.jsxm}-{$v.cname}-{$v.coursename}</option>
-                                    </foreach>
+                                    <?php if(is_array($courses)): foreach($courses as $key=>$v): ?><option value="<?php echo ($v["scid"]); ?>"><?php echo ($v["term"]); ?>-<?php echo ($v["jsxm"]); ?>-<?php echo ($v["cname"]); ?>-<?php echo ($v["coursename"]); ?></option><?php endforeach; endif; ?>
                                 </select><hr style="height: 1px;margin:2px 10px;" />
-                               <a href="{:U(GROUP_NAME.'/admin/Excise/sxpubexciseList')}" class="btn btn-info btnsearch" id="lookexcise"><span class="glyphicon glyphicon-eye-open"></span> 查看任务</a>
-                                <a href="{:U(GROUP_NAME.'/admin/Excise/sxpubexciseSave')}" class="btn btn-info btnsearch" id="addexcise"><span class="glyphicon glyphicon-plus"></span> 添加任务</a>　　
-                                <a href="{:U(GROUP_NAME.'/Excise/courseTable')}" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-eye-open"></span> 查看课表</a>
-                                <a href="{:U(GROUP_NAME.'/Excise/coursetableSave')}" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span>  添加课表</a>
+                               <a href="<?php echo U(GROUP_NAME.'/admin/Excise/sxpubexciseList');?>" class="btn btn-info btnsearch" id="lookexcise"><span class="glyphicon glyphicon-eye-open"></span> 查看任务</a>
+                                <a href="<?php echo U(GROUP_NAME.'/admin/Excise/sxpubexciseSave');?>" class="btn btn-info btnsearch" id="addexcise"><span class="glyphicon glyphicon-plus"></span> 添加任务</a>　　
+                                <a href="<?php echo U(GROUP_NAME.'/Excise/courseTable');?>" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-eye-open"></span> 查看课表</a>
+                                <a href="<?php echo U(GROUP_NAME.'/Excise/coursetableSave');?>" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span>  添加课表</a>
                             </div>
                         </td>
                     </tr>
                     
                     <tr><td>
                             <div class="form-inline"  style="text-align: center;">
-                                <a href="{:U(GROUP_NAME.'/Home/addNews')}" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span> 发布消息</a>
-                                <a href="{:U(GROUP_NAME.'/Home/news')}" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-eye-open"></span> 查看消息</a>　　
-                                <a href="{:U(GROUP_NAME.'/Basicdata/saveStudent')}" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span> 添加学生</a>
-                                <a href="{:U(GROUP_NAME.'/Basicdata/student')}" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-eye-open"></span> 查看学生</a>
+                                <a href="<?php echo U(GROUP_NAME.'/Home/addNews');?>" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span> 发布消息</a>
+                                <a href="<?php echo U(GROUP_NAME.'/Home/news');?>" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-eye-open"></span> 查看消息</a>　　
+                                <a href="<?php echo U(GROUP_NAME.'/Basicdata/saveStudent');?>" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span> 添加学生</a>
+                                <a href="<?php echo U(GROUP_NAME.'/Basicdata/student');?>" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-eye-open"></span> 查看学生</a>
                             </div>
                     </td>
                     </tr>
                     <tr><td>
                             <div class="form-inline" style="text-align: center;">
-                                <a href="{:U(GROUP_NAME.'/Basicdata/saveTeacher')}" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span> 添加教师</a>
-                                <a href="{:U(GROUP_NAME.'/Basicdata/teacher')}" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-eye-open"></span> 查看教师</a>　　
-                                <a href="{:U(GROUP_NAME.'/Basicdata/saveClasses')}" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span> 添加班级</a>
-                                <a href="{:U(GROUP_NAME.'/Basicdata/classes')}" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-eye-open"></span> 查看班级</a>
+                                <a href="<?php echo U(GROUP_NAME.'/Basicdata/saveTeacher');?>" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span> 添加教师</a>
+                                <a href="<?php echo U(GROUP_NAME.'/Basicdata/teacher');?>" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-eye-open"></span> 查看教师</a>　　
+                                <a href="<?php echo U(GROUP_NAME.'/Basicdata/saveClasses');?>" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span> 添加班级</a>
+                                <a href="<?php echo U(GROUP_NAME.'/Basicdata/classes');?>" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-eye-open"></span> 查看班级</a>
                             </div>
                     </td>
                     </tr>
                     <tr><td>
                             <div class="form-inline" style="text-align: center;">
-                                <a href="{:U(GROUP_NAME.'/Basicdata/saveTerm')}" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span> 添加学期</a>
-                                <a href="{:U(GROUP_NAME.'/Basicdata/saveCourse')}" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span> 添加课程</a>　　
-                                <a href="{:U(GROUP_NAME.'/Basicdata/saveProfessional')}" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span> 添加专业</a>
-                                <a href="{:U(GROUP_NAME.'/Basicdata/saveOffice')}" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span> 添加处室</a>
+                                <a href="<?php echo U(GROUP_NAME.'/Basicdata/saveTerm');?>" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span> 添加学期</a>
+                                <a href="<?php echo U(GROUP_NAME.'/Basicdata/saveCourse');?>" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span> 添加课程</a>　　
+                                <a href="<?php echo U(GROUP_NAME.'/Basicdata/saveProfessional');?>" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span> 添加专业</a>
+                                <a href="<?php echo U(GROUP_NAME.'/Basicdata/saveOffice');?>" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span> 添加处室</a>
                                 
                             </div>
                     </td>
@@ -298,43 +296,43 @@ $(function () {
                     <td  class="tdtitle">累计</td>
                    </tr>
                    <tr><td>发布的任务个数</td>
-                    <td>{$excisenum.todayexcisenum}</td>
-                    <td>{$excisenum.thismonthexcisenum}</td>
-                    <td>{$excisenum.thistermexcisenum}</td>
-                    <td>{$excisenum.totalexcisenum}</td>
+                    <td><?php echo ($excisenum["todayexcisenum"]); ?></td>
+                    <td><?php echo ($excisenum["thismonthexcisenum"]); ?></td>
+                    <td><?php echo ($excisenum["thistermexcisenum"]); ?></td>
+                    <td><?php echo ($excisenum["totalexcisenum"]); ?></td>
                    </tr>
                    <tr><td>接收任务学生数</td>
-                    <td>{$sturecnum.todaysturecnum}</td>
-                    <td>{$sturecnum.thismonthsturecnum}</td>
-                    <td>{$sturecnum.thistermsturecnum}</td>
-                    <td>{$sturecnum.totalsturecnum}</td>
+                    <td><?php echo ($sturecnum["todaysturecnum"]); ?></td>
+                    <td><?php echo ($sturecnum["thismonthsturecnum"]); ?></td>
+                    <td><?php echo ($sturecnum["thistermsturecnum"]); ?></td>
+                    <td><?php echo ($sturecnum["totalsturecnum"]); ?></td>
                    </tr>
                    <tr><td>提交作业学生数</td>
-                    <td>{$stusubnum.todaystusubnum}</td>
-                    <td>{$stusubnum.thismonthstusubnum}</td>
-                    <td>{$stusubnum.thistermstusubnum}</td>
-                    <td>{$stusubnum.totalstusubnum}</td>
+                    <td><?php echo ($stusubnum["todaystusubnum"]); ?></td>
+                    <td><?php echo ($stusubnum["thismonthstusubnum"]); ?></td>
+                    <td><?php echo ($stusubnum["thistermstusubnum"]); ?></td>
+                    <td><?php echo ($stusubnum["totalstusubnum"]); ?></td>
                    </tr>
 
                    <tr style="font-weight: bold;"><td>任务完成率(交/收)</td>
-                    <td>{$excisefinish.todayfinish}</td>
-                    <td>{$excisefinish.thismonthfinish}</td>
-                    <td>{$excisefinish.thistermfinish}</td>
-                    <td>{$excisefinish.totalfinish}</td>
+                    <td><?php echo ($excisefinish["todayfinish"]); ?></td>
+                    <td><?php echo ($excisefinish["thismonthfinish"]); ?></td>
+                    <td><?php echo ($excisefinish["thistermfinish"]); ?></td>
+                    <td><?php echo ($excisefinish["totalfinish"]); ?></td>
                    </tr>
 
                    <tr><td>讨论区交流条数</td>
-                    <td>{$discussnum.todaydiscussnum}</td>
-                    <td>{$discussnum.thismonthdiscussnum}</td>
-                    <td>{$discussnum.thistermdiscussnum}</td>
-                    <td>{$discussnum.totaldiscussnum}</td>
+                    <td><?php echo ($discussnum["todaydiscussnum"]); ?></td>
+                    <td><?php echo ($discussnum["thismonthdiscussnum"]); ?></td>
+                    <td><?php echo ($discussnum["thistermdiscussnum"]); ?></td>
+                    <td><?php echo ($discussnum["totaldiscussnum"]); ?></td>
                    </tr>
                    
                    
                </table>
            </div>
             <div class="col-md-3">
-               <h4><span class="glyphicon glyphicon-signal"></span> 用户满意度调查统计<span> <a href="{:U(GROUP_NAME.'/Index/detail')}" class="btn btn-sm">查看细节</a></span></h4>
+               <h4><span class="glyphicon glyphicon-signal"></span> 用户满意度调查统计<span> <a href="<?php echo U(GROUP_NAME.'/Index/detail');?>" class="btn btn-sm">查看细节</a></span></h4>
              <div id="container" style="min-width: 200px;min-height: 235px;border-left:1px solid #ddd;border-right:1px solid #ddd;border-bottom:1px solid #ddd;padding:2px 1px;margin-top: -10px;background-color: none;"></div>
             </div> 
              
@@ -344,12 +342,12 @@ $(function () {
             <div class="col-md-12">
                 <h4><span class="glyphicon glyphicon-info-sign"></span> 框架及系统信息</h4>
                 <table class="table table-bordered table-hover">
-                <tr><td class="tdtitle">运行环境</td><td align="left">{$sinfor.pe}</td></tr>
-                <tr><td class="tdtitle">开发框架</td><td align="left">{$sinfor.think}</td></tr>
-                <tr><td class="tdtitle">运行主机</td><td align="left">{$sinfor.zj}</td></tr>
-                <tr><td class="tdtitle">登录信息</td><td align="left">{$sinfor.userlogin}</td></tr>
-                <tr><td class="tdtitle">系统介绍</td><td align="left">{$sinfor.js}</td></tr>
-                <tr><td class="tdtitle">开发团队</td><td align="left">{$sinfor.kfz}</td></tr>
+                <tr><td class="tdtitle">运行环境</td><td align="left"><?php echo ($sinfor["pe"]); ?></td></tr>
+                <tr><td class="tdtitle">开发框架</td><td align="left"><?php echo ($sinfor["think"]); ?></td></tr>
+                <tr><td class="tdtitle">运行主机</td><td align="left"><?php echo ($sinfor["zj"]); ?></td></tr>
+                <tr><td class="tdtitle">登录信息</td><td align="left"><?php echo ($sinfor["userlogin"]); ?></td></tr>
+                <tr><td class="tdtitle">系统介绍</td><td align="left"><?php echo ($sinfor["js"]); ?></td></tr>
+                <tr><td class="tdtitle">开发团队</td><td align="left"><?php echo ($sinfor["kfz"]); ?></td></tr>
              </table>
             </div>
            

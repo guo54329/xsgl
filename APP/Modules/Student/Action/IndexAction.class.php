@@ -23,15 +23,30 @@ Class IndexAction extends CommonAction {
 
 	public function welcome()
 	{
-		# code...
+		//站点信息
 		$g_site =M('site')->find(1);
+		//框架及系统信息
+		$sinfor = systemconf();
+		//创建由学期联动课程查询的select
 		$stu=session('stu');
-		
-		$wel = "您的身份是学生，欢迎使用".$g_site['title']."！";
-		$this->assign("wel",$wel);
-		$this->assign('stu',$stu);
-		
+		$ccode = $stu['ccode'];
+    	getCourseinfor($ccode);
+		//登录后的首页提示信息
+		$wel = "您的身份是 <b>学生</b> ,欢迎使用".$g_site['title']."！";
+		//待完成任务
+		$stu = session('stu');
+        $xsno = $stu['xsno'];
+        $Model = M('sxsubexcise as a');
+        $termarr=M('term')->order('id DESC')->find();
+        $term=$termarr['name'];
+        $num=$Model->join("xh_sxpubexcise as b on a.peid=b.peid")->join("xh_sxsetcourse as c on b.scid=c.scid")->join("xh_teacher as d on c.jsno=d.jsno")->where("xsno='$xsno' and a.status=0")->count();
+        $list = $Model->join("xh_sxpubexcise as b on a.peid=b.peid")->join("xh_sxsetcourse as c on b.scid=c.scid")->join("xh_teacher as d on c.jsno=d.jsno")->where("xsno='$xsno' and a.status=0")->field("a.seid,a.status,a.desc,a.isrec,b.peid,b.title,b.filename,b.url,b.pubtime,c.coursename,c.term,d.jsxm,b.pubtime")->order("c.term DESC,d.jsxm ASC,c.scid ASC,a.peid ASC")->select();
+	    $this->assign("wel",$wel);
+	    $this->assign('sinfor',$sinfor);
+	    $this->assign('num',$num);
+	    $this->assign('list',$list);
 		$this->display();
+
 	}
 
 	public function sysNews(){

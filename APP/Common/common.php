@@ -30,7 +30,59 @@
     function p($arr){
   	   echo '<pre>' .print_r($arr,true).'</pre>';
     }
-    
+    //系统环境
+	function systemconf()
+	{
+		//$bIp = gethostbyname($_ENV['COMPUTERNAME']); //获取本机的局域网IP
+        //echo "本机IP：",$bIp,"\n";
+        //echo "本机主机名：",gethostbyaddr($bIp),"\n\n\n"; 
+	// 获取Mysql版本
+	    $con = mysql_connect(C('DB_HOST'), C('DB_USER'), C('DB_PWD')); 
+	// 查询当前用户的登录信息
+	    //如果是管理员
+	    if($_SESSION['uid']!==''){
+	 		$id = (int)$_SESSION['uid'];
+		    $user=M('user')->where("id=$id")->find(); 
+	    }
+	    //如果是教师
+	    if(session('tea')){
+	    	$tea = session('tea');
+	    }
+	    //如果是学生
+	    if(session('stu')){
+	    	$stu = session('stu');
+	    }
+	    $sinfor =array(
+	      'pe'=>'服务器:'.substr($_SERVER['SERVER_SOFTWARE'],0,13)."　语言:php".phpversion()."　数据库:Mysql".mysql_get_server_info($con),
+	      'zj' =>$_SERVER['HTTP_HOST'].'('.GetHostByName($_SERVER['SERVER_NAME']).':'.$_SERVER['SERVER_PORT'].')',
+	      'think'=>'ThinkPHP版本:'.THINK_VERSION.'　发行时间:'.THINK_RELEASE,
+	      'js'=>'系统以解决计算机专业实训教学中任务管理混乱和作业收交困难等问题为目的，帮助专业课教师有效管理任务和学生业，通过节省时间让教师致力于实训教学，最终达到师生共赢的目的！',
+	      'kfz'=>'萧寒工作室(郭盛18993351660)',
+	      'userlogin'=>'登录用户:'.$user['username'].'　登录时间:'.date('Y-m-d H:i:s',$user['logintime']).'　登录IP:'.$user['loginip'],
+	      'tealogin'=>'教师：<b>'.$tea['jsxm'].'</b>　登录时间：'.date('Y-m-d H:i:s',$tea['logintime']).'　IP：'.$tea['loginip'].'<br/>用户帐号：'.$tea['jsno'].'　联系电话：'.$tea['jsdh'].'　所在处室：'.$tea['offname'],
+	      'stulogin'=>'学生：<b>'.$stu['xsxm'].'</b>　登录时间：'.date('Y-m-d H:i:s',$stu['logintime']).'　IP：'.$stu['loginip'].'<br/>学号：'.$stu['xsno'].'　班级：'.$stu['cname'].'　入学时间：'.$stu['rxsj'],
+	    ); 
+	    return $sinfor;
+	}
+	/**
+	 * 强制下载
+	 * @author rainfer <81818832@qq.com>
+	 *
+	 * @param string $filename
+	 * @param string $content
+	 */
+	function force_download_content($filename, $content)
+	{
+	    header("Pragma: public");
+	    header("Expires: 0");
+	    header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+	    header("Content-Type: application/force-download");
+	    header("Content-Transfer-Encoding: binary");
+	    header("Content-Disposition: attachment; filename=$filename");
+	    echo $content;
+	    exit ();
+	}
+
 	//附件下载公共函数
 	 function downAttach($filepath,$filename){
 	    $file= $filepath.$filename;

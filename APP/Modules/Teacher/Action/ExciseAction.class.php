@@ -261,6 +261,9 @@ public function delcourseTable(){
  */
 public function sxpubexciseList(){
     $scid = (int)$_GET['scid'];
+    if($scid==0){
+        $this->error('请选择课程查看任务！');
+    }
     $Model=M('sxpubexcise as a');
     $courseinfo = M('sxsetcourse as a')->join("xh_classes as b on a.ccode = b.ccode")->field("a.scid,b.cname,a.coursename,a.term")->where("a.scid=$scid")->find();
     $num=$Model->where("a.scid=$scid")->count();
@@ -340,8 +343,14 @@ public function sxpubexciseSave(){
   }else{
         //发布任务视图
         $scid = (int)$_GET['scid'];
-        $coursename = M('sxsetcourse')->field('coursename')->find($scid);
+        if($scid==0){
+            $this->error('请选择课程添加任务！');
+        }
+        
+        $coursename = M('sxsetcourse as a')->join("xh_teacher as b on a.jsno=b.jsno")->field('a.coursename,b.jsxm')->where("a.scid = $scid")->find();
+
         $this->assign('coursename',$coursename['coursename']);
+        $this->assign('jsxm',$coursename['jsxm']);
         $this->assign('scid',$scid);
         $this->display();
   } 

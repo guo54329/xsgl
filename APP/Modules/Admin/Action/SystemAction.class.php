@@ -68,6 +68,7 @@ Class SystemAction extends CommonAction {
         $x->user= C('DB_USER'); 
         $x->pwd= C('DB_PWD'); 
         $x->database= C('DB_NAME'); 
+        $x->charset= C('DB_CHARSET'); 
 		$x->conn();     //连接数据库
         //p($_POST);
     	if(!empty($_POST)){ //处理
@@ -101,6 +102,28 @@ Class SystemAction extends CommonAction {
 				$file=$pathinfo.$filename;
 				unlink($file);
 				$this->success("文件删除成功！",U(GROUP_NAME."/System/backup"));
+			}
+			//上传备份文件
+			if($_POST['upload']){
+
+				import('ORG.Net.UploadFile');
+				$upload = new UploadFile();// 实例化上传类
+				$upload->saveRule ='definesqlfilename';
+				$upload->allowExts  = array('sql', 'SQL');// 设置附件上传类型
+				$upload->savePath =  './DBback/';// 设置附件上传目录
+				if(!$upload->upload()) {// 上传错误提示错误信息
+					$this->error($upload->getErrorMsg());
+				}else{// 上传成功 获取上传文件信息
+					//$info =  $upload->getUploadFileInfo();
+					$this->success("备份文件已上传成功！",U(GROUP_NAME."/System/backup"));
+				}
+	
+			}
+			//下载备份文件
+			if($_POST['download']){
+				$pathinfo= './DBback/'; 
+				$filename =$_POST['hffilename'];
+				downAttach($pathinfo,$filename);
 			}	
 			if($_POST['yh']){
 				$tablename=$_POST['tabname'];

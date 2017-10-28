@@ -136,7 +136,7 @@ $(function() {
 	  <div class="panel-body">
 		 <table class="table table-bordered table-hover tablesorter">
 		  <thead>
-			<tr><th style="text-align: center;" width="6%">ID</th><th style="text-align: center;">学期</th><th style="text-align: center;" width="12%">任课教师</th><th style="text-align: center;">班级</th><th style="text-align: center;">课程</th><th style="text-align: center;" width="12%">任务数量</th><td style="text-align: center;font-weight: bold;">操作</td></tr>
+			<tr><th style="text-align: center;" width="5%">ID</th><th style="text-align: center;">学期</th><th style="text-align: center;" width="8%">任课教师</th><th style="text-align: center;">班级</th><th style="text-align: center;">课程</th><th style="text-align: center;" width="8%">任务数量</th><td style="text-align: center;font-weight: bold;">接收人数</td><td style="text-align: center;font-weight: bold;">提交人数</td><td style="text-align: center;font-weight: bold;">完成率</td><td style="text-align: center;font-weight: bold;" width="22%">操作</td></tr>
 			</thead>
 			<tbody id="tob">
 			<foreach name='coursetable' item='v'>
@@ -158,6 +158,27 @@ $(function() {
     				</php>
     				<span class="numColor{$i}">{$pubnum}</span>
     			</td>
+    			<td><php>
+    					$i=0;
+						$recnum = M('sxsetcourse as a')->join('inner join xh_sxpubexcise as b on a.scid = b.scid')->join('inner join xh_sxsubexcise as c on b.peid=c.peid')->where("a.scid=$scid")->count();
+						if($recnum>0)$i=1;
+					</php>
+					<span class="numColor{$i}">{$recnum}</span>
+    			</td>
+    			<td><php>
+    					$i=0;
+						$subnum = M('sxsetcourse as a')->join('inner join xh_sxpubexcise as b on a.scid = b.scid')->join('inner join xh_sxsubexcise as c on b.peid=c.peid')->where("a.scid=$scid and c.status=1")->count();
+						if($recnum>0)$i=1;
+						//完成率
+						if($subnum==0){
+							$finish="等待发布";	
+						}else{
+							$finish = (round($subnum / $recnum,4)*100)."%";
+						}
+					</php>
+					<span class="numColor{$i}">{$subnum}</span>
+    			</td>
+    			<td><span class="numColor{$i}">{$finish}</span></td>
 				<td align="left">　
 				   <a href="{:U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$v['scid']))}" class="btn btn-default btn4" title="查看指定教师发布的指定课程的任务列表！"><span class="glyphicon glyphicon-eye-open"></span> 任务列表</a>&nbsp;
 					

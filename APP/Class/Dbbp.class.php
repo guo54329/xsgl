@@ -6,16 +6,18 @@
  */
 
 class Dbbp {
-    public $host='127.0.0.1';    //Êý¾Ý¿âµØÖ·
-    public $user='root';    //µÇÂ¼Ãû
-    public $pwd='';     //ÃÜÂë
-    public $database='xsgl';   //Êý¾Ý¿âÃû
-    public $charset='utf8';    //Êý¾Ý¿âÁ¬½Ó±àÂë£ºmysql_set_charset
+    //可以读取初始化时传递过来的数据库配置信息
+    public $host;  //='127.0.0.1';    
+    public $user;  //='root';    
+    public $pwd;   //='';     
+    public $database; //='xsgl';   
+    public $charset;  //='utf8';   
     
 
     public function conn() {
         
         $con = mysql_connect($this->host,$this->user,$this->pwd);
+        
         if (!$con){
             die('Could not connect');
         }
@@ -25,7 +27,7 @@ class Dbbp {
             die('Can\'t use select db');
         }
 
-        mysql_set_charset($this->charset);    //ÉèÖÃ±àÂë
+        mysql_set_charset($this->charset);    
         
         return $con;
     }

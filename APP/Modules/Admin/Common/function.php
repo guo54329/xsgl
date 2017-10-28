@@ -179,8 +179,11 @@ function getTeacherinfor(){
       exit;
     }
   }
-
-//自定义文件名
+//上传数据库备份文件名命名规则
+function definesqlfilename(){
+   return date('YmdHis',time());
+}
+//自定义文件名:上传附件
 function definefilename(){
   
   $uptime=session('uptime');
@@ -252,26 +255,7 @@ function definefilename(){
     exit;
  }
  */
- //系统环境
-function systemconf()
-{
-
-    $con = mysql_connect(C('DB_HOST'), C('DB_USER'), C('DB_PWD'));
-    
-    $sinfor = array(
-      'f1' =>substr($_SERVER['SERVER_SOFTWARE'],0,13), 
-      'f2' =>"php".phpversion(),         
-      'f3' =>"Mysql".mysql_get_server_info($con),  
-      'f4' =>$_SERVER['HTTP_HOST'], 
-      'f5' =>GetHostByName($_SERVER['SERVER_NAME']), 
-      'f6' =>$_SERVER['SERVER_NAME'],  
-      'f7' =>$_SERVER['SERVER_PORT'],
-      'f8' =>Zend_Version()
-      );
-   
-    return $sinfor;
-}
-
+ 
 
 //组合一维数组：无限极分类
 function unlimitedForLevel($cate,$html='',$pid=0,$level=0){

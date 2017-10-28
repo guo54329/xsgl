@@ -12,7 +12,8 @@ return array(
 	'DB_PWD' => '',
 	'DB_NAME' => 'xsgl',
 	'DB_PREFIX' => 'xh_',
-
+	'DB_CHARSET'=>'utf8',
+	
     //加载verify.php配置文件（配置验证码）
     'LOAD_EXT_CONFIG' => 'verify',
 

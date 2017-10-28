@@ -2,8 +2,11 @@
 	body{
 		font-family:Microsoft YaHei,Verdana,Arial,SimSun; padding-bottom:40px;
 	}
+
 	.panel{
-		margin-top:-16px; 
+		margin-top:-16px;
+		margin-left:8px; 
+		margin-right:4px;
 	}
 	.panel-heading{
 		font-size: 18px;   

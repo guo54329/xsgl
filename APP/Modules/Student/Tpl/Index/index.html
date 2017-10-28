@@ -1,4 +1,3 @@
-
 <!DOCTYPE>
 <html>
 <head>
@@ -9,47 +8,44 @@
 <script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="__PUBLIC__/Js/menu.js"></script>
 <script type="text/javascript" src="__PUBLIC__/Js/time.js"></script>
+<!--[if lt IE 9]>
+      <script src="__PUBLIC__/Js/html5shiv.min.js"></script>
+      <script src="__PUBLIC__/Js/respond.min.js"></script>
+<![endif]-->
 
-<!--
-<script type="text/javascript">
-	$(function(){
-
-		$(".subm").click(function(){
-			var dis = $(".ssubm").css('display','none');
-			 if(dis=='none'){
-			 	$(".ssubm").show();
-			 }else{
-				$(".ssubm").hide();
-			 }
-		});
-	});
-</script>
--->
+<!--[if lt IE 9]>
+      <script src="__PUBLIC__/Js/jquery.placeholder.min.js"></script>
+    <script src="__PUBLIC__/Js/backgroundsize.min.htc"></script>    
+      <script>
+        $(function(){ $('input, textarea').placeholder(); });
+      </script>
+    
+ <![endif]-->
 </head>
 
 <body onload="startTime()">
 <div class="top"></div>
 <div id="header">
-	<div class="logo">{$g_site.title}</div>
-	<div class="navigation">
-		<ul>
-			<li>欢迎您，<a href="{:U(GROUP_NAME.'/Index/welcome')}" target='nr'>{$xsxm}</a><!--({$sname} {$cname})-->！</li>
-			<li><a href="{:U(GROUP_NAME.'/Userinfor/editUserpass')}" target='nr'>修改密码</a></li>
-			<li><a href="{:U(GROUP_NAME.'/Login/logout')}">退出</a></li>
-		</ul>
-		<ul>
-		 	<li>系统时间：<span id="txt"></span></li>
-		</ul>
-	</div>
+  <div class="logo">{$g_site.title}</div>
+  <div class="navigation">
+    <ul>
+      <li>欢迎您，<a href="{:U(GROUP_NAME.'/Index/welcome')}" target='nr'>{$xsxm}</a><!--({$sname} {$cname})-->！</li>
+      <li><a href="{:U(GROUP_NAME.'/Userinfor/editUserpass')}" target='nr'>修改密码</a></li>
+      <li><a href="{:U(GROUP_NAME.'/Login/logout')}">退出</a></li>
+    </ul>
+    <ul>
+      <li>系统时间：<span id="txt"></span></li>
+    </ul>
+  </div>
 </div>
 <div id="content">
-	<div class="left_menu">
-	<ul id="nav_dot">
-		<li style="margin-top:10px;display:block;">
+  <div class="left_menu">
+  <ul id="nav_dot">
+    <li style="margin-top:10px;display:block;">
           <h4 class="M6"><span></span>系统信息查看</h4>
           <div class="list-item none">
-            <a href="{:U(GROUP_NAME.'/Index/welcome')}" target='nr'>查看登录信息</a>
-            <a href="{:U(GROUP_NAME.'/Index/sysNews')}" target='nr'>查看系统消息</a>
+            <a href="{:U(GROUP_NAME.'/Index/welcome')}" target='nr'>控制台</a>
+            <a href="{:U(GROUP_NAME.'/Index/sysNews')}" target='nr'>查看所收消息</a>
             </div>
         </li>
         <li style="margin-top:10px;display:block;">
@@ -59,7 +55,7 @@
             </div>
         </li>
 
-		<li>
+    <li>
           <h4   class="M10"><span></span>个人信息维护</h4>
           <div class="list-item none">
             <a href="{:U(GROUP_NAME.'/Userinfor/userinfor')}" target='nr'>个人资料查看</a>
@@ -68,12 +64,12 @@
         </li>
        
   </ul>
-		</div>
-		<div class="m-right">
-			<div class="main">
-				<iframe name="nr" src="{:U(GROUP_NAME.'/Index/welcome')}" style="width:100%;height:100%;"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="yes" allowtransparency="yes"></iframe>
-			</div>
-		</div>
+    </div>
+    <div class="m-right">
+      <div class="main">
+        <iframe name="nr" src="{:U(GROUP_NAME.'/Index/welcome')}" style="width:100%;height:100%;"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="yes" allowtransparency="yes"></iframe>
+      </div>
+    </div>
 </div>
 <div class="bottom"></div>
 <div id="footer"><p>{$g_site.copyright} {$g_site.icp}</p></div>

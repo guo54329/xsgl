@@ -29,7 +29,7 @@ function myrefresh(){
 	window.location.reload();
 }
 function publish(obj){
-	if(confirm("发布后再执行此操作相当于撤销将会清除已提交的学生作业，请谨慎操作！")){
+	if(confirm("请看清按钮名称执行本操作，确认则执行，取消则不执行！")){
         var peid = obj.id;
 		var status = $("#status"+peid);
 		var scid = $("#scid"+peid).val();
@@ -140,7 +140,7 @@ function del(obj){
 	  <div class="panel-body">
 		 <table class="table table-bordered table-hover tablesorter">
 			<thead>
-			<tr style="text-align: center;font-weight: bold;"><th width="5%">序号</th><td width="20%">任务题目</td><!--<td>任务描述</td><td>任务附件</td>--><td width="7%">发布状态</td><th width="10%" style="text-align: center;">学生下载他人作业</th><td width="10%">发布时间</td><th width="8%" style="text-align: center;">完成</th><td>操 作</td></tr>
+			<tr style="text-align: center;font-weight: bold;"><th width="5%">序号</th><td align="left">任务题目</td><!--<td>任务描述</td><td>任务附件</td>--><td width="7%">发布状态</td><th width="10%" style="text-align: center;">学生下载他人作业</th><td width="10%">发布时间</td><th width="8%" style="text-align: center;">完成</th><td width="32%">操 作</td></tr>
 			</thead>
 			<tbody>
 			{~$i=1}
@@ -184,7 +184,7 @@ function del(obj){
 				<if condition="$v['status'] eq 0">
 					<button class="btn btn-default" id="{$v.peid}" onclick="publish(this);"><span class="glyphicon glyphicon-share-alt"></span> 发布</button>&nbsp;
 				<else/>
-					<button class="btn btn-default" id="{$v.peid}" onclick="publish(this);"><span class="glyphicon glyphicon-share-alt"></span> 撤销</button>&nbsp;
+					<button class="btn btn-default" id="{$v.peid}" onclick="publish(this);"><span style="color: red;"><span class="glyphicon glyphicon-share-alt"></span> 撤销</span></button>&nbsp;
 				</if>
 
 				<button class="btn btn-default" id="{$v.peid}" onclick="del(this);"><span class="glyphicon glyphicon-remove"></span> 删除</button>

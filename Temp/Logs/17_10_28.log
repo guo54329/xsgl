@@ -1,0 +1,37 @@
+[ 2017-10-28T23:48:38+08:00 ] 0.0.0.0 /xsgl/index.php/admin/Login/login
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.000998s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001183s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Driver\Db\DbMysql.class.php 第 55 行.
+SQL: SHOW COLUMNS FROM `xh_user` [ RunTime:0.000728s ]
+NOTIC: [8192] preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead C:\wamp64\www\xsgl\ThinkPHP\Lib\Core\Db.class.php 第 604 行.
+SQL: SELECT * FROM `xh_user` WHERE ( `username` = 'admin' ) LIMIT 1   [ RunTime:0.000601s ]
+SQL: UPDATE `xh_user` SET `logintime`=1509205718,`loginip`='0.0.0.0' WHERE ( `id` = 1 ) [ RunTime:0.000484s ]
+
+[ 2017-10-28T23:48:39+08:00 ] 0.0.0.0 /xsgl/index.php/admin/Index/public/js/jquery.min.js
+ERR: 非法操作:public
+
+[ 2017-10-28T23:48:39+08:00 ] 0.0.0.0 /xsgl/index.php/admin/Index/public/js/bootstrap.min.js
+ERR: 非法操作:public
+
+[ 2017-10-28T23:48:39+08:00 ] 0.0.0.0 /xsgl/APP/Modules/admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-10-28T23:48:42+08:00 ] 0.0.0.0 /xsgl/APP/Modules/admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-10-28T23:50:02+08:00 ] 0.0.0.0 /xsgl/APP/Modules/admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-10-28T23:50:42+08:00 ] 0.0.0.0 /xsgl/APP/Modules/admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-10-28T23:58:14+08:00 ] 0.0.0.0 /xsgl/APP/Modules/admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-10-28T23:58:38+08:00 ] 0.0.0.0 /xsgl/APP/Modules/admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+
+[ 2017-10-28T23:58:39+08:00 ] 0.0.0.0 /xsgl/APP/Modules/admin/Tpl/Public/fonts/glyphicons-halflings-regular.woff2
+ERR: 无法加载模块:APP
+

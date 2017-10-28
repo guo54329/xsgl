@@ -3,14 +3,14 @@
 //管理员信息管理控制器
 Class UserinforAction extends CommonAction {
 
-	Public function index(){
-		//p($_SESSION);die;
-		$id = (int)$_SESSION['uid'];
-		$user=M('user')->where("id=$id")->find();
-		//p($user);
-		$this->user=$user;
-		$this->display();
-	}
+	// Public function index(){
+	// 	//p($_SESSION);die;
+	// 	$id = (int)$_SESSION['uid'];
+	// 	$user=M('user')->where("id=$id")->find();
+	// 	//p($user);
+	// 	$this->user=$user;
+	// 	$this->display();
+	// }
 
 	public function access(){
 		$id = (int)$_SESSION['uid'];

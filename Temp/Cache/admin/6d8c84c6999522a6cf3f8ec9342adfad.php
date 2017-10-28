@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -73,7 +73,7 @@ function checkhf(){
 function yh(obj){
 	var tabname = obj.id;
 	var data={'yh':1,'tabname':tabname};
-    var url ="{:U(GROUP_NAME.'/System/backup')}";
+    var url ="<?php echo U(GROUP_NAME.'/System/backup');?>";
     $.post(url,data,function(result){
     	if(result.status==1){
     		return  dialog.successtip(result.message);
@@ -83,7 +83,7 @@ function yh(obj){
 
 function yjyh(){
 	var data={'yjyh':1};
-	var url ="{:U(GROUP_NAME.'/System/backup')}";
+	var url ="<?php echo U(GROUP_NAME.'/System/backup');?>";
     $.post(url,data,function(result){
     	if(result.status==1){
     		return  dialog.successtip(result.message);
@@ -134,16 +134,14 @@ function yjyh(){
 		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 数据备份与恢复</a>
 	  </div>
 	  <div class="panel-body">
-	  		<form name='myhf' action='{:U(GROUP_NAME.'/System/backup')}' method='post' onsubmit='return checkhf();'>
+	  		<form name='myhf' action='<?php echo U(GROUP_NAME.'/System/backup');?>' method='post' onsubmit='return checkhf();'>
 			<div class="form-horizontal">  
 			    <div class="form-inline">
 					<select class="form-control" id="selecthf" name="hffilename" style="width:662px;">
 						<option value="0">请选择恢复文件名...</option>
-						{~$i=0}
-						<foreach name="files" item="v">
-							<option value="{$files[$i]}">{$i+1} ---> {$files[$i]}</option>
-							{~$i++}
-			 		    </foreach>
+						<?php $i=0;?>
+						<?php if(is_array($files)): foreach($files as $key=>$v): ?><option value="<?php echo ($files[$i]); ?>"><?php echo ($i+1); ?> ---> <?php echo ($files[$i]); ?></option>
+							<?php $i++; endforeach; endif; ?>
 					</select>
 					<button class="btn btn-info" type="submit"  name="hf" value="1"><span class="glyphicon glyphicon-floppy-open"></span> 恢复</button>　　
 					<button class="btn btn-info btn8" type="submit"  name="download" value="1"><span class="glyphicon glyphicon-save"></span> 下载选定备份文件</button>　　
@@ -154,7 +152,7 @@ function yjyh(){
 			    </div>
 			</div>
 		    </form>
-			<form action='{:U(GROUP_NAME.'/System/backup')}' method='post' enctype="multipart/form-data">
+			<form action='<?php echo U(GROUP_NAME.'/System/backup');?>' method='post' enctype="multipart/form-data">
 				<div class="form-inline">
 					<input type="file" name="bpfile" class="form-control">
 					<button class="btn btn-info btn7" type="submit"  name="upload" value="1"><span class="glyphicon glyphicon-open"></span> 上传备份文件</button>(在恢复数据时可供选择)
@@ -164,7 +162,7 @@ function yjyh(){
 			
 	       <button class="btn btn-info btn7" style="float: right;" id="yjyh" onclick="yjyh();"><span class="glyphicon glyphicon-refresh"></span> 数据表一键优化</button>
 
-			<form name='mybf' action='{:U(GROUP_NAME.'/System/backup')}' method='post' onsubmit='return checkbf();'>
+			<form name='mybf' action='<?php echo U(GROUP_NAME.'/System/backup');?>' method='post' onsubmit='return checkbf();'>
                 <div class="form-inline">
 					<button type="button" id="all" class="btn btn-default" >全选</button>
 				
@@ -184,26 +182,23 @@ function yjyh(){
 			<tr class="title"><td>序号</td><td>表名</td><!--<th>表引擎</th>--><td>记录数</td><td>表大小</td><td>更新时间</td><td>操作</td><!--<th>表编码</th>--></tr>
 		</thead>	
 		<tbody id="data">
-			{~$i=0}<!--~不输出-->  
-            <foreach name="tbdesc" item="v">
-              
-              <tr class="tr">
-                <td>{$i+1}</td>
+			<?php $i=0;?><!--~不输出-->  
+            <?php if(is_array($tbdesc)): foreach($tbdesc as $key=>$v): ?><tr class="tr">
+                <td><?php echo ($i+1); ?></td>
                 <td>
                 <div class="form-inline">
-				    <label><input type="checkbox" value="{$tbdesc[$i][0]}" name="tbl[{$i}]"  />{$tbdesc[$i][0]}<if condition = "$tbdesc[$i][7]!=''">({$tbdesc[$i][7]})</if></label>
+				    <label><input type="checkbox" value="<?php echo ($tbdesc[$i][0]); ?>" name="tbl[<?php echo ($i); ?>]"  /><?php echo ($tbdesc[$i][0]); if($tbdesc[$i][7]!=''): ?>(<?php echo ($tbdesc[$i][7]); ?>)<?php endif; ?></label>
 				    </div>
 				</td>
-                <!--<td>{$tbdesc[$i][1]}</td>-->
-                <td>{$tbdesc[$i][2]}</td>
-                <td>{$tbdesc[$i][3]} KB</td>
-                <td>{$tbdesc[$i][5]}</td>
-                <!--<td>{$tbdesc[$i][6]}</td>-->
-                <td><button type="button" id="{$tbdesc[$i][0]}" class="btn btn-default" onclick="yh(this);">优化</button></td>
+                <!--<td><?php echo ($tbdesc[$i][1]); ?></td>-->
+                <td><?php echo ($tbdesc[$i][2]); ?></td>
+                <td><?php echo ($tbdesc[$i][3]); ?> KB</td>
+                <td><?php echo ($tbdesc[$i][5]); ?></td>
+                <!--<td><?php echo ($tbdesc[$i][6]); ?></td>-->
+                <td><button type="button" id="<?php echo ($tbdesc[$i][0]); ?>" class="btn btn-default" onclick="yh(this);">优化</button></td>
               </tr>
               
-			  {~$i++}
-			</foreach>
+			  <?php $i++; endforeach; endif; ?>
             </tbody>
 		</table>
 		</form>	

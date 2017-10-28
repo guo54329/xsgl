@@ -23,7 +23,7 @@ public function sxsubexciseList(){
     
 
     $ccode = $stu['ccode'];
-	//p($stu);
+	  //p($stu);
     getCourseinfor($ccode);//创建由学期联动课程查询的select
     $this->assign('num',$num);
     $this->assign('list',$list);
