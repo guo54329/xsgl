@@ -52,46 +52,109 @@
         $thistermstusubnum = $Model->join('inner join xh_sxpubexcise as b on a.scid = b.scid')->join('inner join xh_sxsubexcise as c on b.peid=c.peid')->where("c.status=1 and a.term='$term'")->count();
         
         $totalstusubnum=$Model->join('inner join xh_sxpubexcise as b on a.scid = b.scid')->join('inner join xh_sxsubexcise as c on b.peid=c.peid')->where("c.status=1")->count();
-//2-4任务完成率(提交/接收)
+//2-4任务完成率(学生提交/学生接收)
         if($todaysturecnum>0){
-            $todayfinish = (round($todaysturecnum / $todaysturecnum,4)*100)."%";
+            $todayfinish = (round($todaystusubnum / $todaysturecnum,4)*100)."%";
+            if($todaystusubnum==$todaysturecnum){
+                $todayfinish="<span class='finishcolor'>".$todayfinish."</span>";
+            }
         }else{
-            $todayfinish = "等待发布";
-        }
-        if($thismonthsturecnum>0){
-            $thismonthfinish = (round($thismonthstusubnum / $thismonthsturecnum,4)*100)."%";
-        }else{
-            $todayfinish = "等待发布";
-        }
-        if($thistermsturecnum>0){
-            $thistermfinish = (round($thistermstusubnum / $thistermsturecnum,4)*100)."%";
-        }else{
-            $thistermfinish = "等待发布";
-        }
-        if($totalsturecnum>0){
-            $totalfinish = (round($totalstusubnum / $totalsturecnum,4)*100)."%";
-        }else{
-            $totalfinish = "等待发布";
-        }
-         
-//2-5讨论板交流条数
-        $todaydiscussnum=$Model->join('inner join xh_sxpubexcise as b on a.scid = b.scid')->join('inner join xh_sxdisexicise as c on b.peid=c.peid')->where("b.pubtime between $beginToday and $endToday")->count();
-        if($todaydiscussnum==0){
-            $todaydiscussnum="等待发布";
+            $todayfinish = "暂无";
         }
         
+        if($thismonthsturecnum>0){
+            $thismonthfinish = (round($thismonthstusubnum / $thismonthsturecnum,4)*100)."%";
+            if($thismonthstusubnum==$thismonthsturecnum){
+                $thismonthfinish="<span class='finishcolor'>".$thismonthfinish."</span>";
+            }
+        }else{
+            $thismonthfinish = "暂无";
+        }
+
+        if($thistermsturecnum>0){
+            $thistermfinish = (round($thistermstusubnum / $thistermsturecnum,4)*100)."%";
+            if($thistermstusubnum==$thistermsturecnum){
+                $thistermfinish="<span class='finishcolor'>".$thistermfinish."</span>";
+            }
+
+        }else{
+            $thistermfinish = "暂无";
+        }
+
+        if($totalsturecnum>0){
+            $totalfinish = (round($totalstusubnum / $totalsturecnum,4)*100)."%";
+            if($totalstusubnum==$totalsturecnum){
+                $totalfinish="<span class='finishcolor'>".$totalfinish."</span>";
+            }
+        }else{
+            $totalfinish = "暂无";
+        }
+ //2-5文件个数和总大小
+        //今日
+        $todaynum=0;
+        $todaysize=0;
+        $todayfile=$Model->join('inner join xh_sxpubexcise as b on a.scid = b.scid')->where("b.pubtime between $beginToday and $endToday")->field('url')->select();
+        for($i=0;$i<count($todayfile);$i++){
+            $tempnum=0;
+            $tempsize=0;
+            $path=substr($todayfile[$i]['url'],0,-1);
+            $res = readDirAndFile($path,$tempnum,$tempsize);
+            $todaynum  += $res['totalnum'];
+            $todaysize += $res['totalsize'];    
+        }
+        $todaysize = format_bytes($todaysize);
+        
+        //本月
+        $thismonthnum=0;
+        $thismonthsize=0;
+        $thismonthfile=$Model->join('inner join xh_sxpubexcise as b on a.scid = b.scid')->where("b.pubtime between $beginThismonth and $endThismonth")->field('url')->select();
+        //获取文件夹中文件的文件名、大小和总数
+        for($i=0;$i<count($thismonthfile);$i++){
+            $tempnum=0;
+            $tempsize=0;
+            $path = substr($thismonthfile[$i]['url'],0,-1);
+            $res = readDirAndFile($path,$tempnum,$tempsize);
+            $thismonthnum += $res['totalnum'];
+            $thismonthsize += $res['totalsize'];
+        }
+        $thismonthsize=format_bytes($thismonthsize);
+        //echo '本月：'.$thismonthnum.'--'.$thismonthsize."<hr/>";
+        //本学期
+        $thistermnum=0;
+        $thistermsize=0;
+        $thistermfile = $Model->join('inner join xh_sxpubexcise as b on a.scid = b.scid')->where("a.term='$term'")->field('url')->select();
+        for($i=0;$i<count($thistermfile);$i++){
+            $tempnum=0;
+            $tempsize=0;
+            $path = substr($thistermfile[$i]['url'],0,-1);
+            $res = readDirAndFile($path,$tempnum,$tempsize);
+            $thistermnum += $res['totalnum'];
+            $thistermsize += $res['totalsize'];
+        }
+        $thistermsize=format_bytes($thistermsize);
+        //echo "本学期：".$thistermnum.'--'.$thistermsize."<hr/>";
+
+
+        //累计
+        $totalnum=0;
+        $totalsize=0;
+        $totalfile=$Model->join('inner join xh_sxpubexcise as b on a.scid = b.scid')->field('url')->select();
+        for($i=0;$i<count($totalfile);$i++){
+            $tempnum=0;
+            $tempsize=0;
+            $path = substr($totalfile[$i]['url'],0,-1);
+            $res = readDirAndFile($path,$tempnum,$tempsize);
+            $totalnum += $res['totalnum'];
+            $totalsize += $res['totalsize'];
+        }
+        $totalsize=format_bytes($totalsize);
+        //echo "累计：".$totalnum.'--'.$totalsize."<hr/>";
+        //        
+//2-6讨论板交流条数
+        $todaydiscussnum=$Model->join('inner join xh_sxpubexcise as b on a.scid = b.scid')->join('inner join xh_sxdisexicise as c on b.peid=c.peid')->where("b.pubtime between $beginToday and $endToday")->count();
         $thismonthdiscussnum=$Model->join('inner join xh_sxpubexcise as b on a.scid = b.scid')->join('inner join xh_sxdisexicise as c on b.peid=c.peid')->where("b.pubtime between $beginThismonth and $endThismonth")->count();
-        if($thismonthdiscussnum==0){
-            $thismonthdiscussnum="等待发布";
-        }
         $thistermdiscussnum = $Model->join('inner join xh_sxpubexcise as b on a.scid = b.scid')->join('inner join xh_sxdisexicise as c on b.peid=c.peid')->where("a.term='$term'")->count();
-        if($thistermdiscussnum==0){
-            $thistermdiscussnum="等待发布";
-        }
         $totaldiscussnum=$Model->join('inner join xh_sxpubexcise as b on a.scid = b.scid')->join('inner join xh_sxdisexicise as c on b.peid=c.peid')->count();
-        if($totaldiscussnum==0){
-            $totaldiscussnum="等待发布";
-        }
 
         //发布任务个数
         $excisenum=array('todayexcisenum'=>$todayexcisenum,'thismonthexcisenum'=>$thimonthexcisenum,'thistermexcisenum'=>$thistermexcisenum,'totalexcisenum'=>$totalexcisenum);
@@ -101,6 +164,8 @@
         $stusubnum=array('todaystusubnum'=>$todaystusubnum,'thismonthstusubnum'=>$thismonthstusubnum,'thistermstusubnum'=>$thistermstusubnum,'totalstusubnum'=>$totalstusubnum);
         //任务完成率(提交/接收)
         $excisefinish=array('todayfinish'=>$todayfinish,'thismonthfinish'=>$thismonthfinish,'thistermfinish'=>$thistermfinish,'totalfinish'=>$totalfinish);
+        //文件个数和总大小
+        $filenumandsize=array('todaynum'=>$todaynum,'todaysize'=>$todaysize,'thismonthnum'=>$thismonthnum,'thismonthsize'=>$thismonthsize,'thistermnum'=>$thistermnum,'thistermsize'=>$thistermsize,'totalnum'=>$totalnum,'totalsize'=>$totalsize);
         //讨论区交流条数
         $discussnum=array('todaydiscussnum'=>$todaydiscussnum,'thismonthdiscussnum'=>$thismonthdiscussnum,'thistermdiscussnum'=>$thistermdiscussnum,'totaldiscussnum'=>$totaldiscussnum);
         
@@ -110,6 +175,7 @@
         $this->assign('sturecnum',$sturecnum);
         $this->assign('stusubnum',$stusubnum);
         $this->assign('excisefinish',$excisefinish);
+        $this->assign('filenumandsize',$filenumandsize);
         $this->assign('discussnum',$discussnum);
 
 //系统配置信息

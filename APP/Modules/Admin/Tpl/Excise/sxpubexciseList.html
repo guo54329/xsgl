@@ -20,6 +20,13 @@ $(function() {
 		.tablesorter({widthFixed: true, widgets: ['zebra']})
 		.tablesorterPager({container: $("#pager")});
 });
+//将拷贝URL置于span
+function copyurl(obj){
+	var scid = obj.name;
+	var url = obj.value;
+	var str= "序号为：<b>"+scid+"</b>　服务器拷贝地址为：<b>"+url+"</b>";
+	$('#urlcontent').html(str);
+}
 </script>
 <!-- 排序加入结束 -->
 <script type="text/javascript">
@@ -140,13 +147,15 @@ function myrefresh(){
 	  <div class="panel-body">
 		 <table class="table table-bordered table-hover tablesorter">
 		 	<thead>
-			<tr style="text-align: center;font-weight: bold;"><th width="5%">序号</th><td align="left">任务题目</td><!--<td>任务描述</td><td>任务附件</td>--><td width="7%">发布状态</td><th width="10%" style="text-align: center;">学生下载他人作业</th><td width="10%">发布时间</td><th width="8%" style="text-align: center;">完成</th><td width="32%">操 作</td></tr>
+			<tr style="text-align: center;font-weight: bold;"><th width="5%">序号</th><td align="left">任务题目</td><!--<td>任务描述</td><td>任务附件</td>--><td width="7%">发布状态</td><th width="10%" style="text-align: center;">学生下载他人作业</th><td width="10%">发布时间</td><th width="8%" style="text-align: center;">完成</th><th width="8%" style="text-align: center;">文件数(大小)</th><td width="34%">操 作</td></tr>
 			</thead>
 			<tbody>
-			{~$i=1}
+			{~$totaln=0}<!-- 统计系统文件总数 -->
+			{~$totals=0}<!-- 统计系统文件总大小 -->
+			{~$i=0}
 			<foreach name='list' item='v'>
 			<tr>
-				<td>{$i}{~$v.peid}</td>
+				<td>{$i+1}{~$v.peid}</td>
 				<td align="left">{$v.title}</td>
 				<!--<td>{$v.desc}</td>
 				<td>{$v.title}</td>-->
@@ -171,12 +180,43 @@ function myrefresh(){
                     	
                     </php>
 				</td>
-				
+				<td><php>
+    				$thistermnum=0;
+			        $thistermsize=0;
+			        $tempnum=0;
+			        $tempsize=0;
+			        $thistermfile = M('sxsetcourse as a')->join('inner join xh_sxpubexcise as b on a.scid = b.scid')->where("b.peid=$peid")->field('url')->find();
+			        $path = substr($thistermfile['url'],0,-1);
+			        $res = readDirAndFile($path,$tempnum,$tempsize);
+			        $thistermnum = $res['totalnum'];
+			        $thistermsize = format_bytes($res['totalsize']);
+			        
+			        if($thistermnum>0){
+			        	//统计总数和总大小
+			        	$totaln += $thistermnum;
+			        	$totals += $res['totalsize'];
+
+				    	$file = $thistermnum."(".$thistermsize.")";
+			    	}else{
+			    		$file =  "暂无";
+				    }
+				    $downflag=0;
+				    if($res['totalsize']>1024*1024*100){//文件超过100MB
+						$downflag=1;
+					}
+				   </php>
+				   <span>{$file}</span>
+    			</td>
 				<td align="left">
 				
 				<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseList',array('peid'=>$v['peid']))}" class="btn btn-default browse" ><span class="glyphicon glyphicon-eye-open"></span> 学生完成</a>&nbsp;
+				<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseTable',array('peid'=>$v['peid']))}" class="btn btn-default"><span class="glyphicon glyphicon-download"></span> 统计</a>
+				<if condition=" $downflag eq 0">
+					<a href="{:U(GROUP_NAME.'/Excise/sxexcisePackage',array('peid'=>$v['peid']))}" class="btn btn-default" title="将该任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 下载</a>
+				 <else/>
+					<button onclick="copyurl(this);" name="{$i+1}" value="{$url[$i]}" class="btn btn-default" title="文件过大，提供在服务器上拷贝地址！"> <span class="glyphicon glyphicon-tag"></span> 拷贝</button>
+			    </if>
 
-				<a href="{:U(GROUP_NAME.'/Excise/sxexcisePackage',array('peid'=>$v['peid']))}" class="btn btn-default browse" title="将该任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 学生作业</a>
 				<input type="hidden" id="status{$v.peid}" value="{$v.status}" />
 				<input type="hidden" id="scid{$v.peid}" value="{$courseinfo.scid}" />
 				<a href="{:U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']))}" class="btn btn-default" ><span class="glyphicon glyphicon-comment"></span> 交流</a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -196,6 +236,13 @@ function myrefresh(){
 			</tr>
 			{~$i++}
 			</foreach>
+			<tr><td colspan="8" style="text-align: left;height: 40px;line-height: 30px;">
+				合计：目前该课程共有 <b>{$totaln}</b> 个文件，所占磁盘空间 <b><php>echo format_bytes($totals)</php></b>
+			</td></tr>
+			<tr><td colspan="8" style="text-align: left;height: 80px;line-height: 30px;">
+				提示：系统设计为文件先压缩在下载，当文件<b>超过100MB</b>时显示<b>拷贝</b>按钮，用户可以单击<b>拷贝</b>按钮，在此处会生成一个地址，可以将此地址复制到<b>服务器计算机的窗口</b>中打开，然后对目标文件或文件夹进行复制！<br/>
+                <span id="urlcontent"></span>
+			</td></tr>
 			</tbody>
 		</table>
 		<!-- 排序分页开始 -->

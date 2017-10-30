@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="refresh" content="10"><!--每隔10s刷新一次-->
+<meta http-equiv="refresh" content="30"><!--每隔10s刷新一次-->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
@@ -57,7 +57,7 @@ function myrefresh(){
 	<div class="panel-heading headalign">
 		  <a href="{:U(GROUP_NAME.'/Excise/courseTable')}" class="btn btncoursetable"><span class="glyphicon glyphicon-home"></span> 教师课表</a><span class="btn xiexian">/</span><a href="{:U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$courseinfo['scid']))}" class="btn btnw">任务列表</a><span class="btn xiexian">/</span><a class="btn browse1">学生完成情况</a>
 		  <span style="float:right;">
-			<button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp;&nbsp;间隔10秒后自动刷新 &nbsp;&nbsp;&nbsp;&nbsp;
+			<button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp;&nbsp;间隔30秒后自动刷新 &nbsp;&nbsp;&nbsp;&nbsp;
 	  		<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseRedoAll',array('peid'=>$excisedesc['peid']))}" class="btn btn-info browse"><span class="glyphicon glyphicon-repeat"></span> 一键重做</a>&nbsp;
 	  		<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseTable',array('peid'=>$excisedesc['peid']))}" class="btn btn-info browse"><span class="glyphicon glyphicon-download"></span> 完成情况</a>
 		  </span>	 
@@ -65,7 +65,7 @@ function myrefresh(){
 	  <div class="panel-body">
 		 <table class='table table-bordered table-hover'>
 		    <tr class="desc">
-		    <td colspan="8">
+		    <td colspan="9">
 		    学期：<strong>{$courseinfo.term}</strong>&nbsp;&nbsp;
 		    教师：<strong>{$courseinfo.jsxm}</strong>&nbsp;&nbsp;
 		    班级：<strong>{$classes.cname}</strong>&nbsp;&nbsp;
@@ -83,14 +83,14 @@ function myrefresh(){
 		    </td>
 		    </tr>
 		    <tr class="desc">
-		    <td colspan="8">
+		    <td colspan="9">
 		    <strong>任务标题：</strong>{$excisedesc.title}&nbsp;&nbsp;
-			<strong>附件下载：</strong><a href="{:U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$excisedesc['peid']))}"  ><span class="glyphicon glyphicon-save"></span> {$excisedesc.filename}</a>&nbsp;&nbsp;
+			<strong>附件下载：</strong><a href="{:U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$excisedesc['peid']))}"  ><span class="glyphicon glyphicon-save"></span> {$excisedesc.filename}(<php>echo format_bytes(filesize($oldurl.($excisedesc['filename'])));</php>)</a>&nbsp;&nbsp;
 		    <strong>发布时间：</strong>{$excisedesc.pubtime|date='Y-m-d H:i:s',###}<br/>
 		    <strong>任务描述：</strong>{$excisedesc.desc}
 		    </td>
 		    </tr>
-			<tr><th>序号</th><th>ID</th><th>学号</th><th>姓名</th><th>提交状态</th><th>提交时间</th><th>实训成绩</th><th>操作</th></tr>
+			<tr><th>序号</th><th>ID</th><th>学号</th><th>姓名</th><th>提交状态</th><th>提交时间</th><th>文件大小</th><th>实训成绩</th><th width="20%">操作</th></tr>
 			{~$i=1}
 			<foreach name='exciselist' item='v'>
 			<tr>
@@ -102,15 +102,28 @@ function myrefresh(){
 				<td><if condition="$v['status'] eq 0 "><span class="no">未提交</span><else/>已提交 </if>
 				</td>
 				<td><if condition="$v['subtime'] neq 0"> {$v.subtime|date='Y-m-d H:i:s',###}</if></td>
+				<td>
+					<php>
+						if($v['filename']!=''){
+						    $filesize = filesize($oldurl.$v['filename']);
+						    if($filesize>=50*1024*1024){
+						    	echo '<b>'.format_bytes($filesize).'</b>';
+							}else{
+								echo format_bytes($filesize);
+							}
+							
+						}
+					</php>
+				</td>
 				<td><php> echo $v['desc']*0.3+$v['isrec']*0.7;</php></td>
 				<td class="footeralign">
-				   
+				   <if condition="$v['status'] eq 1 ">
+					<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDownAttach',array('seid'=>$v['seid']))}" class="btn btn-default"><span class="glyphicon glyphicon-save"></span> 下载</a>
+                   </if>&nbsp;　
 					<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseRedo',array('seid'=>$v['seid']))}" class="btn btn-default"><span class="glyphicon glyphicon-repeat"></span> 重做</a>
 					&nbsp;
 					<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDel',array('seid'=>$v['seid']))}" class="btn btn-default" title="如果该生已不存在，则可直接删除；如果存在，删除之前先设置重做！"><span class="glyphicon glyphicon-remove"></span> 删除</a>
-					<if condition="$v['status'] eq 1 ">&nbsp;　
-					<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDownAttach',array('seid'=>$v['seid']))}" class="btn btn-default browse"><span class="glyphicon glyphicon-save"></span> 下载附件</a>
-                   </if>
+					
 
 				</td>
 

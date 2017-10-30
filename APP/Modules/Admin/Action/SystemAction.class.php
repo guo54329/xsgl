@@ -152,14 +152,16 @@ Class SystemAction extends CommonAction {
             
             //回复展示数据
             //打开备份数据文件的目录，列出要恢复使用的备份文件
-			$pathinfo= './DBback';   
+			$pathinfo= './DBback/';   
 			$filelist=scandir($pathinfo); //列出指定路径中的文件和目录
 			$files = array();
+			$fsize=array();
 			$flag="您还没有备份过数据表，请先备份！";
 			$j=0;
 			for($i=count($filelist)-1;$i>=2;$i--){
 				$tempfname=$filelist[$i];
-				$tempfname = iconv('GB2312','UTF-8',$tempfname); //将文件名中的汉字转换为UTF-8编码形式，显示在UTF-8编码的页面
+				//$tempfname = iconv('GB2312','UTF-8',$tempfname); 
+				$fsize[$j]=format_bytes(filesize($pathinfo.$tempfname)); 
 				$files[$j]=$tempfname;
 				$j++;
 			}
@@ -167,7 +169,9 @@ Class SystemAction extends CommonAction {
 			if(count($filelist)>=3){                  //由于存在.和..两个隐藏的系统文件，在此不计入文件范围
 				$flag="";
 			}
+
 	    	$this->assign('files',$files);
+	    	$this->assign('fsize',$fsize);
 			$this->assign('flag',$flag);
 			
 			//展示视图

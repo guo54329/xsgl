@@ -21,11 +21,45 @@ public function courseTable(){
         $num=$Model->join('xh_classes as b on a.ccode = b.ccode')->join('xh_teacher as c on c.jsno = b.master')->where("a.jsno='$jsno' and a.term='$term'")->count();
 
         $list = $Model->join('xh_classes as b on a.ccode = b.ccode')->join('xh_teacher as c on c.jsno = b.master')->where("a.jsno='$jsno' and a.term='$term'")->field("a.scid,a.term,a.coursename,b.ccode,b.cname,c.jsxm,c.jsdh")->order("a.scid ASC")->select();
+       //获取每门课的url
+        $scids = $Model->join("left join xh_sxpubexcise as b on a.scid=b.scid")->distinct(true)->field("a.scid,b.url")->group("a.scid")->where("a.jsno='$jsno' and a.term='$term'")->order("a.scid ASC")->select();
+
     }else{//查询所有
          $num=$Model->join('xh_classes as b on a.ccode = b.ccode')->join('xh_teacher as c on c.jsno = b.master')->where("a.jsno='$jsno'")->count();
 
         $list = $Model->join('xh_classes as b on a.ccode = b.ccode')->join('xh_teacher as c on c.jsno = b.master')->where("a.jsno='$jsno'")->field("a.scid,a.term,a.coursename,b.ccode,b.cname,c.jsxm,c.jsdh")->order("a.term DESC,a.scid ASC")->select();
+        //获取每门课的url
+        $scids = $Model->join("left join xh_sxpubexcise as b on a.scid=b.scid")->distinct(true)->field("a.scid,b.url")->group("a.scid")->where("a.jsno='$jsno'")->order("a.term DESC,a.scid ASC")->select();
     }
+
+//大文件下载提供拷贝地址
+    //根路径：如：C:\wamp64\www\xsgl\
+    $filepath =  dirname(__FILE__);
+    $str = explode('\\',$filepath);
+    $rooturl = '';
+    for($i=0;$i<count($str)-4;$i++){
+       $rooturl .= $str[$i].'/';
+    }
+    $rooturl = str_replace('/','\\',$rooturl);
+    //相对路径：如：Public\Excise\2017-2018-1\GS-guosheng\jisuanjiyingyongjichu\
+    $scidurl=array();
+    for($i=0;$i<count($scids);$i++){
+       $tempurl = $scids[$i]['url'];
+       if($tempurl!=''){
+          $tempurl = explode('/',$tempurl);
+          for($j=1;$j<count($tempurl)-2;$j++){
+             $scidurl[$i] .= $tempurl[$j].'\\';
+          }
+          // 完整路径如：
+          // ﻿C:\wamp64\www\xsgl\Public\Excise\2017-2018-1\GS-guosheng\jisuanjiyingyongjichu\    
+          $url[$i] = trim($rooturl.$scidurl[$i]);
+          
+       }else{
+          $url[$i] = '';
+       }
+    }
+
+    $this->assign('url',$url);
     $this->assign('num',$num);
     $this->assign('list',$list);
     $this->display();
@@ -106,11 +140,12 @@ public function sxfinishCount(){
     //设置宽度
     //$objPHPExcel->getActiveSheet()->getColumnDimension()->setAutoSize(true);
     $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
-    $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(50);
+    $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(40);
     $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(24);  
-    $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(20);
-    $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
-    $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(20);
+    $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(16);
+    $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(16);
+    $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(16);
+    $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(50);
  
     //设置行高度
     $objPHPExcel->getActiveSheet()->getRowDimension('1')->setRowHeight(40);
@@ -118,13 +153,13 @@ public function sxfinishCount(){
     $objPHPExcel->getActiveSheet()->getRowDimension('3')->setRowHeight(32);
   
     //设置字体大小
-    $objPHPExcel->getActiveSheet()->getStyle('A1:F3')->getFont()->setName('Microsoft YaHei');
+    $objPHPExcel->getActiveSheet()->getStyle('A1:G3')->getFont()->setName('Microsoft YaHei');
     $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setSize(14);
     $objPHPExcel->getActiveSheet()->getDefaultStyle()->getFont()->setSize(12);
-    $objPHPExcel->getActiveSheet()->getStyle('A1:F3')->getFont()->setBold(true);
+    $objPHPExcel->getActiveSheet()->getStyle('A1:G3')->getFont()->setBold(true);
   
-    $objPHPExcel->getActiveSheet()->getStyle('A1:F3')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
-    $objPHPExcel->getActiveSheet()->getStyle('A1:F3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+    $objPHPExcel->getActiveSheet()->getStyle('A1:G3')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+    $objPHPExcel->getActiveSheet()->getStyle('A1:G3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
     
     //设置水平居中
     $objPHPExcel->getActiveSheet()->getStyle('A')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -133,6 +168,7 @@ public function sxfinishCount(){
     $objPHPExcel->getActiveSheet()->getStyle('D')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
     $objPHPExcel->getActiveSheet()->getStyle('E')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
     $objPHPExcel->getActiveSheet()->getStyle('F')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+    $objPHPExcel->getActiveSheet()->getStyle('G')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
    //设置垂直居中
     $objPHPExcel->getActiveSheet()->getStyle('A')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
     $objPHPExcel->getActiveSheet()->getStyle('B')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
@@ -140,19 +176,21 @@ public function sxfinishCount(){
     $objPHPExcel->getActiveSheet()->getStyle('D')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
     $objPHPExcel->getActiveSheet()->getStyle('E')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
     $objPHPExcel->getActiveSheet()->getStyle('F')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+    $objPHPExcel->getActiveSheet()->getStyle('G')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
     //合并
-    $objPHPExcel->getActiveSheet()->mergeCells('A1:F1');
-    $objPHPExcel->getActiveSheet()->mergeCells('A2:F2');
+    $objPHPExcel->getActiveSheet()->mergeCells('A1:G1');
+    $objPHPExcel->getActiveSheet()->mergeCells('A2:G2');
     //设置表格头部内容
 
     $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A1', $title);
 
-    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A3', '序号');
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A3', '任务ID');
     $objPHPExcel->setActiveSheetIndex(0)->setCellValue('B3', '任务题目');
     $objPHPExcel->setActiveSheetIndex(0)->setCellValue('C3', '发布时间');
     $objPHPExcel->setActiveSheetIndex(0)->setCellValue('D3', '发布人数');
     $objPHPExcel->setActiveSheetIndex(0)->setCellValue('E3', '完成人数');
     $objPHPExcel->setActiveSheetIndex(0)->setCellValue('F3', '完成率');
+    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('G3', '未完成人员名单');
 
     //将数据库中的数据转码 UTF-8
     //p($data);die;
@@ -174,7 +212,18 @@ public function sxfinishCount(){
 
         $completeness = round($suboknum/$subtotalnum,4)*100;
         $objPHPExcel->getActiveSheet(0)->setCellValue('F' . ($i + 4), $completeness."%");
-        $objPHPExcel->getActiveSheet()->getRowDimension($i + 4)->setRowHeight(28);  
+
+//未完成任务的学生名单$xsxms
+        $subnoxs=M('sxsubexcise as a')->join("xh_student as b on a.xsno=b.xsno")->field('b.xsxm')->where("peid=$peid and status=0")->select();
+        $xsxms='';
+
+        for($j=0;$j<count($subnoxs);$j++){
+          $xsxms .= $subnoxs[$j]['xsxm'].' ';
+        }
+
+        $objPHPExcel->getActiveSheet(0)->setCellValue('G' . ($i + 4),$xsxms);
+        $objPHPExcel->getActiveSheet()->getRowDimension($i + 4)->setRowHeight(32); 
+
     }
     
     //用于第2行的统计
@@ -198,6 +247,7 @@ public function sxfinishCount(){
     header("Pragma: no-cache");
     $objWriter->save('php://output'); 
 }
+
 //对该门课程的所有任务和学生作业打包成zip文件下载
 public function sxcoursePackage(){
     $scid = (int)$_GET['scid'];//课程id
@@ -268,7 +318,36 @@ public function sxpubexciseList(){
     $courseinfo = M('sxsetcourse as a')->join("xh_classes as b on a.ccode = b.ccode")->field("a.scid,b.cname,a.coursename,a.term")->where("a.scid=$scid")->find();
     $num=$Model->where("a.scid=$scid")->count();
     $list = $Model->field("a.scid,a.peid,a.title,a.desc,a.filename,a.url,a.status,a.isrec,a.pubtime,a.isrec")->where("a.scid=$scid")->order('a.pubtime ASC')->select();
-    
+
+//大文件下载提供拷贝地址
+    $peids = $Model->field("a.url")->where("a.scid=$scid")->order('a.pubtime ASC')->select();
+    //根路径：如：C:\wamp64\www\xsgl\
+    $filepath =  dirname(__FILE__);
+    $str = explode('\\',$filepath);
+    $rooturl = '';
+    for($i=0;$i<count($str)-4;$i++){
+       $rooturl .= $str[$i].'/';
+    }
+    $rooturl = str_replace('/','\\',$rooturl);
+    //相对路径：如：Public\Excise\2017-2018-1\GS-guosheng\jisuanjiyingyongjichu\
+    $peidurl=array();
+    for($i=0;$i<count($peids);$i++){
+       $tempurl = $peids[$i]['url'];
+       if($tempurl!=''){
+          $tempurl = explode('/',$tempurl);
+          for($j=1;$j<count($tempurl)-1;$j++){
+             $peidurl[$i] .= $tempurl[$j].'\\';
+          }
+          // 完整路径如：
+          // ﻿C:\wamp64\www\xsgl\Public\Excise\2017-2018-1\GS-guosheng\jisuanjiyingyongjichu\    
+          $url[$i] = trim($rooturl.$peidurl[$i]);
+          
+       }else{
+          $url[$i] = '';
+       }
+    }
+
+    $this->assign('url',$url);
     $this->assign('courseinfo',$courseinfo);
     $this->assign('num',$num);
     $this->assign('list',$list);
@@ -581,7 +660,34 @@ public function sxsubexciseList(){
     $this->assign('excisedesc',$excisedesc);
     $this->assign('classes',$classes);
     //查询学生作业完成情况
-    $exciselist=M('sxsubexcise as a')->join('xh_student as b on a.xsno=b.xsno')->where("peid=$peid")->field("a.seid,a.xsno,b.xsxm,a.desc,a.status,a.subtime,a.peid,a.isrec")->order('a.status DESC,a.xsno ASC')->select();
+    $exciselist=M('sxsubexcise as a')->join('xh_student as b on a.xsno=b.xsno')->where("a.peid=$peid")->field("a.seid,a.xsno,b.xsxm,a.desc,a.filename,a.status,a.subtime,a.peid,a.isrec")->order('a.status DESC,a.xsno ASC')->select();
+//显示文件大小   
+    //根路径：如：C:\wamp64\www\xsgl\
+    // $filepath =  dirname(__FILE__);
+    // $str = explode('\\',$filepath);
+    // $rooturl = '';
+    // for($i=0;$i<count($str)-4;$i++){
+    //    $rooturl .= $str[$i].'/';
+    // }
+    //$rooturl = trim(str_replace('/','\\',$rooturl));
+   
+    //相对路径：如：Public\Excise\2017-2018-1\GS-guosheng\jisuanjiyingyongjichu\
+    $peidurl = $excisedesc['url']; 
+    // if($excisedesc['url']!=''){
+    //   $tempurl = explode('/',$excisedesc['url']);
+    //   for($j=1;$j<count($tempurl)-1;$j++){
+    //      $peidurl .= $tempurl[$j].'/';
+    //   }    
+    //   $peidurl = trim($peidurl);
+    // }else{
+    //   $peidurl = '';
+    // }
+    $oldurl=$peidurl; //用于计算文件大小
+    //$newurl=str_replace('/','\\',$rooturl.$oldurl);//用于拷贝
+    
+    $this->assign('oldurl',$oldurl);
+    //$this->assign('newurl',$newurl);//由于学生上交文件限制为100MB 所以该变量暂时不会被用到
+    
     $this->assign('peid',$peid);
     $this->assign('exciselist',$exciselist);
     $this->display();

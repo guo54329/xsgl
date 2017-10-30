@@ -26,6 +26,12 @@ $(function() {
 	function myrefresh(){
 		window.location.reload();
 	}
+	function copyurl(obj){
+    	var scid = obj.name;
+    	var url = obj.value;
+    	var str= "序号为：<b>"+scid+"</b>　服务器拷贝地址为：<b>"+url+"</b>";
+    	$('#urlcontent').html(str);
+    }
 	$("#tob").show();
 </script>
 <style type="text/css">
@@ -43,7 +49,6 @@ $(function() {
 	.numColor1{
 		color: green;
 		font-size: 20px;
-		font-weight: bold;
 	}	
 	.xiexian{
 	    width:20px;
@@ -53,8 +58,8 @@ $(function() {
 		padding:5px 0px 5px 0px;
 		margin:5px 0px 5px 16px;
 		
-		height:100px;
-		line-height:34px;
+		height:40px;
+		line-height:40px;
 	 }
 	 .trColor{
 	 	 background-color: #eee;
@@ -88,10 +93,6 @@ $(function() {
 	  </div>
 	  <div class="form-inline">
 		<form action='{:U(GROUP_NAME.'/Excise/courseTable')}' method="post">
-             <span class="bpx">
-			 提示：请选择其中一种方式，然后单击查询！
-			</span>
-			<br/>
 	  		方式一：
   			<select name="term1" class="form-control" style="width: 250px;"></select>
 			<select name="coursename" class="form-control" style="width: 250px;"></select>
@@ -111,7 +112,7 @@ $(function() {
 				s.parent(a,b);
 			 </script>
 			<button type="submit" class="btn btn-default"><span class='glyphicon glyphicon-search'></span> 查询</button>
-			&nbsp;&nbsp;<br/>
+			　　
 	  		方式二：
   			<select name="term2" class="form-control" style="width: 250px;"></select>
 			<select name="js" class="form-control" style="width: 250px;"></select>
@@ -136,9 +137,12 @@ $(function() {
 	  <div class="panel-body">
 		 <table class="table table-bordered table-hover tablesorter">
 		  <thead>
-			<tr><th style="text-align: center;" width="5%">ID</th><th style="text-align: center;">学期</th><th style="text-align: center;" width="8%">任课教师</th><th style="text-align: center;">班级</th><th style="text-align: center;">课程</th><th style="text-align: center;" width="8%">任务数量</th><td style="text-align: center;font-weight: bold;">接收人数</td><td style="text-align: center;font-weight: bold;">提交人数</td><td style="text-align: center;font-weight: bold;">完成率</td><td style="text-align: center;font-weight: bold;" width="22%">操作</td></tr>
+			<tr><th style="text-align: center;" width="5%">ID</th><th style="text-align: center;">学期</th><th style="text-align: center;" width="8%">任课教师</th><th style="text-align: center;">班级</th><th style="text-align: center;">课程</th><th style="text-align: center;" width="8%">任务数量</th><td style="text-align: center;font-weight: bold;">接收人数</td><td style="text-align: center;font-weight: bold;">提交人数</td><th style="text-align: center;font-weight: bold;" width="6%">完成率</th><td style="text-align: center;font-weight: bold;">文件数(大小)</td><td style="text-align: center;font-weight: bold;" width="19%">操作</td></tr>
 			</thead>
 			<tbody id="tob">
+			{~$totaln=0}<!-- 统计系统文件总数 -->
+			{~$totals=0}<!-- 统计系统文件总大小 -->
+			{~$index=0}
 			<foreach name='coursetable' item='v'>
 				<php>
 			  	 $tr = substr($v['term'],10,1);
@@ -168,24 +172,61 @@ $(function() {
     			<td><php>
     					$i=0;
 						$subnum = M('sxsetcourse as a')->join('inner join xh_sxpubexcise as b on a.scid = b.scid')->join('inner join xh_sxsubexcise as c on b.peid=c.peid')->where("a.scid=$scid and c.status=1")->count();
-						if($recnum>0)$i=1;
+						if($subnum>0)$i=1;
 						//完成率
-						if($subnum==0){
-							$finish="等待发布";	
-						}else{
-							$finish = (round($subnum / $recnum,4)*100)."%";
+						$finish = (round($subnum / $recnum,4)*100)."%";
+						$j=0;
+						if($subnum==$recnum and $subnum!=0){
+							$j=1;
 						}
+						
 					</php>
 					<span class="numColor{$i}">{$subnum}</span>
     			</td>
-    			<td><span class="numColor{$i}">{$finish}</span></td>
+    			<td><span class="numColor{$j}">{$finish}</span></td>
+    			<td><php>
+    				$thistermnum=0;
+			        $thistermsize=0;
+			        $thistermfile = M('sxsetcourse as a')->join('inner join xh_sxpubexcise as b on a.scid = b.scid')->where("a.scid=$scid")->field('url')->select();
+			        for($i=0;$i<count($thistermfile);$i++){
+			            $tempnum=0;
+			            $tempsize=0;
+			            $path = substr($thistermfile[$i]['url'],0,-1);
+			            $res = readDirAndFile($path,$tempnum,$tempsize);
+			            $thistermnum += $res['totalnum'];//此处考虑是否减掉教师的任务附件
+			            $thistermsize += $res['totalsize'];
+			        }
+			        $filesize = $thistermsize;
+			        $filesize=format_bytes($filesize);
+			        if($thistermnum>0){
+			           //统计总数和总大小
+			        	$totaln += $thistermnum;
+			        	$totals += $thistermsize;
+				    	$file = $thistermnum."(".$filesize.")";
+			    	}else{
+			    		$file =  "暂无";
+				    }
+
+				    //是拷贝还是下载,大于100MB时拷贝
+			        $k=2;//文件超过100MB时显示成绿色
+			        $downflag=0;
+			        if($thistermsize>1024*1024*100){//当文件大于100MB时提示拷贝而不是下载
+						$downflag=1;	
+						$k=1;
+				    }
+				   </php>
+				   <span class="numColor{$k}">{$file}</span>
+    			</td>
 				<td align="left">　
 				   <a href="{:U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$v['scid']))}" class="btn btn-default btn4" title="查看指定教师发布的指定课程的任务列表！"><span class="glyphicon glyphicon-eye-open"></span> 任务列表</a>&nbsp;
 					
 					<if condition=" $pubnum neq 0">
-						<a href="{:U(GROUP_NAME.'/Excise/sxfinishCount',array('scid'=>$v['scid']))}" class="btn btn-default btn4" title="将课程任务完成情况统计下载！"><span class="glyphicon glyphicon-save"></span> 任务统计</a>&nbsp;
-						<a href="{:U(GROUP_NAME.'/Excise/sxcoursePackage',array('scid'=>$v['scid']))}" class="btn btn-default btn4" title="将该课程所有任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 资料存档</a>&nbsp;
-
+						<a href="{:U(GROUP_NAME.'/Excise/sxfinishCount',array('scid'=>$v['scid']))}" class="btn btn-default" title="将课程任务完成情况统计下载！"><span class="glyphicon glyphicon-download"></span> 统计</a>&nbsp;
+						<if condition=" $downflag eq 0">
+							<a href="{:U(GROUP_NAME.'/Excise/sxcoursePackage',array('scid'=>$v['scid']))}" class="btn btn-default" title="将该课程所有任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 下载</a>
+						 <else/>
+							<button onclick="copyurl(this);" name="{$scid}" value="{$url[$index]}" class="btn btn-default" title="文件过大，提供在服务器上拷贝地址！"> <span class="glyphicon glyphicon-tag"></span> 拷贝</button>
+					    </if>
 					</if>
 					
 					<if condition="$pubnum eq 0">
@@ -193,7 +234,15 @@ $(function() {
 					</if>
 				</td>
 			</tr>
+			{~$index++}
 			</foreach>
+			<tr><td colspan="12" style="text-align: left;height: 40px;line-height: 30px;">
+				合计：目前系统共有 <b>{$totaln}</b> 个文件，所占磁盘空间 <b><php>echo format_bytes($totals)</php></b>
+			</td></tr>
+			<tr><td colspan="12" style="text-align: left;height: 80px;line-height: 30px;">
+				提示：系统设计为文件先压缩在下载，当文件<b>超过100MB</b>时显示<b>拷贝</b>按钮，用户可以单击<b>拷贝</b>按钮，在此处会生成一个地址，可以将此地址复制到<b>服务器计算机的窗口</b>中打开，然后对目标文件或文件夹进行复制！<br/>
+                <span id="urlcontent"></span>
+			</td></tr>
 			</tbody>
 		</table>
 		<!-- 排序分页开始 -->

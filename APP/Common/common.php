@@ -65,11 +65,7 @@
 	    return $sinfor;
 	}
 	/**
-	 * 强制下载
-	 * @author rainfer <81818832@qq.com>
-	 *
-	 * @param string $filename
-	 * @param string $content
+	 * 强制下载,目前还没用到
 	 */
 	function force_download_content($filename, $content)
 	{
@@ -82,7 +78,50 @@
 	    echo $content;
 	    exit ();
 	}
-
+	// 递归读取指定文件夹中的文件名、文件大小和总个数
+	function readDirAndFile($dirname,&$totalnum,&$totalsize){
+	    //static $totallnum=0;
+	    //static $totalsize=0;
+	    $dir=opendir($dirname);
+	    while($filename=readdir($dir)){
+	      //要判断的是$dirname下的路径是否是目录
+	        $newfile=$dirname."/".$filename;
+	        if($filename!="." && $filename!=".."){
+	            //is_dir()函数判断的是当前脚本的路径是不是目录
+	            if(is_dir($newfile)){
+	              //通过递归函数再遍历其子目录下的目录或文件
+	              readDirAndFile($newfile);
+	              //$newfile = iconv("GB2312", "UTF-8", $newfile);
+	                    //rmdir($newfile);
+	              //echo "DIR:".$newfile."<br/>"; 
+	            }else{
+	              //$newfile = iconv("GB2312", "UTF-8", $newfile);
+	                    //unlink($newfile);
+	                    $totallnum++;
+	                    $totalsize += filesize($newfile);
+	                    //echo "No:".$num." Name:".$newfile." Size:".filesize($newfile)."<br/>";//ok
+	              //echo "FILE:".$newfile."<br/>";
+	            }
+	        }
+	    }
+	    clearstatcache();//删除filesize之后的缓存
+	    closedir($dir);
+	    return array('totalnum'=>$totallnum,'totalsize'=>$totalsize);
+	  //遍历指定文件目录与文件数量结束
+	}
+    /**
+	 * 格式化字节大小
+	 * @param  number $size      字节数
+	 * @param  string $delimiter 数字和单位分隔符
+	 * @return string            格式化后的带单位的大小
+	 * @author rainfer <81818832@qq.com>
+	 */
+	function format_bytes($size, $delimiter = '')
+	{
+	    $units = array(' B', ' KB', ' MB', ' GB', ' TB', ' PB');
+	    for ($i = 0; $size >= 1024 && $i < 5; $i++) $size /= 1024;
+	    return round($size, 2) . $delimiter . $units[$i];
+	}
 	//附件下载公共函数
 	 function downAttach($filepath,$filename){
 	    $file= $filepath.$filename;

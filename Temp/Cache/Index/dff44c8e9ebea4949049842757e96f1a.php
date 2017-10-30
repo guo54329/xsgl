@@ -23,7 +23,7 @@
 		
 		//window.UEDITOR_CONFIG.scaleEnabled=true;
 		window.UEDITOR_CONFIG.toolbars=[[
-            'bold', 'italic', 'underline', 'selectall','simpleupload', 'insertimage', 'emotion','attachment'
+            'bold', 'italic', 'underline','insertimage','attachment'
             ]];
  
 		window.UEDITOR_CONFIG.maximumWords=500;

@@ -35,6 +35,9 @@ return array(
 	// 	'/^Student$/'	=>'index.php/Student/Index/index' //  访问：/c_100
 	
 	// )
+	'TMPL_PARSE_STRING' => array(
+		'__ROOTURL__' =>'',
+	),
 
 );
 ?>

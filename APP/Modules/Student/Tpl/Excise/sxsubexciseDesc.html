@@ -114,7 +114,7 @@
 			</tr>
 			<tr>
 				<td align="center">附件下载</td>
-				<td><a href="{:U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$dolist['peid']))}" class="btn  attach"><span class="glyphicon glyphicon-save"> {$dolist.filename}</span> </a></td>
+				<td><a href="{:U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$dolist['peid']))}" class="btn  attach"><span class="glyphicon glyphicon-save"> {$dolist.filename}(<php>echo format_bytes(filesize($dolist['url'].($dolist['filename'])));</php>)</span> </a></td>
 			</tr>
 			<tr>
 				<td align="center">任务描述</td>

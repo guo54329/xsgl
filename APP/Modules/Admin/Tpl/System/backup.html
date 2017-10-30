@@ -138,10 +138,10 @@ function yjyh(){
 			<div class="form-horizontal">  
 			    <div class="form-inline">
 					<select class="form-control" id="selecthf" name="hffilename" style="width:662px;">
-						<option value="0">请选择恢复文件名...</option>
+						<option value="0">请选择恢复文件名(不支持中文名称)</option>
 						{~$i=0}
 						<foreach name="files" item="v">
-							<option value="{$files[$i]}">{$i+1} ---> {$files[$i]}</option>
+							<option value="{$files[$i]}">{$files[$i]}　　({$fsize[$i]})</option>
 							{~$i++}
 			 		    </foreach>
 					</select>
@@ -156,8 +156,8 @@ function yjyh(){
 		    </form>
 			<form action='{:U(GROUP_NAME.'/System/backup')}' method='post' enctype="multipart/form-data">
 				<div class="form-inline">
-					<input type="file" name="bpfile" class="form-control">
-					<button class="btn btn-info btn7" type="submit"  name="upload" value="1"><span class="glyphicon glyphicon-open"></span> 上传备份文件</button>(在恢复数据时可供选择)
+					<input type="file" name="bpfile" class="form-control" style="width:662px;">
+					<button class="btn btn-info btn7" type="submit"  name="upload" value="1"><span class="glyphicon glyphicon-open"></span> 上传备份文件</button> *系统会自动已当前上传时间为准重命名文件名称为年月日时分秒,在恢复数据时可供选择
 				</div>
 			</form>
 
@@ -172,9 +172,9 @@ function yjyh(){
 				
 					<button type="button" id="othercheck" class="btn btn-default">反选</button>
 				
-					<input type="text" name="bffilename" placeholder="请输入备份文件名！" class="form-control" style="width:500px;"/>
+					<input type="text" name="bffilename" placeholder="请输入备份文件名(不支持中文字符)！" class="form-control" style="width:500px;"/>
 				
-					<button class="btn btn-info" type="submit"  name="bf"><span class="glyphicon glyphicon-floppy-save"></span> 备份</button>
+					<button class="btn btn-info" type="submit"  name="bf"><span class="glyphicon glyphicon-floppy-save"></span> 备份</button> *建议使用日期+时间命名备份文件,如:20171010153020(无需加文件扩展名)
 					
 				</div>						
 			

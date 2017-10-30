@@ -12,13 +12,13 @@ public function sxsubexciseList(){
         $coursename=$_POST['coursename'];
         $num=$Model->join("xh_sxpubexcise as b on a.peid=b.peid")->join("xh_sxsetcourse as c on b.scid=c.scid")->join("xh_teacher as d on c.jsno=d.jsno")->where("xsno='$xsno' and c.term='$term' and c.coursename='$coursename'")->count();
 
-        $list = $Model->join("xh_sxpubexcise as b on a.peid=b.peid")->join("xh_sxsetcourse as c on b.scid=c.scid")->join("xh_teacher as d on c.jsno=d.jsno")->where("xsno='$xsno' and c.term='$term' and c.coursename='$coursename'")->field("a.seid,a.status,a.desc,a.isrec,b.peid,b.title,b.filename,b.url,b.pubtime,c.coursename,c.term,d.jsxm,b.pubtime")->order("d.jsxm ASC,c.scid ASC,a.peid ASC")->select();
+        $list = $Model->join("xh_sxpubexcise as b on a.peid=b.peid")->join("xh_sxsetcourse as c on b.scid=c.scid")->join("xh_teacher as d on c.jsno=d.jsno")->where("xsno='$xsno' and c.term='$term' and c.coursename='$coursename'")->field("a.seid,a.status,a.filename as filea,a.desc,a.isrec,b.peid,b.title,b.filename,b.url,b.pubtime,c.coursename,c.term,d.jsxm,b.pubtime")->order("d.jsxm ASC,c.scid ASC,a.peid ASC")->select();
     }else{//查询所有,默认只显示当前学期的任务
         $termarr=M('term')->order('id DESC')->limit(1)->find();
         $term=$termarr['name'];
         $num=$Model->join("xh_sxpubexcise as b on a.peid=b.peid")->join("xh_sxsetcourse as c on b.scid=c.scid")->join("xh_teacher as d on c.jsno=d.jsno")->where("xsno='$xsno' and c.term='$term'")->count();
 
-        $list = $Model->join("xh_sxpubexcise as b on a.peid=b.peid")->join("xh_sxsetcourse as c on b.scid=c.scid")->join("xh_teacher as d on c.jsno=d.jsno")->where("xsno='$xsno' and c.term='$term'")->field("a.seid,a.status,a.desc,a.isrec,b.peid,b.title,b.filename,b.url,b.pubtime,c.coursename,c.term,d.jsxm,b.pubtime")->order("c.term DESC,d.jsxm ASC,c.scid ASC,a.peid ASC")->select();
+        $list = $Model->join("xh_sxpubexcise as b on a.peid=b.peid")->join("xh_sxsetcourse as c on b.scid=c.scid")->join("xh_teacher as d on c.jsno=d.jsno")->where("xsno='$xsno' and c.term='$term'")->field("a.seid,a.filename as filea,a.status,a.desc,a.isrec,b.peid,b.title,b.filename,b.url,b.pubtime,c.coursename,c.term,d.jsxm,b.pubtime")->order("c.term DESC,d.jsxm ASC,c.scid ASC,a.peid ASC")->select();
     }
     
 
@@ -26,6 +26,7 @@ public function sxsubexciseList(){
 	  //p($stu);
     getCourseinfor($ccode);//创建由学期联动课程查询的select
     $this->assign('num',$num);
+    //p($list);
     $this->assign('list',$list);
     $this->display();
 }
@@ -101,7 +102,6 @@ public function sxsubexciseDesc(){
 		$Model = M('sxsubexcise as a');
     $dolist = $Model->join("xh_sxpubexcise as b on a.peid=b.peid")->join("xh_sxsetcourse as c on b.scid=c.scid")->where("xsno='$xsno'")->field("a.seid,b.peid,b.title,b.desc,b.filename,b.url,b.pubtime,c.coursename")->where("seid=$seid")->find();
     $this->assign('dolist',$dolist);
-      //p($dolist);
 		$this->display();
 }
  

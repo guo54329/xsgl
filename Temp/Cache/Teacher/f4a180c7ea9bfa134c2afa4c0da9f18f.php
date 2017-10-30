@@ -1,4 +1,4 @@
-<!DOCTYPE>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
@@ -181,7 +181,7 @@
     		<div class="col-md-12">
 		    	<div class="alert alert-success fade in" style="font-size:18px;margin-bottom: 2px;">
 		            <i class="glyphicon glyphicon-ok"></i> 
-		            <strong>提示</strong> {$wel}
+		            <strong>提示</strong> <?php echo ($wel); ?>
 		        </div>
 	    	</div>
     	</div>
@@ -194,28 +194,26 @@
 	                    	<div class="form-inline" style="padding-top: 2px;">
 	                    		<select id="scid" class="form-control">
 	                    			<option value='0'>请选择课程添加/查看任务[学期-班级-课程]</option>
-	                    			<foreach name='courses' item='v'>
-	                    				<option value="{$v.scid}">{$v.term}-{$v.cname}-{$v.coursename}</option>
-	                    			</foreach>
+	                    			<?php if(is_array($courses)): foreach($courses as $key=>$v): ?><option value="<?php echo ($v["scid"]); ?>"><?php echo ($v["term"]); ?>-<?php echo ($v["cname"]); ?>-<?php echo ($v["coursename"]); ?></option><?php endforeach; endif; ?>
 	                    		</select>
-	                    		<a href="{:U(GROUP_NAME.'/teacher/Excise/sxpubexciseSave')}" class="btn btn-info" id="addexcise"><span class="glyphicon glyphicon-plus"></span> 添加</a>
-								<a href="{:U(GROUP_NAME.'/teacher/Excise/sxpubexciseList')}" class="btn btn-info" id="lookexcise"><span class="glyphicon glyphicon-eye-open"></span> 查看</a>
+	                    		<a href="<?php echo U(GROUP_NAME.'/teacher/Excise/sxpubexciseSave');?>" class="btn btn-info" id="addexcise"><span class="glyphicon glyphicon-plus"></span> 添加</a>
+								<a href="<?php echo U(GROUP_NAME.'/teacher/Excise/sxpubexciseList');?>" class="btn btn-info" id="lookexcise"><span class="glyphicon glyphicon-eye-open"></span> 查看</a>
 	                    		
 	                    	</div>
                     	</td>
                     </tr>
                     <tr><td  style="line-height: 50px;">
                     	<div class="form-inline">
-                    		<a href="{:U(GROUP_NAME.'/News/newsSave')}" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span> 发布消息</a>　<a href="{:U(GROUP_NAME.'/News/sysNews')}" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-eye-open"></span> 查看消息</a> 　　　　　
-	                    	<a href="{:U(GROUP_NAME.'/Excise/coursetableSave')}" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span>  添加课表</a>　
-					        <a href="{:U(GROUP_NAME.'/Excise/courseTable')}" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-eye-open"></span> 查看课表</a>
+                    		<a href="<?php echo U(GROUP_NAME.'/News/newsSave');?>" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span> 发布消息</a>　<a href="<?php echo U(GROUP_NAME.'/News/sysNews');?>" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-eye-open"></span> 查看消息</a> 　　　　　
+	                    	<a href="<?php echo U(GROUP_NAME.'/Excise/coursetableSave');?>" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-plus"></span>  添加课表</a>　
+					        <a href="<?php echo U(GROUP_NAME.'/Excise/courseTable');?>" class="btn btn-info btnsearch"><span class="glyphicon glyphicon-eye-open"></span> 查看课表</a>
 				    	</div>	
 				        </td>
                     </tr>
                 </table>
                 <h4><span class="glyphicon glyphicon-user"></span> 登录信息</h4>
                 <table class="table table-bordered"  style="height:121px">
-                    <tr><td style="text-align: left;line-height: 40px;">{$sinfor.tealogin}</td>
+                    <tr><td style="text-align: left;line-height: 40px;"><?php echo ($sinfor["tealogin"]); ?></td>
                     </tr>
                     
                 </table>
@@ -230,47 +228,47 @@
                	   	<td  class="tdtitle">累计</td>
                	   </tr>
                    <tr><td>发布的任务个数</td>
-                   	<td>{$excisenum.todayexcisenum}</td>
-                   	<td>{$excisenum.thismonthexcisenum}</td>
-                   	<td>{$excisenum.thistermexcisenum}</td>
-                   	<td>{$excisenum.totalexcisenum}</td>
+                   	<td><?php echo ($excisenum["todayexcisenum"]); ?></td>
+                   	<td><?php echo ($excisenum["thismonthexcisenum"]); ?></td>
+                   	<td><?php echo ($excisenum["thistermexcisenum"]); ?></td>
+                   	<td><?php echo ($excisenum["totalexcisenum"]); ?></td>
                    </tr>
                    <tr><td>接收任务学生数</td>
-                   	<td>{$sturecnum.todaysturecnum}</td>
-                   	<td>{$sturecnum.thismonthsturecnum}</td>
-                   	<td>{$sturecnum.thistermsturecnum}</td>
-                   	<td>{$sturecnum.totalsturecnum}</td>
+                   	<td><?php echo ($sturecnum["todaysturecnum"]); ?></td>
+                   	<td><?php echo ($sturecnum["thismonthsturecnum"]); ?></td>
+                   	<td><?php echo ($sturecnum["thistermsturecnum"]); ?></td>
+                   	<td><?php echo ($sturecnum["totalsturecnum"]); ?></td>
                    </tr>
                    <tr><td>提交作业学生数</td>
-                   	<td>{$stusubnum.todaystusubnum}</td>
-                   	<td>{$stusubnum.thismonthstusubnum}</td>
-                   	<td>{$stusubnum.thistermstusubnum}</td>
-                   	<td>{$stusubnum.totalstusubnum}</td>
+                   	<td><?php echo ($stusubnum["todaystusubnum"]); ?></td>
+                   	<td><?php echo ($stusubnum["thismonthstusubnum"]); ?></td>
+                   	<td><?php echo ($stusubnum["thistermstusubnum"]); ?></td>
+                   	<td><?php echo ($stusubnum["totalstusubnum"]); ?></td>
                    </tr>
 
 				   <tr><td>任务完成率(交/收)</td>
-                   	<td>{$excisefinish.todayfinish}</td>
-                   	<td>{$excisefinish.thismonthfinish}</td>
-                   	<td>{$excisefinish.thistermfinish}</td>
-                   	<td>{$excisefinish.totalfinish}</td>
+                   	<td><?php echo ($excisefinish["todayfinish"]); ?></td>
+                   	<td><?php echo ($excisefinish["thismonthfinish"]); ?></td>
+                   	<td><?php echo ($excisefinish["thistermfinish"]); ?></td>
+                   	<td><?php echo ($excisefinish["totalfinish"]); ?></td>
                    </tr>
 				   <tr><td>文件个数统计</td>
-                    <td>{$filenumandsize.todaynum}</td>
-                    <td>{$filenumandsize.thismonthnum}</td>
-                    <td>{$filenumandsize.thistermnum}</td>
-                    <td>{$filenumandsize.totalnum}</td>
+                    <td><?php echo ($filenumandsize["todaynum"]); ?></td>
+                    <td><?php echo ($filenumandsize["thismonthnum"]); ?></td>
+                    <td><?php echo ($filenumandsize["thistermnum"]); ?></td>
+                    <td><?php echo ($filenumandsize["totalnum"]); ?></td>
                    </tr>
                    <tr><td>文件大小统计</td>
-                    <td>{$filenumandsize.todaysize}</td>
-                    <td>{$filenumandsize.thismonthsize}</td>
-                    <td>{$filenumandsize.thismonthsize}</td>
-                    <td>{$filenumandsize.thismonthsize}</td>
+                    <td><?php echo ($filenumandsize["todaysize"]); ?></td>
+                    <td><?php echo ($filenumandsize["thismonthsize"]); ?></td>
+                    <td><?php echo ($filenumandsize["thismonthsize"]); ?></td>
+                    <td><?php echo ($filenumandsize["thismonthsize"]); ?></td>
                    </tr>
                    <tr><td>讨论区交流条数</td>
-                   	<td>{$discussnum.todaydiscussnum}</td>
-                   	<td>{$discussnum.thismonthdiscussnum}</td>
-                   	<td>{$discussnum.thistermdiscussnum}</td>
-                   	<td>{$discussnum.totaldiscussnum}</td>
+                   	<td><?php echo ($discussnum["todaydiscussnum"]); ?></td>
+                   	<td><?php echo ($discussnum["thismonthdiscussnum"]); ?></td>
+                   	<td><?php echo ($discussnum["thistermdiscussnum"]); ?></td>
+                   	<td><?php echo ($discussnum["totaldiscussnum"]); ?></td>
                    </tr>
 				   
                    
@@ -282,12 +280,12 @@
             <div class="col-md-12">
                 <h4><span class="glyphicon glyphicon-info-sign"></span> 框架及系统信息</h4>
                 <table class="table table-bordered table-hover">
-                <tr><td class="tdtitle">运行环境</td><td align="left">{$sinfor.pe}</td></tr>
-                <tr><td class="tdtitle">开发框架</td><td align="left">{$sinfor.think}</td></tr>
-                <tr><td class="tdtitle">运行主机</td><td align="left">{$sinfor.zj}</td></tr>
-                <!-- <tr><td class="tdtitle">登录信息</td><td align="left">{$sinfor.tealogin}</td></tr> -->
-                <tr><td class="tdtitle">系统介绍</td><td align="left">{$sinfor.js}</td></tr>
-                <tr><td class="tdtitle">开发团队</td><td align="left">{$sinfor.kfz}</td></tr>
+                <tr><td class="tdtitle">运行环境</td><td align="left"><?php echo ($sinfor["pe"]); ?></td></tr>
+                <tr><td class="tdtitle">开发框架</td><td align="left"><?php echo ($sinfor["think"]); ?></td></tr>
+                <tr><td class="tdtitle">运行主机</td><td align="left"><?php echo ($sinfor["zj"]); ?></td></tr>
+                <!-- <tr><td class="tdtitle">登录信息</td><td align="left"><?php echo ($sinfor["tealogin"]); ?></td></tr> -->
+                <tr><td class="tdtitle">系统介绍</td><td align="left"><?php echo ($sinfor["js"]); ?></td></tr>
+                <tr><td class="tdtitle">开发团队</td><td align="left"><?php echo ($sinfor["kfz"]); ?></td></tr>
              </table>
             </div>
            
@@ -296,4 +294,3 @@
 </div>
 </body>
 </html>
-

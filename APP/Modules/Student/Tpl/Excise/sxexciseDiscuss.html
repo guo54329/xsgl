@@ -138,17 +138,17 @@ function show(){
 		    </td>
 		    </tr>
 			<tr><td class="desc">
+			<if condition="$excisedesc['isrec'] eq 0">
+				教师禁用了下载功能！
+			<else/>
 			{~$i=1}
 			<foreach name='exciselist' item='v'>
 				<span>
-					<if condition="$excisedesc['isrec'] eq 0">
-						{$i}-{$v.xsxm}(禁止下载)
-					<else/>
-						<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDownAttach',array('seid'=>$v['seid']))}" class="btn btn-default file"><span class="glyphicon glyphicon-save"></span> {$i}-{$v.xsxm}</a>
-					</if>
+					<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDownAttach',array('seid'=>$v['seid']))}" class="btn btn-default file"><span class="glyphicon glyphicon-save"></span> {$i}-{$v.xsxm}</a>			
 				</span>
 				{~$i++}
 			</foreach>
+		    </if>
 			</td></tr>
 		</table>
 	  </div>
