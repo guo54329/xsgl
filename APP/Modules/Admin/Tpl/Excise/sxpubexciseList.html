@@ -24,7 +24,7 @@ $(function() {
 function copyurl(obj){
 	var scid = obj.name;
 	var url = obj.value;
-	var str= "序号为：<b>"+scid+"</b>　服务器拷贝地址为：<b>"+url+"</b>";
+	var str= "序号为：<b>"+scid+"</b>　服务器拷贝地址为：<b style='color:red;'>"+url+"</b>";
 	$('#urlcontent').html(str);
 }
 </script>
@@ -91,6 +91,9 @@ function myrefresh(){
 		width:90px;
 		text-align: left;
 	}	
+	.btn-sm{
+		width: 55px;
+	}
 	.xiexian{
 	    width:20px;
 		margin-left:-5px;margin-right:-5px;
@@ -109,8 +112,8 @@ function myrefresh(){
 	.form-inline{
 		padding:5px 0px 5px 0px;
 		margin:5px 0px 5px 16px;
-		height:30px;
-		line-height:30px;
+		height:76px;
+		line-height:28px;
 	 }
 	/*排序加入开始*/ 
 	table.tablesorter thead tr .header {
@@ -142,12 +145,14 @@ function myrefresh(){
 	<div class="form-inline">
 		学期：<strong>{$courseinfo.term}</strong>&nbsp;&nbsp;
 	    教师：<strong>{$courseinfo.jsxm}</strong>&nbsp;&nbsp;
-	    班级：<strong>{$courseinfo.cname}</strong>&nbsp;&nbsp;课程：<strong>{$courseinfo.coursename}</strong><br/>
+	    班级：<strong>{$courseinfo.cname}</strong>&nbsp;&nbsp;课程：<strong>{$courseinfo.coursename}</strong>
+	    <p>提示：文件<b>超过100MB</b>请单击<b>拷贝</b>按钮，将下面生成的地址复制到<b>服务器计算机的窗口</b>中打开复制即可!<br/>
+                <span id="urlcontent"><b style='color:red;'>单击拷贝按钮后会此处生成地址</b></span></p>
 	</div>
 	  <div class="panel-body">
-		 <table class="table table-bordered table-hover tablesorter">
+		 <table class="table table-bordered table-hover tablesorter" style="font-size: 11px;">
 		 	<thead>
-			<tr style="text-align: center;font-weight: bold;"><th width="5%">序号</th><td align="left">任务题目</td><!--<td>任务描述</td><td>任务附件</td>--><td width="7%">发布状态</td><th width="10%" style="text-align: center;">学生下载他人作业</th><td width="10%">发布时间</td><th width="8%" style="text-align: center;">完成</th><th width="8%" style="text-align: center;">文件数(大小)</th><td width="34%">操 作</td></tr>
+			<tr style="text-align: center;font-weight: bold;"><th width="50px">序号</th><td align="left">任务题目</td><!--<td>任务描述</td><td>任务附件</td>--><td width="60px">状态</td><th width="120px" style="text-align: center;"><span title="在交流页面是否允许相互下载作业">是否允许</span></th><td width="90px">发布时间</td><th width="60px" style="text-align: center;">完成</th><th style="text-align: center;min-width:80px;">文件数</th><td width="420px;">操 作</td></tr>
 			</thead>
 			<tbody>
 			{~$totaln=0}<!-- 统计系统文件总数 -->
@@ -164,7 +169,7 @@ function myrefresh(){
 					<if condition="$v['isrec'] eq 0"><span class="no">禁止</span>
 					<else/><span class="yes">允许</span>
 				    </if>
-				    <a href="{:U(GROUP_NAME.'/Excise/sxsubexciseIsrec',array('peid'=>$v['peid']))}" class="btn btn-default" title="设置在评价交流页面是否允许学生下载他人作业评价"><span class="glyphicon glyphicon-eye-close"></span> 设置</a>
+				    <a href="{:U(GROUP_NAME.'/Excise/sxsubexciseIsrec',array('peid'=>$v['peid']))}" class="btn btn-default btn-sm" title="设置在评价交流页面是否允许学生下载他人作业评价"><span class="glyphicon glyphicon-eye-close"></span> 设置</a>
 				</td>
 				<td>{$v.pubtime|date='m-d H:i',###}</td>
 				<td>
@@ -200,8 +205,9 @@ function myrefresh(){
 			    	}else{
 			    		$file =  "暂无";
 				    }
-				    $downflag=0;
-				    if($res['totalsize']>1024*1024*100){//文件超过100MB
+				    //是拷贝还是下载,大于100MB时拷贝
+			        $downflag=0;
+					if($res['totalsize']>1024*1024*100){
 						$downflag=1;
 					}
 				   </php>
@@ -210,24 +216,22 @@ function myrefresh(){
 				<td align="left">
 				
 				<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseList',array('peid'=>$v['peid']))}" class="btn btn-default browse" ><span class="glyphicon glyphicon-eye-open"></span> 学生完成</a>&nbsp;
-				<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseTable',array('peid'=>$v['peid']))}" class="btn btn-default"><span class="glyphicon glyphicon-download"></span> 统计</a>
+				<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseTable',array('peid'=>$v['peid']))}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-download"></span> 统计</a>
 				<if condition=" $downflag eq 0">
-					<a href="{:U(GROUP_NAME.'/Excise/sxexcisePackage',array('peid'=>$v['peid']))}" class="btn btn-default" title="将该任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 下载</a>
+					<a href="{:U(GROUP_NAME.'/Excise/sxexcisePackage',array('peid'=>$v['peid']))}" class="btn btn-default btn-sm" title="将该任务和学生作业打包下载！"><span class="glyphicon glyphicon-save"></span> 下载</a>
 				 <else/>
-					<button onclick="copyurl(this);" name="{$i+1}" value="{$url[$i]}" class="btn btn-default" title="文件过大，提供在服务器上拷贝地址！"> <span class="glyphicon glyphicon-tag"></span> 拷贝</button>
+					<button onclick="copyurl(this);" name="{$i+1}" value="{$url[$i]}" class="btn btn-default btn-sm" title="文件过大，提供在服务器上拷贝地址！"> <span class="glyphicon glyphicon-tag"></span> 拷贝</button>
 			    </if>
-
 				<input type="hidden" id="status{$v.peid}" value="{$v.status}" />
 				<input type="hidden" id="scid{$v.peid}" value="{$courseinfo.scid}" />
-				<a href="{:U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']))}" class="btn btn-default" ><span class="glyphicon glyphicon-comment"></span> 交流</a>&nbsp;&nbsp;&nbsp;&nbsp;
-
+				<a href="{:U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']))}" class="btn btn-default btn-sm" ><span class="glyphicon glyphicon-comment"></span> 交流</a>&nbsp;&nbsp;
 				<if condition="$v['status'] eq 0">
-					<button class="btn btn-default" id="{$v.peid}" onclick="publish(this);"><span class="glyphicon glyphicon-share-alt"></span> 发布</button>&nbsp;
+					<button class="btn btn-default btn-sm" id="{$v.peid}" onclick="publish(this);"><span class="glyphicon glyphicon-share-alt"></span> 发布</button>&nbsp;
 				<else/>
-					<button class="btn btn-default" id="{$v.peid}" onclick="publish(this);"><span style="color:red;"><span class="glyphicon glyphicon-share-alt"></span> 撤销</span></button>&nbsp;
+					<button class="btn btn-default btn-sm" id="{$v.peid}" onclick="publish(this);"><span style="color:red;"><span class="glyphicon glyphicon-share-alt"></span> 撤销</span></button>&nbsp;
 				</if>
 
-				<button class="btn btn-default" id="{$v.peid}" onclick="del(this);"><span class="glyphicon glyphicon-remove"></span> 删除</button>
+				<button class="btn btn-default btn-sm" id="{$v.peid}" onclick="del(this);"><span class="glyphicon glyphicon-remove"></span> 删除</button>
 				<!--如果有附件，在提供下载按钮  || 此处取消附件下载功能
 				<if condition="$v['url'] neq '0' ">
 				<a href="{:U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$v['peid']))}" class="btn btn-default" ><span class="glyphicon glyphicon-save"></span> 附件</a>
@@ -236,14 +240,13 @@ function myrefresh(){
 			</tr>
 			{~$i++}
 			</foreach>
-			<tr><td colspan="8" style="text-align: left;height: 40px;line-height: 30px;">
+			</tbody>
+		</table>
+		<table>
+			<tr><td style="height:40"></td></tr>
+			<tr><td style="text-align: left;">
 				合计：目前该课程共有 <b>{$totaln}</b> 个文件，所占磁盘空间 <b><php>echo format_bytes($totals)</php></b>
 			</td></tr>
-			<tr><td colspan="8" style="text-align: left;height: 80px;line-height: 30px;">
-				提示：系统设计为文件先压缩在下载，当文件<b>超过100MB</b>时显示<b>拷贝</b>按钮，用户可以单击<b>拷贝</b>按钮，在此处会生成一个地址，可以将此地址复制到<b>服务器计算机的窗口</b>中打开，然后对目标文件或文件夹进行复制！<br/>
-                <span id="urlcontent"></span>
-			</td></tr>
-			</tbody>
 		</table>
 		<!-- 排序分页开始 -->
 		<div id="pager" class="pager">

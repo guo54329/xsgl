@@ -16,7 +16,7 @@
 </style>
 </head>
 <body>
-<form action='{:U(GROUP_NAME.'/System/site')}' method='post'>
+<form action='{:U(GROUP_NAME.'/System/site')}' method='post' enctype="multipart/form-data">
 <div class="panel panel-default">
 	  <div class="panel-heading headalign">
 		<a  class="btn  btncoursetable"><span class="glyphicon glyphicon-home"></span> 系统全局设置</a>
@@ -26,6 +26,10 @@
 			<tr>
 				<td width="20%">网站名称</td>
 				<td><input type='text' name='title' value='{$site.title}' class="form-control" /></td>
+			</tr>
+			<tr>
+				<td width="20%">网站图标</td>
+				<td><input type='file' name='image' class="form-control" /></td>
 			</tr>
 			<tr>
 			    <td>网站描述</td>

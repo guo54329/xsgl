@@ -22,7 +22,10 @@ function myrefresh(){
 	.btncoursetable{
 		width:90px;
 		text-align: left;
-	}	
+	}
+	.btn-sm{
+		width: 55px;
+	}
 	.xiexian{
 	    width:20px;
 		margin-left:-5px;margin-right:-5px;
@@ -90,10 +93,10 @@ function myrefresh(){
 		    <strong>任务描述：</strong>{$excisedesc.desc}
 		    </td>
 		    </tr>
-			<tr><th>序号</th><th>ID</th><th>学号</th><th>姓名</th><th>提交状态</th><th>提交时间</th><th>文件大小</th><th>实训成绩</th><th width="20%">操作</th></tr>
+			<tr><th>序号</th><th>ID</th><th>学号</th><th>姓名</th><th>提交状态</th><th>提交时间</th><th>文件大小</th><th>实训成绩</th><th width="220px">操作</th></tr>
 			{~$i=1}
 			<foreach name='exciselist' item='v'>
-			<tr>
+			<tr style="font-size: 14px;">
 				<td>{$i}</td>
 				<td>{$v.seid}</td>
 				<td>{$v.xsno}</td>
@@ -118,11 +121,10 @@ function myrefresh(){
 				<td><php> echo $v['desc']*0.3+$v['isrec']*0.7;</php></td>
 				<td class="footeralign">
 				   <if condition="$v['status'] eq 1 ">
-					<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDownAttach',array('seid'=>$v['seid']))}" class="btn btn-default"><span class="glyphicon glyphicon-save"></span> 下载</a>
-                   </if>&nbsp;　
-					<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseRedo',array('seid'=>$v['seid']))}" class="btn btn-default"><span class="glyphicon glyphicon-repeat"></span> 重做</a>
-					&nbsp;
-					<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDel',array('seid'=>$v['seid']))}" class="btn btn-default" title="如果该生已不存在，则可直接删除；如果存在，删除之前先设置重做！"><span class="glyphicon glyphicon-remove"></span> 删除</a>
+					<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDownAttach',array('seid'=>$v['seid']))}" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-save"></span> 下载</a>&nbsp;&nbsp;
+                   </if>
+					<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseRedo',array('seid'=>$v['seid']))}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-repeat"></span> 重做</a>
+					&nbsp;<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDel',array('seid'=>$v['seid']))}" class="btn btn-default btn-sm" title="如果该生已不存在，则可直接删除；如果存在，删除之前先设置重做！"><span class="glyphicon glyphicon-remove"></span> 删除</a>
 					
 
 				</td>

@@ -62,6 +62,14 @@ function myrefresh(){
 		height:40px;
 		line-height:40px;
 	 }
+	.btn2{
+		width: 66px;
+	}
+	.btn4{
+		width:90px;
+	}
+
+
 	 /*排序加入开始*/ 
 	table.tablesorter thead tr .header {
 		background-image: url("__ROOT__/Data/jquerytablesorter/themes/blue/bg.gif");
@@ -111,9 +119,9 @@ function myrefresh(){
 		</form>
 	</div>
 	  <div class="panel-body">
-		 <table class="table table-bordered table-hover tablesorter">
+		 <table class="table table-bordered table-hover tablesorter" style="font-size: 11px;">
 		   <thead>
-			<tr style="text-align: center;font-weight: bold;"><td>学期</td><th style="text-align: center;">课程</th><th style="text-align: center;" width="5%">序号</th><td>任务标题</td><th style="text-align: center;">发布教师</th><th style="text-align: center;">发布时间</th><th style="text-align: center;" width="10%">完成状态</th><td>作业大小</td><td>实训成绩</td><td width="14%">操作</td></tr>
+			<tr style="text-align: center;font-weight: bold;"><td width="100px">学期</td><th style="text-align: center;">课程</th><th style="text-align: center;width: 50px;">序号</th><td>任务标题</td><th style="text-align: center;width: 70px;">发布教师</th><!-- <th style="text-align: center;">发布时间</th> --><th style="text-align: center;width: 80px;">完成状态</th><td>作业大小</td><td>实训成绩</td><td width="190px">操作</td></tr>
 			</thead>
 			<tbody>
 			{~$i=1}
@@ -124,9 +132,9 @@ function myrefresh(){
 				<td>{$i}{~$v.peid}</td>
 				<td align="left"><a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDesc',array('seid'=>$v['seid']))}">{$v.title}</a></td>
 				<td>{$v.jsxm}</td>
-				<td>{$v.pubtime|date='m-d H:i',###}</td>
+				<!-- <td>{$v.pubtime|date='m-d H:i',###}</td> -->
 
-				<td><if condition="$v['status'] eq 0 "><span style="font-size: 16px;color:red;">未完成</span><else/><img src="__PUBLIC__/Images/finish.png" style="height: 32px;" /></if></td>
+				<td><if condition="$v['status'] eq 0 "><span style="font-size: 14px;color:red;">待完成</span><else/><img src="__PUBLIC__/Images/finish.png" style="height: 28px;" /></if></td>
 				<td>
 					<php>
 						if($v['filea']!=''){
@@ -138,9 +146,12 @@ function myrefresh(){
 				<td><php> echo $v['desc']*0.3+$v['isrec']*0.7;</php></td>
 			
 				<td>
-					<if condition="$v['status'] eq 0 "><a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDesc',array('seid'=>$v['seid']))}" class="btn" style="font-size: 16px;"><span class="glyphicon glyphicon-hand-right"></span> 去完成</a><else/>
-						<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDownAttach',array('seid'=>$v['seid']))}" class="btn btn-default"><span class="glyphicon glyphicon-save"></span>下载</a>&nbsp;
-						<a href="{:U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']))}" class="btn btn-default" ><span class="glyphicon glyphicon-eye-open"></span> 交流</a></if>
+					<if condition="$v['status'] eq 0 ">
+						<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDesc',array('seid'=>$v['seid']))}" class="btn btn-default" style="font-size: 14px;color: red;"><span class="glyphicon glyphicon-hand-right"></span> 去完成</a>
+					<else/>
+						<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseDownAttach',array('seid'=>$v['seid']))}" class="btn btn-default btn4 btn4"><span class="glyphicon glyphicon-save"></span>作业下载</a>&nbsp;
+						<a href="{:U(GROUP_NAME.'/Excise/sxexciseDiscuss',array('peid'=>$v['peid']))}" class="btn btn-default btn2" ><span class="glyphicon glyphicon-eye-open"></span> 交流</a>
+					</if>
 				</td>
 			</tr>
 			{~$i++}

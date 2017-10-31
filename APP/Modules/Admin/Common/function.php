@@ -10,6 +10,11 @@ function  show($status, $message,$data=array()) {
 
     exit(json_encode($reuslt));
 }
+
+//定义网站图标名称
+function defineICON($imagename){
+  return 'fav';
+}
 //递归重组节点信息为多维数组
 //$node 要处理的节点数组
 //$pid 父级ID

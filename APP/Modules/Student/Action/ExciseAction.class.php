@@ -62,6 +62,7 @@ public function sxsubexciseDo(){
         //作业提交处理
         import('ORG.Net.UploadFile'); //载入TP上传类 
         $uploadfile = new UploadFile();
+        $uploadfile->uploadReplace=true;//允许同名文件覆盖
         $uptime=date("YmdHis");
         session('uptime',$uptime);//用于定义教师上传附件的名称（决定先后次序）
         $uploadfile->saveRule ='definefilename'; 

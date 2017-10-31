@@ -58,9 +58,9 @@
 	      'think'=>'ThinkPHP版本:'.THINK_VERSION.'　发行时间:'.THINK_RELEASE,
 	      'js'=>'系统以解决计算机专业实训教学中任务管理混乱和作业收交困难等问题为目的，帮助专业课教师有效管理任务和学生业，通过节省时间让教师致力于实训教学，最终达到师生共赢的目的！',
 	      'kfz'=>'萧寒工作室(郭盛18993351660)',
-	      'userlogin'=>'登录用户:'.$user['username'].'　登录时间:'.date('Y-m-d H:i:s',$user['logintime']).'　登录IP:'.$user['loginip'],
-	      'tealogin'=>'教师：<b>'.$tea['jsxm'].'</b>　登录时间：'.date('Y-m-d H:i:s',$tea['logintime']).'　IP：'.$tea['loginip'].'<br/>用户帐号：'.$tea['jsno'].'　联系电话：'.$tea['jsdh'].'　所在处室：'.$tea['offname'],
-	      'stulogin'=>'学生：<b>'.$stu['xsxm'].'</b>　登录时间：'.date('Y-m-d H:i:s',$stu['logintime']).'　IP：'.$stu['loginip'].'<br/>学号：'.$stu['xsno'].'　班级：'.$stu['cname'].'　入学时间：'.$stu['rxsj'],
+	      'userlogin'=>'登录时间:'.date('Y-m-d H:i',$user['logintime']).'　登录IP:'.$user['loginip'],
+	      'tealogin'=>'</b>登录时间：'.date('Y-m-d H:i',$tea['logintime']).'　IP：'.$tea['loginip'].'<br/>电话：'.$tea['jsdh'].'　处室：'.$tea['offname'],
+	      'stulogin'=>'用户名：'.$stu['xsno'].'　登录时间：'.date('Y-m-d',$stu['logintime']).'　IP：'.$stu['loginip'].'<br/>所属班级：'.$stu['cname'].'　入学时间：'.$stu['rxsj'],
 	    ); 
 	    return $sinfor;
 	}

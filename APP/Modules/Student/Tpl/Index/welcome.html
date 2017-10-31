@@ -1,6 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="refresh" content="60"><!--每隔10s刷新一次-->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="__PUBLIC__/Css/bootstrap.css" />
@@ -16,7 +17,7 @@
     text-align: left;
   }
   .btnsearch{
-    width:100px;
+    width:110px;
     height: 34px;
     text-align: center;
   }
@@ -164,21 +165,18 @@
           <div class="col-md-12">
             <div class="alert alert-success" style="font-size:18px;margin-bottom:2px;">
                   <i class="glyphicon glyphicon-ok"></i>
-                  <strong>提示</strong> {$wel}
+                  <strong>提示：</strong>{$xsxm}，{$wel}
               </div>
           </div>
         </div>
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                <h4><span class="glyphicon glyphicon-link"></span> 快捷方式</h4>
                <table class="table table-bordered">
                     <tr>
                       <td>
-                        <div class="form-inline" style="height: 80px;line-height: 34px;">
-                          <a href="{:U(GROUP_NAME.'/Index/sysNews')}" class="btn btn-info" style="width: 373px;height: 36px;line-height: 22px;font-size: 16px;
-                          display: block;margin-bottom: 6px;"><span class="glyphicon glyphicon-bullhorn"></span>  查看管理员、教师发布的消息</a>
-
+                        <div class="form-inline" style="height:80px;line-height: 22px;">
                   <form action='{:U(GROUP_NAME.'/Excise/sxsubexciseList')}' method="post">
                 <select name="term" class="form-control"></select>
                 <select name="coursename" class="form-control"></select>
@@ -199,12 +197,14 @@
                  </script>
                  <button type="submit" class="btn btn-info btnsearch"><span class='glyphicon glyphicon-search'></span> 查询任务</button>
                 </form>
+                <a href="{:U(GROUP_NAME.'/Index/sysNews')}" class="btn btn-info" style="width: 270px;line-height: 16px;font-size: 16px;
+                          display: block;margin-bottom: 6px;"><span class="glyphicon glyphicon-bullhorn"></span>  查看管理员和教师发布的消息</a>
               </div>
                       </td>
                     </tr> 
                 </table>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-6">
                <h4><span class="glyphicon glyphicon-user"></span> 登录信息</h4>
                <table class="table table-bordered">
                      <tr><td align="left"><span style="line-height: 40px;">{$sinfor.stulogin}</span></td></tr>
@@ -243,7 +243,7 @@
             <div class="col-md-12">
                 <h4><span class="glyphicon glyphicon-info-sign"></span> 框架及系统信息</h4>
                 <table class="table table-bordered table-hover">
-                <tr><td class="tdtitle">运行环境</td><td align="left">{$sinfor.pe}</td></tr>
+                <tr><td class="tdtitle" style="width:140px;">运行环境</td><td align="left">{$sinfor.pe}</td></tr>
                 <tr><td class="tdtitle">开发框架</td><td align="left">{$sinfor.think}</td></tr>
                 <tr><td class="tdtitle">运行主机</td><td align="left">{$sinfor.zj}</td></tr>
                 <tr><td class="tdtitle">系统介绍</td><td align="left">{$sinfor.js}</td></tr>

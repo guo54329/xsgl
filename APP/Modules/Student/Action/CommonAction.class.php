@@ -8,6 +8,9 @@ Class CommonAction extends Action{
 			$this->error("您还没有登录,请先登录！",U(GROUP_NAME.'/Login/index'));
 			//$this->redirect(GROUP_NAME.'/Login/index');
 		}
+		$stu = session('stu');
+		$xsxm=$stu['xsxm'];
+		$this->assign('xsxm',$xsxm);
 		
 	}
 }

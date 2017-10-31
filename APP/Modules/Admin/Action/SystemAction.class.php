@@ -8,6 +8,18 @@ Class SystemAction extends CommonAction {
 	public function site(){
 
 		if(!empty($_POST)){
+            //上传网站图标
+			if($_FILES['image']['tmp_name']){
+				import('ORG.Net.UploadFile');
+				$upload = new UploadFile();// 实例化上传类
+				$uploadfile->uploadReplace=true;//允许同名文件覆盖
+				$upload->saveRule ='defineICON';
+				$upload->allowExts  = array('png', 'PNG');// 设置图片上传类型
+				$upload->savePath =  './Data/';// 设置图片上传目录
+				$upload->upload();
+				//$info =  $upload->getUploadFileInfo();
+				//p($info);
+			}
             
 			//site1 网站基本信息
 			$data=array(
@@ -31,6 +43,7 @@ Class SystemAction extends CommonAction {
 			$this->success("站点设置成功！",U(GROUP_NAME."/System/site"));
 
 		}else{
+
 			$site = M('site')->find(1);
 			$this->assign('site',$site);
 			$this->display();
