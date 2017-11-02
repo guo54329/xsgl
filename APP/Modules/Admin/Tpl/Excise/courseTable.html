@@ -115,7 +115,7 @@ $(function() {
 				s.parent(a,b);
 			 </script>
 			<button type="submit" class="btn btn-default"><span class='glyphicon glyphicon-search'></span> 查询</button>
-			　　
+			<button type="submit" class="btn btn-info" name='export' value='export'><span class='glyphicon glyphicon-download'></span> 导出</button>　
 	  		方式二：
   			<select name="term2" class="form-control" style="width: 120px;"></select>
 			<select name="js" class="form-control" style="width: 140px;"></select>
@@ -135,6 +135,7 @@ $(function() {
 				s.parent(a,b);
 			 </script>
 			<button type="submit" class="btn btn-default"><span class='glyphicon glyphicon-search'></span> 查询</button>
+			<button type="submit" class="btn btn-info" name='export' value='export'><span class='glyphicon glyphicon-download'></span> 导出</button>
 			<p>提示：文件<b>超过100MB</b>请单击<b>拷贝</b>按钮，将下面生成的地址复制到<b>服务器计算机的窗口</b>中打开复制即可!<br/>
                 <span id="urlcontent"><b style='color:red;'>单击拷贝按钮后会此处生成地址</b></span></p>
 			</form>
@@ -143,7 +144,7 @@ $(function() {
 		 <table class="table table-bordered table-hover tablesorter" style="font-size: 11px;">
 		  <thead>
 			<tr style="text-align: center;font-weight: bold;">
-				<th width="50px" style="text-align: center;">ID</th><th width="100px" style="text-align: center;">学期</th><th  width="70px" style="text-align: center;">教师</th><th style="text-align: center;">班级</th><th width="100px"  style="text-align: center;">课程</th><td width="60px">任务数</td><td>下发/提交</td><th width="60px" style="text-align: center;">完成率</th><th  style="text-align: center;" min-width="80px">文件</th><td width="190px">操作</td></tr>
+				<th width="50px" style="text-align: center;">ID</th><th width="100px" style="text-align: center;">学期</th><th  width="70px" style="text-align: center;">教师</th><th style="text-align: center;">班级</th><th width="100px"  style="text-align: center;">课程</th><td width="60px">任务数</td><td>下发/提交</td><th width="60px" style="text-align: center;">完成率</th><th  style="text-align: center;" min-width="80px">文件</th><td width="190px">操作(要删除请先删任务)</td></tr>
 			</thead>
 			<tbody id="tob">
 			{~$totaln=0}<!-- 统计系统文件总数 -->
@@ -180,7 +181,12 @@ $(function() {
 						$subnum = M('sxsetcourse as a')->join('inner join xh_sxpubexcise as b on a.scid = b.scid')->join('inner join xh_sxsubexcise as c on b.peid=c.peid')->where("a.scid=$scid and c.status=1")->count();
 						if($subnum>0)$i=1;
 						//完成率
-						$finish = (round($subnum / $recnum,4)*100)."%";
+						if($recnum>0){
+							$finish = (round($subnum / $recnum,4)*100)."%";
+						}else{
+							$finish = '0%';
+						}
+						
 						$j=0;
 						if($subnum==$recnum and $subnum!=0){
 							$j=1;
@@ -235,7 +241,7 @@ $(function() {
 					</if>
 					
 					<if condition="$pubnum eq 0">
-					<a href="{:U(GROUP_NAME.'/Excise/delcourseTable',array('id'=>$v['scid']))}" class="btn btn-default btn-sm" title="如果没有任务可以直接删除，否则需要删尽其下的任务再进行删除！"><span class="glyphicon glyphicon-remove"></span> 删除</a>
+					<a href="{:U(GROUP_NAME.'/Excise/delcourseTable',array('id'=>$v['scid']))}" class="btn btn-default btn-sm" title=""><span class="glyphicon glyphicon-remove"></span> 删除</a>
 					</if>
 				</td>
 			</tr>

@@ -21,6 +21,15 @@ Class IndexAction extends CommonAction {
 		$this->display();
 	}
 
+	//清除系统缓存文件包括Excise
+    public function resetTEMP(){//系统缓存文件删除
+        $temppath1 = "./Temp";
+        delDirAndFile($temppath1);
+        $temppath2 = "./Public/ExcisetempZIP";
+        delDirAndFile($temppath2);
+        $this->success('清空缓存成功！',U(GROUP_NAME.'/Index/index'));  
+    }
+    
 	public function welcome()
 	{
 		//登录后首页提示信息

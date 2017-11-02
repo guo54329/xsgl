@@ -112,10 +112,12 @@
 				<td align="center">任务标题</td>
 				<td>{$dolist.title}</td>
 			</tr>
-			<tr>
-				<td align="center">附件下载</td>
-				<td><a href="{:U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$dolist['peid']))}" class="btn  attach"><span class="glyphicon glyphicon-save"> {$dolist.filename}(<php>echo format_bytes(filesize($dolist['url'].($dolist['filename'])));</php>)</span> </a></td>
-			</tr>
+			<if condition="$dolist['filename'] neq ''">
+				<tr>
+					<td align="center">附件下载</td>
+					<td><a href="{:U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$dolist['peid']))}" class="btn  attach"><span class="glyphicon glyphicon-save"> {$dolist.filename}(<php>echo format_bytes(filesize($dolist['url'].($dolist['filename'])));</php>)</span> </a></td>
+				</tr>
+		    </if>
 			<tr>
 				<td align="center">任务描述</td>
 				<td height="200px">{$dolist.desc}</p></td>

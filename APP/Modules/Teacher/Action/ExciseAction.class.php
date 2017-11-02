@@ -359,6 +359,7 @@ public function sxpubexciseSave(){
   if(!empty($_POST)){
       $title=trim($_POST['title']);
       $desc= trim($_POST['desc']);
+      $isup= trim($_POST['isup']);
       $file = $_FILES['file_upload'];
       //输入验证
       if($title==""){
@@ -367,9 +368,12 @@ public function sxpubexciseSave(){
       if($desc==""){
           $this->error("请输入任务描述！");
       }
-      if($file['name']==""||$file['error']==4){
-          $this->error("任务附件必须上传！");
+      if($isup==1){
+          if($file['name']==""||$file['error']==4){
+            $this->error("任务附件必须上传！");
+          }
       }
+      
       if($file['size']>102400000){
           $this->error("附件大小不能超过100MB！");
       }
@@ -393,32 +397,37 @@ public function sxpubexciseSave(){
       $uptime=date("YmdHis");
       session('uptime',$uptime);//用于定义教师上传附件的名称（决定先后次序）
       $filepath="./Public/Excise/".$term."/".$js."/".$coursenamepinyin."/".$uptime."/";
+      //准备保存数据
+      $data['scid']=$scid;
+      $data['title']=$title;
+      $data['desc']=$desc;
+      $data['url']=$filepath;
+      $data['pubtime']=time();
       //echo $filepath;die;
-
-  	  if (!empty($_FILES)) {
-      		import('ORG.Net.UploadFile'); //载入TP上传类
-      		$uploadfile = new UploadFile();
-    			$uploadfile->uploadReplace=true;//允许同名文件覆盖
-    			$uploadfile->saveRule ='definefilename';  //文件命名自定义：在functon里面定义
-    			if($info = $uploadfile->uploadOne($file,$filepath)){ //上传成功
-      			   $filename=$info[0]['savename']; 
-      				//准备保存数据
-      				$data['scid']=$scid;
-              $data['title']=$title;
-              $data['desc']=$desc;
-              $data['url']=$filepath;
-              $data['filename']=$filename;
-              $data['pubtime']=time();
-      				if(M('sxpubexcise')->add($data)){
-                  $this->success("任务添加成功！",U(GROUP_NAME."/Excise/sxpubexciseList",array('scid'=>$scid)));
+      if($isup==1){//有附件，上传获取文件名
+          if (!empty($_FILES)) {
+              import('ORG.Net.UploadFile'); //载入TP上传类
+              $uploadfile = new UploadFile();
+              $uploadfile->uploadReplace=true;//允许同名文件覆盖
+              $uploadfile->saveRule ='definefilename';  //文件命名自定义：在functon里面定义
+              if($info = $uploadfile->uploadOne($file,$filepath)){ //上传成功
+                   $filename=$info[0]['savename']; 
+                  //准备保存数据
+                  $data['filename']=$filename;
               }else{
-                  $this->error("任务添加失败!");
+                 $this->error("任务附件上传失败!");
               }
-      				
-    			}else{
-    			   $this->error("任务附件上传失败!");
-    			}
-  	  }    
+          }
+      }else{//没有附件
+         $data['filename']='';
+         mkdir($filepath,0777,true);
+      }
+      if(M('sxpubexcise')->add($data)){
+          $this->success("任务添加成功！",U(GROUP_NAME."/Excise/sxpubexciseList",array('scid'=>$scid)));
+      }else{
+          $this->error("任务添加失败!");
+      }
+  	      
   }else{
         //发布任务视图
         $scid = (int)$_GET['scid'];
@@ -501,10 +510,16 @@ public function sxpubexciseClone(){//克隆视图
                     $oldurl=$pubexcises[$i]['url'];
                     $filename=$pubexcises[$i]['filename'];
                     //如：/Public/Excise/2017-2018-1/GS-guosheng/jisuanjiyingyongjichu/20170915130417-21025/20170914104016_JS_guosheng.txt
-                    $newfile=$newurl.$filename;//echo "<br/>";
-                    $oldfile=$oldurl.$filename;
+                   
                     //echo "<hr/>";
-                    FileUtil::copyFile($oldfile,$newfile);
+                    if($filename!=''){//存在文件则复制，复制时自动创建文件夹
+                       $newfile=$newurl.$filename;//echo "<br/>";
+                       $oldfile=$oldurl.$filename;
+                       FileUtil::copyFile($oldfile,$newfile);
+                    }else{ //不存在则创建文件夹
+                       mkdir($newurl,0777,true);
+                    }
+
                     $data[$num]['url']=$newurl;
                     $data[$num]['filename']=$filename;
                     $data[$num]['status']=0;
@@ -578,6 +593,44 @@ public function sxpubexciseStatus(){
     }
 }
 
+//补充学生到subexcise
+public function sxsubexciseaddStu(){
+   $peid = (int)$_GET['peid'];
+   $scid = (int)$_GET['scid'];
+   //已经接收任务的学生名单
+   $xsnos = M('sxsubexcise')->field('xsno')->where("peid=$peid")->select();
+   $okxs=array();
+   foreach($xsnos as $k=>$v){
+      $okxs[]=$v['xsno'];
+   }
+  
+   $where['xsno']=array('not in',$okxs);
+    
+   //查询新增的没有接收任务的学生
+   $ccode = M('sxsetcourse')->field('ccode')->find($scid);
+   $ccode=$ccode['ccode'];
+   //echo $ccode;die;
+   $addxsnos = M('student')->field("xsno")->where("ccode = $ccode")->where($where)->order('xsno ASC')->select();
+    $excise =array();
+    for($i=0;$i<count($addxsnos);$i++){
+        $excise[$i]=array(
+            'peid'=>$peid,
+            'xsno'=>$addxsnos[$i]['xsno'],
+        );
+    }
+    if(count($addxsnos)>0){
+        $res=M('sxsubexcise')->addAll($excise);
+        //echo $res;die;
+        if($res!==false){
+            $this->success("成功补充 ".count($addxsnos)." 个学生！",U(GROUP_NAME."/Excise/sxsubexciseList",array('peid'=>$peid)));
+        }else{
+            $this->error('补充学生失败！');
+        }
+    }else{
+         $this->error('该班无新增学生！');
+    }
+}
+
 //下载教师发布的任务的附件
 public function sxpubexciseDownAttach(){
     $peid = (int)$_GET['peid'];
@@ -601,10 +654,12 @@ public function sxpubexciseDel(){
        //删除附件
        $attach = M('sxpubexcise')->field('url,filename')->find($peid);
        $filename = $attach['filename'];
-       if($filename!=''){
-            $filepath = $attach['url'];
+       $filepath = $attach['url'];
+       if($filename!=''){            
             $file = $filepath.$filename;
             unlink($file);
+            rmdir($filepath);
+       }else{
             rmdir($filepath);
        }
        $res=M('sxpubexcise')->delete($peid);
@@ -905,9 +960,17 @@ public function sxsubexciseDownAttach(){
 }
 //删除指定学生作业
 public function sxsubexciseDel(){
-   $seid = $_GET['seid'];
-   $peid = M('sxsubexcise')->field('peid')->find($seid);
-   $peid = $peid['peid']; 
+    $seid = $_GET['seid'];
+    $subexcise = M('sxsubexcise')->field('peid,filename')->find($seid);
+    $peid = $subexcise['peid'];
+    $filename = $subexcise['filename'];
+    $url= M('sxpubexcise')->field('url')->find($peid);
+    $path = $url['url'];
+    if($filename!=''){
+      $file = $path.$filename;
+      unlink($file);//删除附件
+    }
+     
    if(M('sxsubexcise')->delete($seid)){
         $this->success('删除成功！',U(GROUP_NAME."/Excise/sxsubexciseList",array('peid'=>$peid)));
    }else{
@@ -917,14 +980,16 @@ public function sxsubexciseDel(){
 
 //设置学生作业重做
 public function sxsubexciseRedo(){
-	   $seid = $_GET['seid'];
-	   $filename = M('sxsubexcise')->field('filename,peid')->find($seid);
-     $peid = $filename['peid']; 
-     $url= M('sxpubexcise')->field('url')->find($peid);
-	   $filepath = $url['url'];
-     $filename = $filename['filename'];
-	   $file = $filepath.$filename;
-	   unlink($file);//删除附件
+    $seid = $_GET['seid'];
+    $subexcise = M('sxsubexcise')->field('peid,filename')->find($seid);
+    $peid = $subexcise['peid'];
+    $filename = $subexcise['filename'];
+    $url= M('sxpubexcise')->field('url')->find($peid);
+    $path = $url['url'];
+    if($filename!=''){
+      $file = $path.$filename;
+      unlink($file);//删除附件
+    }
 	   $data = array(
 			'seid'=>$seid,
 			'desc' =>'',

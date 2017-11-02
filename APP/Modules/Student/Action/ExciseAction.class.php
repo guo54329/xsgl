@@ -106,32 +106,34 @@ public function sxsubexciseDesc(){
 		$this->display();
 }
  
- 	public function sxsubexciseRedo(){
-  //作业重做
-     $seid = $_GET['seid'];
-     $attach = M('sxsubexcise')->field('filename,peid')->find($seid);
-     $peid = $attach['peid']; //用于返回
-     $url=M('sxpubexcise')->field('url')->find($peid);
-     $filepath = $url['url'];
-     $filename = $attach['filename'];
-     $file = $filepath.$filename;
-     
-     unlink($file);//删除附件
-     $data = array(
-      'seid'=>$seid,
-      'desc' =>'',  //自我评价
-      'filename'=>'',
-      'status'=>0,
-      'isrec'=>''   //教师评价
+//设置学生作业重做
+public function sxsubexciseRedo(){
+    $seid = $_GET['seid'];
+    $subexcise = M('sxsubexcise')->field('peid,filename')->find($seid);
+    $peid = $subexcise['peid'];
+    $filename = $subexcise['filename'];
+    $url= M('sxpubexcise')->field('url')->find($peid);
+    $path = $url['url'];
+    if($filename!=''){
+      $file = $path.$filename;
+      unlink($file);//删除附件
+    }
+    $data = array(
+        'seid'=>$seid,
+        'desc' =>'',
+        'filename'=>'',
+        'subtime'=>0,
+        'status'=>0,
+        'isrec'=>''
     );
-     $res = M('sxsubexcise')->save($data);
-     if($res){
-      $this->success('设置成功，请重做！',U(GROUP_NAME."/Excise/sxsubexciseDesc",array('seid'=>$seid)));
-     }else{
-      $this->error('设置失败！');
-     }
+    $res = M('sxsubexcise')->save($data);
+    if($res){
+           $this->success('设置重做成功！',U(GROUP_NAME."/Excise/sxsubexciseList",array('peid'=>$peid)));
+    }else{
+           $this->error('设置重做失败！');
+    }
      
-  }
+}
 
   public function sxpubexciseDownAttach(){
 	//下载教师发布的任务的附件

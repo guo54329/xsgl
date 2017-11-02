@@ -112,7 +112,7 @@ $(function() {
 	  <div class="panel-body">
 		 <table class="table table-bordered table-hover tablesorter" style="font-size: 11px;">
 		  <thead>
-			<tr style="text-align: center;font-weight: bold;"><td width="50px">ID</td><td width="100px">学期</td><td>课程</td><td width="70px">任务数</td><td>接收</td><td>提交</td><td width="60px">完成率</td><td width="100px">文件</td><td width="120px">班级</td><td width="140px">班主任<td width="190px">操作</td></tr>
+			<tr style="text-align: center;font-weight: bold;"><td width="50px">ID</td><td width="100px">学期</td><td>课程</td><td width="70px">任务数</td><td>接收</td><td>提交</td><td width="60px">完成率</td><td width="100px">文件</td><td width="120px">班级</td><td width="140px">班主任<td width="190px">操作(要删除请先删任务)</td></tr>
 			</thead>
 			<tbody>
 			{~$totaln=0}<!-- 统计系统文件总数 -->
@@ -147,7 +147,12 @@ $(function() {
 						$subnum = M('sxsetcourse as a')->join('inner join xh_sxpubexcise as b on a.scid = b.scid')->join('inner join xh_sxsubexcise as c on b.peid=c.peid')->where("a.scid=$scid and c.status=1")->count();
 						if($subnum>0)$i=1;
 						//完成率
-						$finish = (round($subnum / $recnum,4)*100)."%";
+						if($recnum>0){
+							$finish = (round($subnum / $recnum,4)*100)."%";
+						}else{
+							$finish='0%';
+						}
+						
 						$j=0;
 						if($subnum==$recnum and $subnum!=0){
 							$j=1;

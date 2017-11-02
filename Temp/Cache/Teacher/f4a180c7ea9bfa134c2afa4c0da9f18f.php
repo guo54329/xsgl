@@ -303,14 +303,11 @@
             <div class="col-md-12">
                 <h4><span class="glyphicon glyphicon-info-sign"></span> 框架及系统信息</h4>
                 <table class="table table-bordered table-hover">
-                <tr><td class="tdtitle" width="140px">运行环境</td><td align="left"><?php echo ($sinfor["pe"]); ?></td></tr>
-                <tr><td class="tdtitle">开发框架</td><td align="left"><?php echo ($sinfor["think"]); ?></td></tr>
-                <tr><td class="tdtitle">运行主机</td><td align="left"><?php echo ($sinfor["zj"]); ?></td></tr>
-                <!-- <tr><td class="tdtitle">登录信息</td><td align="left"><?php echo ($sinfor["tealogin"]); ?></td></tr> -->
+                <tr><td class="tdtitle"  style="width:140px;">服务器地址</td><td align="left"><?php echo ($sinfor["zj"]); ?></td></tr>
                 <tr><td class="tdtitle">系统介绍</td><td align="left"><?php echo ($sinfor["js"]); ?></td></tr>
                 <tr><td class="tdtitle">开发团队</td><td align="left"><?php echo ($sinfor["kfz"]); ?></td></tr>
              </table>
-            </div>
+            </div> 
            
         </div>
     </div> 

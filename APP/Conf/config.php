@@ -36,7 +36,7 @@ return array(
 	
 	// )
 	'TMPL_PARSE_STRING' => array(
-		'__FAVICON__' =>__ROOT__.'/Data,
+		'__FAVICON__' =>__ROOT__.'/Data',
 	),
 
 );

@@ -30,10 +30,13 @@
 	<div class="logo">{$g_site.title}</div>
 	<div class="navigation">
 		<ul>
+      <li><a href="{:U(GROUP_NAME.'/Index/resetTEMP')}" class="btn">清空缓存</a></li>
+      <li><a href="{:U(GROUP_NAME.'/Index/index')}" class="btn">控制台</a></li>
 			<li>欢迎您，<a href="{:U(GROUP_NAME.'/Index/welcome')}" target='nr'>{$jsxm}</a>！</li>
 			<li><a href="{:U(GROUP_NAME.'/Userinfor/editUserpass')}" target='nr'>修改密码</a></li>
 			<li><a href="{:U(GROUP_NAME.'/Login/logout')}">退出</a></li>
 		</ul>
+
 		<ul>
 		 	<li>系统时间：<span id="txt"></span></li>
 		</ul>

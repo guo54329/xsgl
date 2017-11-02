@@ -60,9 +60,122 @@ public function courseTable(){
           $url[$i] = '';
        }
     }
+    //导出操作
+    if($_POST['export']){
+        //引入PHPExcel
+        import('Class.PHPExcel',APP_PATH); 
+        require APP_PATH.'Class/PHPExcel/Writer/Excel2007.php' ; //xlsx格式  
+        $objPHPExcel = new PHPExcel();
+        $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel); //xlsx格式 
+
+        //设置宽度
+        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(12);  
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(24);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(26);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(12);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(12);
+        //设置行高度
+        $objPHPExcel->getActiveSheet()->getRowDimension('1')->setRowHeight(40);
+        $objPHPExcel->getActiveSheet()->getRowDimension('2')->setRowHeight(32);
+      
+        //设置字体大小
+        $objPHPExcel->getActiveSheet()->getStyle('A1:I2')->getFont()->setName('Microsoft YaHei');
+        $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setSize(14);
+        $objPHPExcel->getActiveSheet()->getStyle('A2')->getFont()->setSize(12);
+        $objPHPExcel->getActiveSheet()->getStyle('A1:I2')->getFont()->setBold(true);
+        $objPHPExcel->getActiveSheet()->getStyle('A1:I2')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        $objPHPExcel->getActiveSheet()->getStyle('A1:I2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
+        //设置水平居中
+        $objPHPExcel->getActiveSheet()->getStyle('A')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $objPHPExcel->getActiveSheet()->getStyle('B')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $objPHPExcel->getActiveSheet()->getStyle('C')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $objPHPExcel->getActiveSheet()->getStyle('F')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $objPHPExcel->getActiveSheet()->getStyle('G')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $objPHPExcel->getActiveSheet()->getStyle('H')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $objPHPExcel->getActiveSheet()->getStyle('I')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+       //设置垂直居中
+        $objPHPExcel->getActiveSheet()->getStyle('A')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        $objPHPExcel->getActiveSheet()->getStyle('B')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        $objPHPExcel->getActiveSheet()->getStyle('C')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        $objPHPExcel->getActiveSheet()->getStyle('D')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        $objPHPExcel->getActiveSheet()->getStyle('E')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        $objPHPExcel->getActiveSheet()->getStyle('F')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        $objPHPExcel->getActiveSheet()->getStyle('G')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        $objPHPExcel->getActiveSheet()->getStyle('H')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        $objPHPExcel->getActiveSheet()->getStyle('I')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+  
+        //合并
+        $objPHPExcel->getActiveSheet()->mergeCells('A1:I1');
+        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A1', "任务完成情况统计表");
+
+        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A2', '课程ID');
+        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('B2', '学期');
+        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('C2', '教师');
+        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('D2', '班级');
+        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('E2', '课程');
+        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('F2', '任务个数');
+        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('G2', '下发学生总数');
+        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('H2', '提交学生总数');
+        $objPHPExcel->setActiveSheetIndex(0)->setCellValue('I2', '完成率');
+
+        //将数据库中的数据转码 UTF-8
+        //p($data);die;
+        $data = $coursetable;
+        for($i=0;$i<count($data);$i++) {
+            //如果是从数据库中读取的数据，需要对数据进行转码操作，convertUTF8($str)
+            $objPHPExcel->getActiveSheet(0)->setCellValue('A' . ($i + 3), $data[$i]['scid']);
+            $objPHPExcel->getActiveSheet(0)->setCellValue('B' . ($i + 3), $data[$i]['term']);
+            $objPHPExcel->getActiveSheet(0)->setCellValue('C' . ($i + 3), $data[$i]['jsxm']);
+            $objPHPExcel->getActiveSheet(0)->setCellValue('D' . ($i + 3), $data[$i]['cname']);
+            $objPHPExcel->getActiveSheet(0)->setCellValue('E' . ($i + 3), $data[$i]['coursename']);
+            //任务个数
+            $scid=$data[$i]['scid'];
+            $pubnum=M('sxpubexcise')->where("scid=$scid")->count();
+             $objPHPExcel->getActiveSheet(0)->setCellValue('F' . ($i + 3), $pubnum);
+            
+            //发布接收的学生总数
+            $recnum = M('sxsetcourse as a')->join('inner join xh_sxpubexcise as b on a.scid = b.scid')->join('inner join xh_sxsubexcise as c on b.peid=c.peid')->where("a.scid=$scid")->count();
+            $objPHPExcel->getActiveSheet(0)->setCellValue('G' . ($i + 3), $recnum);
+            //提交的学生总数
+            $subnum = M('sxsetcourse as a')->join('inner join xh_sxpubexcise as b on a.scid = b.scid')->join('inner join xh_sxsubexcise as c on b.peid=c.peid')->where("a.scid=$scid and c.status=1")->count();
+
+            $objPHPExcel->getActiveSheet(0)->setCellValue('H' . ($i + 3), $subnum);
+            //完成率
+            if($recnum>0){
+              $finish = (round($subnum / $recnum,4)*100)."%";
+            }else{
+              $finish='0%';
+            }
+            $objPHPExcel->getActiveSheet(0)->setCellValue('I' . ($i + 3), $finish);
+
+            $objPHPExcel->getActiveSheet()->getRowDimension($i + 3)->setRowHeight(32); 
+        }
+
+        // 设置工作表名
+        $objPHPExcel->getActiveSheet()->setTitle('Sheet1');
+        $objPHPExcel->setActiveSheetIndex(0); 
+        //支持xls和xlsx格式
+        $outputFileName = date("YmdHis",time()).".xlsx";
+        
+        ob_end_clean();//清除缓冲区,避免乱码 
+        header("Content-Type: application/force-download");
+        header("Content-Type: application/octet-stream");
+        header("Content-Type: application/download");
+        header('Content-Disposition:attachment;filename="' . $outputFileName . '"');  //到文件
+        header("Content-Transfer-Encoding: binary");
+        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+        header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+        header("Pragma: no-cache");
+        $objWriter->save('php://output'); 
+    }
     //p($url);
     $this->assign('url',$url);
-    
     getCourseinfor2();//创建由学期联动课程的js
     getCourseinfor3();//创建由学期联动教师的js
     $this->assign('num',$num);
@@ -70,6 +183,7 @@ public function courseTable(){
     $this->display();
 
 }
+
 //添加课程表
 public function coursetableSave(){
      if(!empty($_POST)){//添加处理
@@ -397,6 +511,7 @@ public function sxpubexciseSave(){
   if(!empty($_POST)){
       $title=trim($_POST['title']);
       $desc= trim($_POST['desc']);
+      $isup= trim($_POST['isup']);
       $file = $_FILES['file_upload'];
       //输入验证
       if($title==""){
@@ -405,9 +520,12 @@ public function sxpubexciseSave(){
       if($desc==""){
           $this->error("请输入任务描述！");
       }
-      if($file['name']==""||$file['error']==4){
-          $this->error("任务附件必须上传！");
+      if($isup==1){
+          if($file['name']==""||$file['error']==4){
+            $this->error("任务附件必须上传！");
+          }
       }
+      
       if($file['size']>102400000){
           $this->error("附件大小不能超过100MB！");
       }
@@ -431,38 +549,44 @@ public function sxpubexciseSave(){
       $uptime=date("YmdHis");
       session('uptime',$uptime);//用于定义教师上传附件的名称（决定先后次序）
       $filepath="./Public/Excise/".$term."/".$js."/".$coursenamepinyin."/".$uptime."/";
+      //准备保存数据
+      $data['scid']=$scid;
+      $data['title']=$title;
+      $data['desc']=$desc;
+      $data['url']=$filepath;
+      $data['pubtime']=time();
       //echo $filepath;die;
-
-      if (!empty($_FILES)) {
-          import('ORG.Net.UploadFile'); //载入TP上传类
-          $uploadfile = new UploadFile();
-          $uploadfile->uploadReplace=true;//允许同名文件覆盖
-          $uploadfile->saveRule ='definefilename';  //文件命名自定义：在functon里面定义
-          if($info = $uploadfile->uploadOne($file,$filepath)){ //上传成功
-               $filename=$info[0]['savename']; 
-              //准备保存数据
-              $data['scid']=$scid;
-              $data['title']=$title;
-              $data['desc']=$desc;
-              $data['url']=$filepath;
-              $data['filename']=$filename;
-              $data['pubtime']=time();
-              if(M('sxpubexcise')->add($data)){
-                  $this->success("任务添加成功！",U(GROUP_NAME."/Excise/sxpubexciseList",array('scid'=>$scid)));
+      if($isup==1){//有附件，上传获取文件名
+          if (!empty($_FILES)) {
+              import('ORG.Net.UploadFile'); //载入TP上传类
+              $uploadfile = new UploadFile();
+              $uploadfile->uploadReplace=true;//允许同名文件覆盖
+              $uploadfile->saveRule ='definefilename';  //文件命名自定义：在functon里面定义
+              if($info = $uploadfile->uploadOne($file,$filepath)){ //上传成功
+                   $filename=$info[0]['savename']; 
+                  //准备保存数据
+                  $data['filename']=$filename;
               }else{
-                  $this->error("任务添加失败!");
+                 $this->error("任务附件上传失败!");
               }
-              
-          }else{
-             $this->error("任务附件上传失败!");
           }
-      }    
+      }else{//没有附件
+         $data['filename']='';
+         mkdir($filepath,0777,true);
+      }
+      if(M('sxpubexcise')->add($data)){
+          $this->success("任务添加成功！",U(GROUP_NAME."/Excise/sxpubexciseList",array('scid'=>$scid)));
+      }else{
+          $this->error("任务添加失败!");
+      }
+          
   }else{
         //发布任务视图
         $scid = (int)$_GET['scid'];
         if($scid==0){
-           $this->error('请选择课程添加任务');
+            $this->error('请选择课程添加任务！');
         }
+        
         $coursename = M('sxsetcourse as a')->join("xh_teacher as b on a.jsno=b.jsno")->field('a.coursename,b.jsxm')->where("a.scid = $scid")->find();
 
         $this->assign('coursename',$coursename['coursename']);
@@ -471,6 +595,8 @@ public function sxpubexciseSave(){
         $this->display();
   } 
 }
+
+
 //任务克隆
 public function sxpubexciseClone(){//克隆视图
     if($_POST['scidlist'] || !empty($_POST['peid'])){
@@ -536,10 +662,16 @@ public function sxpubexciseClone(){//克隆视图
                     $oldurl=$pubexcises[$i]['url'];
                     $filename=$pubexcises[$i]['filename'];
                     //如：/Public/Excise/2017-2018-1/GS-guosheng/jisuanjiyingyongjichu/20170915130417-21025/20170914104016_JS_guosheng.txt
-                    $newfile=$newurl.$filename;//echo "<br/>";
-                    $oldfile=$oldurl.$filename;
+                   
                     //echo "<hr/>";
-                    FileUtil::copyFile($oldfile,$newfile);
+                    if($filename!=''){//存在文件则复制，复制时自动创建文件夹
+                       $newfile=$newurl.$filename;//echo "<br/>";
+                       $oldfile=$oldurl.$filename;
+                       FileUtil::copyFile($oldfile,$newfile);
+                    }else{ //不存在则创建文件夹
+                       mkdir($newurl,0777,true);
+                    }
+
                     $data[$num]['url']=$newurl;
                     $data[$num]['filename']=$filename;
                     $data[$num]['status']=0;
@@ -573,6 +705,7 @@ public function sxpubexciseClone(){//克隆视图
     }
       
 }
+
 //修改发布状态(发布和撤销发布)
 public function sxpubexciseStatus(){
     $peid = (int)$_POST['peid'];
@@ -612,6 +745,44 @@ public function sxpubexciseStatus(){
     }
 }
 
+//补充学生到subexcise
+public function sxsubexciseaddStu(){
+   $peid = (int)$_GET['peid'];
+   $scid = (int)$_GET['scid'];
+   //已经接收任务的学生名单
+   $xsnos = M('sxsubexcise')->field('xsno')->where("peid=$peid")->select();
+   $okxs=array();
+   foreach($xsnos as $k=>$v){
+      $okxs[]=$v['xsno'];
+   }
+  
+   $where['xsno']=array('not in',$okxs);
+    
+   //查询新增的没有接收任务的学生
+   $ccode = M('sxsetcourse')->field('ccode')->find($scid);
+   $ccode=$ccode['ccode'];
+   //echo $ccode;die;
+   $addxsnos = M('student')->field("xsno")->where("ccode = $ccode")->where($where)->order('xsno ASC')->select();
+    $excise =array();
+    for($i=0;$i<count($addxsnos);$i++){
+        $excise[$i]=array(
+            'peid'=>$peid,
+            'xsno'=>$addxsnos[$i]['xsno'],
+        );
+    }
+    if(count($addxsnos)>0){
+        $res=M('sxsubexcise')->addAll($excise);
+        //echo $res;die;
+        if($res!==false){
+            $this->success("成功补充 ".count($addxsnos)." 个学生！",U(GROUP_NAME."/Excise/sxsubexciseList",array('peid'=>$peid)));
+        }else{
+            $this->error('补充学生失败！');
+        }
+    }else{
+         $this->error('该班无新增学生！');
+    }
+}
+
 //下载教师发布的任务的附件
 public function sxpubexciseDownAttach(){
     $peid = (int)$_GET['peid'];
@@ -629,25 +800,27 @@ public function sxpubexciseDel(){
    //检查学生是否已提交作业
    $resc=M('sxsubexcise')->where("peid=$peid")->count();
    if($resc>0){
-       show(0,"请设置已提交作业学生重做并撤销发布,再删除！");
+       show(0,"请看操作提示按要求删除！");
    }else{
        //删除附件
        $attach = M('sxpubexcise')->field('url,filename')->find($peid);
        $filename = $attach['filename'];
-       if($filename!=''){
-            $filepath = $attach['url'];
+       $filepath = $attach['url'];
+       if($filename!=''){            
             $file = $filepath.$filename;
             unlink($file);
             rmdir($filepath);
+       }else{
+            rmdir($filepath);
        }
-       $res1=M('sxpubexcise')->delete($peid);
-       if($res1){
-            $res2=M('xh_sxdisexicise')->where("peid=$peid")->delete();//删除讨论
+       $res=M('sxpubexcise')->delete($peid);
+       if($res){
+           $res2=M('xh_sxdisexicise')->where("peid=$peid")->delete();//删除讨论
             $scid = (int)$_POST['scid']; //返回去用于页面跳转
             $url = U(GROUP_NAME."/Excise/sxpubexciseList",array('scid'=>$scid));
-            show(1,"删除成功！",$url);
+            show(1,"删除任务成功！",$url);
        }else{
-            show(0,"删除失败！");
+            show(0,"删除任务失败！");
        }
    } 
 }
@@ -920,9 +1093,17 @@ public function sxsubexciseDownAttach(){
 
 //删除指定学生作业
 public function sxsubexciseDel(){
-   $seid = $_GET['seid'];
-   $peid = M('sxsubexcise')->field('peid')->find($seid);
-   $peid = $peid['peid']; 
+    $seid = $_GET['seid'];
+    $subexcise = M('sxsubexcise')->field('peid,filename')->find($seid);
+    $peid = $subexcise['peid'];
+    $filename = $subexcise['filename'];
+    $url= M('sxpubexcise')->field('url')->find($peid);
+    $path = $url['url'];
+    if($filename!=''){
+      $file = $path.$filename;
+      unlink($file);//删除附件
+    }
+     
    if(M('sxsubexcise')->delete($seid)){
         $this->success('删除成功！',U(GROUP_NAME."/Excise/sxsubexciseList",array('peid'=>$peid)));
    }else{
@@ -932,21 +1113,23 @@ public function sxsubexciseDel(){
 
 //设置学生作业重做
 public function sxsubexciseRedo(){
-       $seid = $_GET['seid'];
-       $filename = M('sxsubexcise')->field('filename,peid')->find($seid);
-     $peid = $filename['peid']; 
-     $url= M('sxpubexcise')->field('url')->find($peid);
-       $filepath = $url['url'];
-     $filename = $filename['filename'];
-       $file = $filepath.$filename;
-       unlink($file);//删除附件
+    $seid = $_GET['seid'];
+    $subexcise = M('sxsubexcise')->field('peid,filename')->find($seid);
+    $peid = $subexcise['peid'];
+    $filename = $subexcise['filename'];
+    $url= M('sxpubexcise')->field('url')->find($peid);
+    $path = $url['url'];
+    if($filename!=''){
+      $file = $path.$filename;
+      unlink($file);//删除附件
+    }
        $data = array(
             'seid'=>$seid,
             'desc' =>'',
             'filename'=>'',
-            'subtime'=>0,
+      'subtime'=>0,
             'status'=>0,
-            'isrec'=>0
+            'isrec'=>''
         );
        $res = M('sxsubexcise')->save($data);
        if($res){

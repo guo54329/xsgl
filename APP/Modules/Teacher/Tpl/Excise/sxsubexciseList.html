@@ -81,6 +81,8 @@ function isrec(obj){
 		  <a href="{:U(GROUP_NAME.'/Excise/courseTable')}" class="btn btncoursetable"><span class="glyphicon glyphicon-home"></span> 我的课程表</a><span class="btn xiexian">/</span><a href="{:U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$courseinfo['scid']))}" class="btn btn4">任务列表</a><span class="btn xiexian">/</span><a class="btn browse1">学生完成情况</a>
 		  <span style="float:right;">
 			<button class="btn btn-info" onclick="myrefresh()"><span class="glyphicon glyphicon-refresh"></span> 刷新</button>&nbsp;&nbsp;间隔30秒后自动刷新 &nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseaddStu',array('peid'=>$excisedesc['peid'],'scid'=>$courseinfo['scid']))}" class="btn btn-info browse"><span class="glyphicon glyphicon-plus"></span> 补充学生</a>&nbsp;
+
 	  		<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseRedoAll',array('peid'=>$excisedesc['peid']))}" class="btn btn-info browse"><span class="glyphicon glyphicon-repeat"></span> 一键重做</a>&nbsp;
 	  		<a href="{:U(GROUP_NAME.'/Excise/sxsubexciseTable',array('peid'=>$excisedesc['peid']))}" class="btn btn-info browse"><span class="glyphicon glyphicon-download"></span> 完成情况</a>
 		  </span>
@@ -107,7 +109,11 @@ function isrec(obj){
 			</td></tr>
 		    <tr class="desc">
 		    <td colspan="10">
-		    <strong>任务标题：</strong>{$excisedesc.title}&nbsp;&nbsp;<strong>附件下载：</strong><a href="{:U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$excisedesc['peid']))}"  ><span class="glyphicon glyphicon-save"></span> {$excisedesc.filename}(<php>echo format_bytes(filesize($oldurl.($excisedesc['filename'])));</php>)</a><strong>&nbsp;&nbsp;发布时间：</strong>{$excisedesc.pubtime|date='Y-m-d H:i:s',###}<br/>
+		    <strong>任务标题：</strong>{$excisedesc.title}&nbsp;&nbsp;
+		    <if condition="$excisedesc['filename'] neq ''">
+		    <strong>附件下载：</strong><a href="{:U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$excisedesc['peid']))}"  ><span class="glyphicon glyphicon-save"></span> {$excisedesc.filename}(<php>echo format_bytes(filesize($oldurl.($excisedesc['filename'])));</php>)</a>
+			</if>
+		    <strong>&nbsp;&nbsp;发布时间：</strong>{$excisedesc.pubtime|date='Y-m-d H:i:s',###}<br/>
 		    <strong>任务描述：</strong>{$excisedesc.desc}
 		    </td>
 		    </tr>
