@@ -5,7 +5,8 @@ return array(
 	'TMPL_PARSE_STRING' => array(
 		'__PUBLIC__' => __ROOT__.'/'.APP_NAME.'/Modules/'.GROUP_NAME.'/Tpl/Public',
 		'__JS__' => './'.APP_NAME.'/Modules/'.GROUP_NAME.'/Tpl/Public/Js',
-		'__IMGSRC__' => __ROOT__.'/Public/Upload/images/'
+		'__IMGSRC__' => __ROOT__.'/Public/Upload/images/',
+		'__FAVICON__' =>__ROOT__.'/Data'
 	),  //定义后台的__PUBLIC__所指向的Public文件夹的路径
     
 

@@ -14,7 +14,7 @@ Class SystemAction extends CommonAction {
 				$upload = new UploadFile();// 实例化上传类
 				$uploadfile->uploadReplace=true;//允许同名文件覆盖
 				$upload->saveRule ='defineICON';
-				$upload->allowExts  = array('png', 'PNG');// 设置图片上传类型
+				$upload->allowExts  = array('png', 'PNG','ico','ICO');// 设置图片上传类型
 				$upload->savePath =  './Data/';// 设置图片上传目录
 				$upload->upload();
 				//$info =  $upload->getUploadFileInfo();
