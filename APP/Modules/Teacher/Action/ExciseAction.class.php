@@ -848,6 +848,14 @@ public function sxsubexciseTable(){
 
 } 
 
+//教师评价
+public function sxsubexciseIsrecpj(){
+    $seid=(int)$_POST['seid'];
+    $isrec=$_POST['isrec'];
+    $data=array('seid'=>$seid,'isrec'=>$isrec);
+    $res=M('sxsubexcise')->save($data);
+}//教师评价
+
 //在学生交流页面是否允许其他人下载已提交的作业
 public function sxsubexciseIsrec(){
     $peid=(int)$_GET['peid'];
