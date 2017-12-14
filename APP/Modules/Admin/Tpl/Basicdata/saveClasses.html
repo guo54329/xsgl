@@ -78,7 +78,7 @@
 				    <select name='zjsj' class="form-control" style="width: 500px;">
 						<option value="">请选择时间...</option>
 						<foreach name='term' item='v'>
-							<option value="{$v.name}"  <if condition="$classes['zjsj'] eq $v['name']">selected="selected"</if>  >{$v.name}</option>
+							<option value="{$v.zjsj}"  <if condition="$classes['zjsj'] eq $v['zjsj']"> selected="selected" </if>  >{$v.zjsj}</option>
 						</foreach>
 					</select>
 				</td>

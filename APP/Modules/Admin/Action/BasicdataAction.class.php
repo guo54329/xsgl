@@ -48,36 +48,43 @@ public function saveTermH(){
 	 	$data=array('name'=>$name);
 	 	//验证输入
 	 	if($name==""){
-	 		show(0,"学期不能为空！");
+	 		$this->error("不能为空！");
 	 	}
+	 	//查重
+	 	$tnum = M('term')->where("name='$name'")->count(); 		
+	 	if($tnum>0){
+			$this->error("该学期已存在！");
+ 		}
+
+	 	$res='';
 	 	if($id==0){
 	 		//添加处理
-		 	$res=M(term)->add($data);
+	 		$res=M('term')->add($data);
 		}else{
 		 	//修改处理
 	 		$data['id']=$id;
-	 		$res=M(term)->save($data);
+	 		$res=M('term')->save($data);
 		}
 		if($res){
-			//$this->success("提交成功！",U(GROUP_NAME.'/Basicdata/term'));
-			show(1,"提交成功！");
+			$this->success("提交成功！",U(GROUP_NAME.'/Basicdata/term'));
+			///show(1,"提交成功！");
 		}else{
-			//$this->error("提交失败！");
-			show(1,"提交失败！");
+			$this->error("提交失败！");
+			//show(1,"提交失败！");
 		}	
 	}  
 }
 public function delTerm(){
 //删除操作
 	//$id = $_GET['id'];
-	$id = (int)$_POST['id'];
+	$id = (int)$_GET['id'];
 	$res=M('term')->delete($id);
 	if($res){
-		//$this->success("删除成功！",U(GROUP_NAME.'/Basicdata/term'));
-		show(1,"删除成功！");
+		$this->success("删除成功！",U(GROUP_NAME.'/Basicdata/term'));
+		//show(1,"删除成功！");
 	}else{
-		show(0,"删除失败！");
-		//$this->error("删除失败！");
+		//show(0,"删除失败！");
+		$this->error("删除失败！");
 	}
 }
 /**
@@ -121,6 +128,11 @@ public function saveOfficeH(){
 	 	if($name==""){
 	 		$this->error("处室名称不能为空！");
 	 	}
+	 	//查重
+	 	$onum=M('office')->where("name='$name'")->count();
+	 	if($onum>0){
+			$this->error("该处室已存在！");
+ 		}
 
 	 	if($id==0){
 	 		//添加处理
@@ -153,26 +165,40 @@ public function importOffice(){
 		for($i=0;$i<count($offices);$i++){
 		   $office[$i] = explode("\t",$offices[$i]);
 		}
-		//p($office);
+		
+		//查询原表中的数据，避免重复
+		$oldRes=M('office')->order('id ASC')->select();
+		$olddata=array();
+		foreach($oldRes as $v){
+			$olddata[]=trim($v['name']);
+		}
+
 		//开始写入数据库表		
 		$data = array();
 		$index=0;
-	   for($i=0;$i<count($office);$i++){
+		$indexold=0;
+	    for($i=0;$i<count($office);$i++){
 		   $name=trim($office[$i][1]);
-	   	   if(!empty($name)){
+	   	   if(!empty($name) && !in_array($name,$olddata)){
 	   	   		$data[$index++] = array(
 					'name'=>$name,
 				);
+	   	   }
+	   	   if(in_array($name,$olddata)){
+	   			$indexold++;
 	   	   }		
     	}
         
-		$res= M('office')->addAll($data);
-		$this->display();
-		if($res){
-			$this->success("导入处室($index)成功！",U(GROUP_NAME.'/Basicdata/office'));
+		if(count($data)>0){
+			$res= M('office')->addAll($data);
+			if($res){
+				$this->success("导入".$index."个处室,".$indexold."个已存在！",U(GROUP_NAME.'/Basicdata/office'));
+			}else{
+				$this->error("导入处室失败！");
+			}
 		}else{
-			$this->error("导入处室失败！");
-		}
+        	$this->error("经查重,您提交的所有处室已存在！");
+        }
 	}else{
 		$this->display();
 	}
@@ -240,6 +266,11 @@ public function saveProfessionalH(){
 	 	if($name==""){
 	 		$this->error("专业名称不能为空！");
 	 	}
+	 	//查重
+	 	$pnum=M('professional')->where("name='$name'")->count();
+	 	if($pnum>0){
+			$this->error("该专业已存在！");
+ 		}
 
 	 	if($id==0){
 	 		//添加处理
@@ -272,26 +303,40 @@ public function importProfessional(){
 		for($i=0;$i<count($Professionals);$i++){
 		   $Professional[$i] = explode("\t",$Professionals[$i]);
 		}
+
+		//查询原表中的数据，避免重复
+		$oldRes=M('professional')->order('id ASC')->select();
+		$olddata=array();
+		foreach($oldRes as $v){
+			$olddata[]=trim($v['name']);
+		}
+
 		//开始写入数据库表		
 		$data = array();
 		$index=0;
+		$indexold=0;
 	   for($i=0;$i<count($Professional);$i++){
 		    $name=trim($Professional[$i][1]);
-	   		if(!empty($name)){
+	   		if(!empty($name) && !in_array($name,$olddata)){
 				$data[$index++] = array(
 					'name'=>$name,
 				);
 			}
+			if(in_array($name,$olddata)){
+	   			$indexold++;
+	   		}
     	}
-        //p($data);die;
-		$res= M('professional')->addAll($data);
-		
-		$this->display();
-		if($res){
-			$this->success("导入专业($index)成功！",U(GROUP_NAME.'/Basicdata/professional'));
+        if(count($data)>0){
+			$res= M('professional')->addAll($data);
+			if($res){
+				$this->success("导入".$index."个专业,".$indexold."个已存在！",U(GROUP_NAME.'/Basicdata/professional'));
+			}else{
+				$this->error("导入专业失败！");
+			}
 		}else{
-			$this->error("导入专业失败！");
-		}
+        	$this->error("经查重,您提交的所有专业已存在！");
+        }
+
 	}else{
 		$this->display();
 	}
@@ -379,6 +424,11 @@ public function saveCourseH(){
 	 	if($proname==""){
 	 		$this->error("请选择课程的专业！");
 	 	}
+	 	//查重
+	 	$cnum=M('course')->where("name='$name' and proname='$proname'")->count();
+	 	if($cnum>0){
+			$this->error("该课程已存在！");
+ 		}
 
 	 	//数据处理
 	 	$data=array(
@@ -418,28 +468,45 @@ public function importCourse(){
 		for($i=0;$i<count($courses);$i++){
 		   $course[$i] = explode("\t",$courses[$i]);
 		}
+
+		//查询原表中的数据，避免重复
+		$oldRes=M('course')->order('id ASC')->select();
+		$olddata=array();
+		foreach($oldRes as $v){
+			$olddata[]=trim($v['name']).trim($v['proname']);
+		}
+
 		//开始写入数据库表		
 		$data = array();
 		$index=0;
+		$indexold=0;
 	    for($i=0;$i<count($course);$i++){
 			$name=trim($course[$i][1]);
-	    	if(!empty($name)){
+			$proname=trim($course[$i][3]);
+			$temp=$name.$proname;
+	    	if(!empty($temp) && !in_array($temp,$olddata)){
 	    		$data[$index++] = array(
 					'name'=>$name,
 					'coursetype'=>trim($course[$i][2]),
 					'proname'=>trim($course[$i][3]),
 				);
 	    	}
+	    	if(in_array($temp,$olddata)){
+	   			$indexold++;
+	   		}
     	}
-        //p($data);die;
-		$res= M('course')->addAll($data);
-		
-		$this->display();
-		if($res){
-			$this->success("导入课程($index)成功！",U(GROUP_NAME.'/Basicdata/course'));
+
+    	if(count($data)>0){
+			$res= M('course')->addAll($data);
+			if($res){
+				$this->success("导入".$index."个课程,".$indexold."个已存在！",U(GROUP_NAME.'/Basicdata/course'));
+			}else{
+				$this->error("导入课程失败！");
+			}
 		}else{
-			$this->error("导入课程失败！");
-		}
+        	$this->error("经查重,您提交的所有课程已存在！");
+        }
+
 	}else{
 		$this->display();
 	}
@@ -482,9 +549,24 @@ public function classes(){
 public function saveClasses(){
 //添加和修改视图
 	 $id = (int)$_GET['id'];
-	 //查询学期用于组建时间
-	 $term=M('term')->order('name DESC')->select();
-	 $this->assign('term',$term);
+	 //查询学期为学生指定入学时间
+	 $zjsj = M('classes')->distinct(true)->field('zjsj')->order('zjsj DESC')->select();
+	 $term=M('term')->field('name zjsj')->order('name DESC')->select();
+	 //p($zjsj);p($term);
+
+	 $term=array_merge($zjsj,$term);
+	 $dateterm=array();
+	 foreach ($term as $v) {
+	 	$dateterm[]=$v['zjsj'];
+	 }
+	 rsort($dateterm);
+	 $term=array_unique($dateterm);
+	 $index=0;
+	 foreach ($term as $vv) {
+	 	$termlast[$index++]['zjsj']=$vv;
+	 }
+	 $this->assign('term',$termlast);
+
 	 //查询专业
 	 $pro = M('professional')->select();
 	 $this->assign('pro',$pro);
@@ -539,6 +621,12 @@ public function saveClassesH(){
 	 	if($proname==""){
 	 		$this->error("请选择班级的专业！");
 	 	}
+	 	//查重
+	 	$cnum=M('classes')->where("ccode='$ccode' and cname='$cname'")->count();
+	 	if($cnum>0){
+			$this->error("该班级已存在！");
+ 		}
+
 	 	//数据处理
 	 	$data=array(
 	 	 		'cname'=>$cname,
@@ -578,12 +666,21 @@ public function importClasses(){
 		for($i=0;$i<count($classesm);$i++){
 		   $classes[$i] = explode("\t",$classesm[$i]);
 		}
+
+		//查询原表中的数据，避免重复
+		$oldRes=M('classes')->order('id ASC')->select();
+		$olddata=array();
+		foreach($oldRes as $v){
+			$olddata[]=trim($v['ccode']);
+		}
+
 		//开始写入数据库表		
 		$data = array();
 		$index=0;
+		$indexold=0;
 	    for($i=0;$i<count($classes);$i++){
 			$ccode=trim($classes[$i][1]);
-	    	if(!empty($ccode)){
+	    	if(!empty($ccode) && !in_array($ccode,$olddata)){
 				$data[$index++] = array(
 					'ccode'=>$ccode,
 					'cname'=>trim($classes[$i][2]),
@@ -591,19 +688,23 @@ public function importClasses(){
 					'zjsj'=>trim($classes[$i][4]),
 					'proname'=>trim($classes[$i][5]),
 				);
-
 	    	}
-
+	    	if(in_array($ccode,$olddata)){
+	   			$indexold++;
+	   		}
     	}
-        //p($data);die;
-		$res= M('classes')->addAll($data);
-		
-		$this->display();
-		if($res){
-			$this->success("导入班级($index)成功！",U(GROUP_NAME.'/Basicdata/classes'));
+
+    	if(count($data)>0){
+			$res= M('classes')->addAll($data);
+			if($res){
+				$this->success("导入".$index."个班级,".$indexold."个已存在！",U(GROUP_NAME.'/Basicdata/classes'));
+			}else{
+				$this->error("导入班级失败！");
+			}
 		}else{
-			$this->error("导入班级失败！");
-		}
+        	$this->error("经查重,您提交的所有班级已存在！");
+        }
+
 	}else{
 		$this->display();
 	}
@@ -715,6 +816,12 @@ public function saveTeacherH(){
  	 		$this->error("请选择其所在处室！");	
  	 	}
 
+ 	 	//查重
+	 	$tnum=M('teacher')->where("jsno='$jsno' and jsxm='$jsxm'")->count();
+	 	if($tnum>0){
+			$this->error("该教师已存在！");
+ 		}
+
 	 	//数据处理
  		$data=array(
  	 		'jsxm'=>$jsxm,
@@ -758,12 +865,20 @@ public function importTeacher(){
 		   $teacher[$i] = explode("\t",$teachers[$i]);
 		}
 
+		//查询原表中的数据，避免重复
+		$oldRes=M('teacher')->order('id ASC')->select();
+		$olddata=array();
+		foreach($oldRes as $v){
+			$olddata[]=trim($v['jsno']);
+		}
+
 		//开始写入数据库表		
 		$data = array();
 		$index=0;
-	   for($i=0;$i<count($teacher);$i++){
+		$indexold=0;
+	    for($i=0;$i<count($teacher);$i++){
 		    $jsno=trim($teacher[$i][1]);
-		   	if(!empty($jsno)){
+		   	if(!empty($jsno) && !in_array($jsno,$olddata)){
 		   		$data[$index++] = array(
 					'jsno'=>$jsno,
 					'jsxm'=>trim($teacher[$i][2]),
@@ -773,17 +888,22 @@ public function importTeacher(){
 					'offname'=>trim($teacher[$i][5])
 				);
 		   	}
+		   	if(in_array($jsno,$olddata)){
+	   			$indexold++;
+	   		}
 			
     	}
-        //p($data);die;
-		$res= M('teacher')->addAll($data);
-		
-		$this->display();
-		if($res){
-			$this->success("导入教师($index)成功！",U(GROUP_NAME.'/Basicdata/teacher'));
+    	if(count($data)>0){
+			$res= M('teacher')->addAll($data);
+			if($res){
+				$this->success("导入".$index."个教师,".$indexold."个已存在！",U(GROUP_NAME.'/Basicdata/teacher'));
+			}else{
+				$this->error("导入教师失败！");
+			}
 		}else{
-			$this->error("导入教师失败！");
-		}
+        	$this->error("经查重,您提交的所有教师已存在！");
+        }
+
 	}else{
 		$this->display();
 	}
@@ -923,8 +1043,23 @@ public function saveStudent(){
 //添加和修改视图
 	 $id = (int)$_GET['id'];
 	 //查询学期为学生指定入学时间
-	 $term = M('term')->order('name DESC')->select();
-	 $this->assign('term',$term);
+	 $rxsj = M('student')->distinct(true)->field('rxsj')->order('rxsj DESC')->select();
+	 $term=M('term')->field('name rxsj')->order('name DESC')->select();
+	 //p($rxsj);p($term);
+
+	 $term=array_merge($rxsj,$term);
+	 $dateterm=array();
+	 foreach ($term as $v) {
+	 	$dateterm[]=$v['rxsj'];
+	 }
+	 rsort($dateterm);
+	 $term=array_unique($dateterm);
+	 $index=0;
+	 foreach ($term as $vv) {
+	 	$termlast[$index++]['rxsj']=$vv;
+	 }
+	 $this->assign('term',$termlast);
+	 //p($termlast);
 	 //为学生指定班级
 	 getClassesinfor();//生成由组建时间联动班级名称的js文件
 	 
@@ -974,6 +1109,12 @@ public function saveStudentH(){
  		if($ccode==""){
  			$this->error("请选择所在班级！");
  		}
+ 		//查重
+	 	$snum=M('student')->where("xsno='$xsno' and xsxm='$xsxm'")->count();
+	 	if($snum>0){
+			$this->error("该生已存在！");
+ 		}
+
 	 	//处理班级编号
 	 	$ccode = explode("-",$ccode);
 	 	$ccode=$ccode[0];
@@ -1017,12 +1158,20 @@ public function importStudent(){
 		   $student[$i] = explode("\t",$students[$i]);
 		}
 
+		//查询原表中的数据，避免重复
+		$oldRes=M('student')->order('id ASC')->select();
+		$olddata=array();
+		foreach($oldRes as $v){
+			$olddata[]=trim($v['xsno']);
+		}
+
 		//开始写入数据库表		
 		$data = array();
 		$index=0;
-	   for($i=0;$i<count($student);$i++){
+		$indexold=0;
+	    for($i=0;$i<count($student);$i++){
 		    $xsno=trim($student[$i][1]);
-	   		if(!empty($xsno)){
+	   		if(!empty($xsno)  && !in_array($xsno,$olddata)){
 				$data[$index++] = array(
 					'xsno'=>$xsno,
 					'xsxm'=>trim($student[$i][2]),
@@ -1031,18 +1180,22 @@ public function importStudent(){
 					'xsmm'=>'123456',
 					'ccode'=>trim($student[$i][5])
 				);
-
+	   		}
+	   		if(in_array($xsno,$olddata)){
+	   			$indexold++;
 	   		}
 
     	}
-        //p($data);die;
-		$res= M('student')->addAll($data);
-		$this->display();
-		if($res){
-			$this->success("导入学生($index)成功！",U(GROUP_NAME.'/Basicdata/student'));
+        if(count($data)>0){
+			$res= M('student')->addAll($data);
+			if($res){
+				$this->success("导入".$index."个学生,".$indexold."个已存在！",U(GROUP_NAME.'/Basicdata/student'));
+			}else{
+				$this->error("导入学生失败！");
+			}
 		}else{
-			$this->error("导入学生失败！");
-		}
+        	$this->error("经查重,您提交的所有学生已存在！");
+        }
 	}else{
 		$this->display();
 	}

@@ -63,7 +63,7 @@
 					<select name="rxsj" class="form-control" style="width: 500px;">
 						<option value="">请选择入学时间...</option>
 						<foreach name="term" item="v">
-							<option value="{$v.name}" <if condition="$student['rxsj'] eq $v['name']">selected="selected"</if> >{$v.name}</option>
+							<option value="{$v.rxsj}" <if condition="$student['rxsj'] eq $v['rxsj']"> selected="selected" </if> >{$v.rxsj}</option>
 						</foreach>
 					</select>
 				</td>

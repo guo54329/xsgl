@@ -24,25 +24,6 @@ $(function() {
 </script>
 <!-- 排序加入结束 -->
 
-<script type="text/javascript">
-function del(id){
-	var termid = id;
-	var url = "{:U(GROUP_NAME.'/Basicdata/delTerm')}";
-	var data = {'id':termid};
-        // 执行异步请求  $.post
-        $.post(url,data,function(result){
-        	
-            if(result.status == 0) {
-                return dialog.error(result.message);
-            }
-            if(result.status == 1) {
-                return dialog.success(result.message, "{:U(GROUP_NAME.'/Basicdata/term')}");
-            }
-
-        },'JSON');
-       
-}
-</script>
 <style type="text/css">
 .headalign{
 	text-align: left;
@@ -97,7 +78,7 @@ table.tablesorter thead tr .headerSortDown {
 				<td>
 					<a href="{:U(GROUP_NAME.'/Basicdata/saveTerm',array('id'=>$v['id']))}" class="btn btn-default" ><span class="glyphicon glyphicon-pencil"></span> 修改</a>&nbsp; 
 					<!--<a href="{:U(GROUP_NAME.'/Basicdata/delTerm',array('id'=>$v['id']))}">-->
-					<button class="btn btn-default" onclick="del({$v.id});" ><span class="glyphicon glyphicon-remove"></span> 删除</button>
+					<a href="{:U(GROUP_NAME.'/Basicdata/delTerm',array('id'=>$v['id']))}" class="btn btn-default" ><span class="glyphicon glyphicon-remove"></span> 删除</button>
 
 					<!--</a>-->
 				</td>
