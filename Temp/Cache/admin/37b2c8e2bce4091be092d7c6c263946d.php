@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,21 +20,21 @@
 </style>
 </head>
 <body>
-<form action='{:U(GROUP_NAME.'/Basicdata/saveOfficeH')}' method='post'>
+<form action='<?php echo U(GROUP_NAME.'/Basicdata/saveOfficeH');?>' method='post'>
 <div class="panel panel-default">
 	<div class="panel-heading headalign">
-	   <a href="{:U(GROUP_NAME.'/Basicdata/office')}" class="btn btncoursetable"><span class="glyphicon glyphicon-home"></span> 处室维护</a><span class="btn xiexian">/</span><a  class="btn btn4">{$office.op}</a>
+	   <a href="<?php echo U(GROUP_NAME.'/Basicdata/office');?>" class="btn btncoursetable"><span class="glyphicon glyphicon-home"></span> 处室维护</a><span class="btn xiexian">/</span><a  class="btn btn4"><?php echo ($office["op"]); ?></a>
 	</div>
 	  <div class="panel-body">
 		<table class='table table-bordered table-hover'>
 			<tr>
 				<td>处室名称</td>
-				<td><input type='text' name='name' value="{$office.name}" class="form-control" style="width: 500px;"/></td>
+				<td><input type='text' name='name' value="<?php echo ($office["name"]); ?>" class="form-control" style="width: 500px;"/></td>
 			</tr>
 		</table>
 	  </div>
 	  <div class="panel-footer" style="text-align: center;">
-        <input type='hidden'  name="id" value="{$office.id}"/>
+        <input type='hidden'  name="id" value="<?php echo ($office["id"]); ?>"/>
 	  	<button type='submit' class="btn btn-info"><span class="glyphicon glyphicon-check"></span> 提交</button>
 	  </div>
 </div>

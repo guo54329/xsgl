@@ -1,18 +1,18 @@
-<DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><DOCTYPE html>
 <html lang="zh-cn">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>欢迎使用{$g_site.title}</title>
+<title>欢迎使用<?php echo ($g_site["title"]); ?></title>
 <link rel="shortcut icon" href="__FAVICON__/fav.ico" type="image/x-icon" />
 <link rel="Bookmark" href="__FAVICON__/fav.ico" >
 <link href="__PUBLIC__/Css/bootstrap.min.css" rel="stylesheet">
 <link href="__PUBLIC__/Css/signin.css" rel="stylesheet">
 <script type="text/javascript" src="__PUBLIC__/js/jquery.min.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/bootstrap.min.js"></script>
-<js file="__ROOT__/Data/Ueditor/ueditor.config.js" />
-<js file="__ROOT__/Data/Ueditor/ueditor.all.min.js" />
+<script type="text/javascript" src="__ROOT__/Data/Ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__ROOT__/Data/Ueditor/ueditor.all.min.js"></script>
 
 <script type="text/javascript">	
 	window.UEDITOR_HOME_URL='__ROOT__/Data/Ueditor/';
@@ -30,7 +30,7 @@
  
 		window.UEDITOR_CONFIG.maximumWords=500;
 		//TP里面的上传类，相关配置，此处没用到
-		  //window.UEDITOR_CONFIG.imageUrl="{:U(GROUP_NAME.'/Blog/upload')}"; 
+		  //window.UEDITOR_CONFIG.imageUrl="<?php echo U(GROUP_NAME.'/Blog/upload');?>"; 
 		  //window.UEDITOR_CONFIG.imagePath='__ROOT__/uploads/';
 
 		//图片保存路径直接在Ueditor/php/config.json中配置imagePathFormat的值
@@ -44,9 +44,9 @@
 <div class="signin">
 	        <div class="tab-content">
 				<div class="tab-pane active" id="tab-zhengtitu">
-					<div class="signin-head">欢迎登录{$g_site.title}</div>
+					<div class="signin-head">欢迎登录<?php echo ($g_site["title"]); ?></div>
 					<div class="form-group">
-						<form class="form-signin" role="form" method="post" action="{:U(GROUP_NAME.'/Index/login')}">
+						<form class="form-signin" role="form" method="post" action="<?php echo U(GROUP_NAME.'/Index/login');?>">
 							<div class="input-group">
 								<div class="input-group-addon"><span class="glyphicon glyphicon-user"></span>
 								 </div>
@@ -65,7 +65,7 @@
 				<div class="tab-pane" id="tab-neibutu">
 					<div class="signin-head">用户验证密码重置</div>
                     <div class="form-group">
-						<form class="form-signin" role="form" method="post" action="{:U(GROUP_NAME.'/Index/fpass')}">
+						<form class="form-signin" role="form" method="post" action="<?php echo U(GROUP_NAME.'/Index/fpass');?>">
 							<div class="input-group">
 								<div class="input-group-addon"><span class="glyphicon glyphicon-user"></span>
 								 </div>
@@ -84,7 +84,7 @@
 				<div class="tab-pane" id="tab-texietu">
 					<div class="signin-head">用户满意度调查</div>
 					<div class="form-group">
-						<form class="form-signin3" role="form" method="post" action="{:U(GROUP_NAME.'/Index/survey')}">
+						<form class="form-signin3" role="form" method="post" action="<?php echo U(GROUP_NAME.'/Index/survey');?>">
 							<div class="input-group">
 								<textarea name='content' id='content' placeholder="建议意见区"></textarea>
 								<div class="form-inline">
@@ -109,8 +109,8 @@
 </div>
 <div class="footer">	
     <div class="copyright">       	
-        <p>{$g_site.copyright}&nbsp;&nbsp;{$g_site.icp}</p>
-        <p>{$g_site.address}</p>        
+        <p><?php echo ($g_site["copyright"]); ?>&nbsp;&nbsp;<?php echo ($g_site["icp"]); ?></p>
+        <p><?php echo ($g_site["address"]); ?></p>        
     </div>    
 </div>
 

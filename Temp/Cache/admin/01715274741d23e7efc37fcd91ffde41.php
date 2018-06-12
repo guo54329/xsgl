@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -103,56 +103,47 @@ function checkhf(){
 
 <div class="panel panel-default">
 	  <div class="panel-heading headalign">
-			<a href="{:U(GROUP_NAME.'/Excise/courseTable')}" class="btn btncoursetable"><span class="glyphicon glyphicon-home"></span> 教师课表</a><span class="btn xiexian">/</span><a href="{:U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$scid))}" class="btn btn4">任务列表</a><span class="btn xiexian">/</span><a  class="btn btn4">克隆任务</a>
+			<a href="<?php echo U(GROUP_NAME.'/Excise/courseTable');?>" class="btn btncoursetable"><span class="glyphicon glyphicon-home"></span> 教师课表</a><span class="btn xiexian">/</span><a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseList',array('scid'=>$scid));?>" class="btn btn4">任务列表</a><span class="btn xiexian">/</span><a  class="btn btn4">克隆任务</a>
 	  </div>
 	  <div class="form-inline">
-		      <form action="{:U(GROUP_NAME.'/Excise/sxpubexciseClone')}" method="post" name="hf" onsubmit='return checkhf();'>
+		      <form action="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseClone');?>" method="post" name="hf" onsubmit='return checkhf();'>
 			      <select name="scidlist" class="form-control">
 			         <option value='0'>请选择提供任务的课程</option>
-			      	 <foreach name="courseother" item="v">
-			      	   <php>
-							$scidl = $v['scid'];
-							$num=M('sxpubexcise')->where("scid=$scidl")->count();
-			      	   </php>
-			      	     <if condition="$num gt 0">
-								<option value="{$v.scid}" <if condition="$v['scid'] eq $scidlist">selected="selected"</if>>{$v.coursename}(任务数:{$num})-{$v.cname}({$v.term})</option>
-			      	     </if>
-			      	 </foreach>
+			      	 <?php if(is_array($courseother)): foreach($courseother as $key=>$v): $scidl = $v['scid']; $num=M('sxpubexcise')->where("scid=$scidl")->count(); ?>
+			      	     <?php if($num > 0): ?><option value="<?php echo ($v["scid"]); ?>" <?php if($v['scid'] == $scidlist): ?>selected="selected"<?php endif; ?>><?php echo ($v["coursename"]); ?>(任务数:<?php echo ($num); ?>)-<?php echo ($v["cname"]); ?>(<?php echo ($v["term"]); ?>)</option><?php endif; endforeach; endif; ?>
 			      </select>
-			    <!--   <input type="hidden" name="scid" value="{$scid}"/> -->
+			    <!--   <input type="hidden" name="scid" value="<?php echo ($scid); ?>"/> -->
 			      <button type="submit" class="btn btn-default"><span class='glyphicon glyphicon-search'></span> 查询</button>
 			  </form>
 		</div>
 	  <div class="panel-body">
-		<form name='mybf' action="{:U(GROUP_NAME.'/Excise/sxpubexciseClone')}" method='post' onsubmit='return checkbf();'>
+		<form name='mybf' action="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseClone');?>" method='post' onsubmit='return checkbf();'>
                 						
 		<table class='table table-bordered table-hover'>
 		<thead>
 			<tr class="title"><td>序号</td><td>任务标题</td><td>任务描述</td><td>任务附件</td><td>发布时间</td></tr>
 		</thead>	
 		<tbody id="data">
-			{~$i=0}<!--~不输出-->  
-            <foreach name="publist" item="v">
-              <tr class="tr">
-                <td>{$i+1}</td>
+			<?php $i=0;?><!--~不输出-->  
+            <?php if(is_array($publist)): foreach($publist as $key=>$v): ?><tr class="tr">
+                <td><?php echo ($i+1); ?></td>
                 <td>
                 <div class="form-inline">
-				    <label><input type="checkbox" value="{$v.peid}" name="peid[{$i}]"  />{$v.title}</label>
+				    <label><input type="checkbox" value="<?php echo ($v["peid"]); ?>" name="peid[<?php echo ($i); ?>]"  /><?php echo ($v["title"]); ?></label>
 				    </div>
 				</td>
-                <td>{$v.desc}</td>
-                <td><if condition="$v['filename'] neq ''"><a href="{:U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$v['peid']))}">{$v.filename}(<php>echo format_bytes(filesize($v['url'].($v['filename'])));</php>)</a><else/>无附件</if></td> 
-                <td>{$v.pubtime|date='Y-m-d H:i:s',###}</td>               
+                <td><?php echo ($v["desc"]); ?></td>
+                <td><?php if($v['filename'] != ''): ?><a href="<?php echo U(GROUP_NAME.'/Excise/sxpubexciseDownAttach',array('peid'=>$v['peid']));?>"><?php echo ($v["filename"]); ?>(<?php echo format_bytes(filesize($v['url'].($v['filename']))); ?>)</a><?php else: ?>无附件<?php endif; ?></td> 
+                <td><?php echo (date('Y-m-d H:i:s',$v["pubtime"])); ?></td>               
               </tr>
-			  {~$i++}
-			</foreach>
+			  <?php $i++; endforeach; endif; ?>
             </tbody>
 		</table>
 		<div class="form-inline">
 			<button type="button" id="all" class="btn btn-default" >全选</button>
 			<button type="button" id="uncheck" class="btn btn-default">不选</button>
 			<button type="button" id="othercheck" class="btn btn-default">反选</button>
-			<!-- <input type="hidden" name="scid" value="{$scid}"/> -->
+			<!-- <input type="hidden" name="scid" value="<?php echo ($scid); ?>"/> -->
 			<button class="btn btn-info btn4" type="submit"  name="bf"><span class="glyphicon glyphicon-share-alt"></span> 执行克隆</button>
 			
 		</div>

@@ -907,7 +907,7 @@ public function sxsubexciseTable(){
     $title=M('sxpubexcise')->field('title')->find($peid);
     $title=$title['title'];//实训任务标题
     //查询学生作业完成情况
-    $data=M('sxsubexcise as a')->join('xh_student as b on a.xsno=b.xsno')->where("peid=$peid")->field("a.seid,a.xsno,b.xsxm,a.desc,a.status,a.subtime,a.peid")->order('a.status DESC,a.xsno ASC')->select();
+    $data=M('sxsubexcise as a')->join('xh_student as b on a.xsno=b.xsno')->where("peid=$peid")->field("a.seid,a.xsno,b.xsxm,a.desc,a.status,a.subtime,a.peid,a.isrec")->order('a.status DESC,a.xsno ASC')->select();
     //引入PHPExcel
     import('Class.PHPExcel',APP_PATH); 
     require APP_PATH.'Class/PHPExcel/Writer/Excel2007.php' ; //xlsx格式  

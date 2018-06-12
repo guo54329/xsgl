@@ -554,7 +554,10 @@ public function saveClasses(){
 	 $term=M('term')->field('name zjsj')->order('name DESC')->select();
 	 //p($zjsj);p($term);
 
-	 $term=array_merge($zjsj,$term);
+	 if(count(zjsj)>0){  //2018.6.12新增判断，否则在数据库表中无数据时，合并的结果受影响导致无选项
+	 //当班级表的组建时间和学生表中的入学时间还没有值时（此时表时空的），通过将时间和学期进行合并，合并后的结果为空，而不是学期。
+		$term=array_merge($zjsj,$term);
+	 }
 	 $dateterm=array();
 	 foreach ($term as $v) {
 	 	$dateterm[]=$v['zjsj'];
@@ -1047,7 +1050,11 @@ public function saveStudent(){
 	 $term=M('term')->field('name rxsj')->order('name DESC')->select();
 	 //p($rxsj);p($term);
 
-	 $term=array_merge($rxsj,$term);
+	 if(count($rxsj)>0){
+   //当班级表的组建时间和学生表中的入学时间还没有值时（此时表时空的），通过将时间和学期进行合并，合并后的结果为空，而不是学期。
+   //解决：新增if判断，如果班级表或学生表中的时间存在，则进行合并操作，不存在则不改变学期值。
+		$term=array_merge($rxsj,$term);
+	 }
 	 $dateterm=array();
 	 foreach ($term as $v) {
 	 	$dateterm[]=$v['rxsj'];
